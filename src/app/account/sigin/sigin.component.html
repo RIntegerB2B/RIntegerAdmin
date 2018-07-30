@@ -1,0 +1,28 @@
+<form [formGroup]="onAdminForm" (ngSubmit)="adminSubmit(onAdminForm)" novalidate style="padding-top:60px">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="form-group">
+
+          <input class="form-control required" required placeholder="User Name" style="margin-bottom:5px" formControlName="userName"
+            type="text">
+          <div *ngIf="onAdminForm.controls['userName'].errors
+                                               && !onAdminForm.controls['userName'].pristine" class="alert alert-danger">
+            <div [hidden]="!onAdminForm.controls['userName'].errors.required">Username is required.</div>
+          </div>
+
+          <input class="form-control required" required placeholder="Password" style="margin-bottom:5px" formControlName="password"
+            type="password">
+          <div *ngIf="onAdminForm.controls['password'].errors && !onAdminForm.controls[ 'password'].pristine" class="alert alert-danger">
+            <div [hidden]="!onAdminForm.controls['password'].errors.required">Password is required.</div>
+
+          </div>
+          
+          <button class="btn btn-primary btn-block" type="submit" [disabled]='!onAdminForm.valid'>
+            SignIn
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
