@@ -7,6 +7,8 @@ import { Routing } from './app.route';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 import { AccountService } from './account/account.service';
 import { BookingDetailsService } from './booking-details/booking-details.service';
@@ -31,7 +33,8 @@ import { WelcomeComponent } from './home/welcome/welcome.component';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AccountService, BookingDetailsService],
   bootstrap: [AppComponent]

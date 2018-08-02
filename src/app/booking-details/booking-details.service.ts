@@ -25,12 +25,12 @@ export class BookingDetailsService {
   }
 
   constructor(private http: Http, private httpClient: HttpClient) { }
-  /* addPushSubscriber(sub: any) {
+ /*  addPushSubscriber(sub: any) {
     const notificationUrl = 'notification';
     const url: string = this.serviceUrl + notificationUrl;
     return this.http.post(url, sub);
-} */
-
+}
+ */
   getbookingDetails(): Observable<any> {
     const addurl = 'booking/';
     const url: string = this.serviceUrl + addurl;

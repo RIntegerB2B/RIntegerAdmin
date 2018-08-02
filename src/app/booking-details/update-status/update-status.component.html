@@ -15,9 +15,9 @@
           <div class="col-md-2  form-group">
             <p style="padding-left:20px">Booking Date </p>
           </div>
-          <div class="col-md-2 form-group">
+         <!--  <div class="col-md-2 form-group">
             <p style="padding-left:20px">Order </p>
-          </div>
+          </div> -->
           <div class="col-md-2  form-group">
             <p style="padding-left:20px">View Status</p>
           </div>
@@ -39,9 +39,9 @@
           <div class="col-md-2 form-group">
             <p>{{data.bookingDate}} </p>
           </div>
-          <div class="col-md-2 form-group">
+         <!--  <div class="col-md-2 form-group">
             <p>{{data.order}} </p>
-          </div>
+          </div> -->
 
           <div class="col-md-2  form-group">
             <button class="btn btn-success pull-right btn-sm" (click)="statusView(updateStatusForm,data.mobileNumber,data._id)">View</button>
@@ -141,12 +141,13 @@
             <div class="col-md-4">
               <p> Material Picked Up</p>
             </div>
-           <!--  <div class="col-md-8" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="subscribe()"> Send Message</button>
-            </div> -->
-            <div class="col-md-8" *ngFor="let data of toshow">
+           
+            <div class="col-md-4" *ngFor="let data of toshow">
               <button class="btn btn-success pull-right" (click)="updateMateialPick(updateStatusForm,data.mobileNumber,data._id)"> completed</button>
             </div>
+            <!-- <div class="col-md-4">
+              <button class="btn btn-success " (click)="msg()"> Send msg</button>
+            </div> -->
           </div>
 
           <div class="row">

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-/* import { SwPush, SwUpdate } from '@angular/service-worker';
- */
+import { SwPush, SwUpdate } from '@angular/service-worker';
+
 import { BookingDetailsService } from '../booking-details.service';
 import { Status } from './status.model';
 import { StatusDetail } from './status-forOne.model';
@@ -35,9 +35,10 @@ export class UpdateStatusComponent implements OnInit {
   materialReturn: boolean;
   materialReturnTrue: boolean;
   updateGridView: boolean;
- /*  readonly VAPID_PUBLIC_KEY = 'BIvwBoUek8ZLiE2HRr_srixb0Qi-Ql6CVBhhhvIuuZ5PMFYrfP0zSkNRrHD-uvIBhJ3_BDmzSFedMzu5ZuaVVRM'; */
+  readonly VAPID_PUBLIC_KEY = 'BIvwBoUek8ZLiE2HRr_srixb0Qi-Ql6CVBhhhvIuuZ5PMFYrfP0zSkNRrHD-uvIBhJ3_BDmzSFedMzu5ZuaVVRM';
   constructor(private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute, private bookingService: BookingDetailsService) {
+    private activatedRoute: ActivatedRoute, private bookingService: BookingDetailsService,
+    private swUpdate: SwUpdate, private swPush: SwPush) {
     this.no = this.activatedRoute.snapshot.paramMap.get('no');
   }
 
@@ -153,9 +154,9 @@ export class UpdateStatusComponent implements OnInit {
 
   updateStatus() {
     this.updateGridView = true;
-    this.displayStatus = !this.displayStatus;
+    this.displayStatus = false;
   }
-  /* subscribe() {
+ /*  msg() {
     alert('subscribe');
     this.swPush.requestSubscription({
       serverPublicKey: this.VAPID_PUBLIC_KEY
