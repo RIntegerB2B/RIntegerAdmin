@@ -17,6 +17,10 @@ import { SiginComponent } from './account/sigin/sigin.component';
 import { UpdateStatusComponent } from './booking-details/update-status/update-status.component';
 import { ViewBookingComponent } from './booking-details/view-booking/view-booking.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +38,9 @@ import { WelcomeComponent } from './home/welcome/welcome.component';
     HttpModule,
     HttpClientModule,
     RouterModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AccountService, BookingDetailsService],
