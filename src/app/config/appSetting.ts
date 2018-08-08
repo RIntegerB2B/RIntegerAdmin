@@ -1,3 +1,3 @@
 export const AppSetting: AppSettingType = {
-    serviceUrl: 'http://rinteger.com/adminservice/'
+    serviceUrl: 'https://rinteger.com/adminservice/'
 };
