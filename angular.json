@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Rinteger-admin": {
+    "rinteger-admin": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Rinteger-admin",
+            "outputPath": "dist/rinteger-admin",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Rinteger-admin:build"
+            "browserTarget": "rinteger-admin:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Rinteger-admin:build:production"
+              "browserTarget": "rinteger-admin:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Rinteger-admin:build"
+            "browserTarget": "rinteger-admin:build"
           }
         },
         "test": {
@@ -95,7 +95,7 @@
         }
       }
     },
-    "Rinteger-admin-e2e": {
+    "rinteger-admin-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,11 +103,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Rinteger-admin:serve"
+            "devServerTarget": "rinteger-admin:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Rinteger-admin:serve:production"
+              "devServerTarget": "rinteger-admin:serve:production"
             }
           }
         },
@@ -123,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "Rinteger-admin"
+  "defaultProject": "rinteger-admin"
 }
