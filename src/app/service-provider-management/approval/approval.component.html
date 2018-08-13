@@ -1,0 +1,72 @@
+<div class="container"  style="padding-top:60px"  >
+    <div class="row">
+      <div class="col-md-6 col-sm-12  mx-auto text-center">
+        <button  (click)="unapprovedServiceProviders()"   value="" type="submit">Service Providers Waiting for approval</button>
+      </div>
+   
+    <div class="col-md-6 col-sm-12  mx-auto text-center">
+        <button  (click)="approvedServiceProviders()" value="" type="submit">Approved Service Providers</button>
+      </div>
+    </div><br>
+    
+    <form [formGroup]="approvalForm" style="padding-top:60px" novalidate>
+        <div class="container-fluid">
+          <h1>Service Providers</h1>
+          <div class="row">
+            <div class="col-md-12  mx-auto">
+      
+              <div class="row">
+      
+                <div class="col-md-2 form-group">
+                  <p style="padding-left:20px">User Name </p>
+                </div>
+                <div class="col-md-2  form-group">
+                  <p style="padding-left:20px">Mobile number </p>
+                </div>
+                <div class="col-md-2  form-group">
+                  <p style="padding-left:20px">Company Name </p>
+                </div>
+                <div class="col-md-1 form-group">
+                  <p style="padding-left:20px">Website </p>
+                </div>
+      
+                <div class="col-md-2  form-group">
+                  <p style="padding-left:20px">Location </p>
+                </div>
+                <div class="col-md-2  form-group">
+                  <p style="padding-left:20px">EmailId </p>
+                </div>
+      
+              </div>
+              <div class="row" *ngFor="let data of Detail">
+                <div class="col-md-2  form-group">
+                  <p>{{data.userName}} </p>
+                </div>
+      
+                <div class="col-md-2  form-group">
+                  <p>{{data.mobileNumber}} </p>
+                </div>
+                <div class="col-md-2 form-group">
+                  <p>{{data.companyName}} </p>
+                </div>
+                <div class="col-md-1 form-group">
+                  <p>{{data.website}} </p>
+                </div>
+                <div class="col-md-2  form-group">
+                  <p>{{data.location}} </p>
+                </div>
+                <div class="col-md-2  form-group">
+                  <p>{{data.emailId}} </p>
+                </div>
+               
+                <input class="form-control" hidden type="text" formControlName="id" [value]="data._id" #no/>
+                <div class="col-md-1 form-group">
+                  <button class="btn btn-success pull-right btn-sm" (click)="approve(viewBookingForm,no.value)" *ngIf="show">Approve</button>
+                </div>
+              </div>
+      
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>

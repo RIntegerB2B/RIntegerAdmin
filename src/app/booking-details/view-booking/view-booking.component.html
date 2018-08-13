@@ -1,0 +1,60 @@
+<form [formGroup]="viewBookingForm" style="padding-top:60px" novalidate>
+  <div class="container-fluid">
+    <h1>Booking Details</h1>
+    <div class="row">
+      <div class="col-md-12  mx-auto">
+
+        <div class="row">
+
+          <div class="col-md-2 form-group">
+            <p style="padding-left:20px">Name </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Mobile number </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Type of shoot </p>
+          </div>
+          <div class="col-md-1 form-group">
+            <p style="padding-left:20px">Model type </p>
+          </div>
+
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Product Description </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Quantity Description </p>
+          </div>
+
+        </div>
+        <div class="row" *ngFor="let data of bookingDetail">
+          <div class="col-md-2  form-group">
+            <p>{{data.name}} </p>
+          </div>
+
+          <div class="col-md-2  form-group">
+            <p>{{data.mobileNumber}} </p>
+          </div>
+          <div class="col-md-2 form-group">
+            <p>{{data.shootType}} </p>
+          </div>
+          <div class="col-md-1 form-group">
+            <p>{{data.modelType}} </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p>{{data.productDescription}} </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p>{{data.quantityDescription}} </p>
+          </div>
+          <input class="form-control" hidden type="text" formControlName="no" [value]="data._id" #no/>
+          <div class="col-md-1 form-group">
+            <button class="btn btn-success pull-right btn-sm" (click)="statusView(viewBookingForm,no.value)">View</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
