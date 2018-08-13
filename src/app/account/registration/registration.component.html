@@ -6,7 +6,7 @@
             <h6 class="text-center text-dark">Registration</h6>
               <div class="form-group">
                <mat-form-field>
-                <mat-select #select [(value)]="selected">
+                <mat-select #select >
                   <mat-option value="pleaseSelectUserType">Please select User Type</mat-option>
                   <mat-option value="serviceProvider" (change)="getCategory(select.value)">Service Provider</mat-option>
                 </mat-select>
