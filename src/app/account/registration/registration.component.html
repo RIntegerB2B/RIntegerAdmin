@@ -1,4 +1,4 @@
-<div class="registrationMasterDiv">
+<div class="pageBox">
   <form [formGroup]="registerForm" (ngSubmit)="register(registerForm)" novalidate style="padding-top:60px">
     <div class="container-fluid">
       <div class="row">
@@ -96,7 +96,7 @@
        </mat-error>
      </mat-form-field>
     </div>  
-    <button mat-stroked-button [disabled]='!registerForm.valid'><strong>REGISTER</strong></button>
+    <button mat-raised-button color="accent" [disabled]='!registerForm.valid'><strong>REGISTER</strong></button>
         </div>
       </div>
     </div>
