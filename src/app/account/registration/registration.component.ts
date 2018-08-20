@@ -48,6 +48,7 @@ if (this.headCatSelected === 'serviceProvider') {
   );
   this.accountService.registration(this.userModel).subscribe(data => {
     console.log(data);
+    this.router.navigate(['/welcome']);
    }, error => {
      console.log(error);
    });

@@ -12,12 +12,15 @@ import { BookingDetail } from './booking-detail.model';
 export class ViewBookingComponent implements OnInit {
   bookingDetail: BookingDetail;
   viewBookingForm: FormGroup;
+  showModelBooking: Boolean;
+  showDirectBooking: Boolean;
 
   constructor(private fb: FormBuilder, private router: Router, private bookingService: BookingDetailsService) { }
 
   ngOnInit() {
     this.getDetails();
     this.createForm();
+    this.modelBooking();
   }
   createForm() {
     this.viewBookingForm = this.fb.group({
@@ -32,7 +35,26 @@ export class ViewBookingComponent implements OnInit {
       console.log(error);
     });
   }
-
+modelBooking() {
+  this.showModelBooking = true;
+  this.showDirectBooking = false;
+  this.bookingService.getModelBookingDetails().subscribe(data => {
+    this.bookingDetail = data;
+    console.log(this.bookingDetail);
+  }, error => {
+    console.log(error);
+  });
+}
+directBooking() {
+  this.showDirectBooking = true;
+  this.showModelBooking = false;
+  this.bookingService.getDirectBookingDetails().subscribe(data => {
+    this.bookingDetail = data;
+    console.log(this.bookingDetail);
+  }, error => {
+    console.log(error);
+  });
+}
   statusView(viewBookingForm: FormGroup, no: any) {
     this.router.navigate(['/update', no]);
   }

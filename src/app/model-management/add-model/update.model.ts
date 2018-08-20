@@ -1,4 +1,5 @@
-export class Model {
+export class UpdateModel {
+    id: string;
     userName: string;
     description: string;
     availability: boolean;
@@ -13,11 +14,8 @@ export class Model {
     serviceProviderCompanyName: string;
     modelType: string;
     categoryType: string;
-    height: string;
-    measurements: string;
-    shoulder: string;
-    shoeSize: string;
     constructor(
+        id: string,
         userName: string,
         description: string,
         availability: boolean,

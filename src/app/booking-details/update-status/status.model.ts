@@ -2,6 +2,7 @@ export class Status {
     _id: Number;
     mobileNumber: Number;
     bookingId: Number;
+    bookingOrderId: String;
     bookingDate: String;
     order: Boolean;
     materialPickedUp: Boolean;

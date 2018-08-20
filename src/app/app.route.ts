@@ -9,6 +9,7 @@ import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { AddModelComponent } from './model-management/add-model/add-model.component';
 import { ViewModelComponent } from './model-management/view-model/view-model.component';
 import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
+import { CustomerDetailsComponent } from './customer-management/customer-details/customer-details.component';
 
 const routes: Routes = [
     { path: 'welcome', component: WelcomeComponent},
@@ -20,7 +21,9 @@ const routes: Routes = [
     { path: 'navheader/:data', component: NavHeaderComponent},
     { path: 'models', component: ViewModelComponent},
     { path: 'model', component: AddModelComponent},
+    { path: 'model/:id', component: AddModelComponent},
     { path: 'pushNotification', component: PushNotificationComponent},
+    { path: 'customers', component: CustomerDetailsComponent},
     { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 

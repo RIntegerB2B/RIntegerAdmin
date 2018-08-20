@@ -7,6 +7,7 @@ import { SwPush, SwUpdate } from '@angular/service-worker';
 import { BookingDetailsService } from '../booking-details.service';
 import { Status } from './status.model';
 import { StatusDetail } from './status-forOne.model';
+import { Notification } from './notification.model';
 
 
 @Component({
@@ -35,6 +36,10 @@ export class UpdateStatusComponent implements OnInit {
   materialReturn: boolean;
   materialReturnTrue: boolean;
   updateGridView: boolean;
+  notificationModel: Notification;
+  title: string;
+  notificationBody: string;
+  titleToSent: string;
   readonly VAPID_PUBLIC_KEY = 'BIvwBoUek8ZLiE2HRr_srixb0Qi-Ql6CVBhhhvIuuZ5PMFYrfP0zSkNRrHD-uvIBhJ3_BDmzSFedMzu5ZuaVVRM';
   constructor(private fb: FormBuilder,
     private activatedRoute: ActivatedRoute, private bookingService: BookingDetailsService,
@@ -156,57 +161,72 @@ export class UpdateStatusComponent implements OnInit {
     this.updateGridView = true;
     this.displayStatus = false;
   }
- /*  msg() {
-    alert('subscribe');
-    this.swPush.requestSubscription({
-      serverPublicKey: this.VAPID_PUBLIC_KEY
-    })
-      .then(sub => this.bookingService.addPushSubscriber(sub).subscribe())
-      .catch(err => console.error('Could not subscribe to notifications', err));
-  } */
-
-  updateMateialPick(updateStatusForm: FormGroup, mobileNumber: any, id: any) {
+  updateMateialPick(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    console.log(orderId);
     this.bookingService.updateMaterialStatus(mobileNumber, id).subscribe(data => {
       console.log(data);
     }, error => {
       console.log(error);
     });
-
+    this.titleToSent =  'Material picked up completed';
+this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
   }
-  updateShooting(updateStatusForm: FormGroup, mobileNumber: any, id: any) {
+  updateShooting(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.updateShootingStatus(mobileNumber, id).subscribe(data => {
       console.log(data);
     }, error => {
       console.log(error);
     });
+    this.titleToSent =  'Photo shoot completed';
+this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
   }
 
-  updateImagedEditing(updateStatusForm: FormGroup, mobileNumber: any, id: any) {
+  updateImagedEditing(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.imageEditingStatus(mobileNumber, id).subscribe(data => {
       console.log(data);
     }, error => {
       console.log(error);
     });
+    this.titleToSent =  'Image Editing completed';
+    this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
   }
-  updateDelivery(updateStatusForm: FormGroup, mobileNumber: any, id: any) {
+  updateDelivery(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.delieveryStatus(mobileNumber, id).subscribe(data => {
       console.log(data);
     }, error => {
       console.log(error);
     });
+    this.titleToSent =  'Image Delivery completed';
+    this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
   }
-  updatePayment(updateStatusForm: FormGroup, mobileNumber: any, id: any) {
+  updatePayment(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.paymentStatus(mobileNumber, id).subscribe(data => {
       console.log(data);
     }, error => {
       console.log(error);
     });
+    this.titleToSent =  'Payment completed';
+    this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
   }
-  updateMaterialReturn(updateStatusForm: FormGroup, mobileNumber: any, id: any) {
+  updateMaterialReturn(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.materialReturnStatus(mobileNumber, id).subscribe(data => {
       console.log(data);
     }, error => {
       console.log(error);
+    });
+    this.titleToSent =  'Material return completed';
+    this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
+  }
+  sendNotification(mobileNumber, id , orderId , title) {
+    this.title = title;
+    this.notificationBody = 'Booking Id ' + orderId + 'completed';
+    this.notificationModel = new Notification(
+      mobileNumber,
+      this.title,
+    this.notificationBody
+    );
+    this.bookingService.pushNotification(this.notificationModel).subscribe(data => {
+      console.log(data);
     });
   }
 }

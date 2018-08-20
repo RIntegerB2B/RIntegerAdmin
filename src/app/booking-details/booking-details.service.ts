@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { AppSetting } from '../config/appSetting';
 
 import { BookingDetail } from './view-booking/booking-detail.model';
+import { Notification} from './update-status/notification.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,18 @@ export class BookingDetailsService {
  */
   getbookingDetails(): Observable<any> {
     const addurl = 'booking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<BookingDetail[]>(url);
+
+  }
+  getModelBookingDetails(): Observable<any> {
+    const addurl = 'modelbooking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<BookingDetail[]>(url);
+
+  }
+  getDirectBookingDetails(): Observable<any> {
+    const addurl = 'directbooking/';
     const url: string = this.serviceUrl + addurl;
     return this.httpClient.get<BookingDetail[]>(url);
 
@@ -105,5 +118,10 @@ export class BookingDetailsService {
     const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl;
     return this.httpClient.get<BookingDetail[]>(url);
 
+  }
+  pushNotification(data: Notification) {
+    const notificationUrl = 'pushnotification';
+    const url: string = this.serviceUrl + notificationUrl;
+    return this.http.post(url, data);
   }
 }

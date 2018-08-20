@@ -1,7 +1,10 @@
 <form [formGroup]="viewBookingForm" style="padding-top:60px" novalidate>
   <div class="container-fluid">
-    <h1>Booking Details</h1>
-    <div class="row">
+    <button (click)="modelBooking()">Model based booking</button>
+    <button (click)="directBooking()">Direct booking</button>
+   
+    <div class="row" *ngIf="showDirectBooking">
+        <h1>Direct Booking Details</h1>
       <div class="col-md-12  mx-auto">
 
         <div class="row">
@@ -47,7 +50,58 @@
           <div class="col-md-2  form-group">
             <p>{{data.quantityDescription}} </p>
           </div>
-          <input class="form-control" hidden type="text" formControlName="no" [value]="data._id" #no/>
+          <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+          <div class="col-md-1 form-group">
+            <button class="btn btn-success pull-right btn-sm" (click)="statusView(viewBookingForm,no.value)">View</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="row" *ngIf="showModelBooking">
+        <h1>Model Based Booking Details</h1>
+      <div class="col-md-12  mx-auto">
+
+        <div class="row">
+
+          <div class="col-md-2 form-group">
+            <p style="padding-left:20px">Name </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Mobile number </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Model Name </p>
+          </div>
+         
+
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Product Description </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Quantity Description </p>
+          </div>
+
+        </div>
+        <div class="row" *ngFor="let data of bookingDetail">
+          <div class="col-md-2  form-group">
+            <p>{{data.name}} </p>
+          </div>
+
+          <div class="col-md-2  form-group">
+            <p>{{data.mobileNumber}} </p>
+          </div>
+          <div class="col-md-2 form-group">
+            <p>{{data.modelsName}} </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p>{{data.productDescription}} </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p>{{data.quantityDescription}} </p>
+          </div>
+          <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
           <div class="col-md-1 form-group">
             <button class="btn btn-success pull-right btn-sm" (click)="statusView(viewBookingForm,no.value)">View</button>
           </div>

@@ -45,7 +45,7 @@ export class SiginComponent implements OnInit {
     this.accountService.signIn(this.userModel).subscribe(data => {
       console.log(data);
       if (data === false) { // admin
-        this.router.navigate(['/navheader', data]);
+        this.router.navigate(['/navheader', false]);
       } else if (data === true) { // sp
     this.spValidate(name, pwd);
       }

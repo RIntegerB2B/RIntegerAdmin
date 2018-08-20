@@ -29,7 +29,7 @@
         <div class="row" *ngFor="let data of toshow">
           <div class="col-md-2  form-group">
             <b>
-              <p>{{data._id}} </p>
+              <p>{{data.bookingOrderId}} </p>
             </b>
           </div>
 
@@ -49,9 +49,6 @@
           <div class="col-md-2  form-group">
             <button class="btn btn-success pull-right btn-sm" (click)="updateStatus()">Update</button>
           </div>
-
-
-
         </div>
 
         <div *ngIf="displayStatus">
@@ -143,7 +140,7 @@
             </div>
            
             <div class="col-md-4" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updateMateialPick(updateStatusForm,data.mobileNumber,data._id)"> completed</button>
+              <button class="btn btn-success pull-right" (click)="updateMateialPick(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
             </div>
             <!-- <div class="col-md-4">
               <button class="btn btn-success " (click)="msg()"> Send msg</button>
@@ -155,7 +152,7 @@
               <p> Shooting</p>
             </div>
             <div class="col-md-8" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updateShooting(updateStatusForm,data.mobileNumber,data._id)"> completed</button>
+              <button class="btn btn-success pull-right" (click)="updateShooting(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
             </div>
 
           </div>
@@ -164,7 +161,7 @@
               <p> Image Editing</p>
             </div>
             <div class="col-md-8" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updateImagedEditing(updateStatusForm,data.mobileNumber,data._id)"> completed</button>
+              <button class="btn btn-success pull-right" (click)="updateImagedEditing(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
             </div>
 
           </div>
@@ -173,7 +170,7 @@
               <p> Delivery</p>
             </div>
             <div class="col-md-8" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updateDelivery(updateStatusForm,data.mobileNumber,data._id)"> completed</button>
+              <button class="btn btn-success pull-right" (click)="updateDelivery(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
             </div>
 
           </div>
@@ -182,7 +179,7 @@
               <p> Material return</p>
             </div>
             <div class="col-md-8" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updateMaterialReturn(updateStatusForm,data.mobileNumber,data._id)"> completed</button>
+              <button class="btn btn-success pull-right" (click)="updateMaterialReturn(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
             </div>
           </div>
           
@@ -191,11 +188,10 @@
               <p> Payment</p>
             </div>
             <div class="col-md-8" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updatePayment(updateStatusForm,data.mobileNumber,data._id)"> completed</button>
+              <button class="btn btn-success pull-right" (click)="updatePayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

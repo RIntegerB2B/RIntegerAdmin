@@ -1,12 +1,14 @@
 import { Component, OnInit , Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Router} from '@angular/router';
+import { LocalStorageService } from 'ngx-webstorage';
+import { ActivatedRoute } from '@angular/router';
 
 import {PortFolioImageData} from './portFolioImageData.model';
 import {Model} from './model.model';
 import {ModelManagementService} from '../../model-management/model-management.service';
 import {ServiceProviderDetail} from './service-provider-detail.model';
-import { LocalStorageService } from 'ngx-webstorage';
+import { UpdateModel} from '../add-model/update.model';
 
 
 @Component({
@@ -24,6 +26,10 @@ export class AddModelComponent implements OnInit {
   spCompanyName: string;
   modelTypes = ['National', 'InterNational'];
   shootTypes = ['Men', 'Women'];
+  id;
+  loadedModel: Model;
+  showUpdate: boolean;
+  updatedModel: UpdateModel;
 
 
   fileToUpload: File = null;
@@ -31,11 +37,15 @@ export class AddModelComponent implements OnInit {
   portFolioImageBlob: Blob;
   portFolioImageBytes: Uint8Array;
   constructor(private fb: FormBuilder, private router: Router,
-    private modelService: ModelManagementService , private localStorageService: LocalStorageService) { }
+    private modelService: ModelManagementService , private localStorageService: LocalStorageService,
+     private activatedRoute: ActivatedRoute) { this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    }
 
   ngOnInit() {
     this.createForm();
-    /* this.serviceprovider(); */
+    if (this.id) {
+      this.getModel(this.id);
+    }
   }
   createForm() {
   this.addModelForm = this.fb.group({
@@ -48,21 +58,13 @@ export class AddModelComponent implements OnInit {
     whatsapp: ['', Validators.required],
     shootType: [''],
       modelType: [''],
-      modelHeight: [''],
+      modelId: ['']
+     /*  modelHeight: [''],
       modelMeasurements: [''],
       shoulder: [''],
-      shoeSize: ['']
+      shoeSize: ['']  */
   });
 }
-/* serviceprovider() {
-  this.modelService.newSp.subscribe(data => {
- console.log(data.userName) ;
- this.localStorageService.store('userName', data.userName);
- this.localStorageService.store('companyName', data.companyName);
- this.localStorageService.store('Id', data.Id);
-  });
-} */
-
 handleFileInput(files: FileList, loadedImage) {
   this.fileToUpload = files.item(0);
   this.portFolioImageData.portFolioImage = this.fileToUpload = files[0];
@@ -78,6 +80,28 @@ handleFileInput(files: FileList, loadedImage) {
     };
   };
 }
+getModel(id) {
+  this.showUpdate = true;
+  this.modelService.getModelDetails(id).subscribe(data => {
+    this.loadedModel = data;
+    console.log(this.loadedModel.portfolioImageName);
+    console.log(this.loadedModel);
+   this.addModelForm.setValue({
+       modelName: this.loadedModel.userName,
+    description: this.loadedModel.description,
+      availability: this.loadedModel.availability,
+      mobileNumber: this.loadedModel.mobileNumber,
+      emailId: this.loadedModel.emailId,
+      faceBook: this.loadedModel.faceBook,
+      whatsapp: this.loadedModel.whatsapp,
+      shootType: this.loadedModel.categoryType,
+      modelType: this.loadedModel.modelType,
+      modelId: id
+    });
+  }, error => {
+    console.log(error);
+  });
+}
   save(addModelForm: FormGroup , modelName: any) {
  this.userModel = new Model(
       addModelForm.controls.modelName.value,
@@ -89,10 +113,6 @@ handleFileInput(files: FileList, loadedImage) {
       addModelForm.controls.whatsapp.value,
       addModelForm.controls.shootType.value,
       addModelForm.controls.modelType.value,
-      addModelForm.controls.modelHeight.value,
-      addModelForm.controls.modelMeasurements.value,
-      addModelForm.controls.shoulder.value,
-      addModelForm.controls.shoeSize.value
 
     );
     // sp details
@@ -108,6 +128,30 @@ handleFileInput(files: FileList, loadedImage) {
     });
     this.uploadImage(modelName);
     addModelForm.reset();
+    this.router.navigate(['/model']);
+  }
+  edit(addModelForm: FormGroup, modelName: any, modelDesc: any, id: any,
+    avail: any, mob: any, email: any, fb: any, wapp: any) {
+      this.updatedModel = new UpdateModel(
+        id,
+        modelName,
+        modelDesc,
+        avail,
+        mob,
+        email,
+        fb,
+        wapp,
+        addModelForm.controls.shootType.value,
+        addModelForm.controls.modelType.value,
+  );
+        this.updatedModel.portfolioImageName = this.portFolioImageData.portFolioImage.name;
+      this.modelService.updateModel(id, this.updatedModel ).subscribe(data => {
+        console.log(data);
+        this.uploadImage(modelName);
+        console.log(modelName);
+      }, error => {
+        console.log(error);
+      });
   }
   uploadImage(modelName) {
     console.log(modelName);

@@ -1,0 +1,97 @@
+<form [formGroup]="viewCustomerForm" novalidate style="padding-top:60px">
+  <div class="container-fluid">
+
+
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="container-fluid">
+          <h1>Customer Details</h1>
+
+          <div class="col-md-4 mx-auto" style="margin-bottom: 10px">
+            <select #select (change)="getShootType(select.value)" class="hideLabel form-control">
+              <option>Please select Shoot Type </option>
+              <option value="Men">Men</option>
+              <option value="Women">Women</option>
+              <option value="Kids">Kids</option>
+              <option value="Others">Others</option>
+              <option value="All">All</option>
+            </select>
+          </div>
+          <div class="col-md-4 mx-auto" style="margin-bottom: 10px">
+            <select #select1 (change)="getModelType(select.value,select1.value)" class="hideLabel form-control">
+              <option>Please select Model Type </option>
+              <option value="National">National</option>
+              <option value="InterNational">International</option>
+            </select>
+
+          </div>
+          <div class="col-md-4 mx-auto">
+            <select #product (change)="getProduct(product.value)" class="hideLabel form-control">
+              <option>Please select product Type </option>
+              <option value="sarees">Sarees</option>
+              <option value="kurti">Kurti</option>
+              <option value="shirts">Shirts</option>
+              <option value="jeans">Jeans</option>
+              <option value="leggings">Leggings</option>
+              <option value="sherwani">Sherwani</option>
+              <option value="All">All</option>
+            </select>
+
+          </div>
+          <div class="row">
+              <!-- <div class="col-md-1">
+                  <div class="form-group">
+                    <label>
+                      <h4>Select</h4>
+                    </label>
+                  </div>
+                </div> -->
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>
+                  <h4>Customer Name</h4>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>
+                  <h4>Mobile Number</h4>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>
+                  <h4>Location</h4>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row" *ngFor="let data of customerModel">
+
+            <div class="col-md-1 form-group">
+              <input type = "checkbox" (change)="getValue(data.mobileNumber)" >
+            </div>
+
+            <div class="col-md-4 form-group">
+              {{data.name}}
+            </div>
+
+            <div class="col-md-4 form-group">
+              {{data.mobileNumber}}
+            </div>
+
+            <div class="col-md-3 form-group">
+              {{data.location}}
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

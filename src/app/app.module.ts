@@ -31,7 +31,7 @@ import { ViewModelComponent } from './model-management/view-model/view-model.com
 import {ModelManagementService} from './model-management/model-management.service';
 import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
 import { NotificationService } from './notification/notification.service';
-
+import {CustomerDetailsComponent} from './customer-management/customer-details/customer-details.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import { NotificationService } from './notification/notification.service';
     AddModelComponent,
     ViewModelComponent,
     PushNotificationComponent,
+    CustomerDetailsComponent
   ],
   imports: [
     BrowserModule,

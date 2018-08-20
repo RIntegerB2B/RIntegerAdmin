@@ -8,6 +8,7 @@ import { AppSetting } from '../config/appSetting';
 import {Model} from './add-model/model.model';
 import {PortFolioImageData} from './add-model/portFolioImageData.model';
 import {ServiceProvider} from '../account/registration/service-provider.model';
+import {UpdateModel} from './add-model/update.model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,21 @@ this.newSp.next(data);
     const addUrl = 'serviceprovider/';
     const modelUrl = '/model';
     const url: string = this.serviceUrl + addUrl + id + modelUrl;
+    return this.httpClient.get<Model>(url);
+  }
+  deleteModel(id): Observable<any> {
+    const addUrl = 'model/';
+    const url: string = this.serviceUrl + addUrl + id ;
+    return this.httpClient.delete<Model>(url);
+  }
+  updateModel(id, data: UpdateModel): Observable<any> {
+    const addurl = 'model/';
+    const url: string = this.serviceUrl + addurl + id;
+    return this.httpClient.put<Model>(url, data);
+  }
+  getModelDetails(id): Observable<any> {
+    const addUrl = 'model/';
+    const url: string = this.serviceUrl + addUrl + id ;
     return this.httpClient.get<Model>(url);
   }
 }

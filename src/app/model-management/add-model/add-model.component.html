@@ -26,7 +26,7 @@
                 </label>
               </div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
           <div class="textContainer">
             <input type="text" placeholder="Model Height" class="form-control required appTextBox" required formControlName="modelHeight"
               />
@@ -35,7 +35,7 @@
                                && !addModelForm.get('modelHeight').pristine" class="alert alert-danger">
             <div [hidden]="!addModelForm.get('modelHeight').errors.required">Please enter Model Height</div>
           </div>
-        </div>
+        </div> 
         <div class="form-group">
         <div class="textContainer">
           <input type="text" placeholder="Model Measurements" class="form-control required appTextBox" required formControlName="modelMeasurements"
@@ -56,7 +56,7 @@
                            && !addModelForm.get('shoulder').pristine" class="alert alert-danger">
         <div [hidden]="!addModelForm.get('shoulder').errors.required">Please enter Shoulder</div>
       </div>
-      </div>
+      </div> 
 
       <div class="form-group">
     <div class="textContainer">
@@ -67,12 +67,12 @@
                          && !addModelForm.get('shoeSize').pristine" class="alert alert-danger">
       <div [hidden]="!addModelForm.get('shoeSize').errors.required">Please enter Shoe Size</div>
     </div>
-    </div>
+    </div> -->
 
         <div class="form-group">
           <div class="textContainer">
             <input type="text" placeholder="Description" class="form-control required appTextBox" required formControlName="description"
-            />
+           #modelDesc />
           </div>
           <div *ngIf="addModelForm.get('description').errors
                                && !addModelForm.get('description').pristine" class="alert alert-danger">
@@ -84,7 +84,7 @@
         <div class="form-group">
           <div class="textContainer">
             <input type="text" placeholder="Availability" class="form-control required appTextBox" required formControlName="availability"
-            />
+            #avail/>
 
           </div>
           <div *ngIf="addModelForm.get('availability').errors
@@ -97,7 +97,7 @@
         <div class="form-group">
           <div class="textContainer">
             <input type="text" placeholder="Mobile Number" class="form-control required appTextBox" required formControlName="mobileNumber"
-            />
+            #mob/>
 
           </div>
           <div *ngIf="addModelForm.get('mobileNumber').errors
@@ -109,7 +109,7 @@
 
         <div class="form-group">
           <div class="textContainer">
-            <input type="text" placeholder="Email Id" class="form-control required appTextBox" required formControlName="emailId" #catalogDescription/>
+            <input type="text" placeholder="Email Id" class="form-control required appTextBox" required formControlName="emailId" #email/>
 
           </div>
           <div *ngIf="addModelForm.get('emailId').errors
@@ -120,7 +120,7 @@
 
         <div class="form-group">
           <div class="textContainer">
-            <input type="text" placeholder="FaceBook" class="form-control required appTextBox" required formControlName="faceBook" />
+            <input type="text" placeholder="FaceBook" class="form-control required appTextBox" required formControlName="faceBook" #fb />
 
           </div>
           <div *ngIf="addModelForm.get('faceBook').errors
@@ -131,7 +131,7 @@
 
         <div class="form-group">
           <div class="textContainer">
-            <input type="text" placeholder="WhatsApp" class="form-control required appTextBox" required formControlName="whatsapp" />
+            <input type="text" placeholder="WhatsApp" class="form-control required appTextBox" required formControlName="whatsapp" #wapp/>
 
           </div>
           <div *ngIf="addModelForm.get('whatsapp').errors
@@ -141,13 +141,20 @@
         </div>
 
 
-        <div>
+        <div *ngIf="!showUpdate">
           <input type="submit" class="btn btnPink btn-block" value="Save" (click)="save(addModelForm,modelName.value)" />
+        </div>
+        
+        <input type="text"  placeholder="Catalog Id" hidden class="form-control required appTextBox"  formControlName="modelId"
+          #id/>
+        <div *ngIf="showUpdate">
+          <input type="submit" class="btn btnPink btn-block" value="Update" (click)="edit(addModelForm,modelName.value,modelDesc.value,id.value,
+          avail.value,mob.value,email.value,fb.value,wapp.value)" />
         </div>
       </div>
       <div class="col-md-3 form-group">
         <div>
-          <img src="" #loadedImage style="width: 180px; height: 245px;" />
+          <img [src]="this.loadedModel?.portfolioImageName"  #loadedImage style="width: 180px; height: 245px;" />
         </div>
         <div>
           <input type="file" name="file" class="btn btnPink btn-block" id="file" (change)="handleFileInput($event.target.files, loadedImage)">
