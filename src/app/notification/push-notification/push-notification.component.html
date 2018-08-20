@@ -1,0 +1,62 @@
+<div class="pageBox">
+  <form [formGroup]="pushNotificationForm" (ngSubmit)="pushNotification(pushNotificationForm)" novalidate style="padding-top:60px">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 text-center mx-auto">
+          <h6 class="text-center text-dark">Push Notification</h6>
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Mobile Numbers" formControlName="mobileNumbers" required #mobileNumbers>
+              <button mat-button matSuffix mat-icon-button aria-label="mobileNumbers">
+                <mat-icon>phone</mat-icon>
+              </button>
+              <mat-error *ngIf="pushNotificationForm.controls['mobileNumbers'].errors?.required">
+                Mobile No is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Title" formControlName="title" required>
+              <button mat-button matSuffix mat-icon-button aria-label="title">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+              <mat-error *ngIf="pushNotificationForm.controls['title'].errors?.required">
+                Title
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Notification Body" formControlName="notificationBody" required>
+              <button mat-button matSuffix mat-icon-button aria-label="Notification Body">
+                <mat-icon>web</mat-icon>
+              </button>
+              <mat-error *ngIf="pushNotificationForm.controls['notificationBody'].errors?.required">
+                Notification Body
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Image URL" formControlName="imageUrl" required>
+              <button mat-button matSuffix mat-icon-button aria-label="Image URL">
+                <mat-icon>web</mat-icon>
+              </button>
+              <mat-error *ngIf="pushNotificationForm.controls['imageUrl'].errors?.required">
+                Image URL
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <button mat-raised-button color="accent" [disabled]='!pushNotificationForm.valid'>
+            <strong>Push Notification</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>

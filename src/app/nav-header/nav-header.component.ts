@@ -7,22 +7,22 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./nav-header.component.css']
 })
 export class NavHeaderComponent implements OnInit {
-navID;
-admin: boolean;
-serviceProvider: boolean;
+  navID;
+  admin: boolean;
+  serviceProvider: boolean;
   constructor(private fb: FormBuilder,
     private activatedRoute: ActivatedRoute) {
     this.navID = this.activatedRoute.snapshot.paramMap.get('data');
     console.log(this.navID);
-    }
+  }
 
   ngOnInit() {
     if (this.navID === 'true') {
-this.serviceProvider = true;
-this.admin = false;
+      this.serviceProvider = true;
+      this.admin = false;
     } else if (this.navID === 'false') {
-this.serviceProvider = false;
-this.admin = true;
+      this.serviceProvider = false;
+      this.admin = true;
     }
   }
 

@@ -8,6 +8,7 @@ import { ApprovalComponent } from './service-provider-management/approval/approv
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { AddModelComponent } from './model-management/add-model/add-model.component';
 import { ViewModelComponent } from './model-management/view-model/view-model.component';
+import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
 
 const routes: Routes = [
     { path: 'welcome', component: WelcomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'navheader/:data', component: NavHeaderComponent},
     { path: 'models', component: ViewModelComponent},
     { path: 'model', component: AddModelComponent},
+    { path: 'pushNotification', component: PushNotificationComponent},
     { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 

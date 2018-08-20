@@ -29,6 +29,8 @@ import { ApproveModelComponent } from './model-management/approve-model/approve-
 import { AddModelComponent } from './model-management/add-model/add-model.component';
 import { ViewModelComponent } from './model-management/view-model/view-model.component';
 import {ModelManagementService} from './model-management/model-management.service';
+import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
+import { NotificationService } from './notification/notification.service';
 
 
 @NgModule({
@@ -44,6 +46,7 @@ import {ModelManagementService} from './model-management/model-management.servic
     ApproveModelComponent,
     AddModelComponent,
     ViewModelComponent,
+    PushNotificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,7 @@ import {ModelManagementService} from './model-management/model-management.servic
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AccountService, BookingDetailsService,
-     ModelManagementService, LocalStorageService],
+     ModelManagementService, LocalStorageService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
