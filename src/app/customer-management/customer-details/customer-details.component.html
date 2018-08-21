@@ -39,14 +39,6 @@
 
           </div>
           <div class="row">
-              <!-- <div class="col-md-1">
-                  <div class="form-group">
-                    <label>
-                      <h4>Select</h4>
-                    </label>
-                  </div>
-                </div> -->
-
             <div class="col-md-4">
               <div class="form-group">
                 <label>
@@ -74,7 +66,7 @@
           <div class="row" *ngFor="let data of customerModel">
 
             <div class="col-md-1 form-group">
-              <input type = "checkbox" (change)="getValue(data.mobileNumber)" >
+              <input type="checkbox" formControlName="customer" (change)="getValue(viewCustomerForm,data.mobileNumber,$event.target.checked)">
             </div>
 
             <div class="col-md-4 form-group">
@@ -89,7 +81,13 @@
               {{data.location}}
             </div>
           </div>
-          
+
+        </div>
+        <div>
+          <button class="btn btn-secondary" type="submit" (click)="sendNumbers()">Send notification</button>
+        </div>
+        <div>
+     
         </div>
       </div>
     </div>

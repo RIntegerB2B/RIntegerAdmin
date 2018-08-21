@@ -13,6 +13,7 @@ import {Customers} from './customer.model';
 export class CustomerDetailsComponent implements OnInit {
   viewCustomerForm: FormGroup;
   customerModel: Customers;
+mobileNumbers = [];
   constructor(private fb: FormBuilder, private router: Router, private customerService: CustomerManagementService) { }
 
   ngOnInit() {
@@ -21,7 +22,8 @@ export class CustomerDetailsComponent implements OnInit {
   }
   createForm() {
     this.viewCustomerForm = this.fb.group({
-      mobValue: ['']
+      mobValue: [''],
+      customer: ['']
     });
   }
   getShootType(id) {
@@ -37,17 +39,25 @@ this.customers();
   getModelType(id, id2) {
     this.customerService.findModelType(id, id2).subscribe(data => {
      this.customerModel = data;
-     console.log(data);
+    /*  console.log(data); */
     });
   }
 customers() {
 this.customerService.findCustomers().subscribe(data => {
   this.customerModel = data;
-  console.log(data);
+  /* console.log(data); */
 });
 }
-getValue(value) {
-console.log(value);
+getValue(viewCustomerForm: FormGroup, value , isChecked) {
+const index = this.mobileNumbers.indexOf(value);
+  if (isChecked) {
+    this.mobileNumbers.push(value);
+  } else  if (index > -1 ) {
+    this.mobileNumbers.splice(index, 1);
+  }
+}
+sendNumbers() {
+  console.log(this.mobileNumbers);
 }
 getProduct(product) {
 if (product === 'All' ) {

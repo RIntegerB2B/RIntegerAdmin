@@ -18,7 +18,7 @@ export class ViewBookingComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private bookingService: BookingDetailsService) { }
 
   ngOnInit() {
-    this.getDetails();
+   /*  this.getDetails(); */
     this.createForm();
     this.modelBooking();
   }
