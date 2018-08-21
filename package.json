@@ -4,8 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "build": "ng build --prod --base-href /admin/",
+    "deployBat": "deploy.bat",
+    "deploy": "npm run build && npm run deployBat",
+    "test": "cd ",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
