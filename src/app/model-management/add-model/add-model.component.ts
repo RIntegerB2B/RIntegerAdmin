@@ -128,7 +128,7 @@ getModel(id) {
     });
     this.uploadImage(modelName);
     addModelForm.reset();
-    this.router.navigate(['/model']);
+    this.router.navigate(['/models']);
   }
   edit(addModelForm: FormGroup, modelName: any, modelDesc: any, id: any,
     avail: any, mob: any, email: any, fb: any, wapp: any) {
@@ -149,6 +149,7 @@ getModel(id) {
         console.log(data);
         this.uploadImage(modelName);
         console.log(modelName);
+        this.router.navigate(['/models']);
       }, error => {
         console.log(error);
       });

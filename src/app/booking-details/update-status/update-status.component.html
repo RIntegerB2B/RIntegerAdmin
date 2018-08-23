@@ -1,6 +1,6 @@
-<form [formGroup]="updateStatusForm" style="padding-top:60px" novalidate>
+<form class="pageBox" [formGroup]="updateStatusForm" style="padding-top:60px" novalidate>
   <div class="container-fluid">
-    <h1> Order Details</h1>
+    <h1  class="text-center"> Order Details</h1>
     <div class="row">
       <div class="col-md-12  mx-auto">
 
@@ -15,14 +15,11 @@
           <div class="col-md-2  form-group">
             <p style="padding-left:20px">Booking Date </p>
           </div>
-         <!--  <div class="col-md-2 form-group">
+          <!--  <div class="col-md-2 form-group">
             <p style="padding-left:20px">Order </p>
           </div> -->
           <div class="col-md-2  form-group">
             <p style="padding-left:20px">View Status</p>
-          </div>
-          <div class="col-md-2  form-group">
-            <p style="padding-left:20px">Update Status</p>
           </div>
 
         </div>
@@ -39,159 +36,278 @@
           <div class="col-md-2 form-group">
             <p>{{data.bookingDate}} </p>
           </div>
-         <!--  <div class="col-md-2 form-group">
-            <p>{{data.order}} </p>
-          </div> -->
 
           <div class="col-md-2  form-group">
-            <button class="btn btn-success pull-right btn-sm" (click)="statusView(updateStatusForm,data.mobileNumber,data._id)">View</button>
-          </div>
-          <div class="col-md-2  form-group">
-            <button class="btn btn-success pull-right btn-sm" (click)="updateStatus()">Update</button>
+            <button class="btn btn-success pull-right btn-sm" (click)="statusView(data.mobileNumber,data._id)">View</button>
           </div>
         </div>
 
-        <div *ngIf="displayStatus">
-
+        <div  class="text-center">
+            <h1 class="text-center">Current status</h1>
           <div class="row ">
             <div class="col-md-4">
               <p> Material Picked Up</p>
             </div>
-            <div class="col-md-8" *ngIf="materialPicked">
+            <div class="col-md-2" *ngIf="materialPicked">
               <label>Not completed</label>
             </div>
-            <div class="col-md-8" *ngIf="materialPickedTrue">
+            <div class="col-md-2" *ngIf="materialPickedTrue">
               <label> completed</label>
             </div>
+            <div class="col-md-2" *ngIf="materialPickedProgress">
+                <label> Progress</label>
+              </div>
+              <div *ngFor="let data of toshow"  style="margin-right: 50px">
+                  <button class="btn btn-danger pull-right" (click)="notCompMaterialPick(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                     Not Completed</button>
+                </div>
+            <div *ngFor="let data of toshow" style="margin-right: 50px">
+                <button class="btn btn-info pull-right" (click)="progressMateialPick(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Progress</button>
+              </div>
+              <div *ngFor="let data of toshow" >
+                  <button class="btn btn-success pull-right" (click)="updateMateialPick(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                      Completed</button>
+                </div>
+               
           </div>
 
           <div class="row">
             <div class="col-md-4">
               <p>Shoot Completed </p>
             </div>
-            <div class="col-md-8" *ngIf="shootCompleted">
+            <div class="col-md-2" *ngIf="shootCompleted">
               <label>Not completed</label>
             </div>
-            <div class="col-md-8" *ngIf="shootCompletedTrue">
+            <div class="col-md-2" *ngIf="shootCompletedTrue">
               <label> completed</label>
             </div>
+            <div class="col-md-2" *ngIf="shootCompletedProgress">
+                <label> Progress</label>
+              </div>
+              <div *ngFor="let data of toshow" style="margin-right: 50px" >
+                  <button class="btn btn-danger pull-right" (click)="notCompShooting(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                    Not Completed</button>
+                </div>
+            <div *ngFor="let data of toshow" style="margin-right: 50px">
+                <button class="btn btn-info pull-right" (click)="progressShooting(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                  Progress</button>
+              </div>
+              <div *ngFor="let data of toshow" >
+                  <button class="btn btn-success pull-right" (click)="updateShooting(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                    Completed</button>
+                </div>
+               
           </div>
 
           <div class="row">
             <div class="col-md-4">
               <p>Image Editing</p>
             </div>
-            <div class="col-md-8" *ngIf="imageEditing">
+            <div class="col-md-2" *ngIf="imageEditing">
               <label>Not completed</label>
             </div>
 
-            <div class="col-md-8" *ngIf="imageEditingTrue">
+            <div class="col-md-2" *ngIf="imageEditingTrue">
               <label> completed</label>
             </div>
+            <div class="col-md-2" *ngIf="imageEditingProgress">
+                <label> Progress</label>
+              </div>
+              <div  *ngFor="let data of toshow" style="margin-right: 50px" >
+                  <button class="btn btn-danger pull-right" (click)="notCompImagedEditing(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                  Not Completed</button>
+                </div>
+            <div  *ngFor="let data of toshow"  style="margin-right: 50px">
+                <button class="btn btn-info pull-right" (click)="progressImagedEditing(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Progress</button>
+              </div>
+              <div  *ngFor="let data of toshow" >
+                  <button class="btn btn-success pull-right" (click)="updateImagedEditing(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                      Completed</button>
+                </div>
+                
           </div>
 
           <div class="row">
             <div class="col-md-4">
-              <p>Delivery</p>
+              <p>QC & Image Delivery</p>
             </div>
-            <div class="col-md-8" *ngIf="delivery">
+            <div class="col-md-2" *ngIf="delivery">
               <label>Not completed</label>
             </div>
 
-            <div class="col-md-8" *ngIf="deliveryTrue">
+            <div class="col-md-2" *ngIf="deliveryTrue">
               <label> completed</label>
             </div>
+            <div class="col-md-2" *ngIf="deliveryProgress">
+                <label> Progress</label>
+              </div>
+              <div *ngFor="let data of toshow" style="margin-right: 50px">
+                  <button class="btn btn-danger pull-right" (click)="notCompDelivery(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                      Not Completed</button>
+                </div>
+            <div *ngFor="let data of toshow" style="margin-right: 50px">
+                <button class="btn btn-info pull-right" (click)="progressDelivery(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Progress</button>
+              </div>
+  
+            <div *ngFor="let data of toshow" >
+              <button class="btn btn-success pull-right" (click)="updateDelivery(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                  Completed</button>
+            </div>
+           
           </div>
           <div class="row">
             <div class="col-md-4">
               <p>MaterialReturn</p>
             </div>
-            <div class="col-md-8" *ngIf="materialReturn">
+            <div class="col-md-2" *ngIf="materialReturn">
               <label>Not completed</label>
             </div>
 
-            <div class="col-md-8" *ngIf="materialReturnTrue">
-              <label> completed</label>
+            <div class="col-md-2" *ngIf="materialReturnTrue">
+              <label> Completed</label>
             </div>
+            <div class="col-md-2" *ngIf="materialReturnProgress">
+                <label> Progress</label>
+              </div>
+              <div  *ngFor="let data of toshow" style="margin-right: 50px" >
+                  <button class="btn btn-danger pull-right" (click)="notCompMaterialReturn(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                   Not Completed</button>
+    
+                </div>
+            <div  *ngFor="let data of toshow" style="margin-right: 50px">
+                <button class="btn btn-info pull-right" (click)="progressMaterialReturn(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Progress</button>
+              </div>
+            <div  *ngFor="let data of toshow"  >
+              <button class="btn btn-success pull-right" (click)="updateMaterialReturn(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                  Completed</button>
+            </div>
+           
           </div>
           <div class="row">
             <div class="col-md-4">
               <p>Payment</p>
             </div>
-            <div class="col-md-8" *ngIf="payment">
+            <div class="col-md-2" *ngIf="payment">
               <label>Not completed</label>
             </div>
 
-            <div class="col-md-8" *ngIf="paymentTrue">
+            <div class="col-md-2" *ngIf="paymentTrue">
               <label> completed</label>
             </div>
-          </div>
-         
-
-        </div>
-
-        <div *ngIf="updateGridView">
-          <div class="row">
-            <div *ngFor="let data of toshow">
-            </div>
-
-            <div class="col-md-4">
-              <p> Material Picked Up</p>
+            <div class="col-md-2" *ngIf="paymentProgress">
+                <label> Progress</label>
+              </div>
+              <div  *ngFor="let data of toshow" style="margin-right: 50px">
+                  <button class="btn btn-danger pull-right" (click)="notCompPayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                    Not  Completed</button>
+                </div>
+            <div  *ngFor="let data of toshow"  style="margin-right: 50px">
+                <button class="btn btn-info pull-right" (click)="progressPayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Progress</button>
+              </div>
+            <div  *ngFor="let data of toshow" >
+              <button class="btn btn-success pull-right" (click)="updatePayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                  Completed</button>
             </div>
            
-            <div class="col-md-4" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updateMateialPick(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
+          </div>
+
+
+        </div>
+
+       <!-- <div  class="text-center">
+          <h1 class="text-center">Update the status</h1>
+          <div class="row">
+            <div class="col-md-2">
+              <p> Material Picked Up</p>
             </div>
-            <!-- <div class="col-md-4">
-              <button class="btn btn-success " (click)="msg()"> Send msg</button>
-            </div> -->
+            <div *ngFor="let data of toshow" style="margin-right: 50px">
+              <button class="btn btn-info pull-right" (click)="progressMateialPick(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+              Progress</button>
+            </div>
+
+            <div *ngFor="let data of toshow">
+              <button class="btn btn-success pull-right" (click)="updateMateialPick(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                  Completed</button>
+            </div>
+
           </div>
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
               <p> Shooting</p>
             </div>
-            <div class="col-md-8" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updateShooting(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
+            <div *ngFor="let data of toshow" style="margin-right: 50px">
+              <button class="btn btn-info pull-right" (click)="progressShooting(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Progress</button>
+            </div>
+            <div *ngFor="let data of toshow">
+              <button class="btn btn-success pull-right" (click)="updateShooting(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Completed</button>
             </div>
 
           </div>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
               <p> Image Editing</p>
             </div>
-            <div class="col-md-8" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updateImagedEditing(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
+            <div  *ngFor="let data of toshow"  style="margin-right: 50px">
+                <button class="btn btn-info pull-right" (click)="progressImagedEditing(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Progress</button>
+              </div>
+            <div  *ngFor="let data of toshow">
+              <button class="btn btn-success pull-right" (click)="updateImagedEditing(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                  Completed</button>
             </div>
 
           </div>
           <div class="row">
-            <div class="col-md-4">
-              <p> Delivery</p>
+            <div class="col-md-2">
+              <p> QC & Image Delivery</p>
             </div>
-            <div class="col-md-8" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updateDelivery(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
+            <div *ngFor="let data of toshow" style="margin-right: 50px">
+                <button class="btn btn-info pull-right" (click)="progressDelivery(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Progress</button>
+              </div>
+  
+            <div *ngFor="let data of toshow">
+              <button class="btn btn-success pull-right" (click)="updateDelivery(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                  Completed</button>
             </div>
 
           </div>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
               <p> Material return</p>
             </div>
-            <div class="col-md-8" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updateMaterialReturn(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
+            <div  *ngFor="let data of toshow" style="margin-right: 50px">
+                <button class="btn btn-info pull-right" (click)="progressMaterialReturn(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Progress</button>
+              </div>
+            <div  *ngFor="let data of toshow">
+              <button class="btn btn-success pull-right" (click)="updateMaterialReturn(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                  Completed</button>
             </div>
           </div>
-          
+
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
               <p> Payment</p>
             </div>
-            <div class="col-md-8" *ngFor="let data of toshow">
-              <button class="btn btn-success pull-right" (click)="updatePayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)"> completed</button>
+            <div  *ngFor="let data of toshow"  style="margin-right: 50px">
+                <button class="btn btn-info pull-right" (click)="progressPayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Progress</button>
+              </div>
+            <div  *ngFor="let data of toshow">
+              <button class="btn btn-success pull-right" (click)="updatePayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                  Completed</button>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

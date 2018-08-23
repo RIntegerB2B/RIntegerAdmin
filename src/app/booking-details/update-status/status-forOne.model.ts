@@ -4,24 +4,24 @@ export class StatusDetail {
     bookingId: Number;
     bookingDate: String;
     order: Boolean;
-    materialPickedUp: Boolean;
-    shootCompleted: Boolean;
-    imageEditing: Boolean;
-    delivery: Boolean;
-    payment: Boolean;
-    materialReturn: Boolean;
+    materialPickedUp: Number;
+    shootCompleted: Number;
+    imageEditing: Number;
+    delivery: Number;
+    payment: Number;
+    materialReturn: Number;
     constructor(
         _id: Number,
         mobileNumber: Number,
         bookingId: Number,
         bookingDate: String,
         order: Boolean,
-        materialPickedUp: Boolean,
-        shootCompleted: Boolean,
-        imageEditing: Boolean,
-        delivery: Boolean,
-        payment: Boolean,
-        materialReturn: Boolean
+        materialPickedUp: Number,
+        shootCompleted: Number,
+        imageEditing: Number,
+        delivery: Number,
+        payment: Number,
+        materialReturn: Number
     ) {
         this._id = _id;
         this.mobileNumber = mobileNumber;

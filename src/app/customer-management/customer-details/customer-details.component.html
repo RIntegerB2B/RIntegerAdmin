@@ -10,33 +10,21 @@
           <div class="col-md-4 mx-auto" style="margin-bottom: 10px">
             <select #select (change)="getShootType(select.value)" class="hideLabel form-control">
               <option>Please select Shoot Type </option>
-              <option value="Men">Men</option>
-              <option value="Women">Women</option>
-              <option value="Kids">Kids</option>
-              <option value="Others">Others</option>
-              <option value="All">All</option>
+              <option *ngFor="let shootType of shootTypes" [value]="shootType"> {{shootType}}</option>
             </select>
           </div>
           <div class="col-md-4 mx-auto" style="margin-bottom: 10px">
             <select #select1 (change)="getModelType(select.value,select1.value)" class="hideLabel form-control">
               <option>Please select Model Type </option>
-              <option value="National">National</option>
-              <option value="InterNational">International</option>
+              <option *ngFor="let modelType of modelTypes" [value]="modelType">{{modelType}}</option>
             </select>
 
           </div>
           <div class="col-md-4 mx-auto">
             <select #product (change)="getProduct(product.value)" class="hideLabel form-control">
               <option>Please select product Type </option>
-              <option value="sarees">Sarees</option>
-              <option value="kurti">Kurti</option>
-              <option value="shirts">Shirts</option>
-              <option value="jeans">Jeans</option>
-              <option value="leggings">Leggings</option>
-              <option value="sherwani">Sherwani</option>
-              <option value="All">All</option>
+              <option *ngFor ="let productType of productTypes" [value]="productType">{{productType}}</option>
             </select>
-
           </div>
           <div class="row">
             <div class="col-md-4">

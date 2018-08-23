@@ -14,6 +14,9 @@ export class CustomerDetailsComponent implements OnInit {
   viewCustomerForm: FormGroup;
   customerModel: Customers;
 mobileNumbers = [];
+modelTypes = ['National', 'InterNational', 'All'];
+shootTypes = ['Men', 'Women', 'Kids', 'Others', 'All'];
+productTypes = ['sarees', 'kurti', 'shirts', 'jeans', 'leggings', 'sherwani', 'All'];
   constructor(private fb: FormBuilder, private router: Router, private customerService: CustomerManagementService) { }
 
   ngOnInit() {
@@ -37,10 +40,16 @@ this.customers();
 
   }
   getModelType(id, id2) {
+    if (id2 === 'All') {
+      this.customerService.findShootType(id).subscribe(data => {
+        this.customerModel = data;
+       });
+      } else {
     this.customerService.findModelType(id, id2).subscribe(data => {
      this.customerModel = data;
     /*  console.log(data); */
     });
+  }
   }
 customers() {
 this.customerService.findCustomers().subscribe(data => {
@@ -49,6 +58,7 @@ this.customerService.findCustomers().subscribe(data => {
 });
 }
 getValue(viewCustomerForm: FormGroup, value , isChecked) {
+
 const index = this.mobileNumbers.indexOf(value);
   if (isChecked) {
     this.mobileNumbers.push(value);

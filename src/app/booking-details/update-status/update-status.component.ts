@@ -19,22 +19,28 @@ export class UpdateStatusComponent implements OnInit {
   no;
   toshow: Status;
   statusDetail: StatusDetail[] = [];
-  updateStatusForm: FormGroup;
+    updateStatusForm: FormGroup;
   displayStatus: Boolean;
   progress: boolean;
   completed: boolean;
   materialPicked: boolean;
   materialPickedTrue: boolean;
+  materialPickedProgress: boolean;
   shootCompleted: boolean;
   shootCompletedTrue: boolean;
+  shootCompletedProgress: boolean;
   imageEditing: boolean;
   imageEditingTrue: boolean;
+  imageEditingProgress: boolean;
   delivery: boolean;
   deliveryTrue: boolean;
+  deliveryProgress: boolean;
   payment: boolean;
   paymentTrue: boolean;
+  paymentProgress: boolean;
   materialReturn: boolean;
   materialReturnTrue: boolean;
+  materialReturnProgress: boolean;
   updateGridView: boolean;
   notificationModel: Notification;
   title: string;
@@ -60,95 +66,144 @@ export class UpdateStatusComponent implements OnInit {
   getStatus(id) {
     this.bookingService.getStatusDetail(id).subscribe(data => {
       this.toshow = data;
+      console.log(data);
+      /* this.statusView( data.mobileNumber, id); */
     }, error => {
       console.log(error);
     });
   }
-  statusView(updateStatusForm: FormGroup, no: any, ID: any) {
+  statusView( no: any, ID: any) {
     console.log(ID);
     this.displayStatus = true;
-    this.updateGridView = false;
     this.bookingService.getStatus(no, ID).subscribe(data => {
-      this.statusDetail = data;
+      this.statusDetail = data ;
       switch (data.order) {
-        case false: {
+        case 0: {
           this.progress = true;
           break;
         }
-        case true: {
+        case 1: {
           this.completed = true;
           break;
         }
       }
       switch (data.materialPickedUp) {
-        case false: {
+        case 0: {
           this.materialPicked = true;
           this.materialPickedTrue = false;
+          this.materialPickedProgress = false;
           break;
         }
-        case true: {
+        case 1: {
           this.materialPicked = false;
           this.materialPickedTrue = true;
+          this.materialPickedProgress = false;
+          break;
+        }
+        case 2: {
+          this.materialPicked = false;
+          this.materialPickedTrue = false;
+          this.materialPickedProgress = true;
           break;
         }
       }
       switch (data.shootCompleted) {
-        case false: {
+        case 0: {
           this.shootCompleted = true;
           this.shootCompletedTrue = false;
+          this.shootCompletedProgress = false;
           break;
         }
-        case true: {
+        case 1: {
           this.shootCompleted = false;
+          this.shootCompletedProgress = false;
           this.shootCompletedTrue = true;
+          break;
+        }
+        case 2: {
+          this.shootCompleted = false;
+          this.shootCompletedProgress = true;
+          this.shootCompletedTrue = false;
           break;
         }
       }
       switch (data.imageEditing) {
-        case false: {
+        case 0: {
           this.imageEditing = true;
           this.imageEditingTrue = false;
+          this.imageEditingProgress = false;
           break;
         }
-        case true: {
+        case 1: {
           this.imageEditing = false;
+          this.imageEditingProgress = false;
           this.imageEditingTrue = true;
+          break;
+        }
+        case 2: {
+          this.imageEditing = false;
+          this.imageEditingProgress = true;
+          this.imageEditingTrue = false;
           break;
         }
       }
       switch (data.delivery) {
-        case false: {
+        case 0: {
           this.delivery = true;
           this.deliveryTrue = false;
+          this.deliveryProgress = false;
           break;
         }
-        case true: {
+        case 1: {
           this.deliveryTrue = true;
           this.delivery = false;
+          this.deliveryProgress = false;
+          break;
+        }
+        case 2: {
+          this.deliveryTrue = false;
+          this.delivery = false;
+          this.deliveryProgress = true;
           break;
         }
       }
       switch (data.payment) {
-        case false: {
+        case 0: {
           this.payment = true;
           this.paymentTrue = false;
+          this.paymentProgress = false;
           break;
         }
-        case true: {
+        case 1: {
           this.payment = false;
+          this.paymentProgress = false;
           this.paymentTrue = true;
+          break;
+        }
+        case 2: {
+          this.payment = false;
+          this.paymentProgress = true;
+          this.paymentTrue = false;
           break;
         }
       }
       switch (data.materialReturn) {
-        case false: {
+        case 0: {
           this.materialReturn = true;
+          this.materialReturnProgress = false;
           this.materialReturnTrue = false;
           break;
         }
-        case true: {
+        case 1: {
           this.materialReturn = false;
+          this.materialReturnProgress = false;
           this.materialReturnTrue = true;
+          break;
+        }
+        case 2: {
+          this.materialReturn = false;
+          this.materialReturnTrue = false;
+          this.materialReturnProgress = true;
           break;
         }
       }
@@ -156,11 +211,93 @@ export class UpdateStatusComponent implements OnInit {
       console.log(error);
     });
   }
-
-  updateStatus() {
-    this.updateGridView = true;
-    this.displayStatus = false;
+  // not completed
+  notCompMaterialPick(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.notCompletedMaterialStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
   }
+  notCompShooting(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.notCompletedShootingStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  notCompImagedEditing(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.notCompImagedEditingStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  notCompDelivery(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.notCompDeliveryStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  notCompMaterialReturn(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.notCompMaterialReturnStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  notCompPayment(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.notCompPaymentStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+   // progress
+  progressMateialPick(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.progressMaterialStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  progressShooting(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.progressShootingStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  progressImagedEditing(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.progressImagedEditingStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  progressDelivery(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.progressDeliveryStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  progressPayment(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.progressPaymentStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  progressMaterialReturn(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
+    this.bookingService.progressMaterialReturnStatus(mobileNumber, id).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  // completed
   updateMateialPick(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     console.log(orderId);
     this.bookingService.updateMaterialStatus(mobileNumber, id).subscribe(data => {
