@@ -68,7 +68,13 @@
       <div [hidden]="!addModelForm.get('shoeSize').errors.required">Please enter Shoe Size</div>
     </div>
     </div> -->
-
+    <!-- <div class="col md-12">
+        <label class="pr-2 ">Model Availability</label>
+        <div>
+          <input type="radio" value="true"  (click)="avail($event.target.value)" formControlName="modelAvail">Yes
+          <input type="radio" value="false"   (click)="avail($event.target.value)" formControlName="modelAvail" >No
+        </div>
+      </div> -->
         <div class="form-group">
           <div class="textContainer">
             <input type="text" placeholder="Description" class="form-control required appTextBox" required formControlName="description"
@@ -80,17 +86,19 @@
           </div>
         </div>
 
-
+        
         <div class="form-group">
           <div class="textContainer">
             <input type="text" placeholder="Availability" class="form-control required appTextBox" required formControlName="availability"
             #avail/>
 
           </div>
-          <div *ngIf="addModelForm.get('availability').errors
+          <div>Ex:True,false</div> 
+          
+           <div *ngIf="addModelForm.get('availability').errors
                                  && !addModelForm.get('availability').pristine" class="alert alert-danger">
             <div [hidden]="!addModelForm.get('availability').errors.required">Please enter Availability</div>
-          </div>
+          </div> 
         </div>
 
 
@@ -100,6 +108,7 @@
             #mob/>
 
           </div>
+          <div>Ex:9988776655</div>
           <div *ngIf="addModelForm.get('mobileNumber').errors
                                    && !addModelForm.get('mobileNumber').pristine" class="alert alert-danger">
             <div [hidden]="!addModelForm.get('mobileNumber').errors.required">Please enter MobileNumber</div>

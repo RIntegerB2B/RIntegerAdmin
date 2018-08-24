@@ -27,9 +27,11 @@ export class AddModelComponent implements OnInit {
   modelTypes = ['National', 'InterNational'];
   shootTypes = ['Men', 'Women'];
   id;
+  modelAvailable = ['Yes', 'No'];
   loadedModel: Model;
   showUpdate: boolean;
   updatedModel: UpdateModel;
+  modelAvailability;
 
 
   fileToUpload: File = null;
@@ -58,7 +60,8 @@ export class AddModelComponent implements OnInit {
     whatsapp: ['', Validators.required],
     shootType: [''],
       modelType: [''],
-      modelId: ['']
+      modelId: [''],
+    /*   modelAvail: [''] */
      /*  modelHeight: [''],
       modelMeasurements: [''],
       shoulder: [''],
@@ -79,6 +82,10 @@ handleFileInput(files: FileList, loadedImage) {
       loadedImage.src = reader1.result;
     };
   };
+}
+avail(modelAva) {
+console.log(modelAva);
+this.modelAvailability = modelAva;
 }
 getModel(id) {
   this.showUpdate = true;
@@ -106,7 +113,7 @@ getModel(id) {
  this.userModel = new Model(
       addModelForm.controls.modelName.value,
       addModelForm.controls.description.value,
-      addModelForm.controls.availability.value,
+    addModelForm.controls.availability.value,
       addModelForm.controls.mobileNumber.value,
       addModelForm.controls.emailId.value,
       addModelForm.controls.faceBook.value,
@@ -116,6 +123,7 @@ getModel(id) {
 
     );
     // sp details
+   /*  this.userModel.availability = this.modelAvailability; */
     this.spName = this.localStorageService.retrieve('userName');
     this.spCompanyName = this.localStorageService.retrieve('companyName');
   this.spId = this.localStorageService.retrieve('Id');
