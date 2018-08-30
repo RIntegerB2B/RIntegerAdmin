@@ -5,12 +5,11 @@
           <div class="col-md-6 text-center mx-auto">
             <h6 class="text-center text-dark">REGISTRATION</h6>
               <div class="form-group">
-               <mat-form-field>
-                <mat-select #select >
-                  <mat-option value="pleaseSelectUserType">Please select User Type</mat-option>
-                  <mat-option value="serviceProvider" (change)="getCategory(select.value)">Service Provider</mat-option>
-                </mat-select>
-              </mat-form-field>
+                  <select #selectElem (change)="getType(selectElem.value)"  class="hideLabel form-control" >
+                      <option>Please select the user type</option>
+                      <option value="serviceprovider"> Service Provider </option>
+                      <option value="model"> Model </option>
+                  </select>
             </div>
               <div class="form-group">
                <mat-form-field class="example-full-width">

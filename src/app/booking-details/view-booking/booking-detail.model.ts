@@ -7,6 +7,8 @@ export class BookingDetail {
     shootType: string;
     modelType: string;
     bookingOrderId: string;
+    bookingStatus: number;
+    bookingType: string;
     constructor(
         name: string,
         mobileNumber: number ,

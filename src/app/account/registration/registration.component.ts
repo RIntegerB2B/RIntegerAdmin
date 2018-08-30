@@ -11,7 +11,7 @@ import {AccountService} from '../account.service';
 })
 export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
-  headCatSelected;
+  userType;
   userModel: ServiceProvider;
   constructor(private fb: FormBuilder, private router: Router, private accountService: AccountService) { }
 
@@ -29,10 +29,10 @@ export class RegistrationComponent implements OnInit {
         location: ['', Validators.required]
       });
   }
-  getCategory(id) {
-  this.headCatSelected = id;
-if (this.headCatSelected === 'serviceProvider') {
-}
+  getType(user) {
+  this.userType = user;
+  console.log(this.userType);
+
   }
 
 

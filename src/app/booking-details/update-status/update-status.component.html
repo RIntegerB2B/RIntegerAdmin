@@ -1,6 +1,7 @@
 <form class="pageBox" [formGroup]="updateStatusForm" style="padding-top:60px" novalidate>
   <div class="container-fluid">
-    <h1  class="text-center"> Order Details</h1>
+      <a [routerLink]="['/details']">  <mat-icon>arrow_back</mat-icon></a>
+    <h1  class="text-center"> Booking Status</h1>
     <div class="row">
       <div class="col-md-12  mx-auto">
 
@@ -15,11 +16,13 @@
           <div class="col-md-2  form-group">
             <p style="padding-left:20px">Booking Date </p>
           </div>
-          <!--  <div class="col-md-2 form-group">
-            <p style="padding-left:20px">Order </p>
-          </div> -->
-          <div class="col-md-2  form-group">
-            <p style="padding-left:20px">View Status</p>
+         
+          <div  *ngIf ="confirmed" class="col-md-2  form-group">
+            <p style="padding-left:20px">Update Status</p>
+          </div>
+
+          <div *ngIf="!hide" class="col-md-3  form-group">
+            <p style="padding-left:20px">Update Booking status</p>
           </div>
 
         </div>
@@ -37,13 +40,20 @@
             <p>{{data.bookingDate}} </p>
           </div>
 
-          <div class="col-md-2  form-group">
-            <button class="btn btn-success pull-right btn-sm" (click)="statusView(data.mobileNumber,data._id)">View</button>
+          <div   class="col-md-2  form-group">
+            <button class="btn btn-success pull-right btn-sm" (click)="statusView(data.mobileNumber,data._id)">Update</button>
           </div>
+         
         </div>
+       <!--  <div  class="confirmed col-md-6" *ngIf ="confirmed">
+            <p>Booking order has been confirmed</p>
+        </div>
+        <div  class="cancelled col-md-6" *ngIf ="cancelled">
+            <p>Booking order has been cancelled</p>
+        </div> -->
 
-        <div  class="text-center">
-            <h1 class="text-center">Current status</h1>
+        <div    class="text-center">
+            <h1 class="text-center">Order status</h1>
           <div class="row ">
             <div class="col-md-4">
               <p> Material Picked Up</p>
@@ -65,9 +75,9 @@
                 <button class="btn btn-info pull-right" (click)="progressMateialPick(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
                 Progress</button>
               </div>
-              <div *ngFor="let data of toshow" >
+              <div *ngFor="let data of toshow" style="margin-bottom: 10px">
                   <button class="btn btn-success pull-right" (click)="updateMateialPick(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
-                      Completed</button>
+                      <mat-icon>notifications_active</mat-icon>  Completed</button>
                 </div>
                
           </div>
@@ -93,9 +103,9 @@
                 <button class="btn btn-info pull-right" (click)="progressShooting(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
                   Progress</button>
               </div>
-              <div *ngFor="let data of toshow" >
+              <div *ngFor="let data of toshow" style="margin-bottom: 10px">
                   <button class="btn btn-success pull-right" (click)="updateShooting(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
-                    Completed</button>
+                      <mat-icon>notifications_active</mat-icon> Completed</button>
                 </div>
                
           </div>
@@ -122,16 +132,16 @@
                 <button class="btn btn-info pull-right" (click)="progressImagedEditing(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
                 Progress</button>
               </div>
-              <div  *ngFor="let data of toshow" >
+              <div  *ngFor="let data of toshow" style="margin-bottom: 10px">
                   <button class="btn btn-success pull-right" (click)="updateImagedEditing(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
-                      Completed</button>
+                      <mat-icon>notifications_active</mat-icon> Completed</button>
                 </div>
                 
           </div>
 
           <div class="row">
             <div class="col-md-4">
-              <p>QC & Image Delivery</p>
+              <p> QC & Image Delivery</p>
             </div>
             <div class="col-md-2" *ngIf="delivery">
               <label>Not completed</label>
@@ -152,9 +162,9 @@
                 Progress</button>
               </div>
   
-            <div *ngFor="let data of toshow" >
+            <div *ngFor="let data of toshow" style="margin-bottom: 10px" >
               <button class="btn btn-success pull-right" (click)="updateDelivery(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
-                  Completed</button>
+                  <mat-icon>notifications_active</mat-icon>  Completed</button>
             </div>
            
           </div>
@@ -181,9 +191,9 @@
                 <button class="btn btn-info pull-right" (click)="progressMaterialReturn(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
                 Progress</button>
               </div>
-            <div  *ngFor="let data of toshow"  >
+            <div  *ngFor="let data of toshow" style="margin-bottom: 10px" >
               <button class="btn btn-success pull-right" (click)="updateMaterialReturn(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
-                  Completed</button>
+                  <mat-icon>notifications_active</mat-icon>   Completed</button>
             </div>
            
           </div>
@@ -209,9 +219,9 @@
                 <button class="btn btn-info pull-right" (click)="progressPayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
                 Progress</button>
               </div>
-            <div  *ngFor="let data of toshow" >
+            <div  *ngFor="let data of toshow"  style="margin-bottom: 20px">
               <button class="btn btn-success pull-right" (click)="updatePayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
-                  Completed</button>
+                  <mat-icon>notifications_active</mat-icon>   Completed</button>
             </div>
            
           </div>
