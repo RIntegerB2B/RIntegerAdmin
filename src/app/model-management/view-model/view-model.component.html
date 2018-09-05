@@ -1,8 +1,11 @@
 <div class="container" style="padding-top:60px">
   <div class="row">
-    <div class="col-md-6 col-sm-12  mx-auto text-center">
-      <button mat-raised-button [routerLink]="['/model']" value="" type="submit">Add Model</button>
+    <div class="col-md-4 col-sm-12  mx-auto text-center">
+      <button mat-raised-button color="accent" [routerLink]="['/model']" value="" type="submit">Add Model <mat-icon>add</mat-icon></button>
     </div>
+    <!-- <div class="col-md-6 col-sm-12  mx-auto text-center">
+        <button mat-raised-button color="accent" [routerLink]="['/modelproviderapproval']" value="" type="submit">Approve model</button>
+      </div> -->
   </div>
 </div>
 
@@ -61,7 +64,7 @@
             <div class="col-md-2 form-group">
               {{model.whatsapp}}
             </div>
-            <div class="col-md-2 form-group">
+            <div class="col-md-1 form-group">
               {{model.faceBook}}
             </div>
             <input type="text" hidden formControlName="id" [value]="model._id" #modelId/>
@@ -70,6 +73,10 @@
             </div>
             <div class="col-md-1 form-group">
               <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" />
+            </div>
+            <div class="col-md-1 form-group">
+                <button mat-raised-button color="accent"  (click)="addImage(modelId.value,model.userName)" value="Add Images" type="submit">
+                  Images<mat-icon>add_a_photo</mat-icon></button>
             </div>
           </div>
         </div>

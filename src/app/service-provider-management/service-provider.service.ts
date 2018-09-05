@@ -34,9 +34,10 @@ export class ServiceProviderService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<SProviders>(url);
   }
-  giveApproval(id) {
-    const addUrl = 'serviceProviderApproval/';
-    const url: string = this.serviceUrl + addUrl + id;
+  giveApproval(name , num) {
+    const addUrl = 'serviceProvider/';
+    const approveUrl = '/Approval/';
+    const url: string = this.serviceUrl + addUrl + name + approveUrl + num;
     return this.httpClient.get<SProviders>(url);
   }
 }

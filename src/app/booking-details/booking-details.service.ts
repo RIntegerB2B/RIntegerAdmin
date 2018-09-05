@@ -50,6 +50,12 @@ export class BookingDetailsService {
     return this.httpClient.get<BookingDetail[]>(url);
 
   }
+  getCancelBookingDetails(): Observable<any> {
+    const addurl = 'cancelbooking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<BookingDetail[]>(url);
+
+  }
 
   getStatusDetail(no): Observable<any> {
     const addurl = 'booking/';
@@ -216,6 +222,28 @@ export class BookingDetailsService {
     const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl;
     return this.httpClient.get<BookingDetail[]>(url);
 
+  }
+  bookingApproval(no, id) {
+    const addurl = 'booking/';
+    const statusUrl = '/approve/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id ;
+    return this.httpClient.get<BookingDetail[]>(url);
+  }
+  cancelBooking(no, id): Observable<any> {
+    const addurl = 'booking/';
+    const statusUrl = '/cancel/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id ;
+    return this.httpClient.get<BookingDetail[]>(url);
+  }
+  approvedbooking(): Observable<any> {
+    const addurl = 'approved/';
+    const url: string = this.serviceUrl + addurl  ;
+    return this.httpClient.get<BookingDetail[]>(url);
+  }
+  cancelledbooking(): Observable<any> {
+    const addurl = 'cancelled/';
+    const url: string = this.serviceUrl + addurl  ;
+    return this.httpClient.get<BookingDetail[]>(url);
   }
   pushNotification(data: Notification) {
     const notificationUrl = 'pushnotification';

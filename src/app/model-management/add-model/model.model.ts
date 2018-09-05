@@ -30,7 +30,7 @@ export class Model {
         ) {
         this.userName = userName;
         this.description = description;
-        this.availability = availability;
+     this.availability = availability;
         this.mobileNumber = mobileNumber;
         this.emailId = emailId;
         this.faceBook = faceBook;

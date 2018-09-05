@@ -12,3 +12,14 @@
     text-align: left;
     display: block;
   }
+  .error{
+    text-align: left;
+  }
+  .btn{
+    margin-right:2%;
+}
+.registered{
+  margin-left: 28%;
+  font-family: initial;
+  
+}

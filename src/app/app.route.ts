@@ -10,6 +10,8 @@ import { AddModelComponent } from './model-management/add-model/add-model.compon
 import { ViewModelComponent } from './model-management/view-model/view-model.component';
 import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
 import { CustomerDetailsComponent } from './customer-management/customer-details/customer-details.component';
+import {ViewAgencyComponent} from './agency-management/view-agency/view-agency.component';
+import {ImageManagementComponent} from './model-management/image-management/image-management.component';
 
 const routes: Routes = [
     { path: 'welcome', component: WelcomeComponent},
@@ -18,11 +20,13 @@ const routes: Routes = [
     { path: 'update/:no', component: UpdateStatusComponent },
     { path: 'registration', component: RegistrationComponent},
     { path: 'serviceproviderapproval', component: ApprovalComponent},
+    { path: 'agency', component: ViewAgencyComponent},
     { path: 'navheader/:data', component: NavHeaderComponent},
     { path: 'models', component: ViewModelComponent},
     { path: 'model', component: AddModelComponent},
     { path: 'model/:id', component: AddModelComponent},
     { path: 'pushNotification', component: PushNotificationComponent},
+    { path: 'model/:id/name/:name', component: ImageManagementComponent},
     { path: 'customers', component: CustomerDetailsComponent},
     { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];

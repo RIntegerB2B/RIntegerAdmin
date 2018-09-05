@@ -1,4 +1,5 @@
-export class ServiceProvider {
+export class User {
+    Id: string;
     userName: string;
     password: string;
     companyName: string;
@@ -7,6 +8,7 @@ export class ServiceProvider {
     website: string;
     location: string;
     isActive: Boolean;
+    userType: string;
     constructor(
         userName: string,
     companyName: string,
@@ -14,7 +16,8 @@ export class ServiceProvider {
     mobileNumber: Number,
     website: string,
     location: string,
-    password: string) {
+    password: string,
+   ) {
         this.userName = userName;
         this.companyName = companyName;
         this.emailId = emailId;

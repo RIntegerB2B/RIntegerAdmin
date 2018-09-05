@@ -9,17 +9,17 @@
     </div>
   </div>
   <br>
- <!--  <div class="row">
-    <div class="col-md-6 col-sm-12  mx-auto text-center">
-      <button mat-raised-button value="" type="submit">Model Management</button>
-    </div>
-  </div>
-  <br>
   <div class="row">
-    <div class="col-md-6 col-sm-12  mx-auto text-center">
-      <button mat-raised-button value="" type="submit">Schedule Management</button>
+      <div class="col-md-6 col-sm-12  mx-auto text-center">
+        <button mat-raised-button [routerLink]="['/models']" value="" type="submit">Model Management</button>
+      </div>
     </div>
-  </div> -->
+  <br>
+   <div class="row">
+    <div class="col-md-6 col-sm-12  mx-auto text-center">
+      <button mat-raised-button  [routerLink]="['/agency']" value="" type="submit">Agency Management</button>
+    </div>
+  </div><br>
   <div class="row">
     <div class="col-md-6 col-sm-12  mx-auto text-center">
       <button mat-raised-button value="" [routerLink]="['/pushNotification']" type="submit">Push Notification</button>
@@ -44,12 +44,12 @@
     </div>
   </div>
   <br>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-6 col-sm-12  mx-auto text-center">
       <button mat-raised-button value=""  [routerLink]="['/customers']" type="submit">Customer Management</button>
     </div>
-  </div>
-  <br>
+  </div> 
+  <br>-->
   <div class="row">
       <div class="col-md-6 col-sm-12  mx-auto text-center">
         <button mat-raised-button value="" [routerLink]="['/pushNotification']" type="submit">Push Notification</button>

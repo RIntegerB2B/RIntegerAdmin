@@ -19,6 +19,7 @@ import { UpdateModel} from '../add-model/update.model';
 export class AddModelComponent implements OnInit {
   addModelForm: FormGroup;
   userModel: Model;
+  path;
   spModel: ServiceProviderDetail;
   portFolioImageData: PortFolioImageData = new PortFolioImageData();
   spName: string;
@@ -27,9 +28,12 @@ export class AddModelComponent implements OnInit {
   modelTypes = ['National', 'InterNational'];
   shootTypes = ['Men', 'Women'];
   id;
+  modelAvailable = ['Yes', 'No'];
   loadedModel: Model;
   showUpdate: boolean;
   updatedModel: UpdateModel;
+  modelAvailability;
+  multipleImages = [];
 
 
   fileToUpload: File = null;
@@ -58,13 +62,29 @@ export class AddModelComponent implements OnInit {
     whatsapp: ['', Validators.required],
     shootType: [''],
       modelType: [''],
-      modelId: ['']
+      modelId: [''],
+    /*   modelAvail: [''] */
      /*  modelHeight: [''],
       modelMeasurements: [''],
       shoulder: [''],
       shoeSize: ['']  */
   });
 }
+/* onSelectFile(events) {
+      const filesAmount = events.length;
+      for (let i = 0; i < filesAmount; i++) {
+              const reader = new FileReader();
+              reader.onload = (data) => {
+                console.log(events);
+                 this.multipleImages.push(events.name);
+              }
+              console.log(this.multipleImages);
+              reader.readAsDataURL(events[i]);
+  }
+} */
+
+
+
 handleFileInput(files: FileList, loadedImage) {
   this.fileToUpload = files.item(0);
   this.portFolioImageData.portFolioImage = this.fileToUpload = files[0];
@@ -79,6 +99,12 @@ handleFileInput(files: FileList, loadedImage) {
       loadedImage.src = reader1.result;
     };
   };
+  console.log(this.portFolioImageData);
+}
+
+avail(modelAva) {
+console.log(modelAva);
+this.modelAvailability = modelAva;
 }
 getModel(id) {
   this.showUpdate = true;
@@ -106,7 +132,7 @@ getModel(id) {
  this.userModel = new Model(
       addModelForm.controls.modelName.value,
       addModelForm.controls.description.value,
-      addModelForm.controls.availability.value,
+    addModelForm.controls.availability.value,
       addModelForm.controls.mobileNumber.value,
       addModelForm.controls.emailId.value,
       addModelForm.controls.faceBook.value,
@@ -116,6 +142,7 @@ getModel(id) {
 
     );
     // sp details
+   /*  this.userModel.availability = this.modelAvailability; */
     this.spName = this.localStorageService.retrieve('userName');
     this.spCompanyName = this.localStorageService.retrieve('companyName');
   this.spId = this.localStorageService.retrieve('Id');

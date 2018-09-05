@@ -1,0 +1,10 @@
+.cancelled{
+    border-style: ridge;
+    border-color: brown;
+    margin-left:157px;
+}
+.confirmed{
+    border-style: ridge;
+    border-color:darkgray;
+    margin-left:157px;
+}

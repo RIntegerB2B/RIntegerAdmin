@@ -5,10 +5,10 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 
-import {ServiceProvider} from '../../account/registration/service-provider.model';
+import {User} from '../../account/registration/user.model';
 import {ModelManagementService} from '../../model-management/model-management.service';
 import { Model } from '../../model-management/add-model/model.model';
-import {ServiceProviders} from './sp.model';
+import {Users} from './user.model';
 
 @Component({
   selector: 'app-sigin',
@@ -21,8 +21,8 @@ export class SiginComponent implements OnInit {
   showError: Boolean;
   status;
   data;
-  spModel: ServiceProvider;
-  spDetail: ServiceProviders;
+  spModel: User;
+  userDetail: Users;
   constructor(private fb: FormBuilder, private router: Router, private localStorageService: LocalStorageService,
     private accountService: AccountService, private modelService: ModelManagementService) { }
 
@@ -43,28 +43,25 @@ export class SiginComponent implements OnInit {
     );
 
     this.accountService.signIn(this.userModel).subscribe(data => {
-      console.log(data);
-      if (data === false) { // admin
+      console.log(data.role);
+      if (data.role === 'admin') { // admin
         this.router.navigate(['/navheader', false]);
-      } else if (data === true) { // sp
+      } else if (data.role !== 'admin') { // sp
     this.spValidate(name, pwd);
       }
     }, error => {
       console.log(error);
     });
   }
-spValidate(name, pwd) { // check sp is approved or not
+spValidate(name, pwd) { // check user is approved or not
   this.userModel = new SignIn(name, pwd);
   this.accountService.validate(this.userModel).subscribe(data => {
     console.log(data);
-    this.localStorageService.store('userName', data.userName);
- this.localStorageService.store('companyName', data.companyName);
- this.localStorageService.store('Id', data.Id);
-    /* this.modelService.spDetail(data); */
-  this.spModel = data;
-    if (data == null) {
+    if (data === null) {
 this.showError = true;
     } else  {
+      this.localStorageService.store('userName', data.userName);
+      this.localStorageService.store('ID', data.Id);
 this.status = false;
 this.router.navigate(['/navheader', true]);
     }

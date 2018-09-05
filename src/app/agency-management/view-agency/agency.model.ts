@@ -1,4 +1,5 @@
-export class ServiceProviders {
+
+export class Agency {
     Id: string;
     userName: string;
     password: string;
@@ -8,6 +9,7 @@ export class ServiceProviders {
     website: string;
     location: string;
     isActive: Boolean;
+    userType: string;
     constructor(
         userName: string,
     companyName: string,
@@ -15,7 +17,8 @@ export class ServiceProviders {
     mobileNumber: Number,
     website: string,
     location: string,
-    password: string) {
+    password: string,
+   ) {
         this.userName = userName;
         this.companyName = companyName;
         this.emailId = emailId;

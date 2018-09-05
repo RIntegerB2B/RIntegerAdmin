@@ -46,6 +46,10 @@ export class UpdateStatusComponent implements OnInit {
   title: string;
   notificationBody: string;
   titleToSent: string;
+  confirmed: boolean;
+  cancelled: boolean;
+  hide: boolean;
+  orderconfirmed: boolean;
   readonly VAPID_PUBLIC_KEY = 'BIvwBoUek8ZLiE2HRr_srixb0Qi-Ql6CVBhhhvIuuZ5PMFYrfP0zSkNRrHD-uvIBhJ3_BDmzSFedMzu5ZuaVVRM';
   constructor(private fb: FormBuilder,
     private activatedRoute: ActivatedRoute, private bookingService: BookingDetailsService,
@@ -72,11 +76,29 @@ export class UpdateStatusComponent implements OnInit {
       console.log(error);
     });
   }
+  /* giveApproval(mobileNumber, id) {
+    this.bookingService.bookingApproval(mobileNumber, id).subscribe(data => {
+    console.log(data);
+    this.confirmed = true;
+    this.cancelled = false;
+    this.hide = true;
+    }, error => {
+      console.log(error);
+    });
+  }
+  cancel(num: any, Id: any) {
+    this.bookingService.cancelBooking(num, Id).subscribe(data => {
+      this.confirmed = false;
+      this.cancelled = true;
+      this.hide = true;
+    });
+    } */
   statusView( no: any, ID: any) {
     console.log(ID);
     this.displayStatus = true;
     this.bookingService.getStatus(no, ID).subscribe(data => {
       this.statusDetail = data ;
+      console.log(data);
       switch (data.order) {
         case 0: {
           this.progress = true;

@@ -14,18 +14,53 @@ export class ViewBookingComponent implements OnInit {
   viewBookingForm: FormGroup;
   showModelBooking: Boolean;
   showDirectBooking: Boolean;
+  showCancelBooking: Boolean;
+  showApprovedBooking: Boolean;
 
   constructor(private fb: FormBuilder, private router: Router, private bookingService: BookingDetailsService) { }
 
   ngOnInit() {
-   /*  this.getDetails(); */
+   //  this.getDetails();
     this.createForm();
-    this.modelBooking();
+   this.modelBooking();
   }
   createForm() {
     this.viewBookingForm = this.fb.group({
       no: ['']
     });
+  }
+  cancelled() {
+    this.bookingService.cancelledbooking().subscribe(data => {
+      this.bookingDetail = data;
+      this.showCancelBooking =  true;
+      this.showDirectBooking = false;
+      this.showModelBooking = false;
+      this.showApprovedBooking = false;
+    }, error => {
+      console.log(error);
+     } );
+  }
+  giveApproval(mobileNumber, id) {
+    this.bookingService.bookingApproval(mobileNumber, id).subscribe(data => {
+    console.log(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  cancel(num: any, Id: any) {
+    this.bookingService.cancelBooking(num, Id).subscribe(data => {
+    });
+    }
+  approved() {
+     this.bookingService.approvedbooking().subscribe( data => {
+       this.bookingDetail = data;
+       this.showCancelBooking = false ;
+      this.showDirectBooking = false;
+      this.showModelBooking = false;
+      this.showApprovedBooking = true;
+     }, error => {
+       console.log(error);
+      } );
   }
   getDetails() {
     this.bookingService.getbookingDetails().subscribe(data => {
@@ -38,9 +73,10 @@ export class ViewBookingComponent implements OnInit {
 modelBooking() {
   this.showModelBooking = true;
   this.showDirectBooking = false;
+  this.showCancelBooking = false ;
+  this.showApprovedBooking = false;
   this.bookingService.getModelBookingDetails().subscribe(data => {
     this.bookingDetail = data;
-    console.log(this.bookingDetail);
   }, error => {
     console.log(error);
   });
@@ -48,6 +84,8 @@ modelBooking() {
 directBooking() {
   this.showDirectBooking = true;
   this.showModelBooking = false;
+  this.showCancelBooking = false ;
+  this.showApprovedBooking = false;
   this.bookingService.getDirectBookingDetails().subscribe(data => {
     this.bookingDetail = data;
     console.log(this.bookingDetail);

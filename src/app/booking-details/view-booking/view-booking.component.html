@@ -1,114 +1,240 @@
 <form class="pageBox" [formGroup]="viewBookingForm" style="padding-top:60px" novalidate>
-  <div class="container-fluid">
-    <button (click)="modelBooking()">Model based booking</button>
-    <button (click)="directBooking()">Direct booking</button>
-   
-    <div class="row" *ngIf="showDirectBooking">
-        <h1>Direct Booking Details</h1>
-      <div class="col-md-12  mx-auto">
-
-        <div class="row">
-
-          <div class="col-md-2 form-group">
-            <p style="padding-left:20px">Name </p>
+    <div class="container-fluid">
+        
+      <button mat-raised-button color="accent" style="margin-right: 20px" (click)="modelBooking()"> New Model based booking</button>
+      <button mat-raised-button color="accent"  style="margin-right: 20px" (click)="directBooking()"> New Direct booking</button>
+      <button mat-raised-button color="accent"  style="margin-right: 20px"  (click)="approved()"><mat-icon>check_box</mat-icon>Confirmed booking</button>
+      <button mat-raised-button color="accent"   style="margin-right: 20px"  (click)="cancelled()"> 	<mat-icon>clear</mat-icon>Cancelled booking</button>
+     
+      <div class="row"  style="margin-left: 30px;"*ngIf="showDirectBooking">
+          <h1>Direct Booking Details</h1>
+        <div class="col-md-12  mx-auto">
+  
+          <div class="row">
+  
+            <div class="col-md-2 form-group">
+              <p style="padding-left:20px">Name </p>
+            </div>
+            <div class="col-md-2  form-group">
+              <p style="padding-left:20px">Mobile number </p>
+            </div>
+            <div class="col-md-1  form-group">
+              <p style="padding-left:20px">Type of shoot </p>
+            </div>
+            <div class="col-md-2 form-group">
+              <p style="padding-left:20px">Model type </p>
+            </div>
+  
+            <div class="col-md-2 form-group">
+              <p style="padding-left:20px">Product Description </p>
+            </div>
+            <div class="col-md-1 form-group">
+              <p style="padding-left:20px">Quantity Description </p>
+            </div>
+            <div  class="col-md-2  form-group">
+                <p style="padding-left:20px">Update Booking status</p>
+              </div>
           </div>
-          <div class="col-md-2  form-group">
-            <p style="padding-left:20px">Mobile number </p>
+          <div class="row" *ngFor="let data of bookingDetail">
+            <div class="col-md-2  form-group">
+              <p>{{data.name}} </p>
+            </div>
+  
+            <div class="col-md-2  form-group">
+              <p>{{data.mobileNumber}} </p>
+            </div>
+            <div class="col-md-1 form-group">
+              <p>{{data.shootType}} </p>
+            </div>
+            <div class="col-md-2 form-group">
+              <p>{{data.modelType}} </p>
+            </div>
+            <div class="col-md-2  form-group">
+              <p>{{data.productDescription}} </p>
+            </div>
+            <div class="col-md-1  form-group">
+              <p>{{data.quantityDescription}} </p>
+            </div>
+            <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+            
+  
+            <div class="col-md-2  form-group">
+                <button class="btn btn-success pull-right btn-sm" style="margin-right:10px" value="Confirm"  (click)="giveApproval(data.mobileNumber,data.bookingOrderId)">Confirm </button>
+                <button   class="btn btn-danger pull-right btn-sm" (click)="cancel(data.mobileNumber,data.bookingOrderId)" >Cancel </button>
+            </div>
           </div>
-          <div class="col-md-2  form-group">
-            <p style="padding-left:20px">Type of shoot </p>
-          </div>
-          <div class="col-md-1 form-group">
-            <p style="padding-left:20px">Model type </p>
-          </div>
-
-          <div class="col-md-2  form-group">
-            <p style="padding-left:20px">Product Description </p>
-          </div>
-          <div class="col-md-2  form-group">
-            <p style="padding-left:20px">Quantity Description </p>
-          </div>
-
+  
         </div>
-        <div class="row" *ngFor="let data of bookingDetail">
-          <div class="col-md-2  form-group">
-            <p>{{data.name}} </p>
-          </div>
-
-          <div class="col-md-2  form-group">
-            <p>{{data.mobileNumber}} </p>
-          </div>
-          <div class="col-md-2 form-group">
-            <p>{{data.shootType}} </p>
-          </div>
-          <div class="col-md-1 form-group">
-            <p>{{data.modelType}} </p>
-          </div>
-          <div class="col-md-2  form-group">
-            <p>{{data.productDescription}} </p>
-          </div>
-          <div class="col-md-2  form-group">
-            <p>{{data.quantityDescription}} </p>
-          </div>
-          <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
-          <div class="col-md-1 form-group">
-            <button class="btn btn-success pull-right btn-sm" (click)="statusView(viewBookingForm,no.value)">View</button>
-          </div>
-
-        </div>
-
       </div>
-    </div>
-    <div class="row" *ngIf="showModelBooking">
-        <h1>Model Based Booking Details</h1>
-      <div class="col-md-12  mx-auto">
-
-        <div class="row">
-
-          <div class="col-md-2 form-group">
-            <p style="padding-left:20px">Name </p>
+      <div class="row"  style="margin-left: 30px;" *ngIf="showModelBooking">
+          <h1>Model Based Booking Details</h1>
+        <div class="col-md-12  mx-auto">
+  
+          <div class="row">
+  
+            <div class="col-md-2 form-group">
+              <p style="padding-left:20px">Name </p>
+            </div>
+            <div class="col-md-2  form-group">
+              <p style="padding-left:20px">Mobile number </p>
+            </div>
+            <div class="col-md-2  form-group">
+              <p style="padding-left:20px">Model Name </p>
+            </div>
+           
+  
+            <div class="col-md-2  form-group">
+              <p style="padding-left:20px">Product Description </p>
+            </div>
+            <div class="col-md-2  form-group">
+              <p style="padding-left:20px">Quantity Description </p>
+            </div>
+            <div  class="col-md-2  form-group">
+                <p style="padding-left:20px"> Booking Approval</p>
+              </div>
+  
           </div>
-          <div class="col-md-2  form-group">
-            <p style="padding-left:20px">Mobile number </p>
+          <div class="row"  *ngFor="let data of bookingDetail">
+            <div class="col-md-2  form-group">
+              <p>{{data.name}} </p>
+            </div>
+  
+            <div class="col-md-2  form-group">
+              <p>{{data.mobileNumber}} </p>
+            </div>
+            <div class="col-md-2 form-group">
+              <p>{{data.modelsName}} </p>
+            </div>
+            <div class="col-md-2  form-group">
+              <p>{{data.productDescription}} </p>
+            </div>
+            <div class="col-md-2  form-group">
+              <p>{{data.quantityDescription}} </p>
+            </div>
+            <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+            <div class="col-md-2  form-group">
+                <button class="btn btn-success pull-right btn-sm" style="margin-right:10px" value="Confirm"  (click)="giveApproval(data.mobileNumber,data.bookingOrderId)">Confirm </button>
+                <button class="btn btn-danger pull-right btn-sm" (click)="cancel(data.mobileNumber,data.bookingOrderId)" >Cancel </button>
+            </div>
+           <!--  <div class="col-md-1 form-group">
+              <button class="btn btn-success pull-right btn-sm" (click)="statusView(viewBookingForm,no.value)">View</button>
+            </div> -->
+  
           </div>
-          <div class="col-md-2  form-group">
-            <p style="padding-left:20px">Model Name </p>
-          </div>
-         
-
-          <div class="col-md-2  form-group">
-            <p style="padding-left:20px">Product Description </p>
-          </div>
-          <div class="col-md-2  form-group">
-            <p style="padding-left:20px">Quantity Description </p>
-          </div>
-
+  
         </div>
-        <div class="row" *ngFor="let data of bookingDetail">
-          <div class="col-md-2  form-group">
-            <p>{{data.name}} </p>
-          </div>
-
-          <div class="col-md-2  form-group">
-            <p>{{data.mobileNumber}} </p>
-          </div>
-          <div class="col-md-2 form-group">
-            <p>{{data.modelsName}} </p>
-          </div>
-          <div class="col-md-2  form-group">
-            <p>{{data.productDescription}} </p>
-          </div>
-          <div class="col-md-2  form-group">
-            <p>{{data.quantityDescription}} </p>
-          </div>
-          <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
-          <div class="col-md-1 form-group">
-            <button class="btn btn-success pull-right btn-sm" (click)="statusView(viewBookingForm,no.value)">View</button>
-          </div>
-
-        </div>
-
       </div>
+      <div class="row cancel"  *ngIf="showCancelBooking">
+          <h1>Cancelled booking</h1>
+        <div class="col-md-12  mx-auto">
+  
+          <div class="row">
+  
+            <div class="col-md-2 form-group">
+              <p style="padding-left:20px">Name </p>
+            </div>
+            <div class="col-md-2  form-group">
+              <p style="padding-left:20px">Mobile number </p>
+            </div>
+            
+            <div class="col-md-2  form-group">
+                <p style="padding-left:20px">Booking Id </p>
+              </div>
+  
+            <div class="col-md-2  form-group">
+              <p style="padding-left:20px">Product Description </p>
+            </div>
+            <div class="col-md-2  form-group">
+              <p style="padding-left:20px">Quantity Description </p>
+            </div>
+            <div  class="col-md-2  form-group">
+                <p style="padding-left:20px"> Booking Approval</p>
+              </div>
+          </div>
+          <div class="row cancelbg" *ngFor="let data of bookingDetail">
+            <div class="col-md-2  form-group">
+              <p>{{data.name}} </p>
+            </div>
+  
+            <div class="col-md-2  form-group">
+              <p>{{data.mobileNumber}} </p>
+            </div>
+            <div class="col-md-2  form-group">
+                <p>{{data.bookingOrderId}} </p>
+              </div>
+            <div class="col-md-2  form-group">
+              <p>{{data.productDescription}} </p>
+            </div>
+            <div class="col-md-2  form-group">
+              <p>{{data.quantityDescription}} </p>
+            </div>
+            <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+            
+            <div class="col-md-2  form-group">
+                <button class="btn btn-success pull-right btn-sm" style="margin-right:10px" value="Confirm"  (click)="giveApproval(data.mobileNumber,data.bookingOrderId)">Confirm </button>
+                
+            </div>
+          </div>
+  
+        </div>
+        </div>
+        <div  class="row" style="margin-left: 30px;" *ngIf="showApprovedBooking">
+            <h1 >Approved booking</h1>
+          <div class="col-md-12  mx-auto">
+    
+            <div class="row">
+    
+              <div class="col-md-2 form-group">
+                <p style="padding-left:20px">Name </p>
+              </div>
+              <div class="col-md-2  form-group">
+                <p style="padding-left:20px">Mobile number </p>
+              </div>
+              <div class="col-md-2  form-group">
+                  <p style="padding-left:20px">Booking Id </p>
+                </div>
+                <div class="col-md-2  form-group">
+                    <p style="padding-left:20px">Booking Type </p>
+                  </div>
+             
+    
+              <div class="col-md-2  form-group">
+                <p style="padding-left:20px">Product Description </p>
+              </div>
+              <div class="col-md-2  form-group">
+                <p style="padding-left:20px">Quantity Description </p>
+              </div>
+    
+            </div>
+            <div class="row" *ngFor="let data of bookingDetail">
+              <div class="col-md-2  form-group">
+                <p>{{data.name}} </p>
+              </div>
+    
+              <div class="col-md-2  form-group">
+                <p>{{data.mobileNumber}} </p>
+              </div>
+              <div class="col-md-2  form-group">
+                  <p>{{data.bookingOrderId}} </p>
+                </div>
+                <div class="col-md-2  form-group">
+                    <p>{{data.bookingType}} </p>
+                  </div>
+              <div class="col-md-2  form-group">
+                <p>{{data.productDescription}} </p>
+              </div>
+              <div class="col-md-1 form-group">
+                <p>{{data.quantityDescription}} </p>
+              </div>
+              
+              <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+              <div class="col-md-1 form-group">
+                  <button class="btn btn-success pull-right btn-sm" (click)="statusView(viewBookingForm,no.value)">View</button>
+                </div>
+    
+            </div>
+    
+          </div>
+        </div>
     </div>
-  </div>
-</form>
+  </form>

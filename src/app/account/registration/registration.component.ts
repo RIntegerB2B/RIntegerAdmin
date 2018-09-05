@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import {ServiceProvider} from './service-provider.model';
+import {User} from './user.model';
 import {AccountService} from '../account.service';
+import {mobileNumber} from './validation';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -11,8 +12,10 @@ import {AccountService} from '../account.service';
 })
 export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
-  headCatSelected;
-  userModel: ServiceProvider;
+  users;
+  userModel: User;
+  userTypes = ['Service Provider', 'Agency' , 'Model'];
+  registered: boolean;
   constructor(private fb: FormBuilder, private router: Router, private accountService: AccountService) { }
 
   ngOnInit() {
@@ -20,24 +23,25 @@ export class RegistrationComponent implements OnInit {
   }
   createForm() {
       this.registerForm = this.fb.group({
-        name: ['', Validators.required],
+        name: ['', Validators.minLength(3)],
         password: ['', Validators.required],
-        companyName: ['', Validators.required],
-        emailId: ['', Validators.required],
-        mobileNumber: ['', Validators.required],
-        website: ['', Validators.required],
-        location: ['', Validators.required]
+        companyName: [''],
+        emailId: [''],
+        mobileNumber: ['', mobileNumber],
+        website: [''],
+        location: [''],
+        userType: ['', Validators.required]
       });
   }
-  getCategory(id) {
-  this.headCatSelected = id;
-if (this.headCatSelected === 'serviceProvider') {
-}
+  getType(user) {
+  this.users = user;
+  console.log(this.users);
+
   }
 
 
   register(registerForm: FormGroup) {
-  this.userModel = new ServiceProvider(
+  this.userModel = new User(
     registerForm.controls.name.value,
     registerForm.controls.companyName.value,
     registerForm.controls.emailId.value,
@@ -46,9 +50,11 @@ if (this.headCatSelected === 'serviceProvider') {
     registerForm.controls.location.value,
     registerForm.controls.password.value
   );
+  this.userModel.userType = this.users;
   this.accountService.registration(this.userModel).subscribe(data => {
     console.log(data);
-    this.router.navigate(['/signIn']);
+   /*  this.router.navigate(['/signIn']); */
+   this.registered = true;
    }, error => {
      console.log(error);
    });
