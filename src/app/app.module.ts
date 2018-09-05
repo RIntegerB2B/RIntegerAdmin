@@ -36,6 +36,7 @@ import { ViewAgencyComponent } from './agency-management/view-agency/view-agency
 import { ViewDirectModelComponent } from './direct-model-management/view-direct-model/view-direct-model.component';
 import { ApproveDirectModelComponent } from './direct-model-management/approve-direct-model/approve-direct-model.component';
 import { ImageManagementComponent } from './model-management/image-management/image-management.component';
+import { ViewProfileComponent } from './model-management/view-profile/view-profile.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { ImageManagementComponent } from './model-management/image-management/im
     ViewDirectModelComponent,
     ApproveDirectModelComponent,
     ImageManagementComponent,
+    ViewProfileComponent,
   ],
   imports: [
     BrowserModule,

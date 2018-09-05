@@ -70,18 +70,7 @@ export class AddModelComponent implements OnInit {
       shoeSize: ['']  */
   });
 }
-/* onSelectFile(events) {
-      const filesAmount = events.length;
-      for (let i = 0; i < filesAmount; i++) {
-              const reader = new FileReader();
-              reader.onload = (data) => {
-                console.log(events);
-                 this.multipleImages.push(events.name);
-              }
-              console.log(this.multipleImages);
-              reader.readAsDataURL(events[i]);
-  }
-} */
+
 
 
 
@@ -153,7 +142,7 @@ getModel(id) {
     this.modelService.createModel(this.userModel).subscribe(data => {
       console.log(data);
     });
-    this.uploadImage(modelName);
+    this.uploadImage(modelName , this.spName);
     addModelForm.reset();
     this.router.navigate(['/models']);
   }
@@ -174,16 +163,15 @@ getModel(id) {
         this.updatedModel.portfolioImageName = this.portFolioImageData.portFolioImage.name;
       this.modelService.updateModel(id, this.updatedModel ).subscribe(data => {
         console.log(data);
-        this.uploadImage(modelName);
-        console.log(modelName);
+        this.uploadImage(modelName , this.spName);
         this.router.navigate(['/models']);
       }, error => {
         console.log(error);
       });
   }
-  uploadImage(modelName) {
+  uploadImage(modelName , spName) {
     console.log(modelName);
-    this.modelService.uploadportFolioImage(this.portFolioImageData, modelName).subscribe(data => {
+    this.modelService.uploadportFolioImage(this.portFolioImageData, modelName, spName).subscribe(data => {
     }, error => {
       console.log(error);
     });

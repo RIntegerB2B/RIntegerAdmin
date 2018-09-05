@@ -12,6 +12,7 @@ import { PushNotificationComponent } from './notification/push-notification/push
 import { CustomerDetailsComponent } from './customer-management/customer-details/customer-details.component';
 import {ViewAgencyComponent} from './agency-management/view-agency/view-agency.component';
 import {ImageManagementComponent} from './model-management/image-management/image-management.component';
+import {ViewProfileComponent} from './model-management/view-profile/view-profile.component';
 
 const routes: Routes = [
     { path: 'welcome', component: WelcomeComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path: 'pushNotification', component: PushNotificationComponent},
     { path: 'model/:id/name/:name', component: ImageManagementComponent},
     { path: 'customers', component: CustomerDetailsComponent},
+    { path: 'profile/:name/images/:id', component: ViewProfileComponent},
     { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 

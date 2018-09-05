@@ -15,17 +15,17 @@
       <div class="col-md-8 mx-auto">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="form-group">
                 <label>Catalog</label>
               </div>
             </div>
-            <div class="col-md-1" >
+            <div class="col-md-2" >
               <div class="form-group">
                 <label>Model Name</label>
               </div>
             </div>
-            <div class="col-md-2">
+            <!-- <div class="col-md-2">
               <div class="form-group">
                 <label>Mobile Number</label>
               </div>
@@ -41,7 +41,7 @@
               <div class="form-group">
                 <label>Facebook Id</label>
               </div>
-            </div>
+            </div> -->
 
 
           </div>
@@ -49,14 +49,14 @@
         <div class="container">
           <div class="row" *ngFor="let model of Models">
 
-            <div class="col-md-3 form-group">
+            <div class="col-md-4 form-group">
               <img [src]="this.model?.portfolioImageName" style="width: 180px; height: 245px;" />
             </div>
 
-            <div class="col-md-1 form-group">
+            <div class="col-md-2 form-group">
               {{model.userName}}
             </div>
-
+<!-- 
             <div class="col-md-2 form-group">
               {{model.mobileNumber}}
             </div>
@@ -66,7 +66,8 @@
             </div>
             <div class="col-md-1 form-group">
               {{model.faceBook}}
-            </div>
+            </div> -->
+           
             <input type="text" hidden formControlName="id" [value]="model._id" #modelId/>
             <div class="col-md-1 form-group">
               <input type="button" class="btn btn-success" value="Update" (click)="update(modelId.value)" />
@@ -74,10 +75,14 @@
             <div class="col-md-1 form-group">
               <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" />
             </div>
-            <div class="col-md-1 form-group">
+            <div class="col-md-2 form-group">
                 <button mat-raised-button color="accent"  (click)="addImage(modelId.value,model.userName)" value="Add Images" type="submit">
                   Images<mat-icon>add_a_photo</mat-icon></button>
             </div>
+            <div class="col-md-2 form-group">
+              <button mat-raised-button color="accent"  (click)="viewProfile(modelId.value)" value="Add Images" type="submit">
+                View <mat-icon>visibility</mat-icon></button>
+          </div>
           </div>
         </div>
       </div>

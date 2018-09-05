@@ -40,40 +40,48 @@ export class ModelManagementService {
 /* spDetail(data) {
 this.newSp.next(data);
 } */
-  uploadportFolioImage(portFolioImageData: PortFolioImageData , modelname): Observable<any> {
+  uploadportFolioImage(portFolioImageData: PortFolioImageData , modelname , spName): Observable<any> {
     const formData: FormData = new FormData();
     const modelName = modelname;
-    console.log(name);
     formData.append('file', portFolioImageData.portFolioImage, portFolioImageData.portFolioImage.name);
     const addUrl = 'portFolioImage/';
-    const url: string = this.serviceUrl + addUrl + modelName;
+    const addUrl1 = '/sp/';
+    const url: string = this.serviceUrl + addUrl + modelName + addUrl1 + spName;
     return this.httpClient.put<boolean>(url, formData);
   }
   // /ecommerceImage/:id/name/:modelName
-  uploadecommerceImage( id, modelName , data ): Observable<any> {
+  uploadecommerceImage( spName, id, modelName , data ): Observable<any> {
    /*  const formData: FormData = new FormData();
     formData.append('file', imageData.ecommerceImage, imageData.ecommerceImage.name); */
     const addUrl = 'ecommerceImage/';
-    const addUrl1 = '/name/';
-    const url: string = this.serviceUrl + addUrl + id +  addUrl1 + modelName;
+    const addUrl1 = '/id/';
+    const addUrl2 = '/name/';
+    const url: string = this.serviceUrl + addUrl + spName +  addUrl1 + id + addUrl2 + modelName ;
     return this.httpClient.put<boolean>(url, data);
   }
-  uploadeportraitImage(id, modelName , data ): Observable<any> {
+  uploadeportraitImage(spName, id, modelName , data ): Observable<any> {
     /* const formData: FormData = new FormData();
     formData.append('file', imageData.portraitImage, imageData.portraitImage.name); */
     const addUrl = 'portraitImage/';
-    const addUrl1 = '/name/';
-    const url: string = this.serviceUrl + addUrl + id + addUrl1 + modelName;
+    const addUrl1 = '/id/';
+    const addUrl2 = '/name/';
+    const url: string = this.serviceUrl + addUrl + spName +  addUrl1 + id + addUrl2 + modelName ;
     return this.httpClient.put<boolean>(url, data);
   }
-  uploadeProductImage(id, modelName , data ): Observable<any> {
+  uploadeProductImage(spName, id, modelName , data ): Observable<any> {
     /* const formData: FormData = new FormData();
-    formData.append('file', imageData.p
-    roductImage, imageData.productImage.name); */
+    formData.append('file', imageData.productImage, imageData.productImage.name); */
     const addUrl = 'productImage/';
-    const addUrl1 = '/name/';
-    const url: string = this.serviceUrl + addUrl + id + addUrl1 + modelName;
+    const addUrl1 = '/id/';
+    const addUrl2 = '/name/';
+    const url: string = this.serviceUrl + addUrl + spName +  addUrl1 + id + addUrl2 + modelName ;
     return this.httpClient.put<boolean>(url, data);
+  }
+  findImages(name , id): Observable<any> {
+    const addUrl = 'serviceprovider/';
+    const addUrl1 = '/modelimages/';
+    const url: string = this.serviceUrl + addUrl + name  + addUrl1 + id;
+    return this.httpClient.get<Model>(url);
   }
 
     serviceProviderModels(id): Observable<any> {
