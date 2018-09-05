@@ -19,6 +19,7 @@ import { UpdateModel} from '../add-model/update.model';
 export class AddModelComponent implements OnInit {
   addModelForm: FormGroup;
   userModel: Model;
+  path;
   spModel: ServiceProviderDetail;
   portFolioImageData: PortFolioImageData = new PortFolioImageData();
   spName: string;
@@ -32,6 +33,7 @@ export class AddModelComponent implements OnInit {
   showUpdate: boolean;
   updatedModel: UpdateModel;
   modelAvailability;
+  multipleImages = [];
 
 
   fileToUpload: File = null;
@@ -68,6 +70,21 @@ export class AddModelComponent implements OnInit {
       shoeSize: ['']  */
   });
 }
+/* onSelectFile(events) {
+      const filesAmount = events.length;
+      for (let i = 0; i < filesAmount; i++) {
+              const reader = new FileReader();
+              reader.onload = (data) => {
+                console.log(events);
+                 this.multipleImages.push(events.name);
+              }
+              console.log(this.multipleImages);
+              reader.readAsDataURL(events[i]);
+  }
+} */
+
+
+
 handleFileInput(files: FileList, loadedImage) {
   this.fileToUpload = files.item(0);
   this.portFolioImageData.portFolioImage = this.fileToUpload = files[0];
@@ -82,7 +99,9 @@ handleFileInput(files: FileList, loadedImage) {
       loadedImage.src = reader1.result;
     };
   };
+  console.log(this.portFolioImageData);
 }
+
 avail(modelAva) {
 console.log(modelAva);
 this.modelAvailability = modelAva;

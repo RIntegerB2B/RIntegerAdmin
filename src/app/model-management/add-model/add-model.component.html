@@ -166,10 +166,17 @@
           <img [src]="this.loadedModel?.portfolioImageName"  #loadedImage style="width: 180px; height: 245px;" />
         </div>
         <div>
-          <input type="file" name="file" class="btn btnPink btn-block" id="file" (change)="handleFileInput($event.target.files, loadedImage)">
+          <input type="file"  name="file" class="btn btnPink btn-block" id="file" multiple (change)="handleFileInput($event.target.files, loadedImage)">
         </div>
       </div>
+     <!--  <div class="col-md-3 form-group">
+        <div>
+          <img  *ngFor ="let images of multipleImages" [src]="images"  style="width: 180px; height: 245px;" />
+        </div>
+        <div>
+          <input type='file' (change)="onSelectFile($event.target.files)" multiple>
+        </div>
+      </div> -->
     </div>
-
   </div>
 </form>

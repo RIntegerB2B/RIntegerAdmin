@@ -1,0 +1,40 @@
+<form [formGroup]="modelImageForm" style="padding-top:60px" novalidate>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 formGroup">
+        <div   class="col-md-12 formGroup space  text-center">
+             Ecommerce
+        </div>
+        <div class="col-md-12 formGroup space  text-center">
+             Portrait
+        </div>
+        <div  class="col-md-12 formGroup space  text-center">
+        Product
+        </div>
+      </div>
+      <div class="col-md-3 formGroup">
+        <div class="col-md-12 formGroup space" >
+            <input type="file"  name="file" class="btn btnPink btn-block" id="file" multiple (change)="handleEcommerceInput($event.target.files, loadedImage)">
+        </div>
+        <div class="col-md-12 formGroup space">
+            <input type="file"  name="file" class="btn btnPink btn-block" id="file" multiple (change)="handlePortraitInput($event.target.files, loadedPortrait)">
+        </div>
+        <div class="col-md-12 formGroup space">
+            <input type="file"  name="file" class="btn btnPink btn-block" id="file" multiple (change)="handleProductInput($event.target.files, loadedProduct)">
+        </div>
+      </div>
+      <div class="col-md-6 formGroup">
+        <div class="col-md-12 formGroup " style="margin-bottom: 40px">
+            <img [src]="loadedImage"  #loadedImage   style="width: 180px; height: 180px;" />
+        </div>
+        <div class="col-md-12 formGroup " style="margin-bottom: 40px">
+            <img [src]="loadedPortrait"  #loadedPortrait  style="width: 180px; height: 180px;" />
+        </div>
+        <div class="col-md-12 formGroup " style="margin-bottom: 40px">
+            <img [src]="loadedProduct"   #loadedProduct style="width: 180px; height: 180px;" />
+        </div>
+        <button class="btn btn-secondary" type="submit" (click)="sendImages()">Submit</button>
+      </div >
+     </div>
+  </div>
+</form>

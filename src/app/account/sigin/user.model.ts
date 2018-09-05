@@ -1,4 +1,4 @@
-export class ServiceProviders {
+export class Users {
     Id: string;
     userName: string;
     password: string;
@@ -8,6 +8,7 @@ export class ServiceProviders {
     website: string;
     location: string;
     isActive: Boolean;
+    userType: string;
     constructor(
         userName: string,
     companyName: string,

@@ -25,13 +25,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegistrationComponent } from './account/registration/registration.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { ApprovalComponent } from './service-provider-management/approval/approval.component';
-import { ApproveModelComponent } from './model-management/approve-model/approve-model.component';
 import { AddModelComponent } from './model-management/add-model/add-model.component';
 import { ViewModelComponent } from './model-management/view-model/view-model.component';
 import {ModelManagementService} from './model-management/model-management.service';
 import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
 import { NotificationService } from './notification/notification.service';
 import {CustomerDetailsComponent} from './customer-management/customer-details/customer-details.component';
+import { ApproveAgencyComponent } from './agency-management/approve-agency/approve-agency.component';
+import { ViewAgencyComponent } from './agency-management/view-agency/view-agency.component';
+import { ViewDirectModelComponent } from './direct-model-management/view-direct-model/view-direct-model.component';
+import { ApproveDirectModelComponent } from './direct-model-management/approve-direct-model/approve-direct-model.component';
+import { ImageManagementComponent } from './model-management/image-management/image-management.component';
+
 
 @NgModule({
   declarations: [
@@ -43,11 +48,15 @@ import {CustomerDetailsComponent} from './customer-management/customer-details/c
     RegistrationComponent,
     NavHeaderComponent,
     ApprovalComponent,
-    ApproveModelComponent,
     AddModelComponent,
     ViewModelComponent,
     PushNotificationComponent,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    ApproveAgencyComponent,
+    ViewAgencyComponent,
+    ViewDirectModelComponent,
+    ApproveDirectModelComponent,
+    ImageManagementComponent,
   ],
   imports: [
     BrowserModule,

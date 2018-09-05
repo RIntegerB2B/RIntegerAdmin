@@ -59,9 +59,10 @@
                   <p>{{data.emailId}} </p>
                 </div>
                
-                <input class="form-control" hidden type="text" formControlName="id" [value]="data._id" #no/>
+                <input class="form-control" hidden type="text" formControlName="id" [value]="data.userName" #nm/>
+                <input class="form-control" hidden type="text" formControlName="num" [value]="data.mobileNumber" #mob/>
                 <div class="col-md-1 form-group">
-                  <button class="btn btn-success pull-right btn-sm" (click)="approve(viewBookingForm,no.value)" *ngIf="show">Approve</button>
+                  <button class="btn btn-success pull-right btn-sm" (click)="approve(viewBookingForm,nm.value,mob.value)" *ngIf="show">Approve</button>
                 </div>
               </div>
       

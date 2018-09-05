@@ -22,7 +22,8 @@ show: boolean;
   }
   createForm() {
     this.approvalForm = this.fb.group({
-      id: ['']
+      id: [''],
+      num: ['']
     });
   }
 unapprovedServiceProviders() {
@@ -39,8 +40,8 @@ approvedServiceProviders() {
     console.log(data);
   });
 }
-approve(viewBookingForm: FormGroup, no: any) {
-  this.spService.giveApproval(no).subscribe( data => {
+approve(viewBookingForm: FormGroup, name: any , num: any) {
+  this.spService.giveApproval(name, num).subscribe( data => {
    /*  this.Detail = data; */
     console.log(data);
   });

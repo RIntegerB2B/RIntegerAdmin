@@ -47,4 +47,9 @@ this.modelService.serviceProviderModels(this.spId).subscribe( data => {
   this.modelId = id;
   this.router.navigate(['/model', this.modelId]);
  }
+ addImage(modelId , modelName) {
+console.log(modelId);
+console.log(modelName);
+this.router.navigate(['/model', modelId, 'name', modelName]);
+ }
 }
