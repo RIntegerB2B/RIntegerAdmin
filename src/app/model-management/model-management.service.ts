@@ -105,4 +105,28 @@ this.newSp.next(data);
     const url: string = this.serviceUrl + addUrl + id ;
     return this.httpClient.get<Model>(url);
   }
+  // sp deletec ecom
+  deleteEcomImg(name , id, image): Observable<any> {
+    const addUrl = 'serviceprovider/';
+    const addUrl1 = '/model/';
+    const addUrl2 = '/ecomm/';
+    const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image ;
+    return this.httpClient.delete<Model>(url);
+  }
+  // sp delete portrait
+  deletePortImg(name , id, image): Observable<any> {
+    const addUrl = 'serviceprovider/';
+    const addUrl1 = '/model/';
+    const addUrl2 = '/portrait/';
+    const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image ;
+    return this.httpClient.delete<Model>(url);
+  }
+  // sp delete product
+  deleteProdImg(name , id, image): Observable<any> {
+    const addUrl = 'serviceprovider/';
+    const addUrl1 = '/model/';
+    const addUrl2 = '/product/';
+    const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image ;
+    return this.httpClient.delete<Model>(url);
+  }
 }

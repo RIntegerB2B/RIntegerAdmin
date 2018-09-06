@@ -1,3 +1,142 @@
-<p>
-  view-profile works!
-</p>
+<form [formGroup]="viewProfileForm" novalidate style="padding-top:60px">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link"><button mat-button (click)="profileImage()">Profile </button></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"><button mat-button (click)="ecommerceImage()">Ecommerce</button></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"><button mat-button (click)="portraitImage()">Portrait</button></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"><button mat-button (click)="productImage()">Product</button></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link">
+              <button mat-button (click)="allImages()">All</button></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row" *ngIf="showAll">
+      <div class="col-md-8 mx-auto">
+
+        <div class="container">
+          <div class="row" *ngFor="let model of Model">
+
+            <div class="col-md-3 form-group">
+              <img [src]="this.model?.portfolioImageName" style="width: 180px; height: 245px;" />
+            </div>
+
+            <div class="col-md-3 form-group" *ngFor="let images of this.model?.ecommerceImageName">
+              <img [src]="this.images" style="width: 180px; height: 245px;" />
+            </div>
+
+            <div class="col-md-3 form-group" *ngFor="let images of this.model?.productImageName">
+
+              <img [src]="this.images" style="width: 180px; height: 245px;" />
+            </div>
+
+            <div class="col-md-3 form-group" *ngFor="let images of this.model?.portraitImageName">
+
+              <img [src]="this.images" style="width: 180px; height: 245px;" />
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="showEcommerce">
+      <div class="col-md-8 mx-auto">
+
+        <div class="container">
+          <div class="row" *ngFor="let model of Model">
+
+            <div class="col-md-3 form-group" *ngFor="let images of this.model?.ecommerceImageName">
+                <input type="textbox" hidden  [value]="this.images" formControlName="ecomImgId" #ecomID>
+              <button matTooltip="Info about the action" (click)="deleteEcomImage(ecomID.value)" mat-button matSuffix mat-icon-button>
+                <mat-icon>clear</mat-icon>
+              </button>
+              <img [src]="this.images" style="width: 180px; height: 245px;" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="showProduct">
+      <div class="col-md-8 mx-auto">
+
+        <div class="container">
+          <div class="row" *ngFor="let model of Model">
+
+            <div class="col-md-3 form-group" *ngFor="let images of this.model?.productImageName">
+                <input type="textbox" hidden [value]="this.images" formControlName="prodImgId" #proID>
+              <button matTooltip="Info about the action" (click)="deleteProdImage(proID.value)" mat-button matSuffix mat-icon-button>
+                <mat-icon>clear</mat-icon>
+              </button>
+             
+              <img [src]="this.images" style="width: 180px; height: 245px;" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="showPortrait">
+      <div class="col-md-8 mx-auto">
+
+        <div class="container">
+          <div class="row" *ngFor="let model of Model">
+
+            <div class="col-md-3 form-group" *ngFor="let images of this.model?.portraitImageName">
+                <input type="textbox" hidden [value]="this.images" formControlName="porImgId" #portID>
+              <button matTooltip="Info about the action" (click)="deletePortImage(portID.value)" mat-button matSuffix mat-icon-button>
+                <mat-icon>clear</mat-icon>
+              </button>
+              <img [src]="this.images" style="width: 180px; height: 245px;" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="showProfile">
+      <div class="col-md-8 mx-auto">
+        <div class="container">
+          <div class="row" *ngFor="let model of Model">
+            <div class="col-md-3 form-group">
+              <img [src]="this.model?.portfolioImageName" style="width: 180px; height: 245px;" />
+            </div>
+            <div class="col-md-9 form-group">
+              <div class="col-md-12 form-group">
+
+                <label>Username</label>
+
+                {{model.userName}}
+
+              </div>
+              <div class="col-md-12 form-group">
+
+                <label>WhatsApp</label>
+
+                {{model.whatsapp}}
+
+              </div>
+              <div class="col-md-12 form-group">
+
+                <label>Facebook</label>
+
+                {{model.faceBook}}
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
