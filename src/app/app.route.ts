@@ -31,6 +31,7 @@ const routes: Routes = [
     { path: 'customers', component: CustomerDetailsComponent},
     { path: 'profile/:name/images/:id', component: ViewProfileComponent},
     { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+    { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
 ];
 
 export const Routing = RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'});
