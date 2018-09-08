@@ -15,7 +15,9 @@
           <li class="nav-item">
             <a class="nav-link"><button mat-button (click)="productImage()">Product</button></a>
           </li>
-
+          <li class="nav-item">
+              <a class="nav-link"><button mat-button (click)="portFolioImage()">PortFolio</button></a>
+            </li>
           <li class="nav-item">
             <a class="nav-link">
               <button mat-button (click)="allImages()">All</button></a>
@@ -30,7 +32,7 @@
           <div class="row" *ngFor="let model of Model">
 
             <div class="col-md-3 form-group">
-              <img [src]="this.model?.portfolioImageName" style="width: 180px; height: 245px;" />
+              <img [src]="this.model?.primeImage" style="width: 180px; height: 245px;" />
             </div>
 
             <div class="col-md-3 form-group" *ngFor="let images of this.model?.ecommerceImageName">
@@ -46,6 +48,10 @@
 
               <img [src]="this.images" style="width: 180px; height: 245px;" />
             </div>
+            <div class="col-md-3 form-group" *ngFor="let images of this.model?.portFolioImageName">
+
+                <img [src]="this.images" style="width: 180px; height: 245px;" />
+              </div>
 
           </div>
         </div>
@@ -58,8 +64,9 @@
           <div class="row" *ngFor="let model of Model">
 
             <div class="col-md-3 form-group" *ngFor="let images of this.model?.ecommerceImageName">
-                <input type="textbox" hidden  [value]="this.images" formControlName="ecomImgId" #ecomID>
-              <button matTooltip="Info about the action" (click)="deleteEcomImage(ecomID.value)" mat-button matSuffix mat-icon-button>
+              <input type="textbox" hidden [value]="this.images" formControlName="ecomImgId" #ecomID>
+              <button matTooltip="Info about the action" (click)="deleteEcomImage(ecomID.value)" mat-button matSuffix
+                mat-icon-button>
                 <mat-icon>clear</mat-icon>
               </button>
               <img [src]="this.images" style="width: 180px; height: 245px;" />
@@ -75,11 +82,12 @@
           <div class="row" *ngFor="let model of Model">
 
             <div class="col-md-3 form-group" *ngFor="let images of this.model?.productImageName">
-                <input type="textbox" hidden [value]="this.images" formControlName="prodImgId" #proID>
-              <button matTooltip="Info about the action" (click)="deleteProdImage(proID.value)" mat-button matSuffix mat-icon-button>
+              <input type="textbox" hidden [value]="this.images" formControlName="prodImgId" #proID>
+              <button matTooltip="Info about the action" (click)="deleteProdImage(proID.value)" mat-button matSuffix
+                mat-icon-button>
                 <mat-icon>clear</mat-icon>
               </button>
-             
+
               <img [src]="this.images" style="width: 180px; height: 245px;" />
             </div>
           </div>
@@ -93,8 +101,8 @@
           <div class="row" *ngFor="let model of Model">
 
             <div class="col-md-3 form-group" *ngFor="let images of this.model?.portraitImageName">
-                <input type="textbox" hidden [value]="this.images" formControlName="porImgId" #portID>
-              <button matTooltip="Info about the action" (click)="deletePortImage(portID.value)" mat-button matSuffix mat-icon-button>
+              <input type="textbox" hidden [value]="this.images" formControlName="porImgId" #portID>
+              <button (click)="deletePortImage(portID.value)" mat-button matSuffix mat-icon-button>
                 <mat-icon>clear</mat-icon>
               </button>
               <img [src]="this.images" style="width: 180px; height: 245px;" />
@@ -103,12 +111,32 @@
         </div>
       </div>
     </div>
+    <div class="row" *ngIf="showPortFolio">
+        <div class="col-md-8 mx-auto">
+  
+          <div class="container">
+            <div class="row" *ngFor="let model of Model">
+  
+              <div class="col-md-3 form-group" *ngFor="let images of this.model?.portFolioImageName">
+                <input type="textbox" hidden [value]="this.images" formControlName="porImgId" #portFolioID>
+                <button (click)="deletePortFolioImage(portFolioID.value)" mat-button matSuffix mat-icon-button>
+                  <mat-icon>clear</mat-icon>
+                </button>
+                <img [src]="this.images" style="width: 180px; height: 245px;" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="row" *ngIf="showProfile">
       <div class="col-md-8 mx-auto">
         <div class="container">
           <div class="row" *ngFor="let model of Model">
             <div class="col-md-3 form-group">
-              <img [src]="this.model?.portfolioImageName" style="width: 180px; height: 245px;" />
+              <img [src]="this.model?.primeImage" style="width: 180px; height: 245px;" />
+              <button (click)="update(modelId.value)"   matTooltip="Info about the action" mat-stroked-button matSuffix>
+                  <mat-icon>camera_alt</mat-icon>
+                </button>
             </div>
             <div class="col-md-9 form-group">
               <div class="col-md-12 form-group">
@@ -116,6 +144,13 @@
                 <label>Username</label>
 
                 {{model.userName}}
+
+              </div>
+              <div class="col-md-12 form-group">
+
+                <label>Mobile Number</label>
+
+                {{model.mobileNumber}}
 
               </div>
               <div class="col-md-12 form-group">
@@ -131,6 +166,17 @@
 
                 {{model.faceBook}}
 
+              </div>
+
+              <input type="text" hidden formControlName="id" [value]="model._id" #modelId />
+              <div class="col-md-12 form-group">
+                  
+
+                <button (click)="update(modelId.value)" mat-stroked-button matSuffix>
+                  <mat-icon>edit</mat-icon>Edit Profile
+                </button>
+                
+              
               </div>
             </div>
           </div>

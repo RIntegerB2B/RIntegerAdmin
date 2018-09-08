@@ -7,8 +7,6 @@ export class UpdateModel {
     emailId: string;
     faceBook: string;
     whatsapp: string;
-    portfolioImageName: string;
-    catalogImageName: string;
     serviceProviderId: string;
     serviceProviderName: string;
     serviceProviderCompanyName: string;
@@ -26,7 +24,7 @@ export class UpdateModel {
         modelType: string,
         categoryType: string
         ) {
-        this.userName = userName;
+      this.userName = userName;
         this.description = description;
         this.availability = availability;
         this.mobileNumber = mobileNumber;

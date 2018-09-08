@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ActivatedRoute } from '@angular/router';
 
-import {PortFolioImageData} from './portFolioImageData.model';
+import {PrimeImageData} from './primeImageData.model';
 import {Model} from './model.model';
 import {ModelManagementService} from '../../model-management/model-management.service';
 import {ServiceProviderDetail} from './service-provider-detail.model';
@@ -21,7 +21,7 @@ export class AddModelComponent implements OnInit {
   userModel: Model;
   path;
   spModel: ServiceProviderDetail;
-  portFolioImageData: PortFolioImageData = new PortFolioImageData();
+  primeImageData: PrimeImageData = new PrimeImageData();
   spName: string;
   spId: string;
   spCompanyName: string;
@@ -31,6 +31,7 @@ export class AddModelComponent implements OnInit {
   modelAvailable = ['Yes', 'No'];
   loadedModel: Model;
   showUpdate: boolean;
+  hideImg: boolean;
   updatedModel: UpdateModel;
   modelAvailability;
   multipleImages = [];
@@ -76,7 +77,7 @@ export class AddModelComponent implements OnInit {
 
 handleFileInput(files: FileList, loadedImage) {
   this.fileToUpload = files.item(0);
-  this.portFolioImageData.portFolioImage = this.fileToUpload = files[0];
+  this.primeImageData.primeImage = this.fileToUpload = files[0];
   this.reader.readAsArrayBuffer(this.fileToUpload);
   this.reader.onload = () => {
     const fileResult = this.reader.result;
@@ -88,7 +89,7 @@ handleFileInput(files: FileList, loadedImage) {
       loadedImage.src = reader1.result;
     };
   };
-  console.log(this.portFolioImageData);
+  console.log(this.primeImageData);
 }
 
 avail(modelAva) {
@@ -97,9 +98,10 @@ this.modelAvailability = modelAva;
 }
 getModel(id) {
   this.showUpdate = true;
+   this.hideImg = true;
   this.modelService.getModelDetails(id).subscribe(data => {
     this.loadedModel = data;
-    console.log(this.loadedModel.portfolioImageName);
+    console.log(this.loadedModel.primeImage);
     console.log(this.loadedModel);
    this.addModelForm.setValue({
        modelName: this.loadedModel.userName,
@@ -138,7 +140,7 @@ getModel(id) {
   this.userModel.serviceProviderId = this.spId;
   this.userModel.serviceProviderCompanyName = this.spCompanyName;
   this.userModel.serviceProviderName = this.spName;
-    this.userModel.portfolioImageName = this.portFolioImageData.portFolioImage.name;
+    this.userModel.primeImage = this.primeImageData.primeImage.name;
     this.modelService.createModel(this.userModel).subscribe(data => {
       console.log(data);
     });
@@ -160,10 +162,10 @@ getModel(id) {
         addModelForm.controls.shootType.value,
         addModelForm.controls.modelType.value,
   );
-        this.updatedModel.portfolioImageName = this.portFolioImageData.portFolioImage.name;
+        // this.updatedModel.portfolioImageName = this.portFolioImageData.portFolioImage.name;
       this.modelService.updateModel(id, this.updatedModel ).subscribe(data => {
         console.log(data);
-        this.uploadImage(modelName , this.spName);
+      //  this.uploadImage(modelName , this.spName);
         this.router.navigate(['/models']);
       }, error => {
         console.log(error);
@@ -171,7 +173,7 @@ getModel(id) {
   }
   uploadImage(modelName , spName) {
     console.log(modelName);
-    this.modelService.uploadportFolioImage(this.portFolioImageData, modelName, spName).subscribe(data => {
+    this.modelService.uploadprimeImage(this.primeImageData, modelName, spName).subscribe(data => {
     }, error => {
       console.log(error);
     });

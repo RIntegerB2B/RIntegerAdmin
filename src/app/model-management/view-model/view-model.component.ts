@@ -38,12 +38,13 @@ this.router.navigate(['/profile', this.spName, 'images', modelId]);
     this.spId = this.localStorageService.retrieve('Id');
     this.modelService.serviceProviderModels(this.spId).subscribe(data => {
       this.Models = data;
-      console.log(data);
+     // console.log(data);
     });
   }
   delete(modelId) {
+    this.spName = this.localStorageService.retrieve('userName');
     this.modelId = modelId;
-    this.modelService.deleteModel(this.modelId).subscribe(data => {
+    this.modelService.deleteModel(this.modelId , this.spName).subscribe(data => {
       this.Models = data;
       console.log(data);
     });
@@ -53,8 +54,8 @@ this.router.navigate(['/profile', this.spName, 'images', modelId]);
     this.router.navigate(['/model', this.modelId]);
   }
   addImage(modelId, modelName) {
-    console.log(modelId);
-    console.log(modelName);
+    // console.log(modelId);
+   // console.log(modelName);
     this.router.navigate(['/model', modelId, 'name', modelName]);
   }
 }

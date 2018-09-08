@@ -6,10 +6,11 @@ export class Model {
     emailId: string;
     faceBook: string;
     whatsapp: string;
-    portfolioImageName: string;
+    primeImage: string;
     ecommerceImageName: [string];
     productImageName: [string];
     portraitImageName: [string];
+    porFolioImageName: [string];
     catalogImageName: string;
     serviceProviderId: string;
     serviceProviderName: string;

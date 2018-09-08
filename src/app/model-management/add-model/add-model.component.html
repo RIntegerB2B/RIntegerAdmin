@@ -3,10 +3,11 @@
     <div class="row">
       <div class="col-md-6  mx-auto">
         <div class="form-group">
-          <div class="textContainer">
+          <div class="textContainer"  >
             <input type="text" placeholder="Model Name" class="form-control required appTextBox" required formControlName="modelName"
               #modelName/>
           </div>
+          
           <div *ngIf="addModelForm.get('modelName').errors
                                && !addModelForm.get('modelName').pristine" class="alert alert-danger">
             <div [hidden]="!addModelForm.get('modelName').errors.required">Please enter Model Name</div>
@@ -161,7 +162,7 @@
           avail.value,mob.value,email.value,fb.value,wapp.value)" />
         </div>
       </div>
-      <div class="col-md-3 form-group">
+      <div class="col-md-3 form-group"  *ngIf="!hideImg">
         <div>
           <img [src]="this.loadedModel?.portfolioImageName"  #loadedImage style="width: 180px; height: 245px;" />
         </div>

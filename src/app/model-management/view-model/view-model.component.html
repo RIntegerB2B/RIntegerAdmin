@@ -50,8 +50,9 @@
           <div class="row" *ngFor="let model of Models">
 
             <div class="col-md-4 form-group">
-              <img [src]="this.model?.portfolioImageName" style="width: 180px; height: 245px;" />
+              <img [src]="this.model?.primeImage" style="width: 180px; height: 245px;" />
             </div>
+            
 
             <div class="col-md-2 form-group">
               {{model.userName}}
@@ -69,19 +70,23 @@
             </div> -->
            
             <input type="text" hidden formControlName="id" [value]="model._id" #modelId/>
-            <div class="col-md-1 form-group">
+            <!-- <div class="col-md-1 form-group">
               <input type="button" class="btn btn-success" value="Update" (click)="update(modelId.value)" />
-            </div>
-            <div class="col-md-1 form-group">
-              <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" />
+            </div> -->
+            <div class="col-md-2 form-group">
+                <button mat-raised-button color="accent"  (click)="viewProfile(modelId.value)" value="Add Images" type="submit">
+                  View <mat-icon>visibility</mat-icon></button>
             </div>
             <div class="col-md-2 form-group">
                 <button mat-raised-button color="accent"  (click)="addImage(modelId.value,model.userName)" value="Add Images" type="submit">
                   Images<mat-icon>add_a_photo</mat-icon></button>
             </div>
-            <div class="col-md-2 form-group">
-              <button mat-raised-button color="accent"  (click)="viewProfile(modelId.value)" value="Add Images" type="submit">
-                View <mat-icon>visibility</mat-icon></button>
+            
+          <div class="col-md-2 form-group">
+              <button mat-raised-button color="accent"  (click)="delete(modelId.value)" value="Delete" type="submit">
+                  Delete <mat-icon>  delete sweep icon</mat-icon></button>
+            
+            <!-- <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" /> -->
           </div>
           </div>
         </div>

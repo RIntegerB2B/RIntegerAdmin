@@ -6,7 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { AppSetting } from '../config/appSetting';
 
 import {Model} from './add-model/model.model';
-import {PortFolioImageData} from './add-model/portFolioImageData.model';
+import {PrimeImageData} from './add-model/primeImageData.model';
 import {User} from '../account/registration/user.model';
 import {UpdateModel} from './add-model/update.model';
 import {ImageData} from './image-management/imageData.model';
@@ -40,10 +40,10 @@ export class ModelManagementService {
 /* spDetail(data) {
 this.newSp.next(data);
 } */
-  uploadportFolioImage(portFolioImageData: PortFolioImageData , modelname , spName): Observable<any> {
+  uploadprimeImage(primeImageData: PrimeImageData , modelname , spName): Observable<any> {
     const formData: FormData = new FormData();
     const modelName = modelname;
-    formData.append('file', portFolioImageData.portFolioImage, portFolioImageData.portFolioImage.name);
+    formData.append('file', primeImageData.primeImage, primeImageData.primeImage.name);
     const addUrl = 'portFolioImage/';
     const addUrl1 = '/sp/';
     const url: string = this.serviceUrl + addUrl + modelName + addUrl1 + spName;
@@ -77,6 +77,15 @@ this.newSp.next(data);
     const url: string = this.serviceUrl + addUrl + spName +  addUrl1 + id + addUrl2 + modelName ;
     return this.httpClient.put<boolean>(url, data);
   }
+  uploadePortFolioImage(spName, id, modelName , data ): Observable<any> {
+    /* const formData: FormData = new FormData();
+    formData.append('file', imageData.productImage, imageData.productImage.name); */
+    const addUrl = 'portFolioImage/';
+    const addUrl1 = '/id/';
+    const addUrl2 = '/name/';
+    const url: string = this.serviceUrl + addUrl + spName +  addUrl1 + id + addUrl2 + modelName ;
+    return this.httpClient.put<boolean>(url, data);
+  }
   findImages(name , id): Observable<any> {
     const addUrl = 'serviceprovider/';
     const addUrl1 = '/modelimages/';
@@ -90,9 +99,10 @@ this.newSp.next(data);
     const url: string = this.serviceUrl + addUrl + id + modelUrl;
     return this.httpClient.get<Model>(url);
   }
-  deleteModel(id): Observable<any> {
+  deleteModel(id , spName): Observable<any> {
     const addUrl = 'model/';
-    const url: string = this.serviceUrl + addUrl + id ;
+    const addUrl1 = '/sp/';
+    const url: string = this.serviceUrl + addUrl + id + addUrl1 + spName;
     return this.httpClient.delete<Model>(url);
   }
   updateModel(id, data: UpdateModel): Observable<any> {
@@ -129,4 +139,12 @@ this.newSp.next(data);
     const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image ;
     return this.httpClient.delete<Model>(url);
   }
+// sp delete portFolio
+deletePortFolioImg(name , id, image): Observable<any> {
+  const addUrl = 'serviceprovider/';
+  const addUrl1 = '/model/';
+  const addUrl2 = '/portFolio/';
+  const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image ;
+  return this.httpClient.delete<Model>(url);
+}
 }

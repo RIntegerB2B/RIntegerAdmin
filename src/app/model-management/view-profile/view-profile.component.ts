@@ -23,6 +23,7 @@ export class ViewProfileComponent implements OnInit {
   showProduct: boolean;
   showProfile: boolean;
   showAll: boolean;
+  showPortFolio: boolean;
 
   constructor(private fb: FormBuilder, private router: Router, private localStorageService: LocalStorageService,
     private activatedRoute: ActivatedRoute, private modelService: ModelManagementService) {
@@ -34,13 +35,16 @@ export class ViewProfileComponent implements OnInit {
   ngOnInit() {
     this.findImages();
     this.createForm();
-    this.showAll = true;
+    this.showProfile = true;
   }
   createForm() {
     this.viewProfileForm = this.fb.group({
       prodImgId: [''],
       ecomImgId: [''],
-      porImgId: ['']
+      porImgId: [''],
+      id: [''],
+      portID: [''],
+      portFolioID: ['']
     });
   }
   findImages() {
@@ -54,16 +58,18 @@ export class ViewProfileComponent implements OnInit {
   allImages() {
     this.showAll = true;
     this.showEcommerce = false;
-this.showProfile = false;
-this.showPortrait = false;
-this.showProduct = false;
+    this.showProfile = false;
+    this.showPortrait = false;
+    this.showProduct = false;
+    this.showPortFolio = false;
   }
   productImage() {
-this.showEcommerce = false;
-this.showProfile = false;
-this.showPortrait = false;
-this.showProduct = true;
-this.showAll = false;
+    this.showEcommerce = false;
+    this.showProfile = false;
+    this.showPortrait = false;
+    this.showProduct = true;
+    this.showAll = false;
+    this.showPortFolio = false;
   }
   ecommerceImage() {
     this.showEcommerce = true;
@@ -71,50 +77,78 @@ this.showAll = false;
     this.showPortrait = false;
     this.showProduct = false;
     this.showAll = false;
-      }
-      portraitImage() {
-        this.showEcommerce = false;
+    this.showPortFolio = false;
+  }
+  portraitImage() {
+    this.showEcommerce = false;
     this.showProfile = false;
     this.showPortrait = true;
     this.showProduct = false;
     this.showAll = false;
-      }
-      profileImage() {
-        this.showEcommerce = false;
-        this.showProfile = true;
-        this.showPortrait = false;
-        this.showProduct = false;
-        this.showAll = false;
-      }
-      deleteEcomImage(images) {
-        const str = images;
+    this.showPortFolio = false;
+  }
+  profileImage() {
+    this.showEcommerce = false;
+    this.showProfile = true;
+    this.showPortrait = false;
+    this.showProduct = false;
+    this.showAll = false;
+    this.showPortFolio = false;
+  }
+  portFolioImage() {
+    this.showEcommerce = false;
+    this.showProfile = false;
+    this.showPortrait = false;
+    this.showProduct = false;
+    this.showAll = false;
+    this.showPortFolio = true;
+  }
+  deleteEcomImage(images) {
+    const str = images;
     const strlen = str.length;
-        const  imageName = str.substring(str.lastIndexOf('/') + 1);
-      console.log(imageName);
-        this.modelService.deleteEcomImg(this.serviceProviderName , this.modelId , imageName).subscribe(data => {
-          // this.Model.push(data);
-        }, error => {
-console.log(error);
-        });
+    const imageName = str.substring(str.lastIndexOf('/') + 1);
+    console.log(imageName);
+    this.modelService.deleteEcomImg(this.serviceProviderName, this.modelId, imageName).subscribe(data => {
+      // this.Model.push(data);
+    }, error => {
+      console.log(error);
+    });
   }
   deleteProdImage(images) {
     const str = images;
     const strlen = str.length;
-        const  imageName = str.substring(str.lastIndexOf('/') + 1);
-this.modelService.deleteProdImg(this.serviceProviderName , this.modelId , imageName).subscribe(data => {
-  // this.Model.push(data);
-}, error => {
-console.log(error);
-});
+    const imageName = str.substring(str.lastIndexOf('/') + 1);
+    this.modelService.deleteProdImg(this.serviceProviderName, this.modelId, imageName).subscribe(data => {
+      // this.Model.push(data);
+    }, error => {
+      console.log(error);
+    });
   }
   deletePortImage(images) {
     const str = images;
     const strlen = str.length;
-        const  imageName = str.substring(str.lastIndexOf('/') + 1);
-this.modelService.deletePortImg(this.serviceProviderName , this.modelId , imageName).subscribe(data => {
-  // this.Model.push(data);
-}, error => {
-console.log(error);
-});
-      }
+    const imageName = str.substring(str.lastIndexOf('/') + 1);
+    this.modelService.deletePortImg(this.serviceProviderName, this.modelId, imageName).subscribe(data => {
+      // this.Model.push(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+  deletePortFolioImage(images) {
+    const str = images;
+    const strlen = str.length;
+    const imageName = str.substring(str.lastIndexOf('/') + 1);
+    this.modelService.deletePortFolioImg(this.serviceProviderName, this.modelId, imageName).subscribe(data => {
+      // this.Model.push(data);
+    }, error => {
+      console.log(error);
+    });
+  }
+
+
+  // update profile details
+  update(id) {
+    this.modelId = id;
+    this.router.navigate(['/model', this.modelId]);
+  }
 }

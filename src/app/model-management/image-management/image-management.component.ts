@@ -18,6 +18,7 @@ export class ImageManagementComponent implements OnInit {
   fileToUpload; // ecommerce
   fileToUpload1; // portrait
   fileToUpload2; // product
+  fileToUpload3; // portfolio
   ecommerceImages = [];
   reader: FileReader = new FileReader();
   imageBlob: Blob;
@@ -95,9 +96,26 @@ export class ImageManagementComponent implements OnInit {
       console.log(error);
     });
   }
+  handlePortFolioInput(images: any, loadedPortFolio) {
+    this.fileToUpload3 = images;
+    }
+    uploadPortFolio() {
+      this.spName = this.localStorageService.retrieve('userName');
+      const formData: any = new FormData();
+      this.fileLength = this.fileToUpload3.length;
+      for (let i = 0; i <= this.fileLength; i++) {
+        formData.append('uploads[]', this.fileToUpload3[i]);
+      }
+      this.modelService.uploadePortFolioImage(this.spName, this.id, this.name, formData).subscribe(data => {
+      }, error => {
+        console.log(error);
+      });
+    }
   sendImages() {
     this.uploadEcommerce();
     this.uploadPortrait();
     this.uploadProduct();
+    this.uploadPortFolio();
+  this.modelImageForm.reset();
   }
 }
