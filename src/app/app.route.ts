@@ -13,6 +13,8 @@ import { CustomerDetailsComponent } from './customer-management/customer-details
 import {ViewAgencyComponent} from './agency-management/view-agency/view-agency.component';
 import {ImageManagementComponent} from './model-management/image-management/image-management.component';
 import {ViewProfileComponent} from './model-management/view-profile/view-profile.component';
+import {CatalogListingComponent} from './catalog-listing-settings/catalog-listing/catalog-listing.component';
+
 
 const routes: Routes = [
     { path: 'welcome', component: WelcomeComponent},
@@ -30,6 +32,7 @@ const routes: Routes = [
     { path: 'model/:id/name/:name', component: ImageManagementComponent},
     { path: 'customers', component: CustomerDetailsComponent},
     { path: 'profile/:name/images/:id', component: ViewProfileComponent},
+    { path: 'catalog', component: CatalogListingComponent},
     { path: '', redirectTo: 'welcome', pathMatch: 'full' },
     { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
 ];

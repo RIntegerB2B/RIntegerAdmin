@@ -1,0 +1,51 @@
+
+    <form [formGroup]="catalogPlatform" novalidate >
+        <div class="pageBoxLg ">
+            <label class="pageBoxLg-label display-none-small">B2B National Platform</label>
+            <div>
+      <div class="container-fluid container-fuid-padding-small">
+        <div class="row ">
+          <div class="form-group col-sm-12 col-md-5">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Platform name" formControlName="b2bNational" required #name>
+             
+              <mat-error *ngIf="catalogPlatform.controls['b2bNational'].errors?.required">
+                Name is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-2 btnpink-textbox-inline">
+            <input class="btn btnPink btn-block" value="SAVE" type="submit" (click)='catalogPlatform.valid && addB2bNational() '>
+
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+     <!--  <div class="pageBoxLg ">
+          <label class="pageBoxLg-label display-none-small">B2B InterNational Platform</label>
+          <div>
+    <div class="container-fluid container-fuid-padding-small">
+      <div class="row ">
+        <div class="form-group col-sm-12 col-md-5">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Platform name" formControlName="b2bNational" required #name>
+           
+            <mat-error *ngIf="catalogPlatform.controls['b2bNational'].errors?.required">
+              Name is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-2 btnpink-textbox-inline">
+          <input class="btn btnPink btn-block" value="SAVE" type="submit" (click)='!catalogPlatform.valid && addB2bInterNational(catalogPlatform) '>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div> -->
+    </form>
+  
+  

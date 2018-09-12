@@ -37,6 +37,8 @@ import { ViewDirectModelComponent } from './direct-model-management/view-direct-
 import { ApproveDirectModelComponent } from './direct-model-management/approve-direct-model/approve-direct-model.component';
 import { ImageManagementComponent } from './model-management/image-management/image-management.component';
 import { ViewProfileComponent } from './model-management/view-profile/view-profile.component';
+import { CatalogListingComponent } from './catalog-listing-settings/catalog-listing/catalog-listing.component';
+
 
 
 @NgModule({
@@ -59,6 +61,7 @@ import { ViewProfileComponent } from './model-management/view-profile/view-profi
     ApproveDirectModelComponent,
     ImageManagementComponent,
     ViewProfileComponent,
+    CatalogListingComponent,
   ],
   imports: [
     BrowserModule,

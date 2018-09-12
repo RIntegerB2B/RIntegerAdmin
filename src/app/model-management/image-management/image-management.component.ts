@@ -117,5 +117,6 @@ export class ImageManagementComponent implements OnInit {
     this.uploadProduct();
     this.uploadPortFolio();
   this.modelImageForm.reset();
+  this.router.navigate(['/models']);
   }
 }
