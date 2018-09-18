@@ -14,6 +14,9 @@ export class ViewBookingComponent implements OnInit {
   viewBookingForm: FormGroup;
   showModelBooking: Boolean;
   showDirectBooking: Boolean;
+  showRegistrationBooking: Boolean;
+  showCatalogBooking: Boolean;
+  showMarketingBooking: Boolean;
   showCancelBooking: Boolean;
   showApprovedBooking: Boolean;
 
@@ -36,6 +39,10 @@ export class ViewBookingComponent implements OnInit {
       this.showDirectBooking = false;
       this.showModelBooking = false;
       this.showApprovedBooking = false;
+      this.showRegistrationBooking = false;
+      this.showMarketingBooking = false;
+      this.showCatalogBooking = false;
+
     }, error => {
       console.log(error);
      } );
@@ -58,6 +65,10 @@ export class ViewBookingComponent implements OnInit {
       this.showDirectBooking = false;
       this.showModelBooking = false;
       this.showApprovedBooking = true;
+      this.showRegistrationBooking = false;
+      this.showMarketingBooking = false;
+      this.showCatalogBooking = false;
+
      }, error => {
        console.log(error);
       } );
@@ -75,6 +86,9 @@ modelBooking() {
   this.showDirectBooking = false;
   this.showCancelBooking = false ;
   this.showApprovedBooking = false;
+  this.showRegistrationBooking = false;
+  this.showMarketingBooking = false;
+  this.showCatalogBooking = false;
   this.bookingService.getModelBookingDetails().subscribe(data => {
     this.bookingDetail = data;
   }, error => {
@@ -86,7 +100,55 @@ directBooking() {
   this.showModelBooking = false;
   this.showCancelBooking = false ;
   this.showApprovedBooking = false;
+  this.showRegistrationBooking = false;
+  this.showMarketingBooking = false;
+  this.showCatalogBooking = false;
   this.bookingService.getDirectBookingDetails().subscribe(data => {
+    this.bookingDetail = data;
+    console.log(this.bookingDetail);
+  }, error => {
+    console.log(error);
+  });
+}
+catalogBooking() {
+  this.showDirectBooking = false;
+  this.showModelBooking = false;
+  this.showCancelBooking = false ;
+  this.showApprovedBooking = false;
+  this.showRegistrationBooking = false;
+  this.showMarketingBooking = false;
+  this.showCatalogBooking = true;
+  this.bookingService.getCatalogBookingDetails().subscribe(data => {
+    this.bookingDetail = data;
+    console.log(this.bookingDetail);
+  }, error => {
+    console.log(error);
+  });
+}
+registrationBooking() {
+  this.showDirectBooking = false;
+  this.showModelBooking = false;
+  this.showCancelBooking = false ;
+  this.showApprovedBooking = false;
+  this.showRegistrationBooking = true;
+  this.showMarketingBooking = false;
+  this.showCatalogBooking = false;
+  this.bookingService.getRegistrationBookingDetails().subscribe(data => {
+    this.bookingDetail = data;
+    console.log(this.bookingDetail);
+  }, error => {
+    console.log(error);
+  });
+}
+marketingBooking() {
+  this.showDirectBooking = false;
+  this.showModelBooking = false;
+  this.showCancelBooking = false ;
+  this.showApprovedBooking = false;
+  this.showRegistrationBooking = false;
+  this.showMarketingBooking = true;
+  this.showCatalogBooking = false;
+  this.bookingService.getMarketingBookingDetails().subscribe(data => {
     this.bookingDetail = data;
     console.log(this.bookingDetail);
   }, error => {

@@ -50,6 +50,24 @@ export class BookingDetailsService {
     return this.httpClient.get<BookingDetail[]>(url);
 
   }
+  getCatalogBookingDetails(): Observable<any> {
+    const addurl = 'catalogbooking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<BookingDetail[]>(url);
+
+  }
+  getRegistrationBookingDetails(): Observable<any> {
+    const addurl = 'registrationbooking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<BookingDetail[]>(url);
+
+  }
+  getMarketingBookingDetails(): Observable<any> {
+    const addurl = 'marketingbooking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<BookingDetail[]>(url);
+
+  }
   getCancelBookingDetails(): Observable<any> {
     const addurl = 'cancelbooking/';
     const url: string = this.serviceUrl + addurl;

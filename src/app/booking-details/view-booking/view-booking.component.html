@@ -1,10 +1,13 @@
 <form class="pageBox" [formGroup]="viewBookingForm" style="padding-top:60px" novalidate>
     <div class="container-fluid">
         
-      <button mat-raised-button color="accent" style="margin-right: 20px" (click)="modelBooking()"> New Model based booking</button>
-      <button mat-raised-button color="accent"  style="margin-right: 20px" (click)="directBooking()"> New Direct booking</button>
-      <button mat-raised-button color="accent"  style="margin-right: 20px"  (click)="approved()"><mat-icon>check_box</mat-icon>Confirmed booking</button>
-      <button mat-raised-button color="accent"   style="margin-right: 20px"  (click)="cancelled()"> 	<mat-icon>clear</mat-icon>Cancelled booking</button>
+      <button mat-raised-button color="accent"  (click)="modelBooking()"> New Model shoot booking</button>
+      <button mat-raised-button color="accent"   (click)="directBooking()"> New Direct shoot booking</button>
+      <button mat-raised-button color="accent"  (click)="catalogBooking()"> New Cataloging / Listing booking</button>
+      <button mat-raised-button color="accent"  (click)="registrationBooking()"> New Registration & Setup booking</button>
+      <button mat-raised-button color="accent"  (click)="marketingBooking()"> New Marketing & Services booking</button>
+      <button mat-raised-button color="accent"   (click)="approved()"><mat-icon>check_box</mat-icon>Confirmed booking</button>
+      <button mat-raised-button color="accent"     (click)="cancelled()"> 	<mat-icon>clear</mat-icon>Cancelled booking</button>
      
       <div class="row"  style="margin-left: 30px;"*ngIf="showDirectBooking">
           <h1>Direct Booking Details</h1>
@@ -66,6 +69,120 @@
   
         </div>
       </div>
+      <div class="row"  style="margin-left: 30px;"*ngIf="showRegistrationBooking">
+        <h1>Registration & Services Booking Details</h1>
+      <div class="col-md-12  mx-auto">
+
+        <div class="row">
+
+          <div class="col-md-2 form-group">
+            <p style="padding-left:20px">Name </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Mobile number </p>
+          </div>
+          
+         
+          <div  class="col-md-2  form-group">
+              <p style="padding-left:20px">Update Booking status</p>
+            </div>
+        </div>
+        <div class="row" *ngFor="let data of bookingDetail">
+          <div class="col-md-2  form-group">
+            <p>{{data.name}} </p>
+          </div>
+
+          <div class="col-md-2  form-group">
+            <p>{{data.mobileNumber}} </p>
+          </div>
+          
+          <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+          
+
+          <div class="col-md-2  form-group">
+              <button class="btn btn-success pull-right btn-sm" style="margin-right:10px" value="Confirm"  (click)="giveApproval(data.mobileNumber,data.bookingOrderId)">Confirm </button>
+              <button   class="btn btn-danger pull-right btn-sm" (click)="cancel(data.mobileNumber,data.bookingOrderId)" >Cancel </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row"  style="margin-left: 30px;"*ngIf="showCatalogBooking">
+      <h1>Cataloging & Listing Booking Details</h1>
+    <div class="col-md-12  mx-auto">
+
+      <div class="row">
+
+        <div class="col-md-2 form-group">
+          <p style="padding-left:20px">Name </p>
+        </div>
+        <div class="col-md-2  form-group">
+          <p style="padding-left:20px">Mobile number </p>
+        </div>
+        
+       
+        <div  class="col-md-2  form-group">
+            <p style="padding-left:20px">Update Booking status</p>
+          </div>
+      </div>
+      <div class="row" *ngFor="let data of bookingDetail">
+        <div class="col-md-2  form-group">
+          <p>{{data.name}} </p>
+        </div>
+
+        <div class="col-md-2  form-group">
+          <p>{{data.mobileNumber}} </p>
+        </div>
+        
+        <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+        
+
+        <div class="col-md-2  form-group">
+            <button class="btn btn-success pull-right btn-sm" style="margin-right:10px" value="Confirm"  (click)="giveApproval(data.mobileNumber,data.bookingOrderId)">Confirm </button>
+            <button   class="btn btn-danger pull-right btn-sm" (click)="cancel(data.mobileNumber,data.bookingOrderId)" >Cancel </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row"  style="margin-left: 30px;"*ngIf="showMarketingBooking">
+    <h1>Marketing & Services Booking Details</h1>
+  <div class="col-md-12  mx-auto">
+
+    <div class="row">
+
+      <div class="col-md-2 form-group">
+        <p style="padding-left:20px">Name </p>
+      </div>
+      <div class="col-md-2  form-group">
+        <p style="padding-left:20px">Mobile number </p>
+      </div>
+      
+     
+      <div  class="col-md-2  form-group">
+          <p style="padding-left:20px">Update Booking status</p>
+        </div>
+    </div>
+    <div class="row" *ngFor="let data of bookingDetail">
+      <div class="col-md-2  form-group">
+        <p>{{data.name}} </p>
+      </div>
+
+      <div class="col-md-2  form-group">
+        <p>{{data.mobileNumber}} </p>
+      </div>
+      
+      <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+      
+
+      <div class="col-md-2  form-group">
+          <button class="btn btn-success pull-right btn-sm" style="margin-right:10px" value="Confirm"  (click)="giveApproval(data.mobileNumber,data.bookingOrderId)">Confirm </button>
+          <button   class="btn btn-danger pull-right btn-sm" (click)="cancel(data.mobileNumber,data.bookingOrderId)" >Cancel </button>
+      </div>
+    </div>
+
+  </div>
+</div>
       <div class="row"  style="margin-left: 30px;" *ngIf="showModelBooking">
           <h1>Model Based Booking Details</h1>
         <div class="col-md-12  mx-auto">
