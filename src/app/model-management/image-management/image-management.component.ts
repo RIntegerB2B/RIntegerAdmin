@@ -25,15 +25,16 @@ export class ImageManagementComponent implements OnInit {
   imageBytes: Uint8Array;
   loadedImage;
   fileLength;
+  fileLength1;
   id;
   name;
   spName;
 
   constructor(private fb: FormBuilder, private router: Router, private localStorageService: LocalStorageService,
-     private modelService: ModelManagementService,
+    private modelService: ModelManagementService,
     private activatedRoute: ActivatedRoute) {
-      this.id = this.activatedRoute.snapshot.paramMap.get('id');
-      this.name = this.activatedRoute.snapshot.paramMap.get('name');
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.name = this.activatedRoute.snapshot.paramMap.get('name');
   }
 
   ngOnInit() {
@@ -47,6 +48,7 @@ export class ImageManagementComponent implements OnInit {
 
   handleEcommerceInput(images: any, loadedImage) {
     this.fileToUpload = images;
+    console.log(this.fileToUpload);
   }
 
 
@@ -54,6 +56,7 @@ export class ImageManagementComponent implements OnInit {
     this.spName = this.localStorageService.retrieve('userName');
     const formData: any = new FormData();
     this.fileLength = this.fileToUpload.length;
+    console.log(this.fileLength);
     for (let i = 0; i <= this.fileLength; i++) {
       formData.append('uploads[]', this.fileToUpload[i]);
     }
@@ -65,7 +68,6 @@ export class ImageManagementComponent implements OnInit {
 
   handlePortraitInput(images: any, loadedPortrait) {
     this.fileToUpload1 = images;
-    console.log(this.fileToUpload1);
   }
   uploadPortrait() {
     this.spName = this.localStorageService.retrieve('userName');
@@ -81,9 +83,7 @@ export class ImageManagementComponent implements OnInit {
   }
   handleProductInput(images: any, loadedProduct) {
     this.fileToUpload2 = images;
-    }
-
-
+  }
   uploadProduct() {
     this.spName = this.localStorageService.retrieve('userName');
     const formData: any = new FormData();
@@ -98,25 +98,32 @@ export class ImageManagementComponent implements OnInit {
   }
   handlePortFolioInput(images: any, loadedPortFolio) {
     this.fileToUpload3 = images;
+  }
+  uploadPortFolio() {
+    this.spName = this.localStorageService.retrieve('userName');
+    const formData: any = new FormData();
+    this.fileLength1 = this.fileToUpload3.length;
+    console.log(this.fileLength1);
+    for (let i = 0; i <= this.fileLength1; i++) {
+      formData.append('uploads[]', this.fileToUpload3[i]);
     }
-    uploadPortFolio() {
-      this.spName = this.localStorageService.retrieve('userName');
-      const formData: any = new FormData();
-      this.fileLength = this.fileToUpload3.length;
-      for (let i = 0; i <= this.fileLength; i++) {
-        formData.append('uploads[]', this.fileToUpload3[i]);
-      }
-      this.modelService.uploadePortFolioImage(this.spName, this.id, this.name, formData).subscribe(data => {
-      }, error => {
-        console.log(error);
-      });
-    }
+    this.modelService.uploadePortFolioImage(this.spName, this.id, this.name, formData).subscribe(data => {
+    }, error => {
+      console.log(error);
+    });
+  }
   sendImages() {
-    this.uploadEcommerce();
-    this.uploadPortrait();
-    this.uploadProduct();
-    this.uploadPortFolio();
-  this.modelImageForm.reset();
-  this.router.navigate(['/models']);
+    if (this.fileToUpload !== undefined && this.fileToUpload3 === undefined) {
+      this.uploadEcommerce();
+    } else if (this.fileToUpload3 !== undefined && this.fileToUpload === undefined ) {
+      this.uploadPortFolio();
+    } else if (this.fileToUpload !== null && this.fileToUpload3 !== null  ) {
+      this.uploadEcommerce();
+      this.uploadPortFolio();
+    }
+    this.modelImageForm.reset();
+    this.router.navigate(['/models']);
+    /*  this.uploadPortrait();
+      this.uploadProduct(); */
   }
 }

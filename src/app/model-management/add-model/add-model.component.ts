@@ -55,12 +55,12 @@ export class AddModelComponent implements OnInit {
   createForm() {
   this.addModelForm = this.fb.group({
     modelName: ['', Validators.required],
-    description: ['', Validators.required],
+    description: [''],
     availability: ['', Validators.required],
-    mobileNumber: ['', Validators.required],
-    emailId: ['', Validators.required],
-    faceBook: ['', Validators.required],
-    whatsapp: ['', Validators.required],
+    mobileNumber: [''],
+    emailId: [''],
+    faceBook: [''],
+    whatsapp: [''],
     shootType: [''],
       modelType: [''],
       modelId: [''],
