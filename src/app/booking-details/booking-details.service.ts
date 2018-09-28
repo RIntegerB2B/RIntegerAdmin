@@ -68,11 +68,22 @@ export class BookingDetailsService {
     return this.httpClient.get<BookingDetail[]>(url);
 
   }
+  getEditingBookingDetails(): Observable<any> {
+    const addurl = 'editingbooking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<BookingDetail[]>(url);
+
+  }
+  getCreativeBookingDetails(): Observable<any> {
+    const addurl = 'creativebooking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<BookingDetail[]>(url);
+
+  }
   getCancelBookingDetails(): Observable<any> {
     const addurl = 'cancelbooking/';
     const url: string = this.serviceUrl + addurl;
     return this.httpClient.get<BookingDetail[]>(url);
-
   }
 
   getStatusDetail(no): Observable<any> {

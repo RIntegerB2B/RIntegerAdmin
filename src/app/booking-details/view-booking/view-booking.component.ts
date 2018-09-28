@@ -19,7 +19,8 @@ export class ViewBookingComponent implements OnInit {
   showMarketingBooking: Boolean;
   showCancelBooking: Boolean;
   showApprovedBooking: Boolean;
-
+  showCreativeBooking: Boolean;
+  showEditingBooking: Boolean;
   constructor(private fb: FormBuilder, private router: Router, private bookingService: BookingDetailsService) { }
 
   ngOnInit() {
@@ -42,6 +43,8 @@ export class ViewBookingComponent implements OnInit {
       this.showRegistrationBooking = false;
       this.showMarketingBooking = false;
       this.showCatalogBooking = false;
+      this.showCreativeBooking = false;
+      this.showEditingBooking = false;
 
     }, error => {
       console.log(error);
@@ -68,6 +71,8 @@ export class ViewBookingComponent implements OnInit {
       this.showRegistrationBooking = false;
       this.showMarketingBooking = false;
       this.showCatalogBooking = false;
+      this.showCreativeBooking = false;
+      this.showEditingBooking = false;
 
      }, error => {
        console.log(error);
@@ -89,6 +94,8 @@ modelBooking() {
   this.showRegistrationBooking = false;
   this.showMarketingBooking = false;
   this.showCatalogBooking = false;
+  this.showCreativeBooking = false;
+      this.showEditingBooking = false;
   this.bookingService.getModelBookingDetails().subscribe(data => {
     this.bookingDetail = data;
   }, error => {
@@ -103,6 +110,8 @@ directBooking() {
   this.showRegistrationBooking = false;
   this.showMarketingBooking = false;
   this.showCatalogBooking = false;
+  this.showCreativeBooking = false;
+      this.showEditingBooking = false;
   this.bookingService.getDirectBookingDetails().subscribe(data => {
     this.bookingDetail = data;
     console.log(this.bookingDetail);
@@ -118,6 +127,8 @@ catalogBooking() {
   this.showRegistrationBooking = false;
   this.showMarketingBooking = false;
   this.showCatalogBooking = true;
+  this.showCreativeBooking = false;
+      this.showEditingBooking = false;
   this.bookingService.getCatalogBookingDetails().subscribe(data => {
     this.bookingDetail = data;
     console.log(this.bookingDetail);
@@ -133,6 +144,8 @@ registrationBooking() {
   this.showRegistrationBooking = true;
   this.showMarketingBooking = false;
   this.showCatalogBooking = false;
+  this.showCreativeBooking = false;
+      this.showEditingBooking = false;
   this.bookingService.getRegistrationBookingDetails().subscribe(data => {
     this.bookingDetail = data;
     console.log(this.bookingDetail);
@@ -148,7 +161,43 @@ marketingBooking() {
   this.showRegistrationBooking = false;
   this.showMarketingBooking = true;
   this.showCatalogBooking = false;
+  this.showCreativeBooking = false;
+      this.showEditingBooking = false;
   this.bookingService.getMarketingBookingDetails().subscribe(data => {
+    this.bookingDetail = data;
+    console.log(this.bookingDetail);
+  }, error => {
+    console.log(error);
+  });
+}
+creativeBooking() {
+  this.showDirectBooking = false;
+  this.showModelBooking = false;
+  this.showCancelBooking = false ;
+  this.showApprovedBooking = false;
+  this.showRegistrationBooking = false;
+  this.showMarketingBooking = false;
+  this.showCatalogBooking = false;
+  this.showCreativeBooking = true;
+      this.showEditingBooking = false;
+  this.bookingService.getCreativeBookingDetails().subscribe(data => {
+    this.bookingDetail = data;
+    console.log(this.bookingDetail);
+  }, error => {
+    console.log(error);
+  });
+}
+editingBooking() {
+  this.showDirectBooking = false;
+  this.showModelBooking = false;
+  this.showCancelBooking = false ;
+  this.showApprovedBooking = false;
+  this.showRegistrationBooking = false;
+  this.showMarketingBooking = false;
+  this.showCatalogBooking = false;
+  this.showCreativeBooking = false;
+      this.showEditingBooking = true;
+  this.bookingService.getEditingBookingDetails().subscribe(data => {
     this.bookingDetail = data;
     console.log(this.bookingDetail);
   }, error => {

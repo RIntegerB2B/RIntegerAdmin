@@ -6,9 +6,10 @@
       <button mat-raised-button color="accent"  (click)="catalogBooking()"> New Cataloging / Listing booking</button>
       <button mat-raised-button color="accent"  (click)="registrationBooking()"> New Registration & Setup booking</button>
       <button mat-raised-button color="accent"  (click)="marketingBooking()"> New Marketing & Services booking</button>
+      <button mat-raised-button color="accent"  (click)="editingBooking()"> New Image Editing booking</button>
+      <button mat-raised-button color="accent"  (click)="creativeBooking()"> New Creative shoot booking</button><br>
       <button mat-raised-button color="accent"   (click)="approved()"><mat-icon>check_box</mat-icon>Confirmed booking</button>
       <button mat-raised-button color="accent"     (click)="cancelled()"> 	<mat-icon>clear</mat-icon>Cancelled booking</button>
-     
       <div class="row"  style="margin-left: 30px;"*ngIf="showDirectBooking">
           <h1>Direct Booking Details</h1>
         <div class="col-md-12  mx-auto">
@@ -241,6 +242,108 @@
   
         </div>
       </div>
+      <div class="row"  style="margin-left: 30px;" *ngIf="showCreativeBooking">
+        <h1>Creative shoot Booking Details</h1>
+      <div class="col-md-12  mx-auto">
+
+        <div class="row">
+
+          <div class="col-md-2 form-group">
+            <p style="padding-left:20px">Name </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Mobile number </p>
+          </div>
+
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Product Description </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Quantity Description </p>
+          </div>
+          <div  class="col-md-2  form-group">
+              <p style="padding-left:20px"> Booking Approval</p>
+            </div>
+
+        </div>
+        <div class="row"  *ngFor="let data of bookingDetail">
+          <div class="col-md-2  form-group">
+            <p>{{data.name}} </p>
+          </div>
+
+          <div class="col-md-2  form-group">
+            <p>{{data.mobileNumber}} </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p>{{data.productDescription}} </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p>{{data.quantityDescription}} </p>
+          </div>
+          <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+          <div class="col-md-2  form-group">
+              <button class="btn btn-success pull-right btn-sm" style="margin-right:10px" value="Confirm"  (click)="giveApproval(data.mobileNumber,data.bookingOrderId)">Confirm </button>
+              <button class="btn btn-danger pull-right btn-sm" (click)="cancel(data.mobileNumber,data.bookingOrderId)" >Cancel </button>
+          </div>
+         <!--  <div class="col-md-1 form-group">
+            <button class="btn btn-success pull-right btn-sm" (click)="statusView(viewBookingForm,no.value)">View</button>
+          </div> -->
+
+        </div>
+
+      </div>
+    </div>
+    <div class="row"  style="margin-left: 30px;" *ngIf="showEditingBooking">
+      <h1>Image Editing Booking Details</h1>
+    <div class="col-md-12  mx-auto">
+
+      <div class="row">
+
+        <div class="col-md-2 form-group">
+          <p style="padding-left:20px">Name </p>
+        </div>
+        <div class="col-md-2  form-group">
+          <p style="padding-left:20px">Mobile number </p>
+        </div>
+
+        <div class="col-md-2  form-group">
+          <p style="padding-left:20px">Product Description </p>
+        </div>
+        <div class="col-md-2  form-group">
+          <p style="padding-left:20px">Quantity Description </p>
+        </div>
+        <div  class="col-md-2  form-group">
+            <p style="padding-left:20px"> Booking Approval</p>
+          </div>
+
+      </div>
+      <div class="row"  *ngFor="let data of bookingDetail">
+        <div class="col-md-2  form-group">
+          <p>{{data.name}} </p>
+        </div>
+
+        <div class="col-md-2  form-group">
+          <p>{{data.mobileNumber}} </p>
+        </div>
+        <div class="col-md-2  form-group">
+          <p>{{data.productDescription}} </p>
+        </div>
+        <div class="col-md-2  form-group">
+          <p>{{data.quantityDescription}} </p>
+        </div>
+        <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+        <div class="col-md-2  form-group">
+            <button class="btn btn-success pull-right btn-sm" style="margin-right:10px" value="Confirm"  (click)="giveApproval(data.mobileNumber,data.bookingOrderId)">Confirm </button>
+            <button class="btn btn-danger pull-right btn-sm" (click)="cancel(data.mobileNumber,data.bookingOrderId)" >Cancel </button>
+        </div>
+       <!--  <div class="col-md-1 form-group">
+          <button class="btn btn-success pull-right btn-sm" (click)="statusView(viewBookingForm,no.value)">View</button>
+        </div> -->
+
+      </div>
+
+    </div>
+  </div>
       <div class="row cancel"  *ngIf="showCancelBooking">
           <h1>Cancelled booking</h1>
         <div class="col-md-12  mx-auto">
@@ -259,11 +362,11 @@
               </div>
   
             <div class="col-md-2  form-group">
-              <p style="padding-left:20px">Product Description </p>
+              <p style="padding-left:20px">Booking Type </p>
             </div>
-            <div class="col-md-2  form-group">
+            <!-- <div class="col-md-2  form-group">
               <p style="padding-left:20px">Quantity Description </p>
-            </div>
+            </div> -->
             <div  class="col-md-2  form-group">
                 <p style="padding-left:20px"> Booking Approval</p>
               </div>
@@ -280,11 +383,11 @@
                 <p>{{data.bookingOrderId}} </p>
               </div>
             <div class="col-md-2  form-group">
-              <p>{{data.productDescription}} </p>
+              <p>{{data.bookingType}} </p>
             </div>
-            <div class="col-md-2  form-group">
+          <!--   <div class="col-md-2  form-group">
               <p>{{data.quantityDescription}} </p>
-            </div>
+            </div> -->
             <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
             
             <div class="col-md-2  form-group">

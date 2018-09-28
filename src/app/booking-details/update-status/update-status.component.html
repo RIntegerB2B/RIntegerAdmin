@@ -170,6 +170,34 @@
           </div>
           <div class="row">
             <div class="col-md-4">
+              <p>Payment</p>
+            </div>
+            <div class="col-md-2" *ngIf="payment">
+              <label>Not completed</label>
+            </div>
+
+            <div class="col-md-2" *ngIf="paymentTrue">
+              <label> completed</label>
+            </div>
+            <div class="col-md-2" *ngIf="paymentProgress">
+                <label> Progress</label>
+              </div>
+              <div  *ngFor="let data of toshow" style="margin-right: 50px">
+                  <button class="btn btn-danger pull-right" (click)="notCompPayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                    Not  Completed</button>
+                </div>
+            <div  *ngFor="let data of toshow"  style="margin-right: 50px">
+                <button class="btn btn-info pull-right" (click)="progressPayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                Progress</button>
+              </div>
+            <div  *ngFor="let data of toshow"  style="margin-bottom: 20px">
+              <button class="btn btn-success pull-right" (click)="updatePayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
+                  <mat-icon>notifications_active</mat-icon>   Completed</button>
+            </div>
+           
+          </div>
+          <div class="row">
+            <div class="col-md-4">
               <p>MaterialReturn</p>
             </div>
             <div class="col-md-2" *ngIf="materialReturn">
@@ -197,34 +225,7 @@
             </div>
            
           </div>
-          <div class="row">
-            <div class="col-md-4">
-              <p>Payment</p>
-            </div>
-            <div class="col-md-2" *ngIf="payment">
-              <label>Not completed</label>
-            </div>
-
-            <div class="col-md-2" *ngIf="paymentTrue">
-              <label> completed</label>
-            </div>
-            <div class="col-md-2" *ngIf="paymentProgress">
-                <label> Progress</label>
-              </div>
-              <div  *ngFor="let data of toshow" style="margin-right: 50px">
-                  <button class="btn btn-danger pull-right" (click)="notCompPayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
-                    Not  Completed</button>
-                </div>
-            <div  *ngFor="let data of toshow"  style="margin-right: 50px">
-                <button class="btn btn-info pull-right" (click)="progressPayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
-                Progress</button>
-              </div>
-            <div  *ngFor="let data of toshow"  style="margin-bottom: 20px">
-              <button class="btn btn-success pull-right" (click)="updatePayment(updateStatusForm,data.mobileNumber,data._id,data.bookingOrderId)">
-                  <mat-icon>notifications_active</mat-icon>   Completed</button>
-            </div>
-           
-          </div>
+         
 
 
         </div>

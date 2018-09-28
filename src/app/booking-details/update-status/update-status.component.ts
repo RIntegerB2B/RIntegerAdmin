@@ -94,7 +94,6 @@ export class UpdateStatusComponent implements OnInit {
     });
     } */
   statusView( no: any, ID: any) {
-    console.log(ID);
     this.displayStatus = true;
     this.bookingService.getStatus(no, ID).subscribe(data => {
       this.statusDetail = data ;
@@ -321,7 +320,7 @@ export class UpdateStatusComponent implements OnInit {
   }
   // completed
   updateMateialPick(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
-    console.log(orderId);
+    console.log(this.no);
     this.bookingService.updateMaterialStatus(mobileNumber, id).subscribe(data => {
       console.log(data);
     }, error => {
@@ -368,7 +367,7 @@ this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
     this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
   }
   updateMaterialReturn(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
-    this.bookingService.materialReturnStatus(mobileNumber, id).subscribe(data => {
+    this.bookingService.materialReturnStatus(mobileNumber, orderId).subscribe(data => {
       console.log(data);
     }, error => {
       console.log(error);
