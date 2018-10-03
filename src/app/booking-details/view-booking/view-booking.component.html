@@ -449,7 +449,7 @@
               
               <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
               <div class="col-md-1 form-group">
-                  <button class="btn btn-success pull-right btn-sm" (click)="statusView(viewBookingForm,no.value)">View</button>
+                  <button class="btn btn-success pull-right btn-sm" (click)="statusView(viewBookingForm,no.value,data.bookingType)">View</button>
                 </div>
     
             </div>

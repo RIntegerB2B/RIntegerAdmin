@@ -7,6 +7,7 @@ import { AppSetting } from '../config/appSetting';
 
 import { BookingDetail } from './view-booking/booking-detail.model';
 import { Notification} from './update-status/notification.model';
+import {EditingStatus} from './update-editing-status/status.model';
 
 @Injectable({
   providedIn: 'root'
@@ -91,6 +92,13 @@ export class BookingDetailsService {
     const statusUrl = '/status';
     const url: string = this.serviceUrl + addurl + no + statusUrl;
     return this.httpClient.get<BookingDetail[]>(url);
+
+  }
+  getEditingStatus(no): Observable<any> {
+    const addurl = 'editingbooking/';
+    const statusUrl = '/status';
+    const url: string = this.serviceUrl + addurl + no + statusUrl;
+    return this.httpClient.get<EditingStatus>(url);
 
   }
   getStatus(no, id): Observable<any> {

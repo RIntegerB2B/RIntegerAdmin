@@ -26,7 +26,7 @@ export class ViewBookingComponent implements OnInit {
   ngOnInit() {
    //  this.getDetails();
     this.createForm();
-   this.modelBooking();
+   this.approved();
   }
   createForm() {
     this.viewBookingForm = this.fb.group({
@@ -204,8 +204,12 @@ editingBooking() {
     console.log(error);
   });
 }
-  statusView(viewBookingForm: FormGroup, no: any) {
+  statusView(viewBookingForm: FormGroup, no: any, bookingtype) {
+    console.log(bookingtype);
     this.router.navigate(['/update', no]);
+    if (bookingtype === 'Editing Booking') {
+      this.router.navigate(['/editingstatus', no]);
+    }
   }
 
 }

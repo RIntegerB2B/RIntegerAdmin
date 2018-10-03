@@ -14,13 +14,17 @@ import {ViewAgencyComponent} from './agency-management/view-agency/view-agency.c
 import {ImageManagementComponent} from './model-management/image-management/image-management.component';
 import {ViewProfileComponent} from './model-management/view-profile/view-profile.component';
 import {CatalogListingComponent} from './catalog-listing-settings/catalog-listing/catalog-listing.component';
+import { SubscribeComponent } from './subscribe/subscribe.component';
+import { UpdateEditingStatusComponent } from './booking-details/update-editing-status/update-editing-status.component';
 
 
 const routes: Routes = [
     { path: 'welcome', component: WelcomeComponent},
+    { path: 'subscribe', component: SubscribeComponent},
     { path: 'signIn', component: SiginComponent },
     { path: 'details', component: ViewBookingComponent },
     { path: 'update/:no', component: UpdateStatusComponent },
+    { path: 'editingstatus/:no', component: UpdateEditingStatusComponent},
     { path: 'registration', component: RegistrationComponent},
     { path: 'serviceproviderapproval', component: ApprovalComponent},
     { path: 'agency', component: ViewAgencyComponent},

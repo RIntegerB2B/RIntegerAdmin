@@ -38,6 +38,8 @@ import { ApproveDirectModelComponent } from './direct-model-management/approve-d
 import { ImageManagementComponent } from './model-management/image-management/image-management.component';
 import { ViewProfileComponent } from './model-management/view-profile/view-profile.component';
 import { CatalogListingComponent } from './catalog-listing-settings/catalog-listing/catalog-listing.component';
+import { SubscribeComponent } from './subscribe/subscribe.component';
+import { UpdateEditingStatusComponent } from './booking-details/update-editing-status/update-editing-status.component';
 
 
 
@@ -62,6 +64,8 @@ import { CatalogListingComponent } from './catalog-listing-settings/catalog-list
     ImageManagementComponent,
     ViewProfileComponent,
     CatalogListingComponent,
+    SubscribeComponent,
+    UpdateEditingStatusComponent,
   ],
   imports: [
     BrowserModule,
