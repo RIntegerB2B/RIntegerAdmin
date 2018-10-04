@@ -16,9 +16,9 @@ import { Notification } from './notification.model';
 export class UpdateEditingStatusComponent implements OnInit {
 
   no;
-  arrayLength;
+  value;
   Status: EditingStatus;
-    updateStatusForm: FormGroup;
+    updateEditingStatusForm: FormGroup;
   displayStatus: Boolean;
   progress: boolean;
   completed: boolean;
@@ -55,7 +55,7 @@ export class UpdateEditingStatusComponent implements OnInit {
     this.getStatus(this.no);
   }
   createForm() {
-    this.updateStatusForm = this.fb.group({
+    this.updateEditingStatusForm = this.fb.group({
       mobileNo: [''],
       id: ['']
     });
@@ -63,7 +63,6 @@ export class UpdateEditingStatusComponent implements OnInit {
   getStatus(id) {
     this.bookingService.getEditingStatus(id).subscribe(data => {
       this.Status = data;
-      console.log(data[0]);
       switch (data[0].imageReceived) {
         case 0: {
           this.imageReceived = true;
@@ -149,4 +148,369 @@ export class UpdateEditingStatusComponent implements OnInit {
     });
   }
 
+ // not completed
+   notCompImgReceived(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+this.value = 0;
+    this.bookingService.imgReceived(mobileNumber, orderId, this.value).subscribe(data => {
+      console.log(data);
+      this.Status = data;
+      switch (data[0].imageReceived) {
+        case 0: {
+          this.imageReceived = true;
+          this.imageReceivedTrue = false;
+          this.imageReceivedProgress = false;
+          break;
+        }
+        case 1: {
+          this.imageReceived = false;
+          this.imageReceivedTrue = true;
+          this.imageReceivedProgress = false;
+          break;
+        }
+        case 2: {
+          this.imageReceived = false;
+          this.imageReceivedTrue = false;
+          this.imageReceivedProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+  notCompImgEdiitng(updateEditingStatusForm: FormGroup, mobileNumber: any,  orderId: any) {
+    this.value = 0;
+    this.bookingService.imgEditing(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].editing) {
+        case 0: {
+          this.imageEditing = true;
+          this.imageEditingTrue = false;
+          this.imageEditingProgress = false;
+          break;
+        }
+        case 1: {
+          this.imageEditing = false;
+          this.imageEditingProgress = false;
+          this.imageEditingTrue = true;
+          break;
+        }
+        case 2: {
+          this.imageEditing = false;
+          this.imageEditingProgress = true;
+          this.imageEditingTrue = false;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+  notCompImgDelivery(updateEditingStatusForm: FormGroup, mobileNumber: any,  orderId: any) {
+    this.value = 0;
+    this.bookingService.imgDelivery(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].imageDelivery) {
+        case 0: {
+          this.delivery = true;
+          this.deliveryTrue = false;
+          this.deliveryProgress = false;
+          break;
+        }
+        case 1: {
+          this.deliveryTrue = true;
+          this.delivery = false;
+          this.deliveryProgress = false;
+          break;
+        }
+        case 2: {
+          this.deliveryTrue = false;
+          this.delivery = false;
+          this.deliveryProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+  notCompPayment(updateEditingStatusForm: FormGroup, mobileNumber: any,  orderId: any) {
+    this.value = 0;
+    this.bookingService.payment(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].payment) {
+        case 0: {
+          this.payment = true;
+          this.paymentTrue = false;
+          this.paymentProgress = false;
+          break;
+        }
+        case 1: {
+          this.payment = false;
+          this.paymentProgress = false;
+          this.paymentTrue = true;
+          break;
+        }
+        case 2: {
+          this.payment = false;
+          this.paymentProgress = true;
+          this.paymentTrue = false;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  // progress image editing
+
+  progressImgReceived(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 2;
+    this.bookingService.imgReceived(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].imageReceived) {
+        case 0: {
+          this.imageReceived = true;
+          this.imageReceivedTrue = false;
+          this.imageReceivedProgress = false;
+          break;
+        }
+        case 1: {
+          this.imageReceived = false;
+          this.imageReceivedTrue = true;
+          this.imageReceivedProgress = false;
+          break;
+        }
+        case 2: {
+          this.imageReceived = false;
+          this.imageReceivedTrue = false;
+          this.imageReceivedProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+  progressImgEdiitng(updateEditingStatusForm: FormGroup, mobileNumber: any,  orderId: any) {
+    this.value = 2;
+    this.bookingService.imgEditing(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].editing) {
+        case 0: {
+          this.imageEditing = true;
+          this.imageEditingTrue = false;
+          this.imageEditingProgress = false;
+          break;
+        }
+        case 1: {
+          this.imageEditing = false;
+          this.imageEditingProgress = false;
+          this.imageEditingTrue = true;
+          break;
+        }
+        case 2: {
+          this.imageEditing = false;
+          this.imageEditingProgress = true;
+          this.imageEditingTrue = false;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+  progressImgDelivery(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 2;
+    this.bookingService.imgDelivery(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].imageDelivery) {
+        case 0: {
+          this.delivery = true;
+          this.deliveryTrue = false;
+          this.deliveryProgress = false;
+          break;
+        }
+        case 1: {
+          this.deliveryTrue = true;
+          this.delivery = false;
+          this.deliveryProgress = false;
+          break;
+        }
+        case 2: {
+          this.deliveryTrue = false;
+          this.delivery = false;
+          this.deliveryProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+  progressPayment(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 2;
+    this.bookingService.payment(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].payment) {
+        case 0: {
+          this.payment = true;
+          this.paymentTrue = false;
+          this.paymentProgress = false;
+          break;
+        }
+        case 1: {
+          this.payment = false;
+          this.paymentProgress = false;
+          this.paymentTrue = true;
+          break;
+        }
+        case 2: {
+          this.payment = false;
+          this.paymentProgress = true;
+          this.paymentTrue = false;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  // completed
+
+  updateImgReceived(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 1;
+    this.bookingService.completedImgReceived(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].imageReceived) {
+        case 0: {
+          this.imageReceived = true;
+          this.imageReceivedTrue = false;
+          this.imageReceivedProgress = false;
+          break;
+        }
+        case 1: {
+          this.imageReceived = false;
+          this.imageReceivedTrue = true;
+          this.imageReceivedProgress = false;
+          break;
+        }
+        case 2: {
+          this.imageReceived = false;
+          this.imageReceivedTrue = false;
+          this.imageReceivedProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.titleToSent =  'Image received';
+    this.sendNotification(mobileNumber, orderId , this.titleToSent);
+  }
+
+  updateImgEditing(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 1;
+    this.bookingService.completedImgEditing(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].editing) {
+        case 0: {
+          this.imageEditing = true;
+          this.imageEditingTrue = false;
+          this.imageEditingProgress = false;
+          break;
+        }
+        case 1: {
+          this.imageEditing = false;
+          this.imageEditingProgress = false;
+          this.imageEditingTrue = true;
+          break;
+        }
+        case 2: {
+          this.imageEditing = false;
+          this.imageEditingProgress = true;
+          this.imageEditingTrue = false;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.titleToSent =  'Image Editing';
+    this.sendNotification(mobileNumber, orderId , this.titleToSent);
+  }
+  updateImgDelivery(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 1;
+    this.bookingService.completedImgDelivery(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].imageDelivery) {
+        case 0: {
+          this.delivery = true;
+          this.deliveryTrue = false;
+          this.deliveryProgress = false;
+          break;
+        }
+        case 1: {
+          this.deliveryTrue = true;
+          this.delivery = false;
+          this.deliveryProgress = false;
+          break;
+        }
+        case 2: {
+          this.deliveryTrue = false;
+          this.delivery = false;
+          this.deliveryProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.titleToSent =  'Image Delivery';
+    this.sendNotification(mobileNumber, orderId , this.titleToSent);
+  }
+  updatePayment(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 1;
+    this.bookingService.completedImgPayment(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].payment) {
+        case 0: {
+          this.payment = true;
+          this.paymentTrue = false;
+          this.paymentProgress = false;
+          break;
+        }
+        case 1: {
+          this.payment = false;
+          this.paymentProgress = false;
+          this.paymentTrue = true;
+          break;
+        }
+        case 2: {
+          this.payment = false;
+          this.paymentProgress = true;
+          this.paymentTrue = false;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.titleToSent =  'Image Editing Payment';
+    this.sendNotification(mobileNumber, orderId , this.titleToSent);
+  }
+    sendNotification(mobileNumber, orderId , title) {
+      this.title = title;
+      this.notificationBody = 'Booking Id ' + orderId + 'completed';
+      this.notificationModel = new Notification(
+        mobileNumber,
+        this.title,
+      this.notificationBody
+      );
+      this.bookingService.pushNotification(this.notificationModel).subscribe(data => {
+        console.log(data);
+      });
+    }
 }

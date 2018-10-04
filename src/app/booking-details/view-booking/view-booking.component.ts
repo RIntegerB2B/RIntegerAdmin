@@ -209,6 +209,9 @@ editingBooking() {
     this.router.navigate(['/update', no]);
     if (bookingtype === 'Editing Booking') {
       this.router.navigate(['/editingstatus', no]);
+    } else
+    if (bookingtype === 'Creative Booking') {
+      this.router.navigate(['/creativestatus', no]);
     }
   }
 

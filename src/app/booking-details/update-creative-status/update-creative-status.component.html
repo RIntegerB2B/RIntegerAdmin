@@ -1,0 +1,222 @@
+<form class="pageBox" [formGroup]="updateCreativeStatusForm" style="padding-top:60px" novalidate>
+  <div class="container-fluid">
+    <a [routerLink]="['/details']">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+    <h1 class="text-center"> Booking Status</h1>
+    <div class="row">
+      <div class="col-md-12  mx-auto">
+
+        <div class="row">
+
+          <div class="col-md-2 form-group">
+            <p style="padding-left:20px">Booking ID </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Mobile number </p>
+          </div>
+          <div class="col-md-2  form-group">
+            <p style="padding-left:20px">Booking Date </p>
+          </div>
+
+          <div *ngIf="confirmed" class="col-md-2  form-group">
+            <p style="padding-left:20px">Update Status</p>
+          </div>
+
+          <div *ngIf="!hide" class="col-md-3  form-group">
+            <p style="padding-left:20px">Update Booking status</p>
+          </div>
+
+        </div>
+        <div class="row" *ngFor="let data of Status">
+          <div class="col-md-2  form-group">
+            <b>
+              <p>{{data.bookingOrderId}} </p>
+            </b>
+          </div>
+
+          <div class="col-md-2  form-group">
+            <p>{{data.mobileNumber}} </p>
+          </div>
+          <div class="col-md-2 form-group">
+            <p>{{data.bookingDate}} </p>
+          </div>
+
+          <div class="col-md-2  form-group">
+            <button class="btn btn-success pull-right btn-sm" (click)="statusView(data.mobileNumber,data._id)">Update</button>
+          </div>
+
+        </div>
+        <div class="text-center">
+          <h1 class="text-center">Order status</h1>
+          <div class="row ">
+            <div class="col-md-4">
+              <p> Material Picked Up</p>
+            </div>
+            <div class="col-md-2" *ngIf="materialPickedUp">
+              <label>Not completed</label>
+            </div>
+            <div class="col-md-2" *ngIf="materialPickedUpTrue">
+              <label> completed</label>
+            </div>
+            <div class="col-md-2" *ngIf="materialPickedUpProgress">
+              <label> Progress</label>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-danger pull-right" (click)="notCompMaterialPickedUp(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Not Completed</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-info pull-right" (click)="progressMaterialPickedUp(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Progress</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-bottom: 10px">
+              <button class="btn btn-success pull-right" (click)="updateMaterialPickedUp(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                <mat-icon>notifications_active</mat-icon> Completed</button>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <p>Shoot Planning </p>
+            </div>
+            <div class="col-md-2" *ngIf="shootPlanning">
+              <label>Not completed</label>
+            </div>
+            <div class="col-md-2" *ngIf="shootPlanningTrue">
+              <label> completed</label>
+            </div>
+            <div class="col-md-2" *ngIf="shootPlanningProgress">
+              <label> Progress</label>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-danger pull-right" (click)="notCompShootPlanning(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Not Completed</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-info pull-right" (click)="progressShootPlanning(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Progress</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-bottom: 10px">
+              <button class="btn btn-success pull-right" (click)="updateShootPlanning(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                <mat-icon>notifications_active</mat-icon> Completed</button>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <p>Shoot</p>
+            </div>
+            <div class="col-md-2" *ngIf="shoot">
+              <label>Not completed</label>
+            </div>
+
+            <div class="col-md-2" *ngIf="shootTrue">
+              <label> completed</label>
+            </div>
+            <div class="col-md-2" *ngIf="shootProgress">
+              <label> Progress</label>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-danger pull-right" (click)="notCompShoot(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Not Completed</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-info pull-right" (click)="progressShoot(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Progress</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-bottom: 10px">
+              <button class="btn btn-success pull-right" (click)="updateShoot(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                <mat-icon>notifications_active</mat-icon> Completed</button>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <p>Post Production Work </p>
+            </div>
+            <div class="col-md-2" *ngIf="postProductionWork">
+              <label>Not completed</label>
+            </div>
+            <div class="col-md-2" *ngIf="postProductionWorkTrue">
+              <label> completed</label>
+            </div>
+            <div class="col-md-2" *ngIf="postProductionWorkProgress">
+              <label> Progress</label>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-danger pull-right" (click)="notCompPostProductionWork(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Not Completed</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-info pull-right" (click)="progressPostProductionWork(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Progress</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-bottom: 10px">
+              <button class="btn btn-success pull-right" (click)="updatePostProductionWork(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                <mat-icon>notifications_active</mat-icon> Completed</button>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <p>Payment</p>
+            </div>
+            <div class="col-md-2" *ngIf="payment">
+              <label>Not completed</label>
+            </div>
+
+            <div class="col-md-2" *ngIf="paymentTrue">
+              <label> completed</label>
+            </div>
+            <div class="col-md-2" *ngIf="paymentProgress">
+              <label> Progress</label>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-danger pull-right" (click)="notCompPayment(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Not Completed</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-info pull-right" (click)="progressPayment(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Progress</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-bottom: 20px">
+              <button class="btn btn-success pull-right" (click)="updatePayment(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                <mat-icon>notifications_active</mat-icon> Completed</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <p>Material Return</p>
+            </div>
+            <div class="col-md-2" *ngIf="materialReturn">
+              <label>Not completed</label>
+            </div>
+
+            <div class="col-md-2" *ngIf="materialReturnTrue">
+              <label> completed</label>
+            </div>
+            <div class="col-md-2" *ngIf="materialReturnProgress">
+              <label> Progress</label>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-danger pull-right" (click)="notCompMaterialReturn(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Not Completed</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-right: 50px">
+              <button class="btn btn-info pull-right" (click)="progressMaterialReturn(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                Progress</button>
+            </div>
+            <div *ngFor="let data of Status" style="margin-bottom: 20px">
+              <button class="btn btn-success pull-right" (click)="updateMaterialReturn(updateCreativeStatusForm,data.mobileNumber,data.bookingOrderId)">
+                <mat-icon>notifications_active</mat-icon> Completed</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

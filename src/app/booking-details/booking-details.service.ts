@@ -8,6 +8,7 @@ import { AppSetting } from '../config/appSetting';
 import { BookingDetail } from './view-booking/booking-detail.model';
 import { Notification} from './update-status/notification.model';
 import {EditingStatus} from './update-editing-status/status.model';
+import {CreativeStatus} from './update-creative-status/status.model';
 
 @Injectable({
   providedIn: 'root'
@@ -99,6 +100,13 @@ export class BookingDetailsService {
     const statusUrl = '/status';
     const url: string = this.serviceUrl + addurl + no + statusUrl;
     return this.httpClient.get<EditingStatus>(url);
+
+  }
+  getCreativeStatus(no): Observable<any> {
+    const addurl = 'creativebooking/';
+    const statusUrl = '/status';
+    const url: string = this.serviceUrl + addurl + no + statusUrl;
+    return this.httpClient.get<CreativeStatus>(url);
 
   }
   getStatus(no, id): Observable<any> {
@@ -286,5 +294,117 @@ export class BookingDetailsService {
     const notificationUrl = 'pushnotification';
     const url: string = this.serviceUrl + notificationUrl;
     return this.http.post(url, data);
+  }
+
+  // not completed image editing status
+  imgReceived(no, id, value): Observable<any> {
+    const addurl = 'editing/';
+    const statusUrl = '/received/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<EditingStatus[]>(url);
+
+  }
+
+  imgEditing(no, id, value): Observable<any> {
+    const addurl = 'editing/';
+    const statusUrl = '/imageediting/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<EditingStatus[]>(url);
+  }
+  imgDelivery(no, id, value): Observable<any> {
+    const addurl = 'editing/';
+    const statusUrl = '/imagedelivery/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<EditingStatus[]>(url);
+  }
+  payment(no, id, value): Observable<any> {
+    const addurl = 'editing/';
+    const statusUrl = '/payment/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<EditingStatus[]>(url);
+  }
+
+  // completed image Editing
+  completedImgReceived(no, id, value): Observable<any> {
+    const addurl = 'editing/';
+    const statusUrl = '/receivedcompleted/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<EditingStatus[]>(url);
+
+  }
+  completedImgEditing(no, id, value): Observable<any> {
+    const addurl = 'editing/';
+    const statusUrl = '/editingcompleted/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<EditingStatus[]>(url);
+
+  }
+  completedImgDelivery(no, id, value): Observable<any> {
+    const addurl = 'editing/';
+    const statusUrl = '/deliverycompleted/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<EditingStatus[]>(url);
+
+  }
+  completedImgPayment(no, id, value): Observable<any> {
+    const addurl = 'editing/';
+    const statusUrl = '/paymentcompleted/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<EditingStatus[]>(url);
+
+  }
+
+  // update creative editing
+
+  materialPickedUp(no, id, value): Observable<any> {
+    const addurl = 'creative/';
+    const statusUrl = '/materialreceivedcompleted/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<CreativeStatus[]>(url);
+  }
+
+  shootPlanning(no, id, value): Observable<any> {
+    const addurl = 'creative/';
+    const statusUrl = '/shootplanningcompleted/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<CreativeStatus[]>(url);
+  }
+  shooting(no, id, value): Observable<any> {
+    const addurl = 'creative/';
+    const statusUrl = '/shootcompleted/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<CreativeStatus[]>(url);
+  }
+  postProductionWork(no, id, value): Observable<any> {
+    const addurl = 'creative/';
+    const statusUrl = '/postproductioncompleted/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<CreativeStatus[]>(url);
+  }
+  creativePayment(no, id, value): Observable<any> {
+    const addurl = 'creative/';
+    const statusUrl = '/paymentcompleted/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<CreativeStatus[]>(url);
+  }
+  creativeMaterialReturn(no, id, value): Observable<any> {
+    const addurl = 'creative/';
+    const statusUrl = '/materialReturncompleted/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<CreativeStatus[]>(url);
   }
 }
