@@ -371,7 +371,7 @@ export class UpdateCreativeStatusComponent implements OnInit {
     this.bookingService.postProductionWork(mobileNumber, orderId, this.value).subscribe(data => {
       console.log(data);
       this.Status = data;
-      switch (data[0].shootCompleted) {
+      switch (data[0].postProductionWork) {
         case 0: {
           this.postProductionWork = true;
           this.postProductionWorkTrue = false;
@@ -400,7 +400,7 @@ export class UpdateCreativeStatusComponent implements OnInit {
     this.bookingService.postProductionWork(mobileNumber, orderId, this.value).subscribe(data => {
       console.log(data);
       this.Status = data;
-      switch (data[0].shootCompleted) {
+      switch (data[0].postProductionWork) {
         case 0: {
           this.postProductionWork = true;
           this.postProductionWorkTrue = false;
@@ -538,6 +538,204 @@ export class UpdateCreativeStatusComponent implements OnInit {
       }
     }, error => {
       console.log(error);
+    });
+  }
+  updateMaterialPickedUp(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 1;
+    this.bookingService.completedMaterialPickedUp(mobileNumber, orderId, this.value).subscribe(data => {
+      console.log(data);
+      this.Status = data;
+      switch (data[0].materialPickedUp) {
+        case 0: {
+          this.materialPickedUp = true;
+          this.materialPickedUpTrue = false;
+          this.materialPickedUpProgress = false;
+          break;
+        }
+        case 1: {
+          this.materialPickedUp = false;
+          this.materialPickedUpTrue = true;
+          this.materialPickedUpProgress = false;
+          break;
+        }
+        case 2: {
+          this.materialPickedUp = false;
+          this.materialPickedUpTrue = false;
+          this.materialPickedUpProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.titleToSent =  'Material PickedUp Completed';
+    this.sendNotification(mobileNumber, orderId , this.titleToSent);
+  }
+  updateShootPlanning(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 1;
+    this.bookingService.shootPlanning(mobileNumber, orderId, this.value).subscribe(data => {
+      console.log(data);
+      this.Status = data;
+      switch (data[0].shootPlanning) {
+        case 0: {
+          this.shootPlanning = true;
+          this.shootPlanningTrue = false;
+          this.shootPlanningProgress = false;
+          break;
+        }
+        case 1: {
+          this.shootPlanning = false;
+          this.shootPlanningTrue = true;
+          this.shootPlanningProgress = false;
+          break;
+        }
+        case 2: {
+          this.shootPlanning = false;
+          this.shootPlanningTrue = false;
+          this.shootPlanningProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.titleToSent =  'Shoot Planning Completed';
+    this.sendNotification(mobileNumber, orderId , this.titleToSent);
+  }
+  updateShoot(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 1;
+    this.bookingService.shooting(mobileNumber, orderId, this.value).subscribe(data => {
+      console.log(data);
+      this.Status = data;
+      switch (data[0].shootCompleted) {
+        case 0: {
+          this.shoot = true;
+          this.shootTrue = false;
+          this.shootProgress = false;
+          break;
+        }
+        case 1: {
+          this.shoot = false;
+          this.shootTrue = true;
+          this.shootProgress = false;
+          break;
+        }
+        case 2: {
+          this.shoot = false;
+          this.shootTrue = false;
+          this.shootProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.titleToSent =  'Shooting Completed';
+    this.sendNotification(mobileNumber, orderId , this.titleToSent);
+  }
+  updatePostProductionWork(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 1;
+    this.bookingService.postProductionWork(mobileNumber, orderId, this.value).subscribe(data => {
+      console.log(data);
+      this.Status = data;
+      switch (data[0].postProductionWork) {
+        case 0: {
+          this.postProductionWork = true;
+          this.postProductionWorkTrue = false;
+          this.postProductionWorkProgress = false;
+          break;
+        }
+        case 1: {
+          this.postProductionWork = false;
+          this.postProductionWorkTrue = true;
+          this.postProductionWorkProgress = false;
+          break;
+        }
+        case 2: {
+          this.postProductionWork = false;
+          this.postProductionWorkTrue = false;
+          this.postProductionWorkProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.titleToSent =  'Post Production Work Completed';
+    this.sendNotification(mobileNumber, orderId , this.titleToSent);
+  }
+  updatePayment(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 1;
+    this.bookingService.creativePayment(mobileNumber, orderId, this.value).subscribe(data => {
+      console.log(data);
+      this.Status = data;
+      switch (data[0].payment) {
+        case 0: {
+          this.payment = true;
+          this.paymentTrue = false;
+          this.paymentProgress = false;
+          break;
+        }
+        case 1: {
+          this.payment = false;
+          this.paymentTrue = true;
+          this.paymentProgress = false;
+          break;
+        }
+        case 2: {
+          this.payment = false;
+          this.paymentTrue = false;
+          this.paymentProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.titleToSent =  'Payment Completed';
+    this.sendNotification(mobileNumber, orderId , this.titleToSent);
+  }
+  updateMaterialReturn(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 1;
+    this.bookingService.creativeMaterialReturn(mobileNumber, orderId, this.value).subscribe(data => {
+      console.log(data);
+      this.Status = data;
+      switch (data[0].materialReturn) {
+        case 0: {
+          this.materialReturn = true;
+          this.materialReturnTrue = false;
+          this.materialReturnProgress = false;
+          break;
+        }
+        case 1: {
+          this.materialReturn = false;
+          this.materialReturnTrue = true;
+          this.materialReturnProgress = false;
+          break;
+        }
+        case 2: {
+          this.materialReturn = false;
+          this.materialReturnTrue = false;
+          this.materialReturnProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+    this.titleToSent =  'Material Return Completed';
+    this.sendNotification(mobileNumber, orderId , this.titleToSent);
+  }
+  sendNotification(mobileNumber, orderId , title) {
+    this.title = title;
+    this.notificationBody = 'Booking Id ' + orderId + 'completed';
+    this.notificationModel = new Notification(
+      mobileNumber,
+      this.title,
+    this.notificationBody
+    );
+    this.bookingService.pushNotification(this.notificationModel).subscribe(data => {
+      console.log(data);
     });
   }
 }

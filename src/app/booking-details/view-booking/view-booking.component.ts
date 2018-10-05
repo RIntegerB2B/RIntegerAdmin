@@ -212,6 +212,9 @@ editingBooking() {
     } else
     if (bookingtype === 'Creative Booking') {
       this.router.navigate(['/creativestatus', no]);
+    } else
+    if (bookingtype === 'Catalog Booking') {
+      this.router.navigate(['/catalogstatus', no]);
     }
   }
 

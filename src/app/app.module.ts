@@ -40,6 +40,8 @@ import { ViewProfileComponent } from './model-management/view-profile/view-profi
 import { CatalogListingComponent } from './catalog-listing-settings/catalog-listing/catalog-listing.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { UpdateEditingStatusComponent } from './booking-details/update-editing-status/update-editing-status.component';
+import { UpdateCreativeStatusComponent } from './booking-details/update-creative-status/update-creative-status.component';
+import { UpdateCatalogingStatusComponent } from './booking-details/update-cataloging-status/update-cataloging-status.component';
 
 
 
@@ -66,6 +68,8 @@ import { UpdateEditingStatusComponent } from './booking-details/update-editing-s
     CatalogListingComponent,
     SubscribeComponent,
     UpdateEditingStatusComponent,
+    UpdateCreativeStatusComponent,
+    UpdateCatalogingStatusComponent,
   ],
   imports: [
     BrowserModule,

@@ -27,6 +27,7 @@ export class CreativeStatus {
         this.order = order;
         this.materialPickedUp = materialPickedUp;
         this.shootPlanning = shootPlanning;
+        this.shootCompleted = shootCompleted;
         this.postProductionWork = postProductionWork;
         this.payment = payment;
         this.materialReturn = materialReturn;
