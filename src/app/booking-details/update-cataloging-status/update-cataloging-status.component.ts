@@ -208,14 +208,14 @@ export class UpdateCatalogingStatusComponent implements OnInit {
         }
         case 1: {
           this.productOnLive = false;
-          this.productOnLiveTrue = false;
-          this.productOnLiveProgress = true;
+          this.productOnLiveTrue = true;
+          this.productOnLiveProgress = false;
           break;
         }
         case 2: {
           this.productOnLive = false;
-          this.productOnLiveTrue = true;
-          this.productOnLiveProgress = false;
+          this.productOnLiveTrue = false;
+          this.productOnLiveProgress = true;
           break;
         }
       }
@@ -228,14 +228,14 @@ export class UpdateCatalogingStatusComponent implements OnInit {
         }
         case 1: {
           this.inventoryUpdate = false;
-          this.inventoryUpdateTrue = false;
-          this.inventoryUpdateProgress = true;
+          this.inventoryUpdateTrue = true;
+          this.inventoryUpdateProgress = false;
           break;
         }
         case 2: {
           this.inventoryUpdate = false;
-          this.inventoryUpdateTrue = true;
-          this.inventoryUpdateProgress = false;
+          this.inventoryUpdateTrue = false;
+          this.inventoryUpdateProgress = true;
           break;
         }
       }
@@ -958,7 +958,7 @@ export class UpdateCatalogingStatusComponent implements OnInit {
     this.sendNotification(mobileNumber, orderId , this.titleToSent);
   }
   updateInventory(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
-    this.value = 2;
+    this.value = 1;
     this.bookingService.inventoryupdate(mobileNumber, orderId, this.value).subscribe(data => {
       this.Status = data;
       switch (data[0].inventoryUpdation) {
