@@ -42,6 +42,8 @@ import { SubscribeComponent } from './subscribe/subscribe.component';
 import { UpdateEditingStatusComponent } from './booking-details/update-editing-status/update-editing-status.component';
 import { UpdateCreativeStatusComponent } from './booking-details/update-creative-status/update-creative-status.component';
 import { UpdateCatalogingStatusComponent } from './booking-details/update-cataloging-status/update-cataloging-status.component';
+import { UpdateRegistartionStatusComponent } from './booking-details/update-registartion-status/update-registartion-status.component';
+import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
 
 
 
@@ -70,6 +72,8 @@ import { UpdateCatalogingStatusComponent } from './booking-details/update-catalo
     UpdateEditingStatusComponent,
     UpdateCreativeStatusComponent,
     UpdateCatalogingStatusComponent,
+    UpdateRegistartionStatusComponent,
+    UpdateAplusStatusComponent,
   ],
   imports: [
     BrowserModule,

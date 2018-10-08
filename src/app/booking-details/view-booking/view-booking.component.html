@@ -8,6 +8,7 @@
       <button mat-raised-button color="accent"  (click)="marketingBooking()"> New Marketing & Services booking</button>
       <button mat-raised-button color="accent"  (click)="editingBooking()"> New Image Editing booking</button>
       <button mat-raised-button color="accent"  (click)="creativeBooking()"> New Creative shoot booking</button><br>
+      <button mat-raised-button color="accent"  (click)="aplusBooking()"> New A+ Cataloging booking</button>
       <button mat-raised-button color="accent"   (click)="approved()"><mat-icon>check_box</mat-icon>Confirmed booking</button>
       <button mat-raised-button color="accent"     (click)="cancelled()"> 	<mat-icon>clear</mat-icon>Cancelled booking</button>
       <div class="row"  style="margin-left: 30px;"*ngIf="showDirectBooking">
@@ -344,6 +345,44 @@
 
     </div>
   </div>
+  <div class="row"  style="margin-left: 30px;"*ngIf="showAplusBooking">
+    <h1>Cataloging & Listing Booking Details</h1>
+  <div class="col-md-12  mx-auto">
+
+    <div class="row">
+
+      <div class="col-md-2 form-group">
+        <p style="padding-left:20px">Name </p>
+      </div>
+      <div class="col-md-2  form-group">
+        <p style="padding-left:20px">Mobile number </p>
+      </div>
+      
+     
+      <div  class="col-md-2  form-group">
+          <p style="padding-left:20px">Update Booking status</p>
+        </div>
+    </div>
+    <div class="row" *ngFor="let data of bookingDetail">
+      <div class="col-md-2  form-group">
+        <p>{{data.name}} </p>
+      </div>
+
+      <div class="col-md-2  form-group">
+        <p>{{data.mobileNumber}} </p>
+      </div>
+      
+      <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+      
+
+      <div class="col-md-2  form-group">
+          <button class="btn btn-success pull-right btn-sm" style="margin-right:10px" value="Confirm"  (click)="giveApproval(data.mobileNumber,data.bookingOrderId)">Confirm </button>
+          <button   class="btn btn-danger pull-right btn-sm" (click)="cancel(data.mobileNumber,data.bookingOrderId)" >Cancel </button>
+      </div>
+    </div>
+
+  </div>
+</div>
       <div class="row cancel"  *ngIf="showCancelBooking">
           <h1>Cancelled booking</h1>
         <div class="col-md-12  mx-auto">

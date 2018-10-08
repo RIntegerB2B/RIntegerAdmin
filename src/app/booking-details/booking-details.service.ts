@@ -10,6 +10,8 @@ import { Notification} from './update-status/notification.model';
 import {EditingStatus} from './update-editing-status/status.model';
 import {CreativeStatus} from './update-creative-status/status.model';
 import {CatalogingStatus} from './update-cataloging-status/status.model';
+import {RegistrationStatus} from './update-registartion-status/status.model';
+import {AplusCatalogingStatus} from './update-aplus-status/status.model';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +79,12 @@ export class BookingDetailsService {
     return this.httpClient.get<BookingDetail[]>(url);
 
   }
+  getAplusBookingDetails(): Observable<any> {
+    const addurl = 'aplusbooking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<BookingDetail[]>(url);
+
+  }
   getCreativeBookingDetails(): Observable<any> {
     const addurl = 'creativebooking/';
     const url: string = this.serviceUrl + addurl;
@@ -115,6 +123,18 @@ export class BookingDetailsService {
     const statusUrl = '/status';
     const url: string = this.serviceUrl + addurl + no + statusUrl;
     return this.httpClient.get<CatalogingStatus>(url);
+  }
+  getRegistrationStatus(no): Observable<any> {
+    const addurl = 'registrationbooking/';
+    const statusUrl = '/status';
+    const url: string = this.serviceUrl + addurl + no + statusUrl;
+    return this.httpClient.get<RegistrationStatus>(url);
+  }
+  getAplusStatus(no): Observable<any> {
+    const addurl = 'aplusbooking/';
+    const statusUrl = '/status';
+    const url: string = this.serviceUrl + addurl + no + statusUrl;
+    return this.httpClient.get<AplusCatalogingStatus>(url);
   }
   getStatus(no, id): Observable<any> {
     const addurl = 'booking/';
@@ -522,5 +542,147 @@ completedCreativeMaterialReturn(no, id, value): Observable<any> {
     const updateUrl = '/value/';
     const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
     return this.httpClient.get<CatalogingStatus[]>(url);
+  }
+  // not completed image editing status
+  documentsReq(no, id, value): Observable<any> {
+    const addurl = 'registration/';
+    const statusUrl = '/documents/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+return this.httpClient.get<RegistrationStatus[]>(url);
+  }
+  accountCreation(no, id, value): Observable<any> {
+    const addurl = 'registration/';
+    const statusUrl = '/accountcreation/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<RegistrationStatus[]>(url);
+  }
+  brandRegistration(no, id, value): Observable<any> {
+    const addurl = 'registration/';
+    const statusUrl = '/brandregistration/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<RegistrationStatus[]>(url);
+  }
+  verification(no, id, value): Observable<any> {
+    const addurl = 'registration/';
+    const statusUrl = '/verification/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<RegistrationStatus[]>(url);
+  }
+  activation(no, id, value): Observable<any> {
+    const addurl = 'registration/';
+    const statusUrl = '/activation/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<RegistrationStatus[]>(url);
+  }
+  detailsForward(no, id, value): Observable<any> {
+    const addurl = 'registration/';
+    const statusUrl = '/details/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<RegistrationStatus[]>(url);
+  }
+  registrationPayment(no, id, value): Observable<any> {
+    const addurl = 'registration/';
+    const statusUrl = '/payment/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<RegistrationStatus[]>(url);
+  }
+  // update aplus
+  aplusMaterialPickUp(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/materialpickup/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusShootPlanning(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/shootplanning/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusShootCompleted(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/shoot/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusPostProduction(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/postproduction/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusProductDetails(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/productdetails/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusLoginCredentials(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/logincredentials/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusCatalogContent(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/content/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusCatalogUpload(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/catalogupload/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusQcProcessing(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/qcprocessing/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusInventory(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/inventory/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusProductLive(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/productlive/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusPayment(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/payment/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
+  }
+  aplusMaterialReturn(no, id, value): Observable<any> {
+    const addurl = 'aplus/';
+    const statusUrl = '/materialreturn/';
+    const updateUrl = '/value/';
+    const url: string = this.serviceUrl + addurl + no + statusUrl + id + updateUrl + value;
+    return this.httpClient.get<AplusCatalogingStatus[]>(url);
   }
 }

@@ -18,6 +18,8 @@ import { SubscribeComponent } from './subscribe/subscribe.component';
 import { UpdateEditingStatusComponent } from './booking-details/update-editing-status/update-editing-status.component';
 import { UpdateCreativeStatusComponent } from './booking-details/update-creative-status/update-creative-status.component';
 import { UpdateCatalogingStatusComponent } from './booking-details/update-cataloging-status/update-cataloging-status.component';
+import { UpdateRegistartionStatusComponent } from './booking-details/update-registartion-status/update-registartion-status.component';
+import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
 
 
 const routes: Routes = [
@@ -29,6 +31,8 @@ const routes: Routes = [
     { path: 'editingstatus/:no', component: UpdateEditingStatusComponent},
     { path: 'creativestatus/:no', component: UpdateCreativeStatusComponent},
     { path: 'catalogstatus/:no', component: UpdateCatalogingStatusComponent },
+    { path: 'registrationstatus/:no', component: UpdateRegistartionStatusComponent },
+    { path: 'aplusstatus/:no', component: UpdateAplusStatusComponent },
     { path: 'registration', component: RegistrationComponent},
     { path: 'serviceproviderapproval', component: ApprovalComponent},
     { path: 'agency', component: ViewAgencyComponent},
