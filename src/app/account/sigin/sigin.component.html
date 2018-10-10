@@ -28,7 +28,11 @@
           <div *ngIf="showError">
             Account not yet approved
           </div>
-          <button mat-raised-button color="accent" type="submit" [disabled]='!onAdminForm.valid'>Sign In</button>
+          <div *ngIf="showPasswordError">
+           Username or password is Incorrect
+          </div>
+          <button mat-raised-button color="accent" type="submit" [disabled]='!onAdminForm.valid'>Sign In</button> <br>
+          <a [routerLink]="['/registration']" >Register</a>
         </div>
       </div>
     </div>

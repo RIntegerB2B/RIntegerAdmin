@@ -20,33 +20,34 @@ import { UpdateCreativeStatusComponent } from './booking-details/update-creative
 import { UpdateCatalogingStatusComponent } from './booking-details/update-cataloging-status/update-cataloging-status.component';
 import { UpdateRegistartionStatusComponent } from './booking-details/update-registartion-status/update-registartion-status.component';
 import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
+import {AuthGuard} from './shared/auth.service';
 
 
 const routes: Routes = [
     { path: 'welcome', component: WelcomeComponent},
-    { path: 'subscribe', component: SubscribeComponent},
+    { path: 'subscribe', canActivate: [AuthGuard], component: SubscribeComponent},
     { path: 'signIn', component: SiginComponent },
-    { path: 'details', component: ViewBookingComponent },
-    { path: 'update/:no', component: UpdateStatusComponent },
-    { path: 'editingstatus/:no', component: UpdateEditingStatusComponent},
-    { path: 'creativestatus/:no', component: UpdateCreativeStatusComponent},
-    { path: 'catalogstatus/:no', component: UpdateCatalogingStatusComponent },
-    { path: 'registrationstatus/:no', component: UpdateRegistartionStatusComponent },
-    { path: 'aplusstatus/:no', component: UpdateAplusStatusComponent },
+    { path: 'details', canActivate: [AuthGuard], component: ViewBookingComponent },
+    { path: 'update/:no', canActivate: [AuthGuard], component: UpdateStatusComponent },
+    { path: 'editingstatus/:no', canActivate: [AuthGuard], component: UpdateEditingStatusComponent},
+    { path: 'creativestatus/:no', canActivate: [AuthGuard], component: UpdateCreativeStatusComponent},
+    { path: 'catalogstatus/:no', canActivate: [AuthGuard], component: UpdateCatalogingStatusComponent },
+    { path: 'registrationstatus/:no',  canActivate: [AuthGuard], component: UpdateRegistartionStatusComponent },
+    { path: 'aplusstatus/:no', canActivate: [AuthGuard], component: UpdateAplusStatusComponent },
     { path: 'registration', component: RegistrationComponent},
-    { path: 'serviceproviderapproval', component: ApprovalComponent},
-    { path: 'agency', component: ViewAgencyComponent},
-    { path: 'navheader/:data', component: NavHeaderComponent},
-    { path: 'models', component: ViewModelComponent},
-    { path: 'model', component: AddModelComponent},
-    { path: 'model/:id', component: AddModelComponent},
-    { path: 'pushNotification', component: PushNotificationComponent},
-    { path: 'model/:id/name/:name', component: ImageManagementComponent},
-    { path: 'customers', component: CustomerDetailsComponent},
-    { path: 'profile/:name/images/:id', component: ViewProfileComponent},
-    { path: 'catalog', component: CatalogListingComponent},
-    { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-    { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
+    { path: 'serviceproviderapproval', canActivate: [AuthGuard], component: ApprovalComponent},
+    { path: 'agency', canActivate: [AuthGuard], component: ViewAgencyComponent},
+    { path: 'navheader/:data', canActivate: [AuthGuard], component: NavHeaderComponent},
+    { path: 'models', canActivate: [AuthGuard], component:  ViewModelComponent},
+    { path: 'model', canActivate: [AuthGuard], component: AddModelComponent},
+    { path: 'model/:id', canActivate: [AuthGuard], component: AddModelComponent},
+    { path: 'pushNotification', canActivate: [AuthGuard], component: PushNotificationComponent},
+    { path: 'model/:id/name/:name', canActivate: [AuthGuard], component: ImageManagementComponent},
+    { path: 'customers', canActivate: [AuthGuard], component: CustomerDetailsComponent},
+    { path: 'profile/:name/images/:id', canActivate: [AuthGuard], component: ViewProfileComponent},
+    { path: 'catalog', canActivate: [AuthGuard], component: CatalogListingComponent},
+    { path: '', redirectTo: 'signIn', pathMatch: 'full' },
+    { path: '**', redirectTo: 'signIn', pathMatch: 'full' },
 ];
 
 export const Routing = RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'});

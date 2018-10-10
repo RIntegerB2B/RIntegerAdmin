@@ -23,6 +23,7 @@ export class SiginComponent implements OnInit {
   data;
   spModel: User;
   userDetail: Users;
+  showPasswordError: boolean;
   constructor(private fb: FormBuilder, private router: Router, private localStorageService: LocalStorageService,
     private accountService: AccountService, private modelService: ModelManagementService) { }
 
@@ -43,11 +44,15 @@ export class SiginComponent implements OnInit {
     );
 
     this.accountService.signIn(this.userModel).subscribe(data => {
-      console.log(data.role);
-      if (data.role === 'admin') { // admin
-        this.router.navigate(['/navheader', false]);
-      } else if (data.role !== 'admin') { // sp
-    this.spValidate(name, pwd);
+      console.log(data);
+      if (data === null) {
+        this.showPasswordError = true;
+      } else {
+        if (data.role === 'admin') { // admin
+          this.router.navigate(['/navheader', false]);
+        } else if (data.role !== 'admin') { // sp
+      this.spValidate(name, pwd);
+        }
       }
     }, error => {
       console.log(error);
@@ -60,6 +65,8 @@ spValidate(name, pwd) { // check user is approved or not
     if (data === null) {
 this.showError = true;
     } else  {
+      this.showPasswordError = false;
+      sessionStorage.setItem('isLoggedIn', 'true');
       this.localStorageService.store('userName', data.userName);
       this.localStorageService.store('ID', data.Id);
 this.status = false;

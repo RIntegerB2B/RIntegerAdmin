@@ -44,6 +44,7 @@ import { UpdateCreativeStatusComponent } from './booking-details/update-creative
 import { UpdateCatalogingStatusComponent } from './booking-details/update-cataloging-status/update-cataloging-status.component';
 import { UpdateRegistartionStatusComponent } from './booking-details/update-registartion-status/update-registartion-status.component';
 import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
+import {AuthGuard} from './shared/auth.service';
 
 
 
@@ -89,7 +90,7 @@ import { UpdateAplusStatusComponent } from './booking-details/update-aplus-statu
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AccountService, BookingDetailsService,
-     ModelManagementService, LocalStorageService, NotificationService],
+     ModelManagementService, LocalStorageService, NotificationService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
