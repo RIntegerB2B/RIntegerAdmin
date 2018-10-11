@@ -45,6 +45,27 @@ import { UpdateCatalogingStatusComponent } from './booking-details/update-catalo
 import { UpdateRegistartionStatusComponent } from './booking-details/update-registartion-status/update-registartion-status.component';
 import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
 import {AuthGuard} from './shared/auth.service';
+import {NavheaderService} from './nav-header/nav-header.service';
+import {
+  MatSidenavModule,
+  MatListModule,
+  MatTooltipModule,
+  MatOptionModule,
+  MatMenuModule,
+  MatSnackBarModule,
+  MatGridListModule,
+  MatRadioModule,
+  MatCheckboxModule,
+  MatProgressSpinnerModule,
+  MatExpansionModule,
+  MatRippleModule,
+  MatDialogModule,
+  MatChipsModule,
+  MatStepperModule,
+} from '@angular/material';
+import { ProductBookingComponent , ProductBookingViewComponent } from './production-mgmt/product-booking/product-booking.component';
+import { ModelBookingComponent } from './production-mgmt/model-booking/model-booking.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 
@@ -75,6 +96,9 @@ import {AuthGuard} from './shared/auth.service';
     UpdateCatalogingStatusComponent,
     UpdateRegistartionStatusComponent,
     UpdateAplusStatusComponent,
+    ProductBookingComponent,
+    ModelBookingComponent,
+    ProductBookingViewComponent
   ],
   imports: [
     BrowserModule,
@@ -87,10 +111,27 @@ import {AuthGuard} from './shared/auth.service';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule,
+    MatSidenavModule,
+  MatListModule,
+  MatTooltipModule,
+  MatOptionModule,
+  MatMenuModule,
+  MatSnackBarModule,
+  MatGridListModule,
+  MatRadioModule,
+  MatCheckboxModule,
+  MatProgressSpinnerModule,
+  MatExpansionModule,
+  MatRippleModule,
+  MatDialogModule,
+  MatChipsModule,
+  MatStepperModule,
+  MatBadgeModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AccountService, BookingDetailsService,
+  providers: [AccountService, BookingDetailsService, NavheaderService,
      ModelManagementService, LocalStorageService, NotificationService, AuthGuard],
+     entryComponents: [ProductBookingViewComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

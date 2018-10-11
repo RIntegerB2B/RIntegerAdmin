@@ -21,6 +21,7 @@ import { UpdateCatalogingStatusComponent } from './booking-details/update-catalo
 import { UpdateRegistartionStatusComponent } from './booking-details/update-registartion-status/update-registartion-status.component';
 import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
 import {AuthGuard} from './shared/auth.service';
+import {ProductBookingComponent} from './production-mgmt/product-booking/product-booking.component';
 
 
 const routes: Routes = [
@@ -37,7 +38,7 @@ const routes: Routes = [
     { path: 'registration', component: RegistrationComponent},
     { path: 'serviceproviderapproval', canActivate: [AuthGuard], component: ApprovalComponent},
     { path: 'agency', canActivate: [AuthGuard], component: ViewAgencyComponent},
-    { path: 'navheader/:data', canActivate: [AuthGuard], component: NavHeaderComponent},
+    { path: 'navheader', canActivate: [AuthGuard], component: NavHeaderComponent},
     { path: 'models', canActivate: [AuthGuard], component:  ViewModelComponent},
     { path: 'model', canActivate: [AuthGuard], component: AddModelComponent},
     { path: 'model/:id', canActivate: [AuthGuard], component: AddModelComponent},
@@ -46,6 +47,7 @@ const routes: Routes = [
     { path: 'customers', canActivate: [AuthGuard], component: CustomerDetailsComponent},
     { path: 'profile/:name/images/:id', canActivate: [AuthGuard], component: ViewProfileComponent},
     { path: 'catalog', canActivate: [AuthGuard], component: CatalogListingComponent},
+    { path: 'productbooking', canActivate: [AuthGuard], component: ProductBookingComponent},
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
     { path: '**', redirectTo: 'signIn', pathMatch: 'full' },
 ];

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { BookingDetailsService } from '../../booking-details/booking-details.service';
 import { BookingDetail } from './booking-detail.model';
+import {NavheaderService} from '../../nav-header/nav-header.service';
 @Component({
   selector: 'app-view-booking',
   templateUrl: './view-booking.component.html',
@@ -22,12 +23,14 @@ export class ViewBookingComponent implements OnInit {
   showCreativeBooking: Boolean;
   showEditingBooking: Boolean;
   showAplusBooking: boolean;
-  constructor(private fb: FormBuilder, private router: Router, private bookingService: BookingDetailsService) { }
+  constructor(private fb: FormBuilder, private router: Router, private bookingService: BookingDetailsService,
+    private navheaderService: NavheaderService) { }
 
   ngOnInit() {
     //  this.getDetails();
     this.createForm();
     this.approved();
+    this.navheaderService.makeMenuTransparent();
   }
   createForm() {
     this.viewBookingForm = this.fb.group({
