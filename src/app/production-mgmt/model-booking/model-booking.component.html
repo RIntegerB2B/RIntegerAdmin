@@ -1,3 +1,430 @@
-<p>
-  model-booking works!
-</p>
+<form [formGroup]="viewModelBookingForm" style="padding-top:60px" novalidate>
+    <div class="container-fluid">
+      <div class="col-md-12 form-group">
+        <div class="row">
+          <div class="col-md-3 form-group">
+            <button mat-raised-button color="accent" matBadge={{bookingCount}} matBadgePosition="after" matBadgeColor="primary" (click)="newBookings()">
+            New booking</button>
+          </div>
+          <div class="col-md-3 form-group">
+            <button mat-raised-button color="accent" matBadge={{confirmCount}} (click)="confirmedBookings()">
+              <mat-icon>check_box</mat-icon>Confirmed booking</button>
+          </div>
+          <div class="col-md-3 form-group">
+            <button mat-raised-button color="accent"  matBadge={{cancelCount}} (click)="cancelledBookings()"  >
+              <mat-icon>clear</mat-icon>Cancelled booking</button>
+          </div>
+  
+          <div class="col-md-3 form-group">
+    <button mat-raised-button color="accent"  matBadge={{completedCount}} (click)="completedOrders()"> 
+              Completed orders</button>
+          </div>
+        </div>
+      </div> 
+     
+      <div class="row" style="margin-left: 30px;" *ngIf="showNewBooking"> 
+        <h1>Direct Booking Details</h1>
+  
+        <div class="col-md-12 form-group">
+        <div class="row">
+         <div  class="col-md-7">
+          <div class="row">
+  
+            <div class="col-md-3 form-group">
+              <p >Booking Order ID</p>
+            </div>
+  
+            <div class="col-md-2 form-group">
+              <p >Mobile number </p>
+            </div>
+  
+            <div class="col-md-2 form-group">
+              <p >Name </p>
+            </div>
+  
+  
+            <div class="col-md-3  form-group">
+              <p >Email ID </p>
+            </div>
+           
+            <div class="col-md-2 form-group">
+                <p >Location</p>
+              </div>
+         </div>
+          
+          </div>
+          <div class="col-md-5">
+              <div class="row">
+                  <div class="col-md-2  form-group">
+                    <p >Booking Date </p>
+                  </div>
+                  <div class="col-md-2 form-group">
+                      <p >View</p>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <p >Approve</p>
+                      </div>
+                      <div class="col-md-2 form-group">
+                          <p >Cancel</p>
+                        </div>
+                      </div>
+  
+          </div>
+  
+          <div class="row" *ngIf="showMessage">
+            <p>No results found</p>
+                </div>
+                <div  class="col-md-7  form-group">
+                  <div class="row" *ngFor="let data of bookingDetail">
+  
+                    <div class="col-md-3 form-group">
+                      <p>{{data.bookingOrderId}} </p>
+                    </div>
+          
+          
+                    <div class="col-md-2  form-group">
+                      <p>{{data.mobileNumber}} </p>
+                    </div>
+          
+                    <div class="col-md-2  form-group">
+                      <p>{{data.name}} </p>
+                    </div>
+                    <div class="col-md-3  form-group">
+                      <p>{{data.emailId}} </p>
+                    </div>
+                    <div class="col-md-2  form-group">
+                      <p>{{data.location}} </p>
+                    </div>
+          
+                   
+          
+                  </div>
+                </div>
+                <div  class="col-md-5 form-group">
+                    <div class="row" *ngFor="let data of bookingDetail">
+                        <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+                        <div class="col-md-2  form-group">
+                            <p>{{data.bookingDate}} </p>
+                          </div>
+                  <div class="col-md-2  form-group">
+                    <button mat-button matSuffix mat-icon-button (click)="viewDetails(no.value)">
+                      <mat-icon color="primary">remove_red_eye</mat-icon>
+                    </button>
+                  </div>
+                  <div class="col-md-2  form-group">
+                      <button mat-button matSuffix mat-icon-button (click)="giveApproval(data._id, data.bookingOrderId)">
+                        <mat-icon color="primary">check_box</mat-icon>
+                      </button>
+                    </div>
+                    <div class="col-md-2  form-group">
+                        <button mat-button matSuffix mat-icon-button (click)="cancelNewBooking(data._id, data.bookingOrderId)">
+                          <mat-icon color="primary">clear</mat-icon>
+                        </button>
+                      </div>
+                </div>
+         </div>
+        </div>
+      </div>
+      </div>
+  
+      <div class="row" style="margin-left: 30px;" *ngIf="showConfirmBooking"> 
+        <h1>Confirmed Booking Details</h1>
+        <div class="col-md-12 form-group">
+            <div class="row">
+             <div  class="col-md-7">
+              <div class="row">
+      
+                <div class="col-md-3 form-group">
+                  <p >Booking Order ID</p>
+                </div>
+      
+                <div class="col-md-2 form-group">
+                  <p >Mobile number </p>
+                </div>
+      
+                <div class="col-md-2 form-group">
+                  <p >Name </p>
+                </div>
+      
+      
+                <div class="col-md-3  form-group">
+                  <p >Email ID </p>
+                </div>
+               
+                <div class="col-md-2 form-group">
+                    <p >Location</p>
+                  </div>
+             </div>
+              
+              </div>
+              <div class="col-md-5">
+                  <div class="row">
+                      <div class="col-md-4  form-group">
+                        <p >Booking Date </p>
+                      </div>
+                      <div class="col-md-2 form-group">
+                          <p >View</p>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <p >Update Status</p>
+                          </div>
+                          <div class="col-md-2 form-group">
+                              <p >Cancel</p>
+                            </div>
+                          </div>
+      
+              </div>
+      
+              <div class="row" *ngIf="showMessage">
+                <p>No results found</p>
+                    </div>
+                    <div  class="col-md-7  form-group">
+                      <div class="row" *ngFor="let data of bookingDetail">
+      
+                        <div class="col-md-3 form-group">
+                          <p>{{data.bookingOrderId}} </p>
+                        </div>
+              
+              
+                        <div class="col-md-2  form-group">
+                          <p>{{data.mobileNumber}} </p>
+                        </div>
+              
+                        <div class="col-md-2  form-group">
+                          <p>{{data.name}} </p>
+                        </div>
+                        <div class="col-md-3  form-group">
+                          <p>{{data.emailId}} </p>
+                        </div>
+                        <div class="col-md-2  form-group">
+                          <p>{{data.location}} </p>
+                        </div>
+              
+                       
+              
+                      </div>
+                    </div>
+                    <div  class="col-md-5 form-group">
+                        <div class="row" *ngFor="let data of bookingDetail">
+                            <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+                            <div class="col-md-4 form-group">
+                                <p>{{data.bookingDate}} </p>
+                              </div>
+                      <div class="col-md-2  form-group">
+                        <button mat-button matSuffix mat-icon-button (click)="viewDetails(no.value, true)">
+                          <mat-icon color="primary">remove_red_eye</mat-icon>
+                        </button>
+                      </div>
+                      <div class="col-md-2  form-group">
+                          <button mat-button matSuffix mat-icon-button (click)="updateStatus(data.bookingOrderId)">
+                            <mat-icon color="primary">create</mat-icon>
+                          </button>
+                        </div>
+                        <div class="col-md-2  form-group">
+                            <button mat-button matSuffix mat-icon-button (click)="cancelBooking(data._id, data.bookingOrderId)">
+                              <mat-icon color="primary">clear</mat-icon>
+                            </button>
+                          </div>
+                    </div>
+             </div>
+            </div>
+          </div>
+      </div>
+  
+      <div class="row" style="margin-left: 30px;" *ngIf="showCancelBooking"> 
+          <h1>Cancelled Booking Details</h1>
+    
+          <div class="col-md-12 form-group">
+          <div class="row">
+           <div  class="col-md-7">
+            <div class="row">
+    
+              <div class="col-md-3 form-group">
+                <p >Booking Order ID</p>
+              </div>
+    
+              <div class="col-md-2 form-group">
+                <p >Mobile number </p>
+              </div>
+    
+              <div class="col-md-2 form-group">
+                <p >Name </p>
+              </div>
+    
+    
+              <div class="col-md-3  form-group">
+                <p >Email ID </p>
+              </div>
+             
+              <div class="col-md-2 form-group">
+                  <p >Location</p>
+                </div>
+           </div>
+            
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-3  form-group">
+                      <p >Booking Date </p>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <p >View</p>
+                      </div>
+                      <div class="col-md-3 form-group">
+                          <p >Approve</p>
+                        </div>
+                       
+                        </div>
+    
+            </div>
+    
+            <div class="row" *ngIf="showMessage">
+              <p>No results found</p>
+                  </div>
+                  <div  class="col-md-7  form-group">
+                    <div class="row" *ngFor="let data of bookingDetail">
+    
+                      <div class="col-md-3 form-group">
+                        <p>{{data.bookingOrderId}} </p>
+                      </div>
+            
+            
+                      <div class="col-md-2  form-group">
+                        <p>{{data.mobileNumber}} </p>
+                      </div>
+            
+                      <div class="col-md-2  form-group">
+                        <p>{{data.name}} </p>
+                      </div>
+                      <div class="col-md-3  form-group">
+                        <p>{{data.emailId}} </p>
+                      </div>
+                      <div class="col-md-2  form-group">
+                        <p>{{data.location}} </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div  class="col-md-5 form-group">
+                      <div class="row" *ngFor="let data of bookingDetail">
+                          <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+                          <div class="col-md-3  form-group">
+                              <p>{{data.bookingDate}} </p>
+                            </div>
+                    <div class="col-md-3  form-group">
+                      <button mat-button matSuffix mat-icon-button (click)="viewDetails(no.value)">
+                        <mat-icon color="primary">remove_red_eye</mat-icon>
+                      </button>
+                    </div>
+                    
+                    <div class="col-md-3  form-group">
+                        <button mat-button matSuffix mat-icon-button (click)="cancelledBookingApproval(data._id, data.bookingOrderId)">
+                          <mat-icon color="primary">check_box</mat-icon>
+                        </button>
+                      </div>
+                    
+                  </div>
+           </div>
+          </div>
+        </div>
+        </div>
+    
+        <div class="row" style="margin-left: 30px;" *ngIf="showCompletedOrders"> 
+            <h1>Completed Order Details</h1>
+      
+            <div class="col-md-12 form-group">
+            <div class="row">
+             <div  class="col-md-7">
+              <div class="row">
+      
+                <div class="col-md-3 form-group">
+                  <p >Booking Order ID</p>
+                </div>
+      
+                <div class="col-md-2 form-group">
+                  <p >Mobile number </p>
+                </div>
+      
+                <div class="col-md-2 form-group">
+                  <p >Name </p>
+                </div>
+      
+      
+                <div class="col-md-3  form-group">
+                  <p >Email ID </p>
+                </div>
+               
+                <div class="col-md-2 form-group">
+                    <p >Location</p>
+                  </div>
+             </div>
+              
+              </div>
+              <div class="col-md-5">
+                  <div class="row">
+                      <div class="col-md-3  form-group">
+                        <p >Booking Date </p>
+                      </div>
+                      <div class="col-md-3 form-group">
+                          <p >View</p>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <p >Update Status</p>
+                          </div>
+                         
+                          </div>
+      
+              </div>
+      
+              <div class="row" *ngIf="showMessage">
+                <p>No results found</p>
+                    </div>
+                    <div  class="col-md-7  form-group">
+                      <div class="row" *ngFor="let data of bookingDetail">
+      
+                        <div class="col-md-3 form-group">
+                          <p>{{data.bookingOrderId}} </p>
+                        </div>
+              
+              
+                        <div class="col-md-2  form-group">
+                          <p>{{data.mobileNumber}} </p>
+                        </div>
+              
+                        <div class="col-md-2  form-group">
+                          <p>{{data.name}} </p>
+                        </div>
+                        <div class="col-md-3  form-group">
+                          <p>{{data.emailId}} </p>
+                        </div>
+                        <div class="col-md-2  form-group">
+                          <p>{{data.location}} </p>
+                        </div>
+              
+                       
+              
+                      </div>
+                    </div>
+                    <div  class="col-md-5 form-group">
+                        <div class="row" *ngFor="let data of bookingDetail">
+                            <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no/>
+                            <div class="col-md-3  form-group">
+                                <p>{{data.bookingDate}} </p>
+                              </div>
+                      <div class="col-md-3  form-group">
+                        <button mat-button matSuffix mat-icon-button (click)="viewDetails(no.value)">
+                          <mat-icon color="primary">remove_red_eye</mat-icon>
+                        </button>
+                      </div>
+                      <div class="col-md-3  form-group">
+                          <button mat-button matSuffix mat-icon-button (click)="updateStatus(data.bookingOrderId)">
+                            <mat-icon color="primary">create</mat-icon>
+                          </button>
+                        </div>
+                      
+                    </div>
+             </div>
+            </div>
+          </div>
+          </div>
+    </div>
+  </form>

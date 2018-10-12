@@ -1,4 +1,5 @@
 export class Booking {
+    _id: string;
     bookingOrderId: string;
     bookingStatus: number;
     mobileNumber: number;

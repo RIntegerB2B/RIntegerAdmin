@@ -1,0 +1,80 @@
+<form [formGroup]="viewEditingDetailsForm" style="padding-top:60px" novalidate>
+    <div>
+      <button mat-icon-button (click)="cancel()">
+        <mat-icon color="primary">clear</mat-icon>
+      </button>
+    </div>
+    <div class="container-fluid">
+      <div class="row" style="margin-left: 30px;">
+        <h1>Image Editing Details</h1>
+  
+        <div class="col-md-12 form-group">
+          <div class="row">
+            <div class="col-md-7">
+              <div class="row">
+  
+                <div class="col-md-3 form-group">
+                  <p><b>Booking Order ID</b></p>
+                </div>
+  
+                <div class="col-md-3 form-group">
+                  <p><b>Product Type</b></p>
+                </div>
+                <div class="col-md-3 form-group">
+                  <p><b>Model Type</b></p>
+                </div>
+                <div class="col-md-3 form-group">
+                  <p><b>Shoot Type</b></p>
+                </div>
+  
+              </div>
+  
+            </div>
+            <div class="col-md-5">
+              <div class="row">
+                
+                <div class="col-md-4  form-group">
+                  <p><b>Product Description</b> </p>
+                </div>
+                <div class="col-md-4  form-group">
+                  <p><b>Quantity Description </b></p>
+                </div>
+              </div>
+  
+            </div>
+  
+  
+            <div class="col-md-7  form-group">
+              <div class="row" *ngFor="let data of bookingData">
+  
+                <div class="col-md-3 form-group">
+                  <p>{{data.bookingOrderId}} </p>
+                </div>
+  
+                <div class="col-md-3 form-group">
+                  <p>{{data.productType}} </p>
+                </div>
+  
+                <div class="col-md-3 form-group">
+                  <p>{{data.modelType}} </p>
+                </div>
+                <div class="col-md-3 form-group">
+                  <p>{{data.shootType}} </p>
+                </div>
+  
+  
+              </div>
+            </div>
+            <div class="col-md-5 form-group">
+              <div class="row" *ngFor="let data of bookingData">
+                <input class="form-control" hidden type="text" formControlName="no" [value]="data.bookingOrderId" #no />
+                <div class="col-md-3  form-group">
+                  <p>{{data.productDescription}} </p>
+                </div>
+                <div class="col-md-3  form-group">
+                  <p>{{data.quantityDescription}} </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

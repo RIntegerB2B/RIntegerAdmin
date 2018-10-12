@@ -29,7 +29,7 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit  {
   fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
   constructor(private fb: FormBuilder, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
     private localStorageService: LocalStorageService, private router: Router,
-    private activatedRoute: ActivatedRoute , private navheaderService: NavheaderService) {
+    private activatedRoute: ActivatedRoute , public navheaderService: NavheaderService) {
       this.mobileQuery = media.matchMedia(' (min-width: 900px)');
       this._mobileQueryListener = () => changeDetectorRef.detectChanges();
       this.mobileQuery.addListener(this._mobileQueryListener);

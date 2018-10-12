@@ -22,6 +22,8 @@ import { UpdateRegistartionStatusComponent } from './booking-details/update-regi
 import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
 import {AuthGuard} from './shared/auth.service';
 import {ProductBookingComponent} from './production-mgmt/product-booking/product-booking.component';
+import {ModelBookingComponent} from './production-mgmt/model-booking/model-booking.component';
+import {ImageEditingBookingComponent} from './production-mgmt/image-editing-booking/image-editing-booking.component';
 
 
 const routes: Routes = [
@@ -48,6 +50,8 @@ const routes: Routes = [
     { path: 'profile/:name/images/:id', canActivate: [AuthGuard], component: ViewProfileComponent},
     { path: 'catalog', canActivate: [AuthGuard], component: CatalogListingComponent},
     { path: 'productbooking', canActivate: [AuthGuard], component: ProductBookingComponent},
+    { path: 'modelbooking', canActivate: [AuthGuard], component: ModelBookingComponent},
+    { path: 'imageeditingbooking', canActivate: [AuthGuard], component: ImageEditingBookingComponent},
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
     { path: '**', redirectTo: 'signIn', pathMatch: 'full' },
 ];

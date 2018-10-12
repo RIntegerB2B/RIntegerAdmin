@@ -55,6 +55,7 @@ export class UpdateStatusComponent implements OnInit {
     private activatedRoute: ActivatedRoute, private bookingService: BookingDetailsService,
     private swUpdate: SwUpdate, private swPush: SwPush) {
     this.no = this.activatedRoute.snapshot.paramMap.get('no');
+    console.log(this.no);
   }
 
   ngOnInit() {
@@ -235,42 +236,36 @@ export class UpdateStatusComponent implements OnInit {
   // not completed
   notCompMaterialPick(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.notCompletedMaterialStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
   }
   notCompShooting(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.notCompletedShootingStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
   }
   notCompImagedEditing(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.notCompImagedEditingStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
   }
   notCompDelivery(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.notCompDeliveryStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
   }
   notCompMaterialReturn(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.notCompMaterialReturnStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
   }
   notCompPayment(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.notCompPaymentStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
@@ -278,42 +273,36 @@ export class UpdateStatusComponent implements OnInit {
    // progress
   progressMateialPick(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.progressMaterialStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
   }
   progressShooting(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.progressShootingStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
   }
   progressImagedEditing(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.progressImagedEditingStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
   }
   progressDelivery(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.progressDeliveryStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
   }
   progressPayment(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.progressPaymentStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
   }
   progressMaterialReturn(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.progressMaterialReturnStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
@@ -322,7 +311,6 @@ export class UpdateStatusComponent implements OnInit {
   updateMateialPick(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     console.log(this.no);
     this.bookingService.updateMaterialStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
@@ -331,7 +319,6 @@ this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
   }
   updateShooting(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.updateShootingStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
@@ -341,7 +328,6 @@ this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
 
   updateImagedEditing(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.imageEditingStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
@@ -350,7 +336,6 @@ this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
   }
   updateDelivery(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.delieveryStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
@@ -359,7 +344,6 @@ this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
   }
   updatePayment(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.paymentStatus(mobileNumber, id).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
@@ -368,7 +352,6 @@ this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
   }
   updateMaterialReturn(updateStatusForm: FormGroup, mobileNumber: any, id: any, orderId: any) {
     this.bookingService.materialReturnStatus(mobileNumber, orderId).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });
@@ -384,7 +367,6 @@ this.sendNotification(mobileNumber, id , orderId , this.titleToSent);
     this.notificationBody
     );
     this.bookingService.pushNotification(this.notificationModel).subscribe(data => {
-      console.log(data);
     });
   }
 }

@@ -64,8 +64,10 @@ import {
   MatStepperModule,
 } from '@angular/material';
 import { ProductBookingComponent , ProductBookingViewComponent } from './production-mgmt/product-booking/product-booking.component';
-import { ModelBookingComponent } from './production-mgmt/model-booking/model-booking.component';
+import { ModelBookingComponent , ModelBookingViewComponent} from './production-mgmt/model-booking/model-booking.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import { ImageEditingBookingComponent ,
+  EditingBookingViewComponent} from './production-mgmt/image-editing-booking/image-editing-booking.component';
 
 
 
@@ -98,7 +100,10 @@ import {MatBadgeModule} from '@angular/material/badge';
     UpdateAplusStatusComponent,
     ProductBookingComponent,
     ModelBookingComponent,
-    ProductBookingViewComponent
+    ProductBookingViewComponent,
+    ModelBookingViewComponent,
+    ImageEditingBookingComponent,
+    EditingBookingViewComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +136,7 @@ import {MatBadgeModule} from '@angular/material/badge';
   ],
   providers: [AccountService, BookingDetailsService, NavheaderService,
      ModelManagementService, LocalStorageService, NotificationService, AuthGuard],
-     entryComponents: [ProductBookingViewComponent],
+     entryComponents: [ProductBookingViewComponent, ModelBookingViewComponent, EditingBookingViewComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
