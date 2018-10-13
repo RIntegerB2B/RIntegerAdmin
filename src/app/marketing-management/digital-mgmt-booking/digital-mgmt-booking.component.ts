@@ -4,22 +4,21 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 
-import { ProductionMgmtService } from '../production-mgmt.service';
 import {Booking} from '../../shared/bookings.model';
 import {NavheaderService} from '../../nav-header/nav-header.service';
-import {ImageEditing} from './editing-booking.model';
-import { ModelBooking } from '../model-booking/model-booking.model';
+import {DigitalMgmtBooking} from './digital-mgmt.model';
+import {MarketingMgmtService} from '../marketing-mgmt.service';
 
 @Component({
-  selector: 'app-image-editing-booking',
-  templateUrl: './image-editing-booking.component.html',
-  styleUrls: ['./image-editing-booking.component.css']
+  selector: 'app-digital-mgmt-booking',
+  templateUrl: './digital-mgmt-booking.component.html',
+  styleUrls: ['./digital-mgmt-booking.component.css']
 })
-export class ImageEditingBookingComponent implements OnInit {
+export class DigitalMgmtBookingComponent implements OnInit {
   bookingDetail: Booking[] = [];
-  viewEditingBookingForm: FormGroup;
+  viewDigitalMgmtBookingForm: FormGroup;
   bookingCount;
-  EditingModel: ImageEditing;
+  DigitalModel: DigitalMgmtBooking;
   showNewBooking: boolean;
   showConfirmBooking: boolean;
   showCancelBooking: boolean;
@@ -30,17 +29,16 @@ export class ImageEditingBookingComponent implements OnInit {
   completedCount;
   message;
   action;
-  constructor(private fb: FormBuilder, private router: Router, private productionService: ProductionMgmtService,
+  constructor(private fb: FormBuilder, private router: Router, private marketMgmtService: MarketingMgmtService,
     private navheaderService: NavheaderService, private snackBar: MatSnackBar, private dialog: MatDialog) {
      }
-
      ngOnInit() {
       this.navheaderService.makeMenuTransparent();
       this.createForm();
       this.confirmedBookings();
     }
     createForm() {
-      this.viewEditingBookingForm = this.fb.group({
+      this.viewDigitalMgmtBookingForm = this.fb.group({
         no: ['']
       });
     }
@@ -49,7 +47,7 @@ export class ImageEditingBookingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = false;
     this.showCompletedOrders = false;
-    this.productionService.getEditingBooking().subscribe(data => {
+    this.marketMgmtService.getDigitalMarketingBooking().subscribe(data => {
       console.log(data);
       this.bookingCount = data.length;
       if (data.length === 0) {
@@ -67,7 +65,7 @@ export class ImageEditingBookingComponent implements OnInit {
     this.showConfirmBooking = true;
     this.showCancelBooking = false;
     this.showCompletedOrders = false;
-    this.productionService.approvedEditingBooking().subscribe(data => {
+    this.marketMgmtService.approvedDigitalMarketingBooking().subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
       if (data.length === 0) {
@@ -84,7 +82,7 @@ export class ImageEditingBookingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = true;
     this.showCompletedOrders = false;
-    this.productionService.cancelledEditingBooking().subscribe(data => {
+    this.marketMgmtService.cancelledDigitalMarketingBooking().subscribe(data => {
       this.bookingDetail = data;
       this.cancelCount = data.length;
       if (data.length === 0) {
@@ -101,7 +99,7 @@ export class ImageEditingBookingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = false;
     this.showCompletedOrders = true;
-    this.productionService.completedEditingBooking().subscribe(data => {
+    this.marketMgmtService.completedDigitalMarketingBooking().subscribe(data => {
       this.bookingDetail = data;
       this.completedCount = data.length;
       if (data.length === 0) {
@@ -119,7 +117,7 @@ export class ImageEditingBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.editingBookingApproval( id).subscribe(data => {
+    this.marketMgmtService.digitalMarketingBookingApproval( id).subscribe(data => {
       this.bookingDetail = data;
       this.bookingCount = data.length;
     }, error => {
@@ -132,7 +130,7 @@ export class ImageEditingBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.approvalForCancelledEditingBooking( id).subscribe(data => {
+    this.marketMgmtService.approvalForCancelledDigitalMarketingBooking( id).subscribe(data => {
       this.bookingDetail = data;
       this.cancelCount = data.length;
     }, error => {
@@ -145,7 +143,7 @@ export class ImageEditingBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.editingBookingCancel( id).subscribe(data => {
+    this.marketMgmtService.digitalMarketingBookinCancel( id).subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
     }, error => {
@@ -158,7 +156,7 @@ export class ImageEditingBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.newEditingBookingCancel( id).subscribe(data => {
+    this.marketMgmtService.newDigitalMarketingBookingCancel( id).subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
     }, error => {
@@ -166,15 +164,15 @@ export class ImageEditingBookingComponent implements OnInit {
     });
   }
   updateStatus(no) {
-    this.router.navigate(['/editingstatus', no]);
+    this.router.navigate(['/creativestatus', no]);
   }
   viewDetails(no) {
-    this.productionService.getEditingBookingDetails(no).subscribe(sample => {
-      this.EditingModel = sample;
+    this.marketMgmtService.getDigitalMarketingBookingDetails(no).subscribe(sample => {
+      this.DigitalModel = sample;
     }, error => {
       console.log(error);
     });
-    const dialogRef = this.dialog.open(EditingBookingViewComponent, {
+    const dialogRef = this.dialog.open(DigitalMgmtViewComponent, {
       width: '1020px',
       disableClose: true,
       data: no
@@ -183,13 +181,13 @@ export class ImageEditingBookingComponent implements OnInit {
   }
   }
   @Component({
-    templateUrl: './image-editing-view.component.html'
+    templateUrl: './digital-mgmt-view.component.html'
   })
-  export class EditingBookingViewComponent implements OnInit {
-    viewEditingDetailsForm: FormGroup;
-    EditingModel: ImageEditing;
-    constructor(private fb: FormBuilder, private productionService: ProductionMgmtService,
-       public dialogRef: MatDialogRef<EditingBookingViewComponent>,
+  export class DigitalMgmtViewComponent implements OnInit {
+    viewDigitalMgmtDetailsForm: FormGroup;
+    DigitalModel: DigitalMgmtBooking;
+    constructor(private fb: FormBuilder, private marketMgmtService: MarketingMgmtService,
+       public dialogRef: MatDialogRef<DigitalMgmtViewComponent>,
        @Inject(MAT_DIALOG_DATA) public data) {
          console.log(data);
     }
@@ -201,14 +199,13 @@ export class ImageEditingBookingComponent implements OnInit {
       this.viewEditingBookingDetails();
     }
     createViewForm() {
-      this.viewEditingDetailsForm = this.fb.group({
+      this.viewDigitalMgmtDetailsForm = this.fb.group({
         no: ['']
       });
     }
     viewEditingBookingDetails() {
-      this.productionService.getEditingBookingDetails(this.data).subscribe(sample => {
-        this.EditingModel = sample;
-        console.log(this.EditingModel);
+      this.marketMgmtService.getDigitalMarketingBookingDetails(this.data).subscribe(sample => {
+        this.DigitalModel = sample;
       }, error => {
         console.log(error);
       });

@@ -48,6 +48,7 @@ export class UpdateEditingStatusComponent implements OnInit {
     private activatedRoute: ActivatedRoute, private bookingService: BookingDetailsService,
     private swUpdate: SwUpdate, private swPush: SwPush) {
     this.no = this.activatedRoute.snapshot.paramMap.get('no');
+    console.log(this.no);
   }
 
   ngOnInit() {

@@ -6,6 +6,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { AppSetting } from '../config/appSetting';
 import {Booking} from '../shared/bookings.model';
 import {BookingDetail} from './product-booking/product-booking.model';
+import {ImageEditing} from './image-editing-booking/editing-booking.model';
+import {Creative} from './creative-booking/creative.model';
 
 @Injectable({
   providedIn: 'root'
@@ -138,6 +140,14 @@ getModelBookingDetails(no): Observable<any> {
 
 // editing booking
 
+
+getEditingBookingDetails(no): Observable<any> {
+  const addurl = 'editingbooking/';
+  const viewUrl = '/view';
+  const url: string = this.serviceUrl + addurl + no + viewUrl;
+  return this.httpClient.get<ImageEditing[]>(url);
+}
+
 getEditingBooking(): Observable<any> {
   const addurl = 'editingbooking/';
   const url: string = this.serviceUrl + addurl;
@@ -155,7 +165,7 @@ cancelledEditingBooking(): Observable<any> {
 }
 
 completedEditingBooking(): Observable<any> {
-  const addurl = 'completedproductbooking/';
+  const addurl = 'completededitingbooking/';
   const url: string = this.serviceUrl + addurl  ;
   return this.httpClient.get<Booking[]>(url);
 }
@@ -172,5 +182,80 @@ newEditingBookingCancel(id) {
   const statusUrl = '/cancel/';
   const url: string = this.serviceUrl + addurl + id + statusUrl   ;
   return this.httpClient.get<Booking[]>(url);
+}
+
+editingBookingCancel(id) {
+  const addurl = 'editingbooking/';
+  const statusUrl = '/cancel/';
+  const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+  return this.httpClient.get<Booking[]>(url);
+}
+
+approvalForCancelledEditingBooking(id) {
+  const addurl = 'cancellededitingbooking/';
+  const statusUrl = '/approve/';
+  const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+  return this.httpClient.get<Booking[]>(url);
+}
+ // creative booking
+
+ getCreativeBooking(): Observable<any> {
+  const addurl = 'creativebooking/';
+  const url: string = this.serviceUrl + addurl;
+  return this.httpClient.get<Booking[]>(url);
+}
+
+creativeBookingApproval(id) {
+  const addurl = 'creativebooking/';
+  const statusUrl = '/approve/';
+  const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+  return this.httpClient.get<Booking[]>(url);
+}
+approvedCreativeBooking(): Observable<any> {
+  const addurl = 'approvededcreativebooking/';
+  const url: string = this.serviceUrl + addurl  ;
+  return this.httpClient.get<Booking[]>(url);
+
+}
+completedCreativeBooking(): Observable<any> {
+  const addurl = 'completedcreativebooking/';
+  const url: string = this.serviceUrl + addurl  ;
+  return this.httpClient.get<Booking[]>(url);
+
+}
+cancelledCreativeBooking(): Observable<any> {
+  const addurl = 'cancelledcreativebooking/';
+  const url: string = this.serviceUrl + addurl  ;
+  return this.httpClient.get<Booking[]>(url);
+}
+
+newCreativeBookingCancel(id) {
+  const addurl = 'newcreativebooking/';
+  const statusUrl = '/cancel/';
+  const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+  return this.httpClient.get<Booking[]>(url);
+}
+
+creativeBookingCancel(id) {
+  const addurl = 'creativebooking/';
+  const statusUrl = '/cancel/';
+  const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+  return this.httpClient.get<Booking[]>(url);
+}
+
+
+approvalForCancelledCreativeBooking(id) {
+  const addurl = 'cancelledcreativebooking/';
+  const statusUrl = '/approve/';
+  const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+  return this.httpClient.get<Booking[]>(url);
+}
+
+
+getCreativeBookingDetails(no): Observable<any> {
+  const addurl = 'creativebooking/';
+  const viewUrl = '/view';
+  const url: string = this.serviceUrl + addurl + no + viewUrl;
+  return this.httpClient.get<Creative[]>(url);
 }
 }

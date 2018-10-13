@@ -68,6 +68,11 @@ import { ModelBookingComponent , ModelBookingViewComponent} from './production-m
 import {MatBadgeModule} from '@angular/material/badge';
 import { ImageEditingBookingComponent ,
   EditingBookingViewComponent} from './production-mgmt/image-editing-booking/image-editing-booking.component';
+import { CreativeBookingComponent, CreativeBookingViewComponent  } from './production-mgmt/creative-booking/creative-booking.component';
+import { RegistrationSetupBookingComponent,
+  RegistrationBookingViewComponent } from './marketing-management/registration-setup-booking/registration-setup-booking.component';
+import { DigitalMgmtBookingComponent,
+  DigitalMgmtViewComponent } from './marketing-management/digital-mgmt-booking/digital-mgmt-booking.component';
 
 
 
@@ -103,7 +108,13 @@ import { ImageEditingBookingComponent ,
     ProductBookingViewComponent,
     ModelBookingViewComponent,
     ImageEditingBookingComponent,
-    EditingBookingViewComponent
+    EditingBookingViewComponent,
+    CreativeBookingComponent,
+    CreativeBookingViewComponent,
+    RegistrationSetupBookingComponent,
+    RegistrationBookingViewComponent,
+    DigitalMgmtBookingComponent,
+    DigitalMgmtViewComponent
   ],
   imports: [
     BrowserModule,
@@ -136,7 +147,8 @@ import { ImageEditingBookingComponent ,
   ],
   providers: [AccountService, BookingDetailsService, NavheaderService,
      ModelManagementService, LocalStorageService, NotificationService, AuthGuard],
-     entryComponents: [ProductBookingViewComponent, ModelBookingViewComponent, EditingBookingViewComponent],
+     entryComponents: [ProductBookingViewComponent, ModelBookingViewComponent, EditingBookingViewComponent,
+      CreativeBookingViewComponent, RegistrationBookingViewComponent, DigitalMgmtViewComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

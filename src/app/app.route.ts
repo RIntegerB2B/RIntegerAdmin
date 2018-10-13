@@ -24,7 +24,11 @@ import {AuthGuard} from './shared/auth.service';
 import {ProductBookingComponent} from './production-mgmt/product-booking/product-booking.component';
 import {ModelBookingComponent} from './production-mgmt/model-booking/model-booking.component';
 import {ImageEditingBookingComponent} from './production-mgmt/image-editing-booking/image-editing-booking.component';
-
+import { CreativeBookingComponent } from './production-mgmt/creative-booking/creative-booking.component';
+import {RegistrationBookingViewComponent,
+     RegistrationSetupBookingComponent} from './marketing-management/registration-setup-booking/registration-setup-booking.component';
+import {DigitalMgmtBookingComponent,
+     DigitalMgmtViewComponent} from './marketing-management/digital-mgmt-booking/digital-mgmt-booking.component';
 
 const routes: Routes = [
     { path: 'welcome', component: WelcomeComponent},
@@ -52,6 +56,9 @@ const routes: Routes = [
     { path: 'productbooking', canActivate: [AuthGuard], component: ProductBookingComponent},
     { path: 'modelbooking', canActivate: [AuthGuard], component: ModelBookingComponent},
     { path: 'imageeditingbooking', canActivate: [AuthGuard], component: ImageEditingBookingComponent},
+    { path: 'creativebooking', canActivate: [AuthGuard], component: CreativeBookingComponent},
+    { path: 'registrationbooking', canActivate: [AuthGuard], component: RegistrationSetupBookingComponent},
+    { path: 'digitalmgmtbooking', canActivate: [AuthGuard], component: DigitalMgmtBookingComponent},
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
     { path: '**', redirectTo: 'signIn', pathMatch: 'full' },
 ];

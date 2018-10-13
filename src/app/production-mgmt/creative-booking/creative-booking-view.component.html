@@ -1,4 +1,4 @@
-<form [formGroup]="viewEditingDetailsForm" style="padding-top:60px" novalidate>
+<form [formGroup]="viewCreativeDetailsForm" style="padding-top:60px" novalidate>
     <div>
       <button mat-icon-button (click)="cancel()">
         <mat-icon color="primary">clear</mat-icon>
@@ -6,11 +6,11 @@
     </div>
     <div class="container-fluid">
       <div class="row" style="margin-left: 30px;">
-        <h1>Image Editing Details</h1>
+        <h1>Creative Booking Details</h1>
   
         <div class="col-md-12 form-group">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-9">
               <div class="row">
   
                 <div class="col-md-3 form-group">
@@ -18,14 +18,29 @@
                 </div>
   
                 <div class="col-md-3 form-group">
-                  <p><b>Image Description</b></p>
+                  <p><b>Product Description</b></p>
                 </div>
                 <div class="col-md-3 form-group">
                   <p><b>Quantity Description</b></p>
                 </div>
                 <div class="col-md-3 form-group">
-                  <p><b>Image Requirements</b></p>
+                  <p><b>Purpose of Shoot</b></p>
                 </div>
+  
+              </div>
+  
+            </div>
+            <div class="col-md-3">
+              <div class="row">
+  
+                <div class="col-md-6 form-group">
+                  <p><b>Shoot Type</b></p>
+                </div>
+  
+                <div class="col-md-6 form-group">
+                  <p><b>Video Shoot</b></p>
+                </div>
+                
   
               </div>
   
@@ -33,26 +48,41 @@
            
   
   
-            <div class="col-md-12  form-group">
-              <div class="row" *ngFor="let data of EditingModel">
+            <div class="col-md-9  form-group">
+              <div class="row" *ngFor="let data of creativeModel">
   
                 <div class="col-md-3 form-group">
                   <p>{{data.bookingOrderId}} </p>
                 </div>
   
                 <div class="col-md-3 form-group">
-                  <p>{{data.imageDescription}} </p>
+                  <p>{{data.productDescription}} </p>
                 </div>
   
                 <div class="col-md-3 form-group">
                   <p>{{data.quantityDescription}} </p>
                 </div>
                 <div class="col-md-3 form-group">
-                  <p>{{data.imageRequirements}} </p>
+                  <p>{{data.shootPurpose}} </p>
                 </div>
   
   
               </div>
+            </div>
+            <div class="col-md-3">
+              <div class="row"  *ngFor="let data of creativeModel">
+  
+                <div class="col-md-6 form-group">
+                  <p>{{data.shootType}} </p>
+                </div>
+                
+                <div class="col-md-6 form-group">
+                  <p>{{data.isVideoShoot}} </p>
+                </div>
+                
+  
+              </div>
+  
             </div>
             
           </div>
