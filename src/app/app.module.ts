@@ -73,6 +73,9 @@ import { RegistrationSetupBookingComponent,
   RegistrationBookingViewComponent } from './marketing-management/registration-setup-booking/registration-setup-booking.component';
 import { DigitalMgmtBookingComponent,
   DigitalMgmtViewComponent } from './marketing-management/digital-mgmt-booking/digital-mgmt-booking.component';
+import { MonthlyPlanComponent } from './digital-management/monthly-plan/monthly-plan.component';
+import { MarketingServicesComponent } from './marketing-management/marketing-services/marketing-services.component';
+import { AplusCatalogingComponent } from './marketing-management/aplus-cataloging/aplus-cataloging.component';
 
 
 
@@ -114,7 +117,10 @@ import { DigitalMgmtBookingComponent,
     RegistrationSetupBookingComponent,
     RegistrationBookingViewComponent,
     DigitalMgmtBookingComponent,
-    DigitalMgmtViewComponent
+    DigitalMgmtViewComponent,
+    MonthlyPlanComponent,
+    MarketingServicesComponent,
+    AplusCatalogingComponent
   ],
   imports: [
     BrowserModule,

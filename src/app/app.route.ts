@@ -29,6 +29,7 @@ import {RegistrationBookingViewComponent,
      RegistrationSetupBookingComponent} from './marketing-management/registration-setup-booking/registration-setup-booking.component';
 import {DigitalMgmtBookingComponent,
      DigitalMgmtViewComponent} from './marketing-management/digital-mgmt-booking/digital-mgmt-booking.component';
+     import {MonthlyPlanComponent} from './digital-management/monthly-plan/monthly-plan.component';
 
 const routes: Routes = [
     { path: 'welcome', component: WelcomeComponent},
@@ -59,6 +60,7 @@ const routes: Routes = [
     { path: 'creativebooking', canActivate: [AuthGuard], component: CreativeBookingComponent},
     { path: 'registrationbooking', canActivate: [AuthGuard], component: RegistrationSetupBookingComponent},
     { path: 'digitalmgmtbooking', canActivate: [AuthGuard], component: DigitalMgmtBookingComponent},
+    { path: 'monthlyplan', canActivate: [AuthGuard], component: MonthlyPlanComponent},
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
     { path: '**', redirectTo: 'signIn', pathMatch: 'full' },
 ];
