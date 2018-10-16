@@ -8,6 +8,7 @@ import {Booking} from '../../shared/bookings.model';
 import {NavheaderService} from '../../nav-header/nav-header.service';
 import {Aplus} from './aplus.model';
 import {MarketingMgmtService} from '../marketing-mgmt.service';
+import {Notification} from '../../shared/notification.model';
 
 @Component({
   selector: 'app-aplus-cataloging',
@@ -15,8 +16,12 @@ import {MarketingMgmtService} from '../marketing-mgmt.service';
   styleUrls: ['./aplus-cataloging.component.css']
 })
 export class AplusCatalogingComponent implements OnInit {
+  notificationBody: string;
+  title: any;
+  titleToSent: string;
+  notificationModel: Notification;
   bookingDetail: Booking[] = [];
-  viewRegistrationBookingForm: FormGroup;
+  viewAplusBookingForm: FormGroup;
   bookingCount;
   AplusModel: Aplus;
   showNewBooking: boolean;
@@ -38,7 +43,7 @@ export class AplusCatalogingComponent implements OnInit {
       this.confirmedBookings();
     }
     createForm() {
-      this.viewRegistrationBookingForm = this.fb.group({
+      this.viewAplusBookingForm = this.fb.group({
         no: ['']
       });
     }
@@ -47,8 +52,7 @@ export class AplusCatalogingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = false;
     this.showCompletedOrders = false;
-    this.marketMgmtService.getRegistrationBooking().subscribe(data => {
-      console.log(data);
+    this.marketMgmtService.getAplusBooking().subscribe(data => {
       this.bookingCount = data.length;
       if (data.length === 0) {
   this.showMessage = true;
@@ -65,7 +69,7 @@ export class AplusCatalogingComponent implements OnInit {
     this.showConfirmBooking = true;
     this.showCancelBooking = false;
     this.showCompletedOrders = false;
-    this.marketMgmtService.approvedRegistrationBooking().subscribe(data => {
+    this.marketMgmtService.approvedAplusBooking().subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
       if (data.length === 0) {
@@ -82,7 +86,7 @@ export class AplusCatalogingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = true;
     this.showCompletedOrders = false;
-    this.marketMgmtService.cancelledRegistrationBooking().subscribe(data => {
+    this.marketMgmtService.cancelledAplusBooking().subscribe(data => {
       this.bookingDetail = data;
       this.cancelCount = data.length;
       if (data.length === 0) {
@@ -99,7 +103,7 @@ export class AplusCatalogingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = false;
     this.showCompletedOrders = true;
-    this.marketMgmtService.completedRegistrationBooking().subscribe(data => {
+    this.marketMgmtService.completedAplusBooking().subscribe(data => {
       this.bookingDetail = data;
       this.completedCount = data.length;
       if (data.length === 0) {
@@ -111,31 +115,35 @@ export class AplusCatalogingComponent implements OnInit {
       console.log(error);
     });
   }
-  giveApproval( id, bookingID) {
+  giveApproval( id, bookingID, mobileNumber) {
     this.action = 'Aproved';
     this.message = bookingID ;
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.marketMgmtService.registrationBookingApproval( id).subscribe(data => {
+    this.marketMgmtService.aplusBookingApproval( id).subscribe(data => {
       this.bookingDetail = data;
       this.bookingCount = data.length;
     }, error => {
       console.log(error);
     });
+    this.titleToSent =  'A+ Cataloging  Booking  Confirmed';
+    this.sendNotification(mobileNumber, bookingID, this.titleToSent);
   }
-  cancelledBookingApproval( id, bookingID) {
+  cancelledBookingApproval( id, bookingID, mobileNumber) {
     this.action = 'Aproved';
     this.message = bookingID ;
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.marketMgmtService.approvalForCancelledRegistrationBooking( id).subscribe(data => {
+    this.marketMgmtService.approvalForCancelledAplusBooking( id).subscribe(data => {
       this.bookingDetail = data;
       this.cancelCount = data.length;
     }, error => {
       console.log(error);
     });
+    this.titleToSent =  'A+ Cataloging  Booking  Confirmed';
+    this.sendNotification(mobileNumber, bookingID, this.titleToSent);
   }
   cancelBooking( id, bookingID) {
     this.action = 'Cancelled';
@@ -143,7 +151,7 @@ export class AplusCatalogingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.marketMgmtService.registrationBookingCancel( id).subscribe(data => {
+    this.marketMgmtService.aplusBookingCancel( id).subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
     }, error => {
@@ -156,7 +164,7 @@ export class AplusCatalogingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.marketMgmtService.newRegistrationBookingCancel( id).subscribe(data => {
+    this.marketMgmtService.newAplusBookingCancel( id).subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
     }, error => {
@@ -164,30 +172,41 @@ export class AplusCatalogingComponent implements OnInit {
     });
   }
   updateStatus(no) {
-    this.router.navigate(['/creativestatus', no]);
+    this.router.navigate(['/aplusstatus', no]);
   }
   viewDetails(no) {
-    this.marketMgmtService.getRegistrationBookingDetails(no).subscribe(sample => {
+    this.marketMgmtService.getAplusBookingDetails(no).subscribe(sample => {
       this.AplusModel = sample;
     }, error => {
       console.log(error);
     });
-    /* const dialogRef = this.dialog.open(RegistrationBookingViewComponent, {
+    const dialogRef = this.dialog.open(AplusBookingViewComponent, {
       width: '1020px',
       disableClose: true,
       data: no
     });
-    dialogRef.afterClosed();*/
+    dialogRef.afterClosed();
+  }
+  sendNotification(mobileNumber,  orderId , title) {
+    this.title = title;
+    this.notificationBody = 'Order ' + orderId + 'confirmed';
+    this.notificationModel = new Notification(
+      mobileNumber,
+      this.title,
+    this.notificationBody
+    );
+    this.marketMgmtService.pushNotification(this.notificationModel).subscribe(data => {
+    });
   }
   }
- /*  @Component({
-    templateUrl: './registration-booking-view.component.html'
+  @Component({
+    templateUrl: './aplus-cataloging-view.component.html'
   })
-  export class RegistrationBookingViewComponent implements OnInit {
-    viewRegistrationDetailsForm: FormGroup;
+  export class AplusBookingViewComponent implements OnInit {
+    viewAplusDetailsForm: FormGroup;
     AplusModel: Aplus;
     constructor(private fb: FormBuilder, private marketMgmtService: MarketingMgmtService,
-       public dialogRef: MatDialogRef<RegistrationBookingViewComponent>,
+       public dialogRef: MatDialogRef<AplusBookingViewComponent>,
        @Inject(MAT_DIALOG_DATA) public data) {
          console.log(data);
     }
@@ -196,19 +215,18 @@ export class AplusCatalogingComponent implements OnInit {
     }
     ngOnInit() {
       this.createViewForm();
-      this.viewEditingBookingDetails();
+      this.viewAplusBookingDetails();
     }
     createViewForm() {
-      this.viewRegistrationDetailsForm = this.fb.group({
+      this.viewAplusDetailsForm = this.fb.group({
         no: ['']
       });
     }
-    viewEditingBookingDetails() {
-      this.marketMgmtService.getRegistrationBookingDetails(this.data).subscribe(sample => {
+    viewAplusBookingDetails() {
+      this.marketMgmtService.getAplusBookingDetails(this.data).subscribe(sample => {
         this.AplusModel = sample;
       }, error => {
         console.log(error);
       });
     }
   }
- */

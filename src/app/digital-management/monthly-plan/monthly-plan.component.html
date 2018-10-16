@@ -1,3 +1,94 @@
-<p>
-  monthly-plan works!
-</p>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Monthly plan</ng-template>
+      
+        <div class="col-md-12 form-group">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <input type="month" id="start" name="start" /> 
+                  </div>
+                  <div class="col-md-3 form-group">
+                      <mat-icon>add</mat-icon> Add task
+                  </div>
+                  <div class="col-md-6 form-group">
+                      <div class="form-group">
+                      <mat-form-field class="example-full-width">
+                      <input   matInput placeholder="title" formControlName="title" >
+                      </mat-form-field>
+                      </div>
+                      <div class="form-group">
+                      <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Description" formControlName="Description" >
+                          </mat-form-field>
+                          </div>
+                     </div>
+              </div>
+              </div>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Weekly Plan</ng-template>
+        <div class="col-md-12 form-group">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <input type="month" id="start" name="start" /><br>
+                  </div>
+                  <div class="col-md-3 form-group">
+                      <mat-icon>add</mat-icon> Add task
+                  </div>
+                  <div class="col-md-6 form-group">
+                      <div class="form-group">
+                      <mat-form-field class="example-full-width">
+                      <input   matInput placeholder="title" formControlName="title1" >
+                      </mat-form-field>
+                      </div>
+                      <div class="form-group">
+                      <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Description" formControlName="Description1" >
+                          </mat-form-field>
+                          </div>
+                     </div>
+              </div>
+              </div>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup"> 
+        <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Daily Plan</ng-template>
+      <div class="col-md-12 form-group">
+          <div class="row">
+              <div class="col-md-3 form-group">
+                  <input type="month" id="start" name="start" /><br>
+                </div>
+                <div class="col-md-3 form-group">
+                    <mat-icon>add</mat-icon> Add task
+                </div>
+                <div class="col-md-6 form-group">
+                    <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                    <input   matInput placeholder="title" formControlName="title2" >
+                    </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Description" formControlName="Description2" >
+                        </mat-form-field>
+                        </div>
+                   </div>
+            </div>
+            </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+      </div>
+    </form>
+    </mat-step>
+  </mat-horizontal-stepper>

@@ -1,0 +1,121 @@
+<form [formGroup]="viewCatalogingDetailsForm" style="padding-top:60px" novalidate>
+        <div>
+          <button mat-icon-button (click)="cancel()">
+            <mat-icon color="primary">clear</mat-icon>
+          </button>
+        </div>
+        <div class="container-fluid">
+          <div class="row" style="margin-left: 30px;">
+            <h1>Cataloging / Listing Details </h1>
+      
+            <div class="col-md-12 form-group">
+              <div class="row">
+                <div class="col-md-2">
+                  <div class="row">
+      
+                    <div class="col-md-8 form-group">
+                      <p><b>Booking Order ID</b></p>
+                    </div>
+      
+                    
+                    <div class="col-md-4 form-group">
+                      <p><b>Product Description</b></p>
+                    </div>
+                   
+      
+                  </div>
+      
+                </div>
+                <div class="col-md-5">
+                        <div class="row">
+            
+                          <div class="col-md-4 form-group">
+                            <p><b>Quantity Description</b></p>
+                          </div>
+            
+                          <div class="col-md-4 form-group">
+                            <p><b>B2C National</b></p>
+                          </div>
+                          <div class="col-md-4 form-group">
+                            <p><b>B2C InterNational</b></p>
+                          </div>
+                         
+            
+                        </div>
+            
+                      </div>
+                <div class="col-md-5">
+                  <div class="row">
+                      <div class="col-md-4 form-group">
+                          <p><b>B2B National</b></p>
+                        </div>
+                      <div class="col-md-4 form-group">
+                          <p><b>B2B InterNational</b></p>
+                        </div>
+                    <div class="col-md-4 form-group">
+                      <p><b>Social Media</b></p>
+                    </div>
+      
+      
+                  </div>
+      
+                </div>
+               
+      
+      
+                <div class="col-md-2 form-group">
+                  <div class="row" *ngFor="let data of CatalogModel">
+      
+                    <div class="col-md-8 form-group">
+                      <p>{{data.bookingOrderId}} </p>
+                    </div>
+      
+                    <div class="col-md-4 form-group">
+                      <p>{{data.productDescription}} </p>
+                    </div>
+      
+                   
+      
+      
+                  </div>
+                </div>
+                <div class="col-md-5  form-group">
+                        <div class="row" *ngFor="let data of CatalogModel">
+                                <div class="col-md-4 form-group">
+                                        <p>{{data.quantityDescription}} </p>
+                                      </div>
+                          
+            
+                          <div class="col-md-4 form-group">
+                            <p>{{data.b2cNational}} </p>
+                          </div>
+            
+                          <div class="col-md-4 form-group">
+                            <p>{{data.b2cInterNational}} </p>
+                          </div>
+                         
+            
+            
+                        </div>
+                      </div>
+                <div class="col-md-5">
+                  <div class="row"  *ngFor="let data of CatalogModel">
+      
+                      <div class="col-md-4 form-group">
+                          <p>{{data.b2bNational}} </p>
+                        </div>
+                    <div class="col-md-4 form-group">
+                      <p>{{data.b2bInterNational}} </p>
+                    </div>
+                    
+                    <div class="col-md-4 form-group">
+                      <p>{{data.socialMedia}} </p>
+                    </div>
+                    
+      
+                  </div>
+      
+                </div>
+                
+              </div>
+            </div>

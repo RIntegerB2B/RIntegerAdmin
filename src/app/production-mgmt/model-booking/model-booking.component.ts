@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material';
 
 import { ProductionMgmtService } from '../production-mgmt.service';
 import {Booking} from '../../shared/bookings.model';
+import {Notification} from '../../shared/notification.model';
 import {NavheaderService} from '../../nav-header/nav-header.service';
 import {ModelBooking} from './model-booking.model';
 import { BookingDetail } from '../../booking-details/view-booking/booking-detail.model';
@@ -16,8 +17,12 @@ import { BookingDetail } from '../../booking-details/view-booking/booking-detail
   styleUrls: ['./model-booking.component.css']
 })
 export class ModelBookingComponent implements OnInit {
+  titleToSent: string;
+  title: any;
+  notificationBody: string;
 modelBooking: ModelBooking;
   bookingDetail: Booking[] = [];
+  notificationModel: Notification;
   viewModelBookingForm: FormGroup;
   bookingCount;
   showNewBooking: boolean;
@@ -112,7 +117,7 @@ modelBooking: ModelBooking;
         console.log(error);
       });
     }
-    giveApproval( id, bookingID) {
+    giveApproval( id, bookingID, mobileNumber) {
       this.action = 'Aproved';
       this.message = bookingID ;
       this.snackBar.open(this.message, this.action, {
@@ -124,8 +129,10 @@ modelBooking: ModelBooking;
       }, error => {
         console.log(error);
       });
+      this.titleToSent =  'Model Booking Confirmed';
+      this.sendNotification(mobileNumber, bookingID, this.titleToSent);
     }
-    cancelledBookingApproval( id, bookingID) {
+    cancelledBookingApproval( id, bookingID, mobileNumber) {
       this.action = 'Aproved';
       this.message = bookingID ;
       this.snackBar.open(this.message, this.action, {
@@ -137,6 +144,8 @@ modelBooking: ModelBooking;
       }, error => {
         console.log(error);
       });
+      this.titleToSent =  'Model Booking Confirmed';
+      this.sendNotification(mobileNumber, bookingID, this.titleToSent);
     }
     cancelBooking( id, bookingID) {
       this.action = 'Cancelled';
@@ -179,6 +188,17 @@ modelBooking: ModelBooking;
         data: no
       });
       dialogRef.afterClosed();
+    }
+    sendNotification(mobileNumber,  orderId , title) {
+      this.title = title;
+      this.notificationBody = 'Order ' + orderId + 'confirmed';
+      this.notificationModel = new Notification(
+        mobileNumber,
+        this.title,
+      this.notificationBody
+      );
+      this.productionService.pushNotification(this.notificationModel).subscribe(data => {
+      });
     }
     }
     @Component({

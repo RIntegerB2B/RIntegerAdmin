@@ -1,0 +1,85 @@
+<form [formGroup]="viewAplusDetailsForm" style="padding-top:60px" novalidate>
+    <div>
+      <button mat-icon-button (click)="cancel()">
+        <mat-icon color="primary">clear</mat-icon>
+      </button>
+    </div>
+    <div class="container-fluid">
+      <div class="row" style="margin-left: 30px;">
+        <h1>A+ Cataloging Booking Details</h1>
+  
+        <div class="col-md-12 form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+  
+                <div class="col-md-4 form-group">
+                  <p><b>Booking Order ID</b></p>
+                </div>
+  
+                <div class="col-md-4 form-group">
+                  <p><b>Product Description</b></p>
+                </div>
+                <div class="col-md-4 form-group">
+                  <p><b>Quantity Description</b></p>
+                </div>
+               
+  
+              </div>
+  
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                  <div class="col-md-6 form-group">
+                      <p><b>Video Shoot</b></p>
+                    </div>
+                  <div class="col-md-6 form-group">
+                      <p><b>Photo Shoot</b></p>
+                    </div>
+             
+  
+  
+              </div>
+  
+            </div>
+           
+  
+  
+            <div class="col-md-6  form-group">
+              <div class="row" *ngFor="let data of AplusModel">
+  
+                <div class="col-md-4 form-group">
+                  <p>{{data.bookingOrderId}} </p>
+                </div>
+  
+                <div class="col-md-4 form-group">
+                  <p>{{data.productDescription}} </p>
+                </div>
+  
+                <div class="col-md-4 form-group">
+                  <p>{{data.quantityDescription}} </p>
+                </div>
+               
+  
+  
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row"  *ngFor="let data of AplusModel">
+  
+                  <div class="col-md-6 form-group">
+                      <p>{{data.isVideoShoot}} </p>
+                    </div>
+                <div class="col-md-6 form-group">
+                  <p>{{data.isPhotoShoot}} </p>
+                </div>
+                
+         
+                
+  
+              </div>
+  
+            </div>
+            
+          </div>
+        </div>

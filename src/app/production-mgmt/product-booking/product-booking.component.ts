@@ -8,6 +8,7 @@ import { ProductionMgmtService } from '../production-mgmt.service';
 import { BookingDetail } from './product-booking.model';
 import {Booking} from '../../shared/bookings.model';
 import {NavheaderService} from '../../nav-header/nav-header.service';
+import {Notification} from '../../shared/notification.model';
 
 @Component({
   selector: 'app-product-booking',
@@ -15,8 +16,12 @@ import {NavheaderService} from '../../nav-header/nav-header.service';
   styleUrls: ['./product-booking.component.css']
 })
 export class ProductBookingComponent implements OnInit {
+  notificationBody: string;
+  title: any;
+  titleToSent: string;
   bookingDetail: Booking[] = [];
   viewBookingForm: FormGroup;
+  notificationModel: Notification;
   bookingCount;
   bookingData: BookingDetail;
   showNewBooking: boolean;
@@ -111,7 +116,7 @@ completedOrders() {
     console.log(error);
   });
 }
-giveApproval( id, bookingID) {
+giveApproval( id, bookingID, mobileNumber) {
   this.action = 'Aproved';
   this.message = bookingID ;
   this.snackBar.open(this.message, this.action, {
@@ -123,8 +128,10 @@ giveApproval( id, bookingID) {
   }, error => {
     console.log(error);
   });
+  this.titleToSent =  'Product Shoot Booking Confirmed';
+  this.sendNotification(mobileNumber, bookingID, this.titleToSent);
 }
-cancelledBookingApproval( id, bookingID) {
+cancelledBookingApproval( id, bookingID, mobileNumber) {
   this.action = 'Aproved';
   this.message = bookingID ;
   this.snackBar.open(this.message, this.action, {
@@ -136,6 +143,8 @@ cancelledBookingApproval( id, bookingID) {
   }, error => {
     console.log(error);
   });
+  this.titleToSent =  'Product Shoot Booking Confirmed';
+  this.sendNotification(mobileNumber, bookingID, this.titleToSent);
 }
 cancelBooking( id, bookingID) {
   this.action = 'Cancelled';
@@ -178,6 +187,17 @@ viewDetails(no) {
     data: no
   });
   dialogRef.afterClosed();
+}
+sendNotification(mobileNumber,  orderId , title) {
+  this.title = title;
+  this.notificationBody = 'Order ' + orderId + 'confirmed';
+  this.notificationModel = new Notification(
+    mobileNumber,
+    this.title,
+  this.notificationBody
+  );
+  this.productionService.pushNotification(this.notificationModel).subscribe(data => {
+  });
 }
 }
 

@@ -7,6 +7,10 @@ import { AppSetting } from '../config/appSetting';
 import {Booking} from '../shared/bookings.model';
 
 import {RegistrationBooking} from './registration-setup-booking/registration.model';
+import {DigitalMgmtBooking} from './digital-mgmt-booking/digital-mgmt.model';
+import {Aplus} from './aplus-cataloging/aplus.model';
+import {MarketingServicesBooking} from './marketing-services/marketing-services.model';
+import {Notification} from '../shared/notification.model';
 
 @Injectable({
   providedIn: 'root'
@@ -133,6 +137,173 @@ export class MarketingMgmtService {
     const addurl = 'digitalmarketingbooking/';
     const viewUrl = '/view';
     const url: string = this.serviceUrl + addurl + no + viewUrl;
-    return this.httpClient.get<RegistrationBooking[]>(url);
+    return this.httpClient.get<DigitalMgmtBooking[]>(url);
+  }
+
+  // aplus booking
+  getAplusBooking(): Observable<any> {
+    const addurl = 'aplusbooking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<Booking[]>(url);
+  }
+
+  approvedAplusBooking(): Observable<any> {
+    const addurl = 'approvedaplusbooking/';
+    const url: string = this.serviceUrl + addurl  ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  aplusBookingApproval(id) {
+    const addurl = 'aplusbooking/';
+    const statusUrl = '/approve/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+
+  newAplusBookingCancel(id) {
+    const addurl = 'newaplusbooking/';
+    const statusUrl = '/cancel/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  cancelledAplusBooking(): Observable<any> {
+    const addurl = 'cancelledaplusbooking/';
+    const url: string = this.serviceUrl + addurl  ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  completedAplusBooking(): Observable<any> {
+    const addurl = 'completedaplusbooking/';
+    const url: string = this.serviceUrl + addurl  ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  aplusBookingCancel(id) {
+    const addurl = 'aplusbooking/';
+    const statusUrl = '/cancel/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  approvalForCancelledAplusBooking(id) {
+    const addurl = 'cancelledaplusbooking/';
+    const statusUrl = '/approve/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+
+  getAplusBookingDetails(no): Observable<any> {
+    const addurl = 'aplusbooking/';
+    const viewUrl = '/view';
+    const url: string = this.serviceUrl + addurl + no + viewUrl;
+    return this.httpClient.get<Aplus[]>(url);
+  }
+
+  // cataloging
+  getCatalogingBooking(): Observable<any> {
+    const addurl = 'catalogbooking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  catalogBookingApproval(id) {
+    const addurl = 'catalogbooking/';
+    const statusUrl = '/approve/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+
+  approvedCatalogingBooking(): Observable<any> {
+    const addurl = 'approvedcatalogbooking/';
+    const url: string = this.serviceUrl + addurl  ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  newCatalogBookingCancel(id) {
+    const addurl = 'newcatalogbooking/';
+    const statusUrl = '/cancel/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  cancelledCatalogBooking(): Observable<any> {
+    const addurl = 'cancelledcatalogbooking/';
+    const url: string = this.serviceUrl + addurl  ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  catalogBookingCancel(id) {
+    const addurl = 'catalogbooking/';
+    const statusUrl = '/cancel/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  approvalForCancelledCatalogBooking(id) {
+    const addurl = 'cancelledcatalogbooking/';
+    const statusUrl = '/approve/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  completedCatalogBooking(): Observable<any> {
+    const addurl = 'completedcatalogbooking/';
+    const url: string = this.serviceUrl + addurl  ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  getCatalogBookingDetails(no): Observable<any> {
+    const addurl = 'catalogbooking/';
+    const viewUrl = '/view';
+    const url: string = this.serviceUrl + addurl + no + viewUrl;
+    return this.httpClient.get<Aplus[]>(url);
+  }
+
+  // marketing - services booking
+  getMarketingBooking(): Observable<any> {
+    const addurl = 'marketingbooking/';
+    const url: string = this.serviceUrl + addurl;
+    return this.httpClient.get<Booking[]>(url);
+  }
+
+  marketingBookingApproval(id) {
+    const addurl = 'marketingbooking/';
+    const statusUrl = '/approve/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+
+  approvedMarketingBooking(): Observable<any> {
+    const addurl = 'approvedmarketingbooking/';
+    const url: string = this.serviceUrl + addurl  ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  newMarketingBookingCancel(id) {
+    const addurl = 'newmarketingbooking/';
+    const statusUrl = '/cancel/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  cancelledMarketingBooking(): Observable<any> {
+    const addurl = 'cancelledmarketingbooking/';
+    const url: string = this.serviceUrl + addurl  ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  marketingBookingCancel(id) {
+    const addurl = 'marketingbooking/';
+    const statusUrl = '/cancel/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  approvalForCancelledMarketingBooking(id) {
+    const addurl = 'cancelledmarketingbooking/';
+    const statusUrl = '/approve/';
+    const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  getMarketingBookingDetails(no): Observable<any> {
+    const addurl = 'marketingbooking/';
+    const viewUrl = '/view';
+    const url: string = this.serviceUrl + addurl + no + viewUrl;
+    return this.httpClient.get<MarketingServicesBooking[]>(url);
+  }
+  completedMarketingBooking(): Observable<any> {
+    const addurl = 'completedmarketingbooking/';
+    const url: string = this.serviceUrl + addurl  ;
+    return this.httpClient.get<Booking[]>(url);
+  }
+  pushNotification(data: Notification) {
+    const notificationUrl = 'pushnotification';
+    const url: string = this.serviceUrl + notificationUrl;
+    return this.http.post(url, data);
   }
 }

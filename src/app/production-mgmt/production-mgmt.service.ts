@@ -8,6 +8,7 @@ import {Booking} from '../shared/bookings.model';
 import {BookingDetail} from './product-booking/product-booking.model';
 import {ImageEditing} from './image-editing-booking/editing-booking.model';
 import {Creative} from './creative-booking/creative.model';
+import {Notification} from '../shared/notification.model';
 
 @Injectable({
   providedIn: 'root'
@@ -257,5 +258,11 @@ getCreativeBookingDetails(no): Observable<any> {
   const viewUrl = '/view';
   const url: string = this.serviceUrl + addurl + no + viewUrl;
   return this.httpClient.get<Creative[]>(url);
+}
+
+pushNotification(data: Notification) {
+  const notificationUrl = 'pushnotification';
+  const url: string = this.serviceUrl + notificationUrl;
+  return this.http.post(url, data);
 }
 }

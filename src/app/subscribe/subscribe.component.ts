@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SwPush, SwUpdate } from '@angular/service-worker';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import {Booking} from '../shared/bookings.model';
+import {NavheaderService} from '../nav-header/nav-header.service';
 
 import {Subscribe} from './subscribe.model';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -22,9 +24,11 @@ export class SubscribeComponent implements OnInit {
   subscribeForm: FormGroup;
   readonly VAPID_PUBLIC_KEY = 'BEe66AvTCe_qowysFNV2QsGWzgEDnUWAJq1ytVSXxtwqjcf0bnc6d5USXmZOnIu6glj1BFcj87jIR5eqF2WJFEY';
   constructor(private localStorageService: LocalStorageService, private fb: FormBuilder, private router: Router,
+    private navheaderService: NavheaderService,
     private swUpdate: SwUpdate, private swPush: SwPush, private subscribeService: SubscribeService) { }
 
   ngOnInit() {
+    this.navheaderService.makeMenuTransparent();
     this.createForm();
   }
   createForm() {

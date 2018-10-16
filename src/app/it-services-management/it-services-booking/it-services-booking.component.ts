@@ -4,26 +4,27 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 
-import { ProductionMgmtService } from '../production-mgmt.service';
 import {Booking} from '../../shared/bookings.model';
 import {NavheaderService} from '../../nav-header/nav-header.service';
-import {Creative} from './creative.model';
+import {ITServices} from './it-services.model';
+import {ItServicesService} from '../it-services.service';
 import {Notification} from '../../shared/notification.model';
 
+
 @Component({
-  selector: 'app-creative-booking',
-  templateUrl: './creative-booking.component.html',
-  styleUrls: ['./creative-booking.component.css']
+  selector: 'app-it-services-booking',
+  templateUrl: './it-services-booking.component.html',
+  styleUrls: ['./it-services-booking.component.css']
 })
-export class CreativeBookingComponent implements OnInit {
+export class ItServicesBookingComponent implements OnInit {
   notificationBody: string;
   title: any;
   titleToSent: string;
-  notificationModel: Notification;
   bookingDetail: Booking[] = [];
-  viewCreativeBookingForm: FormGroup;
+  notificationModel: Notification;
+  viewMarketingBookingForm: FormGroup;
   bookingCount;
-  creativeModel: Creative;
+  ITModel: ITServices;
   showNewBooking: boolean;
   showConfirmBooking: boolean;
   showCancelBooking: boolean;
@@ -34,17 +35,16 @@ export class CreativeBookingComponent implements OnInit {
   completedCount;
   message;
   action;
-  constructor(private fb: FormBuilder, private router: Router, private productionService: ProductionMgmtService,
+  constructor(private fb: FormBuilder, private router: Router, private itService: ItServicesService,
     private navheaderService: NavheaderService, private snackBar: MatSnackBar, private dialog: MatDialog) {
      }
-
      ngOnInit() {
       this.navheaderService.makeMenuTransparent();
       this.createForm();
       this.confirmedBookings();
     }
     createForm() {
-      this.viewCreativeBookingForm = this.fb.group({
+      this.viewMarketingBookingForm = this.fb.group({
         no: ['']
       });
     }
@@ -53,8 +53,7 @@ export class CreativeBookingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = false;
     this.showCompletedOrders = false;
-    this.productionService.getCreativeBooking().subscribe(data => {
-      console.log(data);
+    this.itService.getITBooking().subscribe(data => {
       this.bookingCount = data.length;
       if (data.length === 0) {
   this.showMessage = true;
@@ -71,7 +70,7 @@ export class CreativeBookingComponent implements OnInit {
     this.showConfirmBooking = true;
     this.showCancelBooking = false;
     this.showCompletedOrders = false;
-    this.productionService.approvedCreativeBooking().subscribe(data => {
+    this.itService.approvedITBooking().subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
       if (data.length === 0) {
@@ -88,7 +87,7 @@ export class CreativeBookingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = true;
     this.showCompletedOrders = false;
-    this.productionService.cancelledCreativeBooking().subscribe(data => {
+    this.itService.cancelledITBooking().subscribe(data => {
       this.bookingDetail = data;
       this.cancelCount = data.length;
       if (data.length === 0) {
@@ -105,7 +104,7 @@ export class CreativeBookingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = false;
     this.showCompletedOrders = true;
-    this.productionService.completedCreativeBooking().subscribe(data => {
+    this.itService.completedITBooking().subscribe(data => {
       this.bookingDetail = data;
       this.completedCount = data.length;
       if (data.length === 0) {
@@ -123,13 +122,13 @@ export class CreativeBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.creativeBookingApproval( id).subscribe(data => {
+    this.itService.itBookingApproval( id).subscribe(data => {
       this.bookingDetail = data;
       this.bookingCount = data.length;
     }, error => {
       console.log(error);
     });
-    this.titleToSent =  'Creative Booking Confirmed';
+    this.titleToSent =  'IT - Services Booking Confirmed';
     this.sendNotification(mobileNumber, bookingID, this.titleToSent);
   }
   cancelledBookingApproval( id, bookingID, mobileNumber) {
@@ -138,13 +137,13 @@ export class CreativeBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.approvalForCancelledCreativeBooking( id).subscribe(data => {
+    this.itService.approvalForCancelledITBooking( id).subscribe(data => {
       this.bookingDetail = data;
       this.cancelCount = data.length;
     }, error => {
       console.log(error);
     });
-    this.titleToSent =  'Creative Booking Confirmed';
+    this.titleToSent =  'IT - Services Booking Confirmed';
     this.sendNotification(mobileNumber, bookingID, this.titleToSent);
   }
   cancelBooking( id, bookingID) {
@@ -153,7 +152,7 @@ export class CreativeBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.creativeBookingCancel( id).subscribe(data => {
+    this.itService.itBookinCancel( id).subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
     }, error => {
@@ -166,7 +165,7 @@ export class CreativeBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.newCreativeBookingCancel( id).subscribe(data => {
+    this.itService.newITBookingCancel( id).subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
     }, error => {
@@ -174,16 +173,16 @@ export class CreativeBookingComponent implements OnInit {
     });
   }
   updateStatus(no) {
-    this.router.navigate(['/creativestatus', no]);
+   /*  this.router.navigate(['/catalogstatus', no]); */
   }
   viewDetails(no) {
-    this.productionService.getCreativeBookingDetails(no).subscribe(sample => {
-      this.creativeModel = sample;
+    this.itService.getITBookingDetails(no).subscribe(sample => {
+      this.ITModel = sample;
     }, error => {
       console.log(error);
     });
-    const dialogRef = this.dialog.open(CreativeBookingViewComponent, {
-      width: '1020px',
+    const dialogRef = this.dialog.open(ITServicesViewComponent, {
+      width: '2020px',
       disableClose: true,
       data: no
     });
@@ -197,18 +196,18 @@ export class CreativeBookingComponent implements OnInit {
       this.title,
     this.notificationBody
     );
-    this.productionService.pushNotification(this.notificationModel).subscribe(data => {
+    this.itService.pushNotification(this.notificationModel).subscribe(data => {
     });
   }
   }
   @Component({
-    templateUrl: './creative-booking-view.component.html'
+    templateUrl: './it-services-view.component.html'
   })
-  export class CreativeBookingViewComponent implements OnInit {
-    viewCreativeDetailsForm: FormGroup;
-    creativeModel: Creative;
-    constructor(private fb: FormBuilder, private productionService: ProductionMgmtService,
-       public dialogRef: MatDialogRef<CreativeBookingViewComponent>,
+  export class ITServicesViewComponent implements OnInit {
+    viewITDetailsForm: FormGroup;
+    ITModel: ITServices;
+    constructor(private fb: FormBuilder, private itService: ItServicesService,
+       public dialogRef: MatDialogRef<ITServicesViewComponent>,
        @Inject(MAT_DIALOG_DATA) public data) {
          console.log(data);
     }
@@ -217,16 +216,16 @@ export class CreativeBookingComponent implements OnInit {
     }
     ngOnInit() {
       this.createViewForm();
-      this.viewEditingBookingDetails();
+      this.viewMarketingDetails();
     }
     createViewForm() {
-      this.viewCreativeDetailsForm = this.fb.group({
+      this.viewITDetailsForm = this.fb.group({
         no: ['']
       });
     }
-    viewEditingBookingDetails() {
-      this.productionService.getCreativeBookingDetails(this.data).subscribe(sample => {
-        this.creativeModel = sample;
+    viewMarketingDetails() {
+      this.itService.getITBookingDetails(this.data).subscribe(sample => {
+        this.ITModel = sample;
       }, error => {
         console.log(error);
       });

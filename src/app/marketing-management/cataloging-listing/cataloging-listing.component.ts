@@ -4,26 +4,26 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 
-import { ProductionMgmtService } from '../production-mgmt.service';
 import {Booking} from '../../shared/bookings.model';
 import {NavheaderService} from '../../nav-header/nav-header.service';
-import {Creative} from './creative.model';
+import {CatalogBooking} from './cataloging-listing.model';
+import {MarketingMgmtService} from '../marketing-mgmt.service';
 import {Notification} from '../../shared/notification.model';
 
 @Component({
-  selector: 'app-creative-booking',
-  templateUrl: './creative-booking.component.html',
-  styleUrls: ['./creative-booking.component.css']
+  selector: 'app-cataloging-listing',
+  templateUrl: './cataloging-listing.component.html',
+  styleUrls: ['./cataloging-listing.component.css']
 })
-export class CreativeBookingComponent implements OnInit {
+export class CatalogingListingComponent implements OnInit {
   notificationBody: string;
   title: any;
   titleToSent: string;
   notificationModel: Notification;
   bookingDetail: Booking[] = [];
-  viewCreativeBookingForm: FormGroup;
+  viewCatalogingBookingForm: FormGroup;
   bookingCount;
-  creativeModel: Creative;
+  CatalogModel: CatalogBooking;
   showNewBooking: boolean;
   showConfirmBooking: boolean;
   showCancelBooking: boolean;
@@ -34,17 +34,16 @@ export class CreativeBookingComponent implements OnInit {
   completedCount;
   message;
   action;
-  constructor(private fb: FormBuilder, private router: Router, private productionService: ProductionMgmtService,
+  constructor(private fb: FormBuilder, private router: Router, private marketMgmtService: MarketingMgmtService,
     private navheaderService: NavheaderService, private snackBar: MatSnackBar, private dialog: MatDialog) {
      }
-
      ngOnInit() {
       this.navheaderService.makeMenuTransparent();
       this.createForm();
       this.confirmedBookings();
     }
     createForm() {
-      this.viewCreativeBookingForm = this.fb.group({
+      this.viewCatalogingBookingForm = this.fb.group({
         no: ['']
       });
     }
@@ -53,8 +52,7 @@ export class CreativeBookingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = false;
     this.showCompletedOrders = false;
-    this.productionService.getCreativeBooking().subscribe(data => {
-      console.log(data);
+    this.marketMgmtService.getCatalogingBooking().subscribe(data => {
       this.bookingCount = data.length;
       if (data.length === 0) {
   this.showMessage = true;
@@ -71,7 +69,7 @@ export class CreativeBookingComponent implements OnInit {
     this.showConfirmBooking = true;
     this.showCancelBooking = false;
     this.showCompletedOrders = false;
-    this.productionService.approvedCreativeBooking().subscribe(data => {
+    this.marketMgmtService.approvedCatalogingBooking().subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
       if (data.length === 0) {
@@ -88,7 +86,7 @@ export class CreativeBookingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = true;
     this.showCompletedOrders = false;
-    this.productionService.cancelledCreativeBooking().subscribe(data => {
+    this.marketMgmtService.cancelledCatalogBooking().subscribe(data => {
       this.bookingDetail = data;
       this.cancelCount = data.length;
       if (data.length === 0) {
@@ -105,7 +103,7 @@ export class CreativeBookingComponent implements OnInit {
     this.showConfirmBooking = false;
     this.showCancelBooking = false;
     this.showCompletedOrders = true;
-    this.productionService.completedCreativeBooking().subscribe(data => {
+    this.marketMgmtService.completedCatalogBooking().subscribe(data => {
       this.bookingDetail = data;
       this.completedCount = data.length;
       if (data.length === 0) {
@@ -123,13 +121,13 @@ export class CreativeBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.creativeBookingApproval( id).subscribe(data => {
+    this.marketMgmtService.catalogBookingApproval( id).subscribe(data => {
       this.bookingDetail = data;
       this.bookingCount = data.length;
     }, error => {
       console.log(error);
     });
-    this.titleToSent =  'Creative Booking Confirmed';
+    this.titleToSent =  'Cataloging / Listing Booking  Confirmed';
     this.sendNotification(mobileNumber, bookingID, this.titleToSent);
   }
   cancelledBookingApproval( id, bookingID, mobileNumber) {
@@ -138,13 +136,13 @@ export class CreativeBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.approvalForCancelledCreativeBooking( id).subscribe(data => {
+    this.marketMgmtService.approvalForCancelledCatalogBooking( id).subscribe(data => {
       this.bookingDetail = data;
       this.cancelCount = data.length;
     }, error => {
       console.log(error);
     });
-    this.titleToSent =  'Creative Booking Confirmed';
+    this.titleToSent =  'Cataloging / Listing Booking  Confirmed';
     this.sendNotification(mobileNumber, bookingID, this.titleToSent);
   }
   cancelBooking( id, bookingID) {
@@ -153,7 +151,7 @@ export class CreativeBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.creativeBookingCancel( id).subscribe(data => {
+    this.marketMgmtService.catalogBookingCancel( id).subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
     }, error => {
@@ -166,7 +164,7 @@ export class CreativeBookingComponent implements OnInit {
     this.snackBar.open(this.message, this.action, {
       duration: 2000,
     });
-    this.productionService.newCreativeBookingCancel( id).subscribe(data => {
+    this.marketMgmtService.newCatalogBookingCancel( id).subscribe(data => {
       this.bookingDetail = data;
       this.confirmCount = data.length;
     }, error => {
@@ -174,16 +172,16 @@ export class CreativeBookingComponent implements OnInit {
     });
   }
   updateStatus(no) {
-    this.router.navigate(['/creativestatus', no]);
+    this.router.navigate(['/catalogstatus', no]);
   }
   viewDetails(no) {
-    this.productionService.getCreativeBookingDetails(no).subscribe(sample => {
-      this.creativeModel = sample;
+    this.marketMgmtService.getCatalogBookingDetails(no).subscribe(sample => {
+      this.CatalogModel = sample;
     }, error => {
       console.log(error);
     });
-    const dialogRef = this.dialog.open(CreativeBookingViewComponent, {
-      width: '1020px',
+    const dialogRef = this.dialog.open(CatalogingViewComponent, {
+      width: '2020px',
       disableClose: true,
       data: no
     });
@@ -197,18 +195,18 @@ export class CreativeBookingComponent implements OnInit {
       this.title,
     this.notificationBody
     );
-    this.productionService.pushNotification(this.notificationModel).subscribe(data => {
+    this.marketMgmtService.pushNotification(this.notificationModel).subscribe(data => {
     });
   }
   }
   @Component({
-    templateUrl: './creative-booking-view.component.html'
+    templateUrl: './cataloging-listing-view.component.html'
   })
-  export class CreativeBookingViewComponent implements OnInit {
-    viewCreativeDetailsForm: FormGroup;
-    creativeModel: Creative;
-    constructor(private fb: FormBuilder, private productionService: ProductionMgmtService,
-       public dialogRef: MatDialogRef<CreativeBookingViewComponent>,
+  export class CatalogingViewComponent implements OnInit {
+    viewCatalogingDetailsForm: FormGroup;
+    CatalogModel: CatalogBooking;
+    constructor(private fb: FormBuilder, private marketMgmtService: MarketingMgmtService,
+       public dialogRef: MatDialogRef<CatalogingViewComponent>,
        @Inject(MAT_DIALOG_DATA) public data) {
          console.log(data);
     }
@@ -217,18 +215,19 @@ export class CreativeBookingComponent implements OnInit {
     }
     ngOnInit() {
       this.createViewForm();
-      this.viewEditingBookingDetails();
+      this.viewAplusBookingDetails();
     }
     createViewForm() {
-      this.viewCreativeDetailsForm = this.fb.group({
+      this.viewCatalogingDetailsForm = this.fb.group({
         no: ['']
       });
     }
-    viewEditingBookingDetails() {
-      this.productionService.getCreativeBookingDetails(this.data).subscribe(sample => {
-        this.creativeModel = sample;
+    viewAplusBookingDetails() {
+      this.marketMgmtService.getCatalogBookingDetails(this.data).subscribe(sample => {
+        this.CatalogModel = sample;
       }, error => {
         console.log(error);
       });
     }
   }
+

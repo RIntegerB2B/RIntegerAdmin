@@ -62,6 +62,7 @@ import {
   MatDialogModule,
   MatChipsModule,
   MatStepperModule,
+  MatDatepickerModule
 } from '@angular/material';
 import { ProductBookingComponent , ProductBookingViewComponent } from './production-mgmt/product-booking/product-booking.component';
 import { ModelBookingComponent , ModelBookingViewComponent} from './production-mgmt/model-booking/model-booking.component';
@@ -74,8 +75,14 @@ import { RegistrationSetupBookingComponent,
 import { DigitalMgmtBookingComponent,
   DigitalMgmtViewComponent } from './marketing-management/digital-mgmt-booking/digital-mgmt-booking.component';
 import { MonthlyPlanComponent } from './digital-management/monthly-plan/monthly-plan.component';
-import { MarketingServicesComponent } from './marketing-management/marketing-services/marketing-services.component';
-import { AplusCatalogingComponent } from './marketing-management/aplus-cataloging/aplus-cataloging.component';
+import { MarketingServicesComponent ,
+  MarketingServicesViewComponent} from './marketing-management/marketing-services/marketing-services.component';
+import { AplusCatalogingComponent ,
+  AplusBookingViewComponent} from './marketing-management/aplus-cataloging/aplus-cataloging.component';
+import { CatalogingListingComponent ,
+  CatalogingViewComponent} from './marketing-management/cataloging-listing/cataloging-listing.component';
+import { ItServicesBookingComponent ,
+  ITServicesViewComponent} from './it-services-management/it-services-booking/it-services-booking.component';
 
 
 
@@ -120,7 +127,13 @@ import { AplusCatalogingComponent } from './marketing-management/aplus-catalogin
     DigitalMgmtViewComponent,
     MonthlyPlanComponent,
     MarketingServicesComponent,
-    AplusCatalogingComponent
+    AplusCatalogingComponent,
+    AplusBookingViewComponent,
+    CatalogingListingComponent,
+    CatalogingViewComponent,
+    MarketingServicesViewComponent,
+    ItServicesBookingComponent,
+    ITServicesViewComponent
   ],
   imports: [
     BrowserModule,
@@ -149,12 +162,15 @@ import { AplusCatalogingComponent } from './marketing-management/aplus-catalogin
   MatChipsModule,
   MatStepperModule,
   MatBadgeModule,
+  MatDatepickerModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AccountService, BookingDetailsService, NavheaderService,
      ModelManagementService, LocalStorageService, NotificationService, AuthGuard],
      entryComponents: [ProductBookingViewComponent, ModelBookingViewComponent, EditingBookingViewComponent,
-      CreativeBookingViewComponent, RegistrationBookingViewComponent, DigitalMgmtViewComponent],
+      CreativeBookingViewComponent, RegistrationBookingViewComponent, ITServicesViewComponent,
+       MarketingServicesViewComponent, DigitalMgmtViewComponent, CatalogingViewComponent,
+       AplusBookingViewComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

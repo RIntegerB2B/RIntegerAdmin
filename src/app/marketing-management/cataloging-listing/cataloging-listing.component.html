@@ -1,6 +1,6 @@
-<form [formGroup]="viewBookingForm" style="padding-top:60px" novalidate>
+<form [formGroup]="viewCatalogingBookingForm" style="padding-top:60px" novalidate>
   <div class="container-fluid">
-    <h1 class="text-center">Product Shoot Booking</h1>
+    <h1 class="text-center"> Cataloging / Listing Booking</h1>
     <div class="col-md-12 form-group">
       <div class="row">
         <div class="col-md-3 form-group">
@@ -24,7 +24,7 @@
     </div> 
    
     <div class="row" style="margin-left: 30px;" *ngIf="showNewBooking"> 
-      <h1>Direct Booking Details</h1>
+      <h1>Cataloging / Listing Booking</h1>
 
       <div class="col-md-12 form-group">
       <div class="row">
@@ -113,7 +113,7 @@
                   </button>
                 </div>
                 <div class="col-md-2  form-group">
-                    <button mat-button matSuffix mat-icon-button (click)="giveApproval(data._id, data.bookingOrderId, data.mobileNumber)">
+                    <button mat-button matSuffix mat-icon-button (click)="giveApproval(data._id, data.bookingOrderId,data.mobileNumber)">
                       <mat-icon color="primary">check_box</mat-icon>
                     </button>
                   </div>
@@ -318,7 +318,7 @@
                   </div>
                   
                   <div class="col-md-3  form-group">
-                      <button mat-button matSuffix mat-icon-button (click)="cancelledBookingApproval(data._id, data.bookingOrderId, data.mobileNumber)">
+                      <button mat-button matSuffix mat-icon-button (click)="cancelledBookingApproval(data._id, data.bookingOrderId,data.mobileNumber)">
                         <mat-icon color="primary">check_box</mat-icon>
                       </button>
                     </div>

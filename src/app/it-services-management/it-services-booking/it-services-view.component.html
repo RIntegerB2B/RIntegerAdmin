@@ -1,4 +1,4 @@
-<form [formGroup]="viewMarketingDetailsForm" style="padding-top:60px" novalidate>
+<form [formGroup]="viewITDetailsForm" style="padding-top:60px" novalidate>
   <div>
     <button mat-icon-button (click)="cancel()">
       <mat-icon color="primary">clear</mat-icon>
@@ -6,20 +6,20 @@
   </div>
   <div class="container-fluid">
     <div class="row" style="margin-left: 30px;">
-      <h1>Marketing & Services Details </h1>
+      <h1>IT Services Details </h1>
 
       <div class="col-md-12 form-group">
         <div class="row">
           <div class="col-md-12">
             <div class="row">
 
-              <div class="col-md-6 form-group">
+              <div class="col-md-4 form-group">
                 <p><b>Booking Order ID</b></p>
               </div>
 
 
-              <div class="col-md-6 form-group">
-                <p><b>Marketing Medium</b></p>
+              <div class="col-md-8 form-group">
+                <p><b>Services</b></p>
               </div>
 
 
@@ -27,22 +27,19 @@
           </div>
 
           <div class="col-md-12 form-group">
-            <div class="row" *ngFor="let data of MarketingModel">
+            <div class="row" *ngFor="let data of ITModel">
 
-              <div class="col-md-6 form-group">
+              <div class="col-md-4 form-group">
                 <p>{{data.bookingOrderId}} </p>
               </div>
 
-              <div class="col-md-6 form-group">
-                <p>{{data.marketingMedium}} </p>
+              <div class="col-md-8 form-group">
+                <p>{{data.services}} </p>
               </div>
-
-
 
 
             </div>
           </div>
-
 
 
         </div>

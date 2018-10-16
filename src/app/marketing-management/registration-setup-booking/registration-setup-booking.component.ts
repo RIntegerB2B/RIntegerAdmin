@@ -8,6 +8,7 @@ import {Booking} from '../../shared/bookings.model';
 import {NavheaderService} from '../../nav-header/nav-header.service';
 import {RegistrationBooking} from './registration.model';
 import {MarketingMgmtService} from '../marketing-mgmt.service';
+import {Notification} from '../../shared/notification.model';
 
 @Component({
   selector: 'app-registration-setup-booking',
@@ -15,6 +16,10 @@ import {MarketingMgmtService} from '../marketing-mgmt.service';
   styleUrls: ['./registration-setup-booking.component.css']
 })
 export class RegistrationSetupBookingComponent implements OnInit {
+  notificationBody: string;
+  title: any;
+  titleToSent: string;
+  notificationModel: Notification;
   bookingDetail: Booking[] = [];
   viewRegistrationBookingForm: FormGroup;
   bookingCount;
@@ -111,7 +116,7 @@ export class RegistrationSetupBookingComponent implements OnInit {
       console.log(error);
     });
   }
-  giveApproval( id, bookingID) {
+  giveApproval( id, bookingID, mobileNumber) {
     this.action = 'Aproved';
     this.message = bookingID ;
     this.snackBar.open(this.message, this.action, {
@@ -123,8 +128,10 @@ export class RegistrationSetupBookingComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+    this.titleToSent =  'Registration Setup Booking  Confirmed';
+    this.sendNotification(mobileNumber, bookingID, this.titleToSent);
   }
-  cancelledBookingApproval( id, bookingID) {
+  cancelledBookingApproval( id, bookingID, mobileNumber) {
     this.action = 'Aproved';
     this.message = bookingID ;
     this.snackBar.open(this.message, this.action, {
@@ -136,6 +143,8 @@ export class RegistrationSetupBookingComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+    this.titleToSent =  'Registration Setup  Booking Confirmed';
+    this.sendNotification(mobileNumber, bookingID, this.titleToSent);
   }
   cancelBooking( id, bookingID) {
     this.action = 'Cancelled';
@@ -178,6 +187,17 @@ export class RegistrationSetupBookingComponent implements OnInit {
       data: no
     });
     dialogRef.afterClosed();
+  }
+  sendNotification(mobileNumber,  orderId , title) {
+    this.title = title;
+    this.notificationBody = 'Order ' + orderId + 'confirmed';
+    this.notificationModel = new Notification(
+      mobileNumber,
+      this.title,
+    this.notificationBody
+    );
+    this.marketMgmtService.pushNotification(this.notificationModel).subscribe(data => {
+    });
   }
   }
   @Component({

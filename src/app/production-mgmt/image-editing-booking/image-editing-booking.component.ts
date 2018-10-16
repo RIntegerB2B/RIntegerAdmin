@@ -9,6 +9,7 @@ import {Booking} from '../../shared/bookings.model';
 import {NavheaderService} from '../../nav-header/nav-header.service';
 import {ImageEditing} from './editing-booking.model';
 import { ModelBooking } from '../model-booking/model-booking.model';
+import {Notification} from '../../shared/notification.model';
 
 @Component({
   selector: 'app-image-editing-booking',
@@ -16,7 +17,11 @@ import { ModelBooking } from '../model-booking/model-booking.model';
   styleUrls: ['./image-editing-booking.component.css']
 })
 export class ImageEditingBookingComponent implements OnInit {
+  notificationBody: string;
+  title: any;
+  titleToSent: string;
   bookingDetail: Booking[] = [];
+  notificationModel: Notification;
   viewEditingBookingForm: FormGroup;
   bookingCount;
   EditingModel: ImageEditing;
@@ -113,7 +118,7 @@ export class ImageEditingBookingComponent implements OnInit {
       console.log(error);
     });
   }
-  giveApproval( id, bookingID) {
+  giveApproval( id, bookingID, mobileNumber) {
     this.action = 'Aproved';
     this.message = bookingID ;
     this.snackBar.open(this.message, this.action, {
@@ -125,8 +130,10 @@ export class ImageEditingBookingComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+    this.titleToSent =  'Image Editing Booking Confirmed';
+    this.sendNotification(mobileNumber, bookingID, this.titleToSent);
   }
-  cancelledBookingApproval( id, bookingID) {
+  cancelledBookingApproval( id, bookingID, mobileNumber) {
     this.action = 'Aproved';
     this.message = bookingID ;
     this.snackBar.open(this.message, this.action, {
@@ -138,6 +145,8 @@ export class ImageEditingBookingComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+    this.titleToSent =  'Image Editing Booking Confirmed';
+    this.sendNotification(mobileNumber, bookingID, this.titleToSent);
   }
   cancelBooking( id, bookingID) {
     this.action = 'Cancelled';
@@ -180,6 +189,17 @@ export class ImageEditingBookingComponent implements OnInit {
       data: no
     });
     dialogRef.afterClosed();
+  }
+  sendNotification(mobileNumber,  orderId , title) {
+    this.title = title;
+    this.notificationBody = 'Order ' + orderId + 'confirmed';
+    this.notificationModel = new Notification(
+      mobileNumber,
+      this.title,
+    this.notificationBody
+    );
+    this.productionService.pushNotification(this.notificationModel).subscribe(data => {
+    });
   }
   }
   @Component({

@@ -30,6 +30,14 @@ import {RegistrationBookingViewComponent,
 import {DigitalMgmtBookingComponent,
      DigitalMgmtViewComponent} from './marketing-management/digital-mgmt-booking/digital-mgmt-booking.component';
      import {MonthlyPlanComponent} from './digital-management/monthly-plan/monthly-plan.component';
+     import {AplusCatalogingComponent,
+        AplusBookingViewComponent} from './marketing-management/aplus-cataloging/aplus-cataloging.component';
+        import {CatalogingListingComponent,
+            CatalogingViewComponent} from './marketing-management/cataloging-listing/cataloging-listing.component';
+import { MarketingServicesComponent ,
+    MarketingServicesViewComponent} from './marketing-management/marketing-services/marketing-services.component';
+    import {ItServicesBookingComponent,
+    ITServicesViewComponent} from './it-services-management/it-services-booking/it-services-booking.component';
 
 const routes: Routes = [
     { path: 'welcome', component: WelcomeComponent},
@@ -61,6 +69,10 @@ const routes: Routes = [
     { path: 'registrationbooking', canActivate: [AuthGuard], component: RegistrationSetupBookingComponent},
     { path: 'digitalmgmtbooking', canActivate: [AuthGuard], component: DigitalMgmtBookingComponent},
     { path: 'monthlyplan', canActivate: [AuthGuard], component: MonthlyPlanComponent},
+    { path: 'aplusbooking', canActivate: [AuthGuard], component: AplusCatalogingComponent},
+    { path: 'cataloging', canActivate: [AuthGuard], component: CatalogingListingComponent},
+    { path: 'marketing', canActivate: [AuthGuard], component: MarketingServicesComponent},
+    { path: 'itservices', canActivate: [AuthGuard], component: ItServicesBookingComponent},
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
     { path: '**', redirectTo: 'signIn', pathMatch: 'full' },
 ];

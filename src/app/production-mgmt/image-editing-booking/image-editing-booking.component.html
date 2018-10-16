@@ -113,7 +113,7 @@
                   </button>
                 </div>
                 <div class="col-md-2  form-group">
-                    <button mat-button matSuffix mat-icon-button (click)="giveApproval(data._id, data.bookingOrderId)">
+                    <button mat-button matSuffix mat-icon-button (click)="giveApproval(data._id, data.bookingOrderId,data.mobileNumber)">
                       <mat-icon color="primary">check_box</mat-icon>
                     </button>
                   </div>
@@ -318,7 +318,7 @@
                   </div>
                   
                   <div class="col-md-3  form-group">
-                      <button mat-button matSuffix mat-icon-button (click)="cancelledBookingApproval(data._id, data.bookingOrderId)">
+                      <button mat-button matSuffix mat-icon-button (click)="cancelledBookingApproval(data._id, data.bookingOrderId,data.mobileNumber)">
                         <mat-icon color="primary">check_box</mat-icon>
                       </button>
                     </div>
