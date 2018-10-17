@@ -68,7 +68,7 @@ const routes: Routes = [
     { path: 'creativebooking', canActivate: [AuthGuard], component: CreativeBookingComponent},
     { path: 'registrationbooking', canActivate: [AuthGuard], component: RegistrationSetupBookingComponent},
     { path: 'digitalmgmtbooking', canActivate: [AuthGuard], component: DigitalMgmtBookingComponent},
-    { path: 'monthlyplan', canActivate: [AuthGuard], component: MonthlyPlanComponent},
+    { path: 'monthlyplan/:no', canActivate: [AuthGuard], component: MonthlyPlanComponent},
     { path: 'aplusbooking', canActivate: [AuthGuard], component: AplusCatalogingComponent},
     { path: 'cataloging', canActivate: [AuthGuard], component: CatalogingListingComponent},
     { path: 'marketing', canActivate: [AuthGuard], component: MarketingServicesComponent},
