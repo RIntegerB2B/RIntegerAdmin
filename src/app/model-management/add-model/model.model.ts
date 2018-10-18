@@ -21,6 +21,7 @@ export class Model {
     measurements: string;
     shoulder: string;
     shoeSize: string;
+    isScheduledBooking: boolean;
     constructor(
         userName: string,
         description: string,

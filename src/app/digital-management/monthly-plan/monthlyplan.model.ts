@@ -5,4 +5,5 @@ export class AddMonthlyPlan {
     status: string;
     planTitle: string;
     planDescription: string;
+    editing: boolean;
 }

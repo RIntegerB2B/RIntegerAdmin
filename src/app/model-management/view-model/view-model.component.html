@@ -20,7 +20,7 @@
                 <label>Catalog</label>
               </div>
             </div>
-            <div class="col-md-2" >
+            <div class="col-md-1" >
               <div class="form-group">
                 <label>Model Name</label>
               </div>
@@ -49,12 +49,12 @@
         <div class="container">
           <div class="row" *ngFor="let model of Models">
 
-            <div class="col-md-4 form-group">
+            <div class="col-md-3 form-group">
               <img [src]="this.model?.primeImage" style="width: 180px; height: 245px;" />
             </div>
             
 
-            <div class="col-md-2 form-group">
+            <div class="col-md-1 form-group">
               {{model.userName}}
             </div>
 <!-- 
@@ -81,12 +81,14 @@
                 <button mat-raised-button color="accent"  (click)="addImage(modelId.value,model.userName)" value="Add Images" type="submit">
                   Images<mat-icon>add_a_photo</mat-icon></button>
             </div>
-            
           <div class="col-md-2 form-group">
               <button mat-raised-button color="accent"  (click)="delete(modelId.value)" value="Delete" type="submit">
                   Delete <mat-icon>  delete sweep icon</mat-icon></button>
-            
+            <input type="textbox" hidden [value]="model.isScheduledBooking" formControlName="isScheduled">
             <!-- <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" /> -->
+          </div>
+          <div class="col-md-2 form-group">
+              <input type="checkbox" formControlName="Scheduled" value="Scheduled Booking" (change)="addScheduled(modelId.value, $event.target.checked)">  scheduled booking
           </div>
           </div>
         </div>

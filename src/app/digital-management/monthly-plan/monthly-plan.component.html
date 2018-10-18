@@ -56,15 +56,13 @@
         <div class="row">
           <div class="col-md-6 form-group">
             <div class="row">
-              <div class="col-md-4 form-group">
+              <div class="col-md-6 form-group">
                 <b>Title</b>
               </div>
-              <div class="col-md-4 form-group">
+              <div class="col-md-6 form-group">
                 <b>Description</b>
               </div>
-              <div class="col-md-4 form-group">
-                <b>Edit </b>
-              </div>
+             
             </div>
 
           </div>
@@ -73,7 +71,7 @@
             <div class="row">
               <div class="col-md-4 form-group">
 
-                <b>Delete</b>
+                <b>Edit</b>
               </div>
               <div class="col-md-4 form-group">
 
@@ -93,29 +91,48 @@
 
       <div class="container" *ngFor="let data of Status">
         <div class="row" *ngFor="let val of this.data?.monthlyPlan">
-          <div class="col-md-6 form-group">
+          <div class="col-md-6 form-group"  *ngIf="!showEditing">
             <div class="row">
-              <div class="col-md-4 form-group">
+              <div class="col-md-6 form-group">
                 {{val.planTitle}}
               </div>
-              <div class="col-md-4 form-group">
+              <div class="col-md-6 form-group">
                 {{val.planDescription}}
               </div>
+            </div>
+          </div>
+          <div class="col-md-6 form-group"  *ngIf="showEditing">
+            <div class="row">
               <div class="col-md-4 form-group">
-                <button mat-button matSuffix (click)="editStatus(data._id)">
-                  <mat-icon>create</mat-icon>
+                <input class="form-control" hidden  type="text" formControlName="_id" [value]="data._id"  />
+                <input class="form-control" hidden  type="text" formControlName="monthId" [value]="val._id"  />
+                <input class="form-control" type="text" formControlName="updTitle" [value]="val.planTitle" #updateTitle/>
+              </div>
+              <div class="col-md-4 form-group">
+                <input class="form-control" type="text" formControlName="updDesc" [value]="val.planDescription" #updateDescription/>
+              </div>
+              <div class="col-md-1 form-group">
+                <button mat-button matSuffix (click)="updateMonthlyPlan(data._id, val._id, updateTitle.value ,updateDescription.value)">
+                  <mat-icon>save</mat-icon>
                 </button>
               </div>
-
+              <div class="col-md-1 form-group">
+                <button mat-button matSuffix (click)="deleteMonthlyPlan(data._id, val._id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <div class="col-md-1 form-group">
+                <button mat-button matSuffix (click)="cancel()">
+                  <mat-icon>reply</mat-icon>
+                </button>
+              </div>
             </div>
-
           </div>
-
           <div class="col-md-6 form-group">
             <div class="row">
               <div class="col-md-4 form-group">
-                <button mat-button matSuffix (click)="deleteStatus(data.bookingOrderId)">
-                  <mat-icon>delete</mat-icon>
+                <button mat-button matSuffix (click)="editTask()">
+                  <mat-icon>create</mat-icon>
                 </button>
               </div>
               <div class="col-md-4 form-group">
@@ -177,7 +194,7 @@
               </div>
   
             </div>
-            <div class="col-md-3 form-group">
+            <div class="col-md-3 form-group" *ngIf="showAdd">
               <button mat-button matSuffix mat-raised-button color="accent" (click)="showForm2()">
                 <mat-icon>add</mat-icon> Add task
               </button>
@@ -186,16 +203,16 @@
             <div class="col-md-6 form-group" *ngIf="showForms2">
               <div class="form-group">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="title" formControlName="title">
+                  <input matInput placeholder="title" formControlName="title1" >
                 </mat-form-field>
               </div>
               <div class="form-group">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Description" formControlName="Description">
+                  <input matInput placeholder="Description" formControlName="Description1" >
                 </mat-form-field>
               </div>
               <div class="form-group">
-                <button mat-button matSuffix mat-raised-button color="accent" (click)="save(secondFormGroup)">
+                <button mat-button matSuffix mat-raised-button color="accent" (click)="saveWeeklyPlan(secondFormGroup)">
                   Save
                 </button>
               </div>
@@ -205,14 +222,11 @@
                 <div class="row">
                   <div class="col-md-6 form-group">
                     <div class="row">
-                      <div class="col-md-4 form-group">
+                      <div class="col-md-6 form-group">
                         <b>Title</b>
                       </div>
-                      <div class="col-md-4 form-group">
+                      <div class="col-md-6 form-group">
                         <b>Description</b>
-                      </div>
-                      <div class="col-md-4 form-group">
-                        <b>Edit </b>
                       </div>
                     </div>
         
@@ -222,7 +236,7 @@
                     <div class="row">
                       <div class="col-md-4 form-group">
         
-                        <b>Delete</b>
+                        <b>Edit</b>
                       </div>
                       <div class="col-md-4 form-group">
         
@@ -242,33 +256,55 @@
         
               <div class="container" *ngFor="let data of WeeklyStatus">
                 <div class="row" *ngFor="let val of this.data?.weeklyPlan">
-                  <div class="col-md-6 form-group">
+                  <div class="col-md-6 form-group" *ngIf="!showEditing2">
                     <div class="row">
-                      <div class="col-md-4 form-group">
+                      <div class="col-md-6 form-group">
                         {{val.planTitle}}
                       </div>
-                      <div class="col-md-4 form-group">
+                      <div class="col-md-6 form-group">
                         {{val.planDescription}}
                       </div>
-                      <div class="col-md-4 form-group">
-                        <button mat-button matSuffix (click)="editStatus(data._id)">
-                          <mat-icon>create</mat-icon>
-                        </button>
-                      </div>
-        
+                      
                     </div>
         
+                  </div>
+                  <div class="col-md-6 form-group"  *ngIf="showEditing2">
+                    <div class="row">
+                      <div class="col-md-4 form-group">
+                        <input class="form-control" hidden  type="text" formControlName="_id" [value]="data._id"  />
+                        <input class="form-control" hidden  type="text" formControlName="monthId" [value]="val._id"  />
+                        <input class="form-control" type="text" formControlName="updTitle1" [value]="val.planTitle" #updateTitle1/>
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <input class="form-control" type="text" formControlName="updDesc1" [value]="val.planDescription" #updateDescription1/>
+                      </div>
+                      <div class="col-md-1 form-group">
+                        <button mat-button matSuffix (click)="updateWeeklyPlan(data._id, val._id, updateTitle1.value ,updateDescription1.value, val.week)">
+                          <mat-icon>save</mat-icon>
+                        </button>
+                      </div>
+                      <div class="col-md-1 form-group">
+                        <button mat-button matSuffix (click)="deleteWeeklyPlan(data._id, val._id)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                      <div class="col-md-1 form-group">
+                        <button mat-button matSuffix (click)="cancel2()">
+                          <mat-icon>reply</mat-icon>
+                        </button>
+                      </div>
+                    </div>
                   </div>
         
                   <div class="col-md-6 form-group">
                     <div class="row">
                       <div class="col-md-4 form-group">
-                        <button mat-button matSuffix (click)="deleteStatus(data.bookingOrderId)">
-                          <mat-icon>delete</mat-icon>
+                       <button mat-button matSuffix (click)="editTask2()">
+                          <mat-icon>create</mat-icon>
                         </button>
                       </div>
                       <div class="col-md-4 form-group">
-                          <select #selectVal (change)="selectStatus(data._id,val._id,selectVal.value)" style="width:150px">
+                          <select #selectVal (change)="selectStatus2(data._id,val._id,selectVal.value)" style="width:150px">
                             <option *ngFor="let data of status">
                               {{data}}
                             </option>
