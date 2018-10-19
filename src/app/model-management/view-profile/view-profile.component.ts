@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ModelManagementService } from '../model-management.service';
 import { Model } from '../add-model/model.model';
+import { NavheaderService } from '../../nav-header/nav-header.service';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class ViewProfileComponent implements OnInit {
   showPortFolio: boolean;
 
   constructor(private fb: FormBuilder, private router: Router, private localStorageService: LocalStorageService,
+    private navheaderService: NavheaderService,
     private activatedRoute: ActivatedRoute, private modelService: ModelManagementService) {
     this.serviceProviderName = this.activatedRoute.snapshot.paramMap.get('name');
     this.modelId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -33,6 +35,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.navheaderService.makeMenuTransparent();
     this.findImages();
     this.createForm();
     this.showProfile = true;
@@ -49,8 +52,8 @@ export class ViewProfileComponent implements OnInit {
   }
   findImages() {
     this.modelService.findImages(this.serviceProviderName, this.modelId).subscribe(data => {
-      this.Model.push(data);
-      console.log(this.Model);
+      this.Model = data;
+      console.log(data);
     }, error => {
       console.log(error);
     });
@@ -109,7 +112,7 @@ export class ViewProfileComponent implements OnInit {
     const imageName = str.substring(str.lastIndexOf('/') + 1);
     console.log(imageName);
     this.modelService.deleteEcomImg(this.serviceProviderName, this.modelId, imageName).subscribe(data => {
-      // this.Model.push(data);
+      this.Model = data;
     }, error => {
       console.log(error);
     });
@@ -119,7 +122,8 @@ export class ViewProfileComponent implements OnInit {
     const strlen = str.length;
     const imageName = str.substring(str.lastIndexOf('/') + 1);
     this.modelService.deleteProdImg(this.serviceProviderName, this.modelId, imageName).subscribe(data => {
-      // this.Model.push(data);
+      this.Model = data;
+      console.log(data);
     }, error => {
       console.log(error);
     });
@@ -139,7 +143,7 @@ export class ViewProfileComponent implements OnInit {
     const strlen = str.length;
     const imageName = str.substring(str.lastIndexOf('/') + 1);
     this.modelService.deletePortFolioImg(this.serviceProviderName, this.modelId, imageName).subscribe(data => {
-      // this.Model.push(data);
+      this.Model = data;
     }, error => {
       console.log(error);
     });

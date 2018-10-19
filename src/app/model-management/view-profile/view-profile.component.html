@@ -11,10 +11,10 @@
           </li>
          <!--  <li class="nav-item">
             <a class="nav-link"><button mat-button (click)="portraitImage()">Portrait</button></a>
-          </li>
+          </li>-->
           <li class="nav-item">
             <a class="nav-link"><button mat-button (click)="productImage()">Product</button></a>
-          </li> -->
+          </li> 
           <li class="nav-item">
               <a class="nav-link"><button mat-button (click)="portFolioImage()">PortFolio</button></a>
             </li>
@@ -65,7 +65,7 @@
 
             <div class="col-md-3 form-group" *ngFor="let images of this.model?.ecommerceImageName">
               <input type="textbox" hidden [value]="this.images" formControlName="ecomImgId" #ecomID>
-              <button matTooltip="Info about the action" (click)="deleteEcomImage(ecomID.value)" mat-button matSuffix
+              <button matTooltip="Do you want to delete" (click)="deleteEcomImage(ecomID.value)" mat-button matSuffix
                 mat-icon-button>
                 <mat-icon>clear</mat-icon>
               </button>
@@ -75,7 +75,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="row" *ngIf="showProduct">
+    <div class="row" *ngIf="showProduct">
       <div class="col-md-8 mx-auto">
 
         <div class="container">
@@ -83,7 +83,7 @@
 
             <div class="col-md-3 form-group" *ngFor="let images of this.model?.productImageName">
               <input type="textbox" hidden [value]="this.images" formControlName="prodImgId" #proID>
-              <button matTooltip="Info about the action" (click)="deleteProdImage(proID.value)" mat-button matSuffix
+              <button matTooltip="Do you want to delete" (click)="deleteProdImage(proID.value)" mat-button matSuffix
                 mat-icon-button>
                 <mat-icon>clear</mat-icon>
               </button>
@@ -93,7 +93,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
    <!--  <div class="row" *ngIf="showPortrait">
       <div class="col-md-8 mx-auto">
 
@@ -134,7 +134,7 @@
           <div class="row" *ngFor="let model of Model">
             <div class="col-md-3 form-group">
               <img [src]="this.model?.primeImage" style="width: 180px; height: 245px;" />
-              <button (click)="update(modelId.value)"   matTooltip="Info about the action" mat-stroked-button matSuffix>
+              <button (click)="update(modelId.value)"   matTooltip="Do you want to delete" mat-stroked-button matSuffix>
                   <mat-icon>camera_alt</mat-icon>
                 </button>
             </div>

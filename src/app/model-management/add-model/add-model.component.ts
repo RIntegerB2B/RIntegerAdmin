@@ -9,6 +9,7 @@ import {Model} from './model.model';
 import {ModelManagementService} from '../../model-management/model-management.service';
 import {ServiceProviderDetail} from './service-provider-detail.model';
 import { UpdateModel} from '../add-model/update.model';
+import { NavheaderService } from '../../nav-header/nav-header.service';
 
 
 @Component({
@@ -43,10 +44,12 @@ export class AddModelComponent implements OnInit {
   portFolioImageBytes: Uint8Array;
   constructor(private fb: FormBuilder, private router: Router,
     private modelService: ModelManagementService , private localStorageService: LocalStorageService,
+    private navheaderService: NavheaderService,
      private activatedRoute: ActivatedRoute) { this.id = this.activatedRoute.snapshot.paramMap.get('id');
     }
 
   ngOnInit() {
+    this.navheaderService.makeMenuTransparent();
     this.createForm();
     if (this.id) {
       this.getModel(this.id);
@@ -172,7 +175,6 @@ getModel(id) {
       });
   }
   uploadImage(modelName , spName) {
-    console.log(modelName);
     this.modelService.uploadprimeImage(this.primeImageData, modelName, spName).subscribe(data => {
     }, error => {
       console.log(error);

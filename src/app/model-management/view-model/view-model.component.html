@@ -87,9 +87,12 @@
             <input type="textbox" hidden [value]="model.isScheduledBooking" formControlName="isScheduled">
             <!-- <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" /> -->
           </div>
-          <div class="col-md-2 form-group">
+          <div class="col-md-2 form-group" *ngIf="showScheduled">
               <input type="checkbox" formControlName="Scheduled" value="Scheduled Booking" (change)="addScheduled(modelId.value, $event.target.checked)">  scheduled booking
           </div>
+          <div class="col-md-2 form-group" *ngIf="removeScheduled">
+            <input type="checkbox" formControlName="RemoveScheduled" value="Scheduled Booking" (change)="cancelScheduled(modelId.value, $event.target.checked)"> Remove from  scheduled booking
+        </div>
           </div>
         </div>
       </div>

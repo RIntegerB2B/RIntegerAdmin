@@ -68,7 +68,7 @@ this.newSp.next(data);
     const url: string = this.serviceUrl + addUrl + spName +  addUrl1 + id + addUrl2 + modelName ;
     return this.httpClient.put<boolean>(url, data);
   }
-  uploadeProductImage(spName, id, modelName , data ): Observable<any> {
+  uploadProductImage(spName, id, modelName , data ): Observable<any> {
     /* const formData: FormData = new FormData();
     formData.append('file', imageData.productImage, imageData.productImage.name); */
     const addUrl = 'productImage/';
@@ -146,5 +146,16 @@ deletePortFolioImg(name , id, image): Observable<any> {
   const addUrl2 = '/portFolio/';
   const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image ;
   return this.httpClient.delete<Model>(url);
+}
+
+allowScheduledModel(id): Observable<any> {
+  const addUrl = 'scheduledbooking/';
+  const url: string = this.serviceUrl + addUrl + id ;
+  return this.httpClient.get<Model>(url);
+}
+cancelScheduledModel(id): Observable<any> {
+  const addUrl = 'removescheduledbooking/';
+  const url: string = this.serviceUrl + addUrl + id ;
+  return this.httpClient.get<Model>(url);
 }
 }

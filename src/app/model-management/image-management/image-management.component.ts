@@ -6,6 +6,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { ImageData } from './imageData.model';
 import { ModelManagementService } from '../model-management.service';
 import { ActivatedRoute } from '@angular/router';
+import { NavheaderService } from '../../nav-header/nav-header.service';
 
 @Component({
   selector: 'app-image-management',
@@ -31,6 +32,7 @@ export class ImageManagementComponent implements OnInit {
   spName;
 
   constructor(private fb: FormBuilder, private router: Router, private localStorageService: LocalStorageService,
+    private navheaderService: NavheaderService,
     private modelService: ModelManagementService,
     private activatedRoute: ActivatedRoute) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -38,6 +40,7 @@ export class ImageManagementComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.navheaderService.makeMenuTransparent();
     this.createForm();
   }
 
@@ -91,7 +94,7 @@ export class ImageManagementComponent implements OnInit {
     for (let i = 0; i <= this.fileLength; i++) {
       formData.append('uploads[]', this.fileToUpload2[i]);
     }
-    this.modelService.uploadeProductImage(this.spName, this.id, this.name, formData).subscribe(data => {
+    this.modelService.uploadProductImage(this.spName, this.id, this.name, formData).subscribe(data => {
     }, error => {
       console.log(error);
     });
@@ -113,17 +116,29 @@ export class ImageManagementComponent implements OnInit {
     });
   }
   sendImages() {
-    if (this.fileToUpload !== undefined && this.fileToUpload3 === undefined) {
+    if (this.fileToUpload !== undefined && this.fileToUpload3 === undefined && this.fileToUpload2 === undefined) {
       this.uploadEcommerce();
-    } else if (this.fileToUpload3 !== undefined && this.fileToUpload === undefined ) {
+    } else if (this.fileToUpload3 !== undefined && this.fileToUpload === undefined && this.fileToUpload2 === undefined) {
       this.uploadPortFolio();
-    } else if (this.fileToUpload !== null && this.fileToUpload3 !== null  ) {
+    } else if (this.fileToUpload2 !== undefined && this.fileToUpload === undefined && this.fileToUpload3 === undefined) {
+      this.uploadProduct();
+    } else if (this.fileToUpload !== null && this.fileToUpload3 !== null && this.fileToUpload2 === undefined) {
       this.uploadEcommerce();
       this.uploadPortFolio();
+    } else if (this.fileToUpload2 !== null && this.fileToUpload3 !== null && this.fileToUpload === undefined) {
+      this.uploadProduct();
+      this.uploadPortFolio();
+    } else if (this.fileToUpload !== null && this.fileToUpload2 !== null && this.fileToUpload3 === undefined) {
+      this.uploadEcommerce();
+      this.uploadProduct();
+    } else if (this.fileToUpload !== null && this.fileToUpload3 !== null && this.fileToUpload2 !== null) {
+      this.uploadEcommerce();
+      this.uploadPortFolio();
+      this.uploadProduct();
     }
     this.modelImageForm.reset();
     this.router.navigate(['/models']);
-    /*  this.uploadPortrait();
-      this.uploadProduct(); */
+    /*  this.uploadPortrait();*/
+   /*  this.uploadProduct(); */
   }
 }

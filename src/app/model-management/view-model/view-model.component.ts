@@ -17,10 +17,12 @@ import { copyStyles } from '@angular/animations/browser/src/util';
 export class ViewModelComponent implements OnInit {
   selectModel = [];
   spId;
-  viewModelForm;
+  viewModelForm: FormGroup;
   Models: Model[] = [];
   modelId;
   spName;
+  showScheduled: boolean;
+  removeScheduled: boolean;
   constructor(private fb: FormBuilder, private router: Router, private navheaderService: NavheaderService,
     private modelService: ModelManagementService, private localStorageService: LocalStorageService) { }
 
@@ -33,34 +35,67 @@ export class ViewModelComponent implements OnInit {
     this.viewModelForm = this.fb.group({
       id: [''],
       Scheduled: [''],
-      isScheduled: ['']
+      isScheduled: [''],
+      RemoveScheduled: ['']
     });
   }
   viewProfile(modelId) {
     this.spName = this.localStorageService.retrieve('userName');
-this.router.navigate(['/profile', this.spName, 'images', modelId]);
+    this.router.navigate(['/profile', this.spName, 'images', modelId]);
   }
   findModels() {
     this.spId = this.localStorageService.retrieve('Id');
     this.modelService.serviceProviderModels(this.spId).subscribe(data => {
       this.Models = data;
+      const arrayLength = data.length - 1;
+      for (let i = 0; i <= arrayLength; i++) {
+        console.log(data[i].isScheduledBooking);
+        switch (data[i].isScheduledBooking) {
+          case true:
+            {
+              this.showScheduled = false;
+              this.removeScheduled = true;
+              break;
+            }
+          case false:
+            {
+              this.showScheduled = true;
+              this.removeScheduled = false;
+              break;
+            }
+
+        }
+      }
     });
   }
   delete(modelId) {
     this.spName = this.localStorageService.retrieve('userName');
     this.modelId = modelId;
-    this.modelService.deleteModel(this.modelId , this.spName).subscribe(data => {
+    this.modelService.deleteModel(this.modelId, this.spName).subscribe(data => {
       this.Models = data;
-      console.log(data);
     });
   }
   addScheduled(id, isChecked) {
-const marketingIndex = this.selectModel.indexOf(id);
-if (isChecked) {
-  this.selectModel.push(id);
-} else if (marketingIndex > -1) {
-  this.selectModel.splice(marketingIndex, 1);
-}
+    const marketingIndex = this.selectModel.indexOf(id);
+    if (isChecked) {
+      this.selectModel.push(id);
+    } else if (marketingIndex > -1) {
+      this.selectModel.splice(marketingIndex, 1);
+    }
+    this.modelService.allowScheduledModel(id).subscribe(data => {
+      this.Models = data;
+    });
+  }
+  cancelScheduled(id, isChecked) {
+    const marketingIndex = this.selectModel.indexOf(id);
+    if (isChecked) {
+      this.selectModel.push(id);
+    } else if (marketingIndex > -1) {
+      this.selectModel.splice(marketingIndex, 1);
+    }
+    this.modelService.cancelScheduledModel(id).subscribe(data => {
+      this.Models = data;
+    });
   }
   update(id) {
     this.modelId = id;
@@ -68,7 +103,7 @@ if (isChecked) {
   }
   addImage(modelId, modelName) {
     // console.log(modelId);
-   // console.log(modelName);
+    // console.log(modelName);
     this.router.navigate(['/model', modelId, 'name', modelName]);
   }
 }
