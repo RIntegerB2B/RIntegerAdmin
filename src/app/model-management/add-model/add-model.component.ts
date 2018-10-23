@@ -10,6 +10,7 @@ import {ModelManagementService} from '../../model-management/model-management.se
 import {ServiceProviderDetail} from './service-provider-detail.model';
 import { UpdateModel} from '../add-model/update.model';
 import { NavheaderService } from '../../nav-header/nav-header.service';
+import {mobileNumber} from './mobile-validation';
 
 
 @Component({
@@ -59,7 +60,7 @@ export class AddModelComponent implements OnInit {
   this.addModelForm = this.fb.group({
     modelName: ['', Validators.required],
     description: [''],
-    availability: ['', Validators.required],
+    availability: [''],
     mobileNumber: [''],
     emailId: [''],
     faceBook: [''],
@@ -100,14 +101,15 @@ console.log(modelAva);
 this.modelAvailability = modelAva;
 }
 getModel(id) {
-  this.showUpdate = true;
+
+this.showUpdate = true;
    this.hideImg = true;
   this.modelService.getModelDetails(id).subscribe(data => {
     this.loadedModel = data;
-    console.log(this.loadedModel.primeImage);
-    console.log(this.loadedModel);
+    /* console.log(this.loadedModel.primeImage);
+    console.log(this.loadedModel); */
    this.addModelForm.setValue({
-       modelName: this.loadedModel.userName,
+    modelName: this.loadedModel.userName,
     description: this.loadedModel.description,
       availability: this.loadedModel.availability,
       mobileNumber: this.loadedModel.mobileNumber,

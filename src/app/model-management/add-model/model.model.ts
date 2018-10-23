@@ -1,7 +1,7 @@
 export class Model {
     userName: string;
     description: string;
-    availability: boolean;
+    availability: Number;
     mobileNumber: Number;
     emailId: string;
     faceBook: string;
@@ -25,7 +25,7 @@ export class Model {
     constructor(
         userName: string,
         description: string,
-        availability: boolean,
+        availability: Number,
         mobileNumber: Number,
         emailId: string,
         faceBook: string,

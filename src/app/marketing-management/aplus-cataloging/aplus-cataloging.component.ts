@@ -71,6 +71,7 @@ export class AplusCatalogingComponent implements OnInit {
     this.showCompletedOrders = false;
     this.marketMgmtService.approvedAplusBooking().subscribe(data => {
       this.bookingDetail = data;
+      console.log(data);
       this.confirmCount = data.length;
       if (data.length === 0) {
         this.showMessage = true;

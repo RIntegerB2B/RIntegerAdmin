@@ -39,7 +39,7 @@ export class SubscribeComponent implements OnInit {
 
   subscribe(subscribeForm: FormGroup, mobileNo: any) {
     this. mobNo  = mobileNo;
-    this.router.navigate(['/navheader', true]);
+    this.router.navigate(['/productbooking']);
      this.swPush.requestSubscription({
        serverPublicKey: this.VAPID_PUBLIC_KEY
      })
