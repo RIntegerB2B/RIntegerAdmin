@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 
 import { ModelManagementService } from '../../model-management/model-management.service';
@@ -23,8 +24,12 @@ export class ViewModelComponent implements OnInit {
   spName;
   showScheduled: boolean;
   removeScheduled: boolean;
+  unselectedModel = [];
+  message;
+  action;
   constructor(private fb: FormBuilder, private router: Router, private navheaderService: NavheaderService,
-    private modelService: ModelManagementService, private localStorageService: LocalStorageService) { }
+    private modelService: ModelManagementService, private localStorageService: LocalStorageService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.navheaderService.makeMenuTransparent();
@@ -47,7 +52,7 @@ export class ViewModelComponent implements OnInit {
     this.spId = this.localStorageService.retrieve('Id');
     this.modelService.serviceProviderModels(this.spId).subscribe(data => {
       this.Models = data;
-      const arrayLength = data.length - 1;
+     /*  const arrayLength = data.length - 1;
       for (let i = 0; i <= arrayLength; i++) {
         console.log(data[i].isScheduledBooking);
         switch (data[i].isScheduledBooking) {
@@ -65,7 +70,7 @@ export class ViewModelComponent implements OnInit {
             }
 
         }
-      }
+      } */
     });
   }
   delete(modelId) {
@@ -75,26 +80,36 @@ export class ViewModelComponent implements OnInit {
       this.Models = data;
     });
   }
-  addScheduled(id, isChecked) {
-    const marketingIndex = this.selectModel.indexOf(id);
+  addScheduled(id) {
+    this.message = 'model added to scheduled booking ';
+    this.spId = this.localStorageService.retrieve('Id');
+   /*  const marketingIndex = this.selectModel.indexOf(id);
     if (isChecked) {
       this.selectModel.push(id);
     } else if (marketingIndex > -1) {
       this.selectModel.splice(marketingIndex, 1);
-    }
-    this.modelService.allowScheduledModel(id).subscribe(data => {
+    } */
+    this.modelService.allowScheduledModel(id, this.spId).subscribe(data => {
       this.Models = data;
     });
+    this.snackBar.open(this.message, this.action, {
+      duration: 3000,
+    });
   }
-  cancelScheduled(id, isChecked) {
-    const marketingIndex = this.selectModel.indexOf(id);
+  cancelScheduled(id) {
+  this.spId = this.localStorageService.retrieve('Id');
+      /* const marketingIndex = this.selectModel.indexOf(id);
     if (isChecked) {
-      this.selectModel.push(id);
+      this.unselectedModel.push(id);
     } else if (marketingIndex > -1) {
-      this.selectModel.splice(marketingIndex, 1);
-    }
-    this.modelService.cancelScheduledModel(id).subscribe(data => {
+      this.unselectedModel.splice(marketingIndex, 1);
+    } */
+    this.message = 'model removed from scheduled booking ';
+    this.modelService.cancelScheduledModel(id, this.spId).subscribe(data => {
       this.Models = data;
+    });
+    this.snackBar.open(this.message, this.action, {
+      duration: 3000,
     });
   }
   update(id) {

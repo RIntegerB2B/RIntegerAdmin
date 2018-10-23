@@ -11,6 +11,7 @@ import { DigitalManagementService } from '../digital-management.service';
 import { AddMonthlyPlan } from './monthlyplan.model';
 import {DigitalMgmtStatus} from './digital-mgmt.status.model';
 import {WeeklyPlan} from './weeklyplan.model';
+import {DailyPlan} from './dailyplan.model';
 
 @Component({
   selector: 'app-monthly-plan',
@@ -18,6 +19,11 @@ import {WeeklyPlan} from './weeklyplan.model';
   styleUrls: ['./monthly-plan.component.css']
 })
 export class MonthlyPlanComponent implements OnInit {
+  showEditing3: boolean;
+  selectedYear3: any;
+  showYear3: boolean;
+  selectedMonth3: any;
+  showForms3: boolean;
   selectedWeek2: any;
   selectedYear2: any;
   selectedMonth2: any;
@@ -33,7 +39,9 @@ export class MonthlyPlanComponent implements OnInit {
   monthlyPlanModel: AddMonthlyPlan;
   Status: DigitalMgmtStatus;
   WeeklyStatus: DigitalMgmtStatus;
+  DailyStatus: DigitalMgmtStatus;
   WeeklyModel: WeeklyPlan;
+  DailyModel: DailyPlan;
   showAdd: boolean;
   showEditing: boolean;
   showEditing2: boolean;
@@ -67,15 +75,22 @@ export class MonthlyPlanComponent implements OnInit {
     });
     this.secondFormGroup = this._formBuilder.group({
       _id: [''],
-      monthId: [''],
+      weekId: [''],
       title1: [''],
       Description1: [''],
       updTitle1: [''],
-      updDesc1: ['']
+      updDesc1: [''],
+      date: ['']
     });
     this.thirdFormGroup = this._formBuilder.group({
+      _id: [''],
+      dateID: [''],
       title2: [''],
-      Description2: ['']
+      Description2: [''],
+      updTitle2: [''],
+      updDesc2: [''],
+      dailydate: [''],
+      copyToDate: [''],
     });
   }
   selectMonth(val1) {
@@ -224,6 +239,14 @@ this.digitalMgmtService.editMonthlyPlanStatus(id1, monthid2, val).subscribe(data
       console.log(error);
     });
   }
+  copyToDate(id, weekId, date) {
+    const value = date.split('/');
+    this.digitalMgmtService.copyToDailyPlan(id, weekId, value[1]).subscribe(data => {
+      this.WeeklyStatus = data;
+    }, error => {
+      console.log(error);
+    });
+  }
   selectStatus2( id1,  weekid , val) {
     this.digitalMgmtService.editWeeklyPlanStatus(id1, weekid, val).subscribe(data => {
       console.log(data);
@@ -232,4 +255,74 @@ this.digitalMgmtService.editMonthlyPlanStatus(id1, monthid2, val).subscribe(data
       console.log(error);
     });
       }
+
+      // daily plan
+
+      showForm3() {
+        this.showForms3 = true;
+      }
+
+      selectMonth3(val1) {
+        console.log(val1);
+        this.selectedMonth3 = val1;
+        this.showYear3 = true;
+      }
+      selectYear3(val2) {
+        this.selectedYear3 = val2;
+        this.viewDailyPlan();
+        this.showAdd = true;
+      }
+      viewDailyPlan() {
+        this.digitalMgmtService.viewMonthlyPlan(this.no, this.selectedMonth3, this.selectedYear3).subscribe(data => {
+          this.DailyStatus = data;
+          console.log(data);
+        }, error => {
+          console.log(error);
+        });
+      }
+      saveDailyPlan(thirdFormGroup , update) {
+        const DATE = update.split('/');
+        this.DailyModel = new DailyPlan();
+        this.DailyModel.date = DATE[1];
+        this.DailyModel.planTitle = this.thirdFormGroup.controls.title2.value;
+        this.DailyModel.planDescription = this.thirdFormGroup.controls.Description2.value;
+        this.digitalMgmtService.addDailyPlan(this.no, this.selectedMonth3, this.selectedYear3, this.DailyModel).subscribe(data => {
+          this.DailyStatus = data;
+        }, error => {
+          console.log(error);
+        });
+      }
+      editTask3() {
+        this.showEditing3 = true;
+      }
+      cancel3() {
+        this.showEditing3 = false;
+      }
+      updateDailyPlan( id, dateID, updatedTitle, updatedDescription, week) {
+        this.DailyModel = new DailyPlan();
+        this.DailyModel.planTitle = updatedTitle;
+        this.DailyModel.planDescription = updatedDescription;
+        this.digitalMgmtService.editDailyPlan(id, dateID, this.DailyModel).subscribe(data => {
+          this.DailyStatus = data;
+          this.showEditing3 = false;
+        }, error => {
+          console.log(error);
+        });
+      }
+      deleteDailyPlan(id, dateId) {
+        this.digitalMgmtService.deleteDailyPlan(id, dateId).subscribe(data => {
+          this.DailyStatus = data;
+          this.showEditing3 = false;
+        }, error => {
+          console.log(error);
+        });
+      }
+      selectStatus3( id1,  dailyId , val) {
+        this.digitalMgmtService.editDailyPlanStatus(id1, dailyId, val).subscribe(data => {
+          console.log(data);
+          this.DailyStatus = data;
+        }, error => {
+          console.log(error);
+        });
+          }
 }

@@ -148,14 +148,16 @@ deletePortFolioImg(name , id, image): Observable<any> {
   return this.httpClient.delete<Model>(url);
 }
 
-allowScheduledModel(id): Observable<any> {
+allowScheduledModel(id, spid): Observable<any> {
   const addUrl = 'scheduledbooking/';
-  const url: string = this.serviceUrl + addUrl + id ;
+  const spUrl = '/serviceproviders/';
+  const url: string = this.serviceUrl + addUrl + id + spUrl + spid;
   return this.httpClient.get<Model>(url);
 }
-cancelScheduledModel(id): Observable<any> {
+cancelScheduledModel(id, spid): Observable<any> {
   const addUrl = 'removescheduledbooking/';
-  const url: string = this.serviceUrl + addUrl + id ;
+  const spUrl = '/serviceproviders/';
+  const url: string = this.serviceUrl + addUrl + id + spUrl + spid;
   return this.httpClient.get<Model>(url);
 }
 }

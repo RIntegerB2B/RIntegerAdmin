@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="container">
-          <div class="row" *ngFor="let model of Models">
+          <div class="row" *ngFor="let model of Models ; let i = index">
 
             <div class="col-md-3 form-group">
               <img [src]="this.model?.primeImage" style="width: 180px; height: 245px;" />
@@ -84,14 +84,16 @@
           <div class="col-md-2 form-group">
               <button mat-raised-button color="accent"  (click)="delete(modelId.value)" value="Delete" type="submit">
                   Delete <mat-icon>  delete sweep icon</mat-icon></button>
-            <input type="textbox" hidden [value]="model.isScheduledBooking" formControlName="isScheduled">
+            <input type="textbox" hidden [value]="Models[i].isScheduledBooking" formControlName="isScheduled">
             <!-- <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" /> -->
           </div>
-          <div class="col-md-2 form-group" *ngIf="showScheduled">
-              <input type="checkbox" formControlName="Scheduled" value="Scheduled Booking" (change)="addScheduled(modelId.value, $event.target.checked)">  scheduled booking
+          <div class="col-md-1 form-group" *ngIf="!Models[i].isScheduledBooking">
+              <button class="btn btn-success"  (click)="addScheduled(modelId.value)" value="Add Images" type="submit">
+                  Add to Scheduled Booking</button>
           </div>
-          <div class="col-md-2 form-group" *ngIf="removeScheduled">
-            <input type="checkbox" formControlName="RemoveScheduled" value="Scheduled Booking" (change)="cancelScheduled(modelId.value, $event.target.checked)"> Remove from  scheduled booking
+          <div class="col-md-1 form-group" *ngIf="Models[i].isScheduledBooking">
+              <button class="btn btn-danger"  (click)="cancelScheduled(modelId.value)" value="Add Images" type="submit">
+                  Remove from Scheduled Booking</button>
         </div>
           </div>
         </div>

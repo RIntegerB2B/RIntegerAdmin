@@ -38,7 +38,8 @@ import { MarketingServicesComponent ,
     MarketingServicesViewComponent} from './marketing-management/marketing-services/marketing-services.component';
     import {ItServicesBookingComponent,
     ITServicesViewComponent} from './it-services-management/it-services-booking/it-services-booking.component';
-
+ import {ScheduledModelBookingComponent,
+    ScheduledBookingViewComponent} from './production-mgmt/scheduled-model-booking/scheduled-model-booking.component';
 const routes: Routes = [
     { path: 'welcome', component: WelcomeComponent},
     { path: 'subscribe', canActivate: [AuthGuard], component: SubscribeComponent},
@@ -73,6 +74,7 @@ const routes: Routes = [
     { path: 'cataloging', canActivate: [AuthGuard], component: CatalogingListingComponent},
     { path: 'marketing', canActivate: [AuthGuard], component: MarketingServicesComponent},
     { path: 'itservices', canActivate: [AuthGuard], component: ItServicesBookingComponent},
+    { path: 'scheduledmodel', canActivate: [AuthGuard], component: ScheduledModelBookingComponent},
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
     { path: '**', redirectTo: 'signIn', pathMatch: 'full' },
 ];

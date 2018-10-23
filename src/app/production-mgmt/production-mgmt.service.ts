@@ -260,9 +260,68 @@ getCreativeBookingDetails(no): Observable<any> {
   return this.httpClient.get<Creative[]>(url);
 }
 
+
+// scheduled - booking
+
+getScheduledBooking(): Observable<any> {
+  const addurl = 'scheduledbooking/';
+  const url: string = this.serviceUrl + addurl;
+  return this.httpClient.get<Booking[]>(url);
+}
+
+approvedScheduledBooking(): Observable<any> {
+  const addurl = 'approvedscheduledbooking/';
+  const url: string = this.serviceUrl + addurl  ;
+  return this.httpClient.get<Booking[]>(url);
+}
+
+cancelledScheduledBooking(): Observable<any> {
+  const addurl = 'cancelledscheduledbooking/';
+  const url: string = this.serviceUrl + addurl  ;
+  return this.httpClient.get<Booking[]>(url);
+}
+completedScheduledBooking(): Observable<any> {
+  const addurl = 'completedscheduledbooking/';
+  const url: string = this.serviceUrl + addurl  ;
+  return this.httpClient.get<Booking[]>(url);
+}
+
+scheduledBookingApproval(id) {
+  const addurl = 'scheduledbooking/';
+  const statusUrl = '/approve/';
+  const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+  return this.httpClient.get<Booking[]>(url);
+}
+approvalForCancelledScheduledBooking(id) {
+  const addurl = 'cancelledscheduledbooking/';
+  const statusUrl = '/approve/';
+  const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+  return this.httpClient.get<Booking[]>(url);
+}
+
+scheduledBookingCancel(id) {
+  const addurl = 'scheduledbooking/';
+  const statusUrl = '/cancel/';
+  const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+  return this.httpClient.get<Booking[]>(url);
+}
+cancelNewScheduledBooking(id) {
+  const addurl = 'newscheduledbooking/';
+  const statusUrl = '/cancel/';
+  const url: string = this.serviceUrl + addurl + id + statusUrl   ;
+  return this.httpClient.get<Booking[]>(url);
+}
+
+getScheduledBookingDetails(no): Observable<any> {
+  const addurl = 'scheduledbooking/';
+  const viewUrl = '/view';
+  const url: string = this.serviceUrl + addurl + no + viewUrl;
+  return this.httpClient.get<BookingDetail[]>(url);
+}
 pushNotification(data: Notification) {
   const notificationUrl = 'pushnotification';
   const url: string = this.serviceUrl + notificationUrl;
   return this.http.post(url, data);
 }
+
 }

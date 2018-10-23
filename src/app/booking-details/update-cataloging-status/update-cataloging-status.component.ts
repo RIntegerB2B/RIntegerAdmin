@@ -7,6 +7,7 @@ import { SwPush, SwUpdate } from '@angular/service-worker';
 import { BookingDetailsService } from '../booking-details.service';
 import { CatalogingStatus } from './status.model';
 import { Notification } from './notification.model';
+import {NavheaderService} from '../../nav-header/nav-header.service';
 
 @Component({
   selector: 'app-update-cataloging-status',
@@ -60,12 +61,13 @@ export class UpdateCatalogingStatusComponent implements OnInit {
   orderconfirmed: boolean;
   readonly VAPID_PUBLIC_KEY = 'BIvwBoUek8ZLiE2HRr_srixb0Qi-Ql6CVBhhhvIuuZ5PMFYrfP0zSkNRrHD-uvIBhJ3_BDmzSFedMzu5ZuaVVRM';
   constructor(private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute, private bookingService: BookingDetailsService,
+    private activatedRoute: ActivatedRoute, private bookingService: BookingDetailsService, private navheaderService: NavheaderService,
     private swUpdate: SwUpdate, private swPush: SwPush) {
     this.no = this.activatedRoute.snapshot.paramMap.get('no');
   }
 
   ngOnInit() {
+    this.navheaderService.makeMenuTransparent();
     this.createForm();
     this.getStatus(this.no);
   }

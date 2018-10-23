@@ -62,7 +62,8 @@ import {
   MatDialogModule,
   MatChipsModule,
   MatStepperModule,
-  MatDatepickerModule
+  MatDatepickerModule,
+MatNativeDateModule
 } from '@angular/material';
 import { ProductBookingComponent , ProductBookingViewComponent } from './production-mgmt/product-booking/product-booking.component';
 import { ModelBookingComponent , ModelBookingViewComponent} from './production-mgmt/model-booking/model-booking.component';
@@ -83,6 +84,8 @@ import { CatalogingListingComponent ,
   CatalogingViewComponent} from './marketing-management/cataloging-listing/cataloging-listing.component';
 import { ItServicesBookingComponent ,
   ITServicesViewComponent} from './it-services-management/it-services-booking/it-services-booking.component';
+import { ScheduledModelBookingComponent ,
+  ScheduledBookingViewComponent} from './production-mgmt/scheduled-model-booking/scheduled-model-booking.component';
 
 
 
@@ -133,7 +136,9 @@ import { ItServicesBookingComponent ,
     CatalogingViewComponent,
     MarketingServicesViewComponent,
     ItServicesBookingComponent,
-    ITServicesViewComponent
+    ITServicesViewComponent,
+    ScheduledModelBookingComponent,
+    ScheduledBookingViewComponent
   ],
   imports: [
     BrowserModule,
@@ -163,6 +168,7 @@ import { ItServicesBookingComponent ,
   MatStepperModule,
   MatBadgeModule,
   MatDatepickerModule,
+  MatNativeDateModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AccountService, BookingDetailsService, NavheaderService,
@@ -170,7 +176,7 @@ import { ItServicesBookingComponent ,
      entryComponents: [ProductBookingViewComponent, ModelBookingViewComponent, EditingBookingViewComponent,
       CreativeBookingViewComponent, RegistrationBookingViewComponent, ITServicesViewComponent,
        MarketingServicesViewComponent, DigitalMgmtViewComponent, CatalogingViewComponent,
-       AplusBookingViewComponent],
+       AplusBookingViewComponent, ScheduledBookingViewComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
