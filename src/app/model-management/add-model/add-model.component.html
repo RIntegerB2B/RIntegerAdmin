@@ -3,15 +3,15 @@
     <div class="row">
       <div class="col-md-6  mx-auto">
         <div class="form-group">
+              
+           
+        
           <div class="textContainer"   >
             <input type="text" placeholder="Model Name" class="form-control required appTextBox" required formControlName="modelName"
               #modelName/>
           </div>
-        
-          <div *ngIf="addModelForm.get('modelName').errors
-                               && !addModelForm.get('modelName').pristine" class="alert alert-danger">
-            <div [hidden]="!addModelForm.get('modelName').errors.required">Please enter Model Name</div>
-          </div>
+          <div *ngIf="showError" class="alert alert-danger">Please enter Model Name</div>
+         
         </div>
         <div class="col-md-12">
           <label>Type of Category</label>
@@ -88,7 +88,7 @@
         </div>
 
         
-        <div class="form-group">
+   <!--      <div class="form-group">
           <div class="textContainer">
             <input type="text" placeholder="Availability" class="form-control required appTextBox" required formControlName="availability"
             #avail/>
@@ -100,12 +100,19 @@
                                  && !addModelForm.get('availability').pristine" class="alert alert-danger">
             <div [hidden]="!addModelForm.get('availability').errors.required">Please enter Availability</div>
           </div> 
+        </div> -->
+
+
+        <label>Availability</label>
+        <div class="col-sm-12 radio">
+          <label class="pr-2 " *ngFor="let avail of Availability">
+            <input type="radio" formControlName="available" [value]="avail">&nbsp;&nbsp;{{ avail}}
+          </label>
         </div>
-
-
+    
         <div class="form-group">
           <div class="textContainer">
-            <input type="text" placeholder="Mobile Number" class="form-control required appTextBox" required formControlName="mobileNumber"
+            <input type="text" placeholder="Mobile Number" maxlength="10" class="form-control required appTextBox" required formControlName="mobileNumber"
             #mob/>
 
           </div>
@@ -141,9 +148,10 @@
 
         <div class="form-group">
           <div class="textContainer">
-            <input type="text" placeholder="WhatsApp" class="form-control required appTextBox" required formControlName="whatsapp" #wapp/>
+            <input type="text" placeholder="WhatsApp"  maxlength="10" class="form-control required appTextBox" required formControlName="whatsapp" #wapp/>
 
           </div>
+          <div>Ex:9988776655</div>
           <div *ngIf="addModelForm.get('whatsapp').errors
                                        && !addModelForm.get('whatsapp').pristine" class="alert alert-danger">
             <div [hidden]="!addModelForm.get('whatsapp').errors.required">Please enter WhatsApp No</div>
@@ -169,6 +177,9 @@
         <div>
           <input type="file"  name="file" class="btn btnPink btn-block" id="file" multiple (change)="handleFileInput($event.target.files, loadedImage)">
         </div>
+        <div *ngIf="showError2" class="alert alert-danger">Please Add Model Image</div>
+         
+        
       </div>
      <!--  <div class="col-md-3 form-group">
         <div>

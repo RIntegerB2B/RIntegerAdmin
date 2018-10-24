@@ -22,6 +22,8 @@ export class AddModelComponent implements OnInit {
   addModelForm: FormGroup;
   userModel: Model;
   path;
+  showError: boolean;
+  showError2: boolean;
   spModel: ServiceProviderDetail;
   primeImageData: PrimeImageData = new PrimeImageData();
   spName: string;
@@ -30,6 +32,7 @@ export class AddModelComponent implements OnInit {
   modelTypes = ['National', 'InterNational'];
   shootTypes = ['Men', 'Women'];
   id;
+  Availability = ['Yes', 'No'];
   modelAvailable = ['Yes', 'No'];
   loadedModel: Model;
   showUpdate: boolean;
@@ -60,7 +63,6 @@ export class AddModelComponent implements OnInit {
   this.addModelForm = this.fb.group({
     modelName: ['', Validators.required],
     description: [''],
-    availability: [''],
     mobileNumber: [''],
     emailId: [''],
     faceBook: [''],
@@ -68,6 +70,7 @@ export class AddModelComponent implements OnInit {
     shootType: [''],
       modelType: [''],
       modelId: [''],
+      available: ['']
     /*   modelAvail: [''] */
      /*  modelHeight: [''],
       modelMeasurements: [''],
@@ -111,47 +114,57 @@ this.showUpdate = true;
    this.addModelForm.setValue({
     modelName: this.loadedModel.userName,
     description: this.loadedModel.description,
-      availability: this.loadedModel.availability,
       mobileNumber: this.loadedModel.mobileNumber,
       emailId: this.loadedModel.emailId,
       faceBook: this.loadedModel.faceBook,
       whatsapp: this.loadedModel.whatsapp,
       shootType: this.loadedModel.categoryType,
       modelType: this.loadedModel.modelType,
-      modelId: id
+      modelId: id,
+      available: this.loadedModel.availability,
     });
   }, error => {
     console.log(error);
   });
 }
   save(addModelForm: FormGroup , modelName: any) {
- this.userModel = new Model(
-      addModelForm.controls.modelName.value,
-      addModelForm.controls.description.value,
-    addModelForm.controls.availability.value,
-      addModelForm.controls.mobileNumber.value,
-      addModelForm.controls.emailId.value,
-      addModelForm.controls.faceBook.value,
-      addModelForm.controls.whatsapp.value,
-      addModelForm.controls.shootType.value,
-      addModelForm.controls.modelType.value,
+      if (modelName === '' ) {
+this.showError = true;
+this.showError2 = false;
+      } else if (this.fileToUpload === null) {
+        this.showError = false;
+        this.showError2 = true;
+      } else  if (modelName !== 0 && this.fileToUpload != null) {
+          this.showError = false;
+          this.showError2 = false;
+        this.userModel = new Model(
+            addModelForm.controls.modelName.value,
+            addModelForm.controls.description.value,
+          addModelForm.controls.available.value,
+            addModelForm.controls.mobileNumber.value,
+            addModelForm.controls.emailId.value,
+            addModelForm.controls.faceBook.value,
+            addModelForm.controls.whatsapp.value,
+            addModelForm.controls.shootType.value,
+            addModelForm.controls.modelType.value,
+          );
+          // sp details
+         /*  this.userModel.availability = this.modelAvailability; */
+          this.spName = this.localStorageService.retrieve('userName');
+          this.spCompanyName = this.localStorageService.retrieve('companyName');
+        this.spId = this.localStorageService.retrieve('Id');
+        this.userModel.serviceProviderId = this.spId;
+        this.userModel.serviceProviderCompanyName = this.spCompanyName;
+        this.userModel.serviceProviderName = this.spName;
+          this.userModel.primeImage = this.primeImageData.primeImage.name;
+          this.modelService.createModel(this.userModel).subscribe(data => {
+            console.log(data);
+          });
+          this.uploadImage(modelName , this.spName);
+          addModelForm.reset();
+          this.router.navigate(['/models']);
+      }
 
-    );
-    // sp details
-   /*  this.userModel.availability = this.modelAvailability; */
-    this.spName = this.localStorageService.retrieve('userName');
-    this.spCompanyName = this.localStorageService.retrieve('companyName');
-  this.spId = this.localStorageService.retrieve('Id');
-  this.userModel.serviceProviderId = this.spId;
-  this.userModel.serviceProviderCompanyName = this.spCompanyName;
-  this.userModel.serviceProviderName = this.spName;
-    this.userModel.primeImage = this.primeImageData.primeImage.name;
-    this.modelService.createModel(this.userModel).subscribe(data => {
-      console.log(data);
-    });
-    this.uploadImage(modelName , this.spName);
-    addModelForm.reset();
-    this.router.navigate(['/models']);
   }
   edit(addModelForm: FormGroup, modelName: any, modelDesc: any, id: any,
     avail: any, mob: any, email: any, fb: any, wapp: any) {
