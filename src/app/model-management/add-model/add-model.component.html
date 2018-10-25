@@ -26,6 +26,7 @@
                   <input type="radio" formControlName="modelType"  [value]="modelType"><small>&nbsp;&nbsp;{{modelType}}</small>
                 </label>
               </div>
+              <div *ngIf="showModel" class="alert alert-danger">Please select Model Type</div>
           </div>
           <!-- <div class="form-group">
           <div class="textContainer">
@@ -103,16 +104,17 @@
         </div> -->
 
 
-        <label>Availability</label>
+        <label>Availability </label>
         <div class="col-sm-12 radio">
           <label class="pr-2 " *ngFor="let avail of Availability">
             <input type="radio" formControlName="available" [value]="avail">&nbsp;&nbsp;{{ avail}}
           </label>
         </div>
+        <div *ngIf="showAvailability" class="alert alert-danger">Please select the availability</div>
     
         <div class="form-group">
           <div class="textContainer">
-            <input type="text" placeholder="Mobile Number" maxlength="10" class="form-control required appTextBox" required formControlName="mobileNumber"
+            <input type="text" placeholder="Mobile Number" maxlength="20" class="form-control required appTextBox" required formControlName="mobileNumber"
             #mob/>
 
           </div>
@@ -148,7 +150,7 @@
 
         <div class="form-group">
           <div class="textContainer">
-            <input type="text" placeholder="WhatsApp"  maxlength="10" class="form-control required appTextBox" required formControlName="whatsapp" #wapp/>
+            <input type="text" placeholder="WhatsApp"  maxlength="20" class="form-control required appTextBox" required formControlName="whatsapp" #wapp/>
 
           </div>
           <div>Ex:9988776655</div>
@@ -167,7 +169,7 @@
           #id/>
         <div *ngIf="showUpdate">
           <input type="submit" class="btn btnPink btn-block" value="Update" (click)="edit(addModelForm,modelName.value,modelDesc.value,id.value,
-          avail.value,mob.value,email.value,fb.value,wapp.value)" />
+          mob.value,email.value,fb.value,wapp.value)" />
         </div>
       </div>
       <div class="col-md-3 form-group"  *ngIf="!hideImg">

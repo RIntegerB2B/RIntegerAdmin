@@ -87,6 +87,10 @@
             <input type="textbox" hidden [value]="Models[i].isScheduledBooking" formControlName="isScheduled">
             <!-- <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" /> -->
           </div>
+      <!--     <div class="col-md-1 form-group" >
+            <button class="btn btn-danger"  (click)="cancelScheduled(modelId.value)" value="Add Images" type="submit">
+                Available model</button>
+      </div> -->
           <div class="col-md-1 form-group" *ngIf="!Models[i].isScheduledBooking">
               <button class="btn btn-success"  (click)="addScheduled(modelId.value)" value="Add Images" type="submit">
                   Add to Scheduled Booking</button>
@@ -95,6 +99,7 @@
               <button class="btn btn-danger"  (click)="cancelScheduled(modelId.value)" value="Add Images" type="submit">
                   Remove from Scheduled Booking</button>
         </div>
+      
           </div>
         </div>
       </div>
