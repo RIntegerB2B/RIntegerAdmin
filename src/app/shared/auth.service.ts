@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, CanActivateChild, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
 
-    constructor(private router: Router) {}
+    constructor(private router: Router, private localStorageService: LocalStorageService) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         const url: string = state.url;
@@ -21,7 +22,7 @@ export class AuthGuard implements CanActivate {
     }
     isLoggedIn() {
         let status = false;
-        if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        if (this.localStorageService.retrieve('isLoggedIn') === 'true') {
           status = true;
         }         else {
           status = false;

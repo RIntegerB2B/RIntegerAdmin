@@ -53,6 +53,7 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit  {
     this.toggleBar = this.toggleBar === 'colapseMenuBar' ? 'expandMenuBar' : 'colapseMenuBar';
   }
   logout() {
+    this.localStorageService.clear('isLoggedIn');
     this.router.navigate(['/signIn']);
   }
   ngAfterViewInit() {

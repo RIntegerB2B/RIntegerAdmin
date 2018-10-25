@@ -50,7 +50,7 @@ export class SiginComponent implements OnInit {
         this.showPasswordError = true;
       } else {
         if (data.role === 'admin') { // admin
-          sessionStorage.setItem('role', 'admin');
+          this.localStorageService.store('role', 'admin');
           this.router.navigate(['/navheader']);
         } else if (data.role !== 'admin') { // sp
       this.spValidate(name, pwd);
@@ -68,8 +68,8 @@ spValidate(name, pwd) { // check user is approved or not
 this.showError = true;
     } else  {
       this.showPasswordError = false;
-      sessionStorage.setItem('isLoggedIn', 'true');
-      sessionStorage.setItem('role', 'serviceprovider');
+      this.localStorageService.store('isLoggedIn', 'true');
+      this.localStorageService.store('role', 'serviceprovider');
       this.localStorageService.store('userName', data.userName);
       this.localStorageService.store('ID', data.Id);
 this.status = false;
