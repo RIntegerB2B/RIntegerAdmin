@@ -41,7 +41,7 @@ export class ProductBookingComponent implements OnInit {
   ngOnInit() {
     this.navheaderService.makeMenuTransparent();
     this.createForm();
-    this.confirmedBookings();
+    this.newBookings();
   }
   createForm() {
     this.viewBookingForm = this.fb.group({

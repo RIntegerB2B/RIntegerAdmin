@@ -41,7 +41,7 @@ export class CreativeBookingComponent implements OnInit {
      ngOnInit() {
       this.navheaderService.makeMenuTransparent();
       this.createForm();
-      this.confirmedBookings();
+      this.newBookings();
     }
     createForm() {
       this.viewCreativeBookingForm = this.fb.group({

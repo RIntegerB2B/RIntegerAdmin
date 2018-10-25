@@ -112,6 +112,38 @@ export class ViewModelComponent implements OnInit {
       duration: 3000,
     });
   }
+  addToAvailable(id) {
+    this.spId = this.localStorageService.retrieve('Id');
+        /* const marketingIndex = this.selectModel.indexOf(id);
+      if (isChecked) {
+        this.unselectedModel.push(id);
+      } else if (marketingIndex > -1) {
+        this.unselectedModel.splice(marketingIndex, 1);
+      } */
+      this.message = 'added to available model';
+      this.modelService.addToAvailable(id, this.spId).subscribe(data => {
+        this.Models = data;
+      });
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+    }
+    removeFromAvailable(id) {
+      this.spId = this.localStorageService.retrieve('Id');
+          /* const marketingIndex = this.selectModel.indexOf(id);
+        if (isChecked) {
+          this.unselectedModel.push(id);
+        } else if (marketingIndex > -1) {
+          this.unselectedModel.splice(marketingIndex, 1);
+        } */
+        this.message = 'removed from available model';
+        this.modelService.removeFromAvailable(id, this.spId).subscribe(data => {
+          this.Models = data;
+        });
+        this.snackBar.open(this.message, this.action, {
+          duration: 3000,
+        });
+      }
   update(id) {
     this.modelId = id;
     this.router.navigate(['/model', this.modelId]);

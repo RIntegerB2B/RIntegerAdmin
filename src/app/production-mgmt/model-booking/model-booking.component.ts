@@ -42,7 +42,7 @@ modelBooking: ModelBooking;
      ngOnInit() {
       this.navheaderService.makeMenuTransparent();
       this.createForm();
-      this.confirmedBookings();
+      this.newBookings();
     }
     createForm() {
       this.viewModelBookingForm = this.fb.group({

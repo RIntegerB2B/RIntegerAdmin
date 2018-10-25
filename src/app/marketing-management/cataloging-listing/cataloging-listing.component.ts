@@ -40,7 +40,7 @@ export class CatalogingListingComponent implements OnInit {
      ngOnInit() {
       this.navheaderService.makeMenuTransparent();
       this.createForm();
-      this.confirmedBookings();
+      this.newBookings();
     }
     createForm() {
       this.viewCatalogingBookingForm = this.fb.group({

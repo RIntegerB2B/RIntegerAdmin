@@ -40,7 +40,7 @@ export class DigitalMgmtBookingComponent implements OnInit {
      ngOnInit() {
       this.navheaderService.makeMenuTransparent();
       this.createForm();
-      this.confirmedBookings();
+      this.newBookings();
     }
     createForm() {
       this.viewDigitalMgmtBookingForm = this.fb.group({

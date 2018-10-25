@@ -12,20 +12,31 @@
 <form [formGroup]="viewModelForm" novalidate style="padding-top:60px">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8 mx-auto">
-        <div class="container-fluid">
+      <div class="col-md-12 mx-auto">
+     <!--    <div class="container-fluid">
           <div class="row">
             <div class="col-md-4">
-              <div class="form-group">
-                <label>Catalog</label>
+              <div class="col-md-6">
+                <div class="row">
+                    <div class="form-group">
+                        <label>Catalog</label>
+                      </div>
+                </div>
+               
               </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Model Name</label>
+                  </div>
+                </div>
             </div>
-            <div class="col-md-1" >
-              <div class="form-group">
-                <label>Model Name</label>
+            <div class="col-md-4">
+              
+            </div>
+            <div class="col-md-4">
+              
               </div>
-            </div>
-            <!-- <div class="col-md-2">
+             <div class="col-md-2">
               <div class="form-group">
                 <label>Mobile Number</label>
               </div>
@@ -41,65 +52,75 @@
               <div class="form-group">
                 <label>Facebook Id</label>
               </div>
-            </div> -->
+            </div> 
 
 
           </div>
-        </div>
+        </div> -->
         <div class="container">
           <div class="row" *ngFor="let model of Models ; let i = index">
-
-            <div class="col-md-3 form-group">
-              <img [src]="this.model?.primeImage" style="width: 180px; height: 245px;" />
-            </div>
+              <div class="col-md-4 form-group">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <img [src]="this.model?.primeImage" style="width: 180px; height: 245px;" />
+                      </div>
+                      <div class="col-md-6 form-group">
+                        {{model.userName}}
+                      </div>
+                </div>
+                
+              </div>
+              <div class="col-md-3 form-group">
+                  <div class="row">
+                  <input type="text" hidden formControlName="id" [value]="model._id" #modelId />
             
+                  <div class="col-md-4 form-group">
+                    <button mat-raised-button color="accent" (click)="viewProfile(modelId.value)" value="Add Images" type="submit">
+                      View <mat-icon>visibility</mat-icon></button>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <button mat-raised-button color="accent" (click)="addImage(modelId.value,model.userName)" value="Add Images"
+                      type="submit">
+                      Images<mat-icon>add_a_photo</mat-icon></button>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <button mat-raised-button color="accent" (click)="delete(modelId.value)" value="Delete" type="submit">
+                      Delete <mat-icon> delete sweep icon</mat-icon></button>
+                    <input type="textbox" hidden [value]="Models[i].isScheduledBooking" formControlName="isScheduled">
+                    <!-- <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" /> -->
+                  </div>
+                  </div>
+              </div>
+              <div class="col-md-5 form-group">
+                  <div class="row">
+                  <div class="col-md-6 form-group" *ngIf="!Models[i].isScheduledBooking">
+                      <button class="btn btn-success"  (click)="addScheduled(modelId.value)" value="Add Images" type="submit">
+                        Add to Scheduled Booking</button>
+                    </div>
+                    <div class="col-md-6 form-group" *ngIf="Models[i].isScheduledBooking">
+                      <button class="btn btn-danger"  (click)="cancelScheduled(modelId.value)" value="Add Images" type="submit">
+                        Remove from Scheduled Booking</button>
+                    </div>
+                    <div class="col-md-6 form-group" *ngIf="Models[i].availability !== 'Yes'">
+                        <button class="btn btn-success" (click)="addToAvailable(modelId.value)" value="Add Images" type="submit">
+                            Add to  Available</button>
+                      </div>
+                      <div class="col-md-6 form-group" *ngIf="Models[i].availability === 'Yes'">
+                          <button class="btn btn-danger"  (click)="removeFromAvailable(modelId.value)" value="Add Images" type="submit">
+                           Remove from Available</button>
+                        </div>
+                    </div>
+              </div>
+            
+         
 
-            <div class="col-md-1 form-group">
-              {{model.userName}}
-            </div>
-<!-- 
-            <div class="col-md-2 form-group">
-              {{model.mobileNumber}}
-            </div>
-
-            <div class="col-md-2 form-group">
-              {{model.whatsapp}}
-            </div>
-            <div class="col-md-1 form-group">
-              {{model.faceBook}}
-            </div> -->
            
-            <input type="text" hidden formControlName="id" [value]="model._id" #modelId/>
-            <!-- <div class="col-md-1 form-group">
-              <input type="button" class="btn btn-success" value="Update" (click)="update(modelId.value)" />
-            </div> -->
-            <div class="col-md-2 form-group">
-                <button mat-raised-button color="accent"  (click)="viewProfile(modelId.value)" value="Add Images" type="submit">
-                  View <mat-icon>visibility</mat-icon></button>
-            </div>
-            <div class="col-md-2 form-group">
-                <button mat-raised-button color="accent"  (click)="addImage(modelId.value,model.userName)" value="Add Images" type="submit">
-                  Images<mat-icon>add_a_photo</mat-icon></button>
-            </div>
-          <div class="col-md-2 form-group">
-              <button mat-raised-button color="accent"  (click)="delete(modelId.value)" value="Delete" type="submit">
-                  Delete <mat-icon>  delete sweep icon</mat-icon></button>
-            <input type="textbox" hidden [value]="Models[i].isScheduledBooking" formControlName="isScheduled">
-            <!-- <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" /> -->
-          </div>
-      <!--     <div class="col-md-1 form-group" >
+            <!--     <div class="col-md-1 form-group" >
             <button class="btn btn-danger"  (click)="cancelScheduled(modelId.value)" value="Add Images" type="submit">
                 Available model</button>
       </div> -->
-          <div class="col-md-1 form-group" *ngIf="!Models[i].isScheduledBooking">
-              <button class="btn btn-success"  (click)="addScheduled(modelId.value)" value="Add Images" type="submit">
-                  Add to Scheduled Booking</button>
-          </div>
-          <div class="col-md-1 form-group" *ngIf="Models[i].isScheduledBooking">
-              <button class="btn btn-danger"  (click)="cancelScheduled(modelId.value)" value="Add Images" type="submit">
-                  Remove from Scheduled Booking</button>
-        </div>
-      
+           
+
           </div>
         </div>
       </div>

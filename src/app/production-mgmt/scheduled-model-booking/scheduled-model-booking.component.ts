@@ -43,7 +43,7 @@ modelBooking: ScheduledBooking;
      ngOnInit() {
       this.navheaderService.makeMenuTransparent();
       this.createForm();
-      this.confirmedBookings();
+      this.newBookings();
     }
     createForm() {
       this.viewScheduledBookingForm = this.fb.group({

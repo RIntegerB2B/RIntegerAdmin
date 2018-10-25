@@ -42,7 +42,7 @@ export class ImageEditingBookingComponent implements OnInit {
      ngOnInit() {
       this.navheaderService.makeMenuTransparent();
       this.createForm();
-      this.confirmedBookings();
+      this.newBookings();
     }
     createForm() {
       this.viewEditingBookingForm = this.fb.group({

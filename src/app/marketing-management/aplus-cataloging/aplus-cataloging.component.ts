@@ -40,7 +40,7 @@ export class AplusCatalogingComponent implements OnInit {
      ngOnInit() {
       this.navheaderService.makeMenuTransparent();
       this.createForm();
-      this.confirmedBookings();
+      this.newBookings();
     }
     createForm() {
       this.viewAplusBookingForm = this.fb.group({
