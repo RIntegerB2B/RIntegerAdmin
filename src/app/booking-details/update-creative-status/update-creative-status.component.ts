@@ -575,7 +575,7 @@ export class UpdateCreativeStatusComponent implements OnInit {
   }
   updateShootPlanning(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
     this.value = 1;
-    this.bookingService.shootPlanning(mobileNumber, orderId, this.value).subscribe(data => {
+    this.bookingService.completedShootPlanning(mobileNumber, orderId, this.value).subscribe(data => {
       console.log(data);
       this.Status = data;
       switch (data[0].shootPlanning) {
@@ -606,7 +606,7 @@ export class UpdateCreativeStatusComponent implements OnInit {
   }
   updateShoot(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
     this.value = 1;
-    this.bookingService.shooting(mobileNumber, orderId, this.value).subscribe(data => {
+    this.bookingService.completedShooting(mobileNumber, orderId, this.value).subscribe(data => {
       console.log(data);
       this.Status = data;
       switch (data[0].shootCompleted) {
@@ -637,7 +637,7 @@ export class UpdateCreativeStatusComponent implements OnInit {
   }
   updatePostProductionWork(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
     this.value = 1;
-    this.bookingService.postProductionWork(mobileNumber, orderId, this.value).subscribe(data => {
+    this.bookingService.completedPostProductionWork(mobileNumber, orderId, this.value).subscribe(data => {
       console.log(data);
       this.Status = data;
       switch (data[0].postProductionWork) {
@@ -668,7 +668,7 @@ export class UpdateCreativeStatusComponent implements OnInit {
   }
   updatePayment(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
     this.value = 1;
-    this.bookingService.creativePayment(mobileNumber, orderId, this.value).subscribe(data => {
+    this.bookingService.completedCreativePayment(mobileNumber, orderId, this.value).subscribe(data => {
       console.log(data);
       this.Status = data;
       switch (data[0].payment) {
@@ -699,8 +699,35 @@ export class UpdateCreativeStatusComponent implements OnInit {
   }
   updateMaterialReturn(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
     this.value = 1;
-    this.bookingService.creativeMaterialReturn(mobileNumber, orderId, this.value).subscribe(data => {
-      console.log(data);
+    this.bookingService.completedCreativeMaterialReturn(mobileNumber, orderId, this.value).subscribe(data => {
+      this.Status = data;
+      switch (data[0].materialReturn) {
+        case 0: {
+          this.materialReturn = true;
+          this.materialReturnTrue = false;
+          this.materialReturnProgress = false;
+          break;
+        }
+        case 1: {
+          this.materialReturn = false;
+          this.materialReturnTrue = true;
+          this.materialReturnProgress = false;
+          break;
+        }
+        case 2: {
+          this.materialReturn = false;
+          this.materialReturnTrue = false;
+          this.materialReturnProgress = true;
+          break;
+        }
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+  completeMaterialReturn(updateEditingStatusForm: FormGroup, mobileNumber: any, orderId: any) {
+    this.value = 1;
+    this.bookingService.completedCreativeMaterialReturn(mobileNumber, orderId, this.value).subscribe(data => {
       this.Status = data;
       switch (data[0].materialReturn) {
         case 0: {
