@@ -16,6 +16,7 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit  {
   admin: boolean;
   serviceProvider: boolean;
   subMenus: boolean;
+  panelOpenState: boolean;
   menuItems: any[];
   public hasIconTypeMenuItem: boolean;
   menuItemsSub: Subscription;

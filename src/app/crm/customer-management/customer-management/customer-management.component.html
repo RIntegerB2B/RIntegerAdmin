@@ -63,7 +63,7 @@
     <div>
   
       <ngx-datatable #myTable class="material pl-5 ml-0 mr-0" [rows]="newCustomer" [columnMode]="'force'" [externalPaging]="false"
-        (select)="onSelect($event)" [headerHeight]="50"
+       [headerHeight]="50"
          [footerHeight]="50" [draggable]="false" [limit]="10"
         [rowHeight]="'auto'">
         <ngx-datatable-column [sortable]="false" [draggable]="false" name="CUSTOMER NAME" [flexGrow]="1">
