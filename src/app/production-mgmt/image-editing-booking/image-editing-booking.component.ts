@@ -175,7 +175,7 @@ export class ImageEditingBookingComponent implements OnInit {
     });
   }
   updateStatus(no) {
-    this.router.navigate(['/editingstatus', no]);
+    this.router.navigate(['/navheader/editingstatus', no]);
   }
   viewDetails(no) {
     this.productionService.getEditingBookingDetails(no).subscribe(sample => {

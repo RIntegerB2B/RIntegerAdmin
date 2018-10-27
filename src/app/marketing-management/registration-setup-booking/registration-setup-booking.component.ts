@@ -173,7 +173,7 @@ export class RegistrationSetupBookingComponent implements OnInit {
     });
   }
   updateStatus(no) {
-    this.router.navigate(['/registrationstatus', no]);
+    this.router.navigate(['/navheader/registrationstatus', no]);
   }
   viewDetails(no) {
     this.marketMgmtService.getRegistrationBookingDetails(no).subscribe(sample => {

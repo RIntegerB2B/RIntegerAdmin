@@ -1,3 +1,5 @@
+
+
 .example-container {
     display: flex;
     flex-direction: column;
@@ -19,7 +21,17 @@
     transition: transform .3s cubic-bezier(.35, 0, .25, 1);
     width: 15rem;
 }
+.example-sidenav-container {
+  flex: 1 !important;
+}
 
+.example-is-mobile .example-sidenav-container {
+  flex: 1 0 auto !important;
+}
+.mat-drawer-backdrop .mat-drawer-shown
+{
+  background-color: white !important;
+}
 .mat-toolbar-single-row {
   height: 64px;
   font-size: medium;

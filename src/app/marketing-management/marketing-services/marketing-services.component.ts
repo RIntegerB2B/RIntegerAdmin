@@ -173,7 +173,7 @@ export class MarketingServicesComponent implements OnInit {
     });
   }
   updateStatus(no) {
-   /*  this.router.navigate(['/catalogstatus', no]); */
+     /* this.router.navigate(['/navheader/catalogstatus', no]); */
   }
   viewDetails(no) {
     this.marketMgmtService.getMarketingBookingDetails(no).subscribe(sample => {

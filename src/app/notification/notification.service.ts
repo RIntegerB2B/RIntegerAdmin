@@ -25,7 +25,7 @@ export class NotificationService {
     constructor(private http: Http, private httpClient: HttpClient) { }
 
     pushNotification(pushNotificationData: PushNotification) {
-        const addUrl = 'pushNotification';
+        const addUrl = 'pushnotificationtoany';
         const url: string = this.serviceUrl + addUrl;
         return this.httpClient.post<PushNotification>(url, pushNotificationData);
     }

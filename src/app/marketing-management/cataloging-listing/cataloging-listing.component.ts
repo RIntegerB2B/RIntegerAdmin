@@ -172,7 +172,7 @@ export class CatalogingListingComponent implements OnInit {
     });
   }
   updateStatus(no) {
-    this.router.navigate(['/catalogstatus', no]);
+    this.router.navigate(['navheader/catalogstatus', no]);
   }
   viewDetails(no) {
     this.marketMgmtService.getCatalogBookingDetails(no).subscribe(sample => {

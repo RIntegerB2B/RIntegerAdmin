@@ -173,7 +173,7 @@ export class AplusCatalogingComponent implements OnInit {
     });
   }
   updateStatus(no) {
-    this.router.navigate(['/aplusstatus', no]);
+    this.router.navigate(['navheader/aplusstatus', no]);
   }
   viewDetails(no) {
     this.marketMgmtService.getAplusBookingDetails(no).subscribe(sample => {

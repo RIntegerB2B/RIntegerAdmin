@@ -174,7 +174,7 @@ export class CreativeBookingComponent implements OnInit {
     });
   }
   updateStatus(no) {
-    this.router.navigate(['/creativestatus', no]);
+    this.router.navigate(['/navheader/creativestatus', no]);
   }
   viewDetails(no) {
     this.productionService.getCreativeBookingDetails(no).subscribe(sample => {

@@ -73,7 +73,7 @@ this.showError = true;
       this.localStorageService.store('userName', data.userName);
       this.localStorageService.store('ID', data.Id);
 this.status = false;
-this.router.navigate(['/productbooking']);
+this.router.navigate(['/navheader/productbooking']);
     }
   }, error => {
     console.log(error);

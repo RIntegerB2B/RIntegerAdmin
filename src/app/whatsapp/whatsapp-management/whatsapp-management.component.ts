@@ -3,28 +3,26 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { MatStepper } from '@angular/material';
 import { PageEvent } from '@angular/material';
-import { NotificationService } from '../notification.service';
+import { WhatsappService } from './../../whatsapp/whatsapp.service';
 import { CustomerManagementService } from './../../crm/customer-management/customer-management.service';
 import { MarketingManagementService } from './../../crm/marketing-management/marketing-management.service';
 import { Market } from './../../shared/marketing.model';
-import { PushNotification } from './push-notification.model';
 import { Customer } from '../../shared/customer.model';
-import {AppSetting} from '../../config/appSetting';
-
-
+import {AppSetting } from '../../config/appSetting';
 
 @Component({
-  selector: 'app-push-notification',
-  templateUrl: './push-notification.component.html',
-  styleUrls: ['./push-notification.component.css']
+  selector: 'app-whatsapp-management',
+  templateUrl: './whatsapp-management.component.html',
+  styleUrls: ['./whatsapp-management.component.css']
 })
-export class PushNotificationComponent implements OnInit {
+export class WhatsappManagementComponent implements OnInit {
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   imageUrl: string = AppSetting.imageUrl;
   serviceUrl: string = AppSetting.serviceUrl;
-  pushNotificationForm: FormGroup;
-  pushNotificationModel: PushNotification;
   customerModel: Customer;
+  whatsappForm: FormGroup;
+  whatsappShareUrl;
   customerMarket: Market;
   rows: any = [];
   columns: any = [];
@@ -33,7 +31,7 @@ export class PushNotificationComponent implements OnInit {
   customerSource: any = [];
   mobileNumber = [];
   mobileNumbers;
-  selectNo: string = this.mobileNumber.toString();
+  whatsappText;
   @ViewChild('myTable') table: any;
   public pageSize = 10;
   public currentPage = 0;
@@ -41,10 +39,10 @@ export class PushNotificationComponent implements OnInit {
   breakpoint: number;
   setSpace: number;
   array: any;
-  modelTypes = ['National', 'InterNational', 'All'];
-  shootTypes = ['Men', 'Women', 'Kids', 'Others', 'All'];
-  constructor(private fb: FormBuilder, private notificationService: NotificationService,
-     private customerService: CustomerManagementService, private marketingManagementService: MarketingManagementService) { }
+  constructor(private fb: FormBuilder,
+     private customerService: CustomerManagementService,
+      private marketingManagementService: MarketingManagementService, private whatsappService: WhatsappService) { }
+
   ngOnInit() {
     this.createForm();
     this.getAllCustomer();
@@ -61,15 +59,14 @@ export class PushNotificationComponent implements OnInit {
     stepper.next();
   }
   createForm() {
-    this.pushNotificationForm = this.fb.group({
+    this.whatsappForm = this.fb.group({
       mobileNumbers: [ '', Validators.required],
-      title: ['', Validators.required],
-      isAdmin: [false, Validators.required],
-      notificationBody: ['', Validators.required],
-      imageUrl: [this.imageUrl, Validators.required],
-      linkUrl: [this.serviceUrl, Validators.required],
-      customer: [''],
+      whatsappText: ['', Validators.required],
     });
+  }
+  whatsappShare(whatsappForm: FormGroup, mobileNumbers, whatsappText) {
+    this.whatsappShareUrl = 'https://api.whatsapp.com/send?phone=91' + mobileNumbers + '&text=' + encodeURIComponent(whatsappText);
+    window.open(this.whatsappShareUrl);
   }
   getAllCustomer() {
     this.customerService.allCustomer()
@@ -110,37 +107,7 @@ export class PushNotificationComponent implements OnInit {
     const part = this.array.slice(start, end);
     this.customerSource = part;
   }
-  /*customers() {
-    this.customerService.findCustomers().subscribe(data => {
-      this.customerModel = data;
-       console.log(data);
-    });
-    }*/
-  /* getShootType(id) {
-    this.showData = true;
-    if (id === 'All') {
-    this.customers();
-    } else {
-      this.customerService.findShootType(id).subscribe(data => {
-        this.customerModel = data;
-       });
-    }
-  }
-  getModelType(id, id2) {
-    this.showData = true;
-    if (id2 === 'All') {
-      this.customerService.findShootType(id).subscribe(data => {
-        this.customerModel = data;
-       });
-      } else {
-    this.customerService.findModelType(id, id2).subscribe(data => {
-     this.customerModel = data;
-    console.log(data);
-    });
-  }
-  }*/
-
-  getValue(pushNotificationForm: FormGroup, isChecked,  mobileNo) {
+  getValue(whatsappForm: FormGroup, isChecked,  mobileNo) {
     const index = this.mobileNumber.indexOf(mobileNo);
       if (isChecked.checked === true) {
         this.mobileNumber.push(mobileNo);
@@ -148,12 +115,12 @@ export class PushNotificationComponent implements OnInit {
         this.mobileNumber.splice(index, 1);
       }
        this.mobileNumbers = this.mobileNumber.toString();
-      this.pushNotificationForm.controls.mobileNumbers.setValue(this.mobileNumbers);
+      this.whatsappForm.controls.mobileNumbers.setValue(this.mobileNumbers);
       console.log(this.mobileNumbers);
     }
     sendNumbers() {
     this.mobileNumbers = this.mobileNumber.toString();
-    this.pushNotificationForm.controls.mobileNumbers.setValue( this.mobileNumbers);
+    this.whatsappForm.controls.mobileNumbers.setValue( this.mobileNumbers);
       console.log(this.mobileNumbers);
     }
     updateFilter(event) {
@@ -179,19 +146,19 @@ export class PushNotificationComponent implements OnInit {
       this.customerSource = rows;
     }
 
-  pushNotification(pushNotificationForm: FormGroup) {
-    this.pushNotificationModel = new PushNotification(
-      pushNotificationForm.controls.mobileNumbers.value,
-      pushNotificationForm.controls.title.value,
-      pushNotificationForm.controls.isAdmin.value,
-      pushNotificationForm.controls.notificationBody.value,
-      pushNotificationForm.controls.imageUrl.value,
-      pushNotificationForm.controls.linkUrl.value
+  /* pushNotification(whatsappForm: FormGroup) {
+    this.whatsappForm = new WhatsApp(
+      whatsappForm.controls.mobileNumbers.value,
+      whatsappForm.controls.title.value,
+      whatsappForm.controls.isAdmin.value,
+      whatsappForm.controls.notificationBody.value,
+      whatsappForm.controls.imageUrl.value,
+      whatsappForm.controls.linkUrl.value
     );
-    this.notificationService.pushNotification(this.pushNotificationModel).subscribe(data => {
+    this.whatsappService.pushNotification(this.pushNotificationModel).subscribe(data => {
       console.log(data);
     }, error => {
       console.log(error);
     });
-  }
+  } */
 }

@@ -173,7 +173,7 @@ cancelNewBooking(id, bookingID) {
   });
 }
 updateStatus(no) {
-  this.router.navigate(['/update', no]);
+  this.router.navigate(['/navheader/update', no]);
 }
 viewDetails(no) {
   this.productionService.getProductBookingDetails(no).subscribe(sample => {

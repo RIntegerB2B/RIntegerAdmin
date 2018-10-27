@@ -37,10 +37,6 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
 
   ngOnInit() {
-   /*  this.menuItemsSub = this.navheaderService.menuItems$.subscribe(menuItem => {
-      this.menuItems = menuItem.filter(item => item.type !== 'icon' && item.type !== 'separator');
-      this.hasIconTypeMenuItem = !!this.menuItems.filter(item => item.type === 'icon').length;
-    }); */
     if (this.navID === 'true') {
       this.serviceProvider = true;
       this.admin = false;
