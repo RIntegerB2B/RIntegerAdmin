@@ -182,7 +182,7 @@ export class AddModelComponent implements OnInit {
       });
       this.uploadImage(modelName, this.spName);
       addModelForm.reset();
-      this.router.navigate(['/models']);
+      this.router.navigate(['/navheader/models']);
     }
 
   }
@@ -204,7 +204,7 @@ export class AddModelComponent implements OnInit {
     this.modelService.updateModel(id, this.updatedModel).subscribe(data => {
       console.log(data);
       //  this.uploadImage(modelName , this.spName);
-      this.router.navigate(['/models']);
+      this.router.navigate(['/navheader/models']);
     }, error => {
       console.log(error);
     });

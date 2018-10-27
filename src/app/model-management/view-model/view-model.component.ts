@@ -46,7 +46,7 @@ export class ViewModelComponent implements OnInit {
   }
   viewProfile(modelId) {
     this.spName = this.localStorageService.retrieve('userName');
-    this.router.navigate(['/profile', this.spName, 'images', modelId]);
+    this.router.navigate(['/navheader/profile', this.spName, 'images', modelId]);
   }
   findModels() {
     this.spId = this.localStorageService.retrieve('Id');
@@ -146,11 +146,11 @@ export class ViewModelComponent implements OnInit {
       }
   update(id) {
     this.modelId = id;
-    this.router.navigate(['/model', this.modelId]);
+    this.router.navigate(['/navheader/model', this.modelId]);
   }
   addImage(modelId, modelName) {
     // console.log(modelId);
     // console.log(modelName);
-    this.router.navigate(['/model', modelId, 'name', modelName]);
+    this.router.navigate(['/navheader/model', modelId, 'name', modelName]);
   }
 }

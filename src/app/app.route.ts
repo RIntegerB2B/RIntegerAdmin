@@ -51,6 +51,7 @@ const routes: Routes = [
     {
         path: 'signIn', component: SiginComponent
     },
+    { path: 'registration', component: RegistrationComponent },
     {
         path: 'navheader', canActivate: [AuthGuard], component: NavHeaderComponent,
         children: [
@@ -63,7 +64,6 @@ const routes: Routes = [
             { path: 'catalogstatus/:no', canActivate: [AuthGuard], component: UpdateCatalogingStatusComponent },
             { path: 'registrationstatus/:no', canActivate: [AuthGuard], component: UpdateRegistartionStatusComponent },
             { path: 'aplusstatus/:no', canActivate: [AuthGuard], component: UpdateAplusStatusComponent },
-            { path: 'registration', component: RegistrationComponent },
             { path: 'serviceproviderapproval', canActivate: [AuthGuard], component: ApprovalComponent },
             { path: 'agency', canActivate: [AuthGuard], component: ViewAgencyComponent },
             { path: 'models', canActivate: [AuthGuard], component: ViewModelComponent },

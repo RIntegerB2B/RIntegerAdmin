@@ -153,6 +153,6 @@ export class ViewProfileComponent implements OnInit {
   // update profile details
   update(id) {
     this.modelId = id;
-    this.router.navigate(['/model', this.modelId]);
+    this.router.navigate(['/navheader/model', this.modelId]);
   }
 }
