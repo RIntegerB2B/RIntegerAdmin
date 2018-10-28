@@ -1,0 +1,176 @@
+<form [formGroup]="permissionForm" class="p-3" novalidate style="padding-top:60px; padding-bottom:60px;" (ngSubmit)="accessPermission(permissionForm)">
+  <div class="container">
+    <div fxLayout="row">
+      <div fxFlex="30%">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Role" formControlName="role">
+        </mat-form-field>
+      </div>
+      <div fxFlex="30%">
+
+      </div>
+      <div fxFlex="30%">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Date" formControlName="currentDate">
+        </mat-form-field>
+      </div>
+    </div>
+    <h5>Main Menu</h5>
+    <div class="row">
+      <div class="col-md-6 col-6">
+        <div class="row">
+          <div class="col-md-12 p-2"><b>ProductBookingMgmt</b></div>
+          <div class="col-md-12 p-2"><b>DigitalBusinessMgmt</b></div>
+          <div class="col-md-12 p-2"> <b>IT Services BookingMgmt</b></div>
+          <div class="col-md-12 p-2"> <b>Model Mgmt</b></div>
+          <div class="col-md-12 p-2"> <b>Marketing Mgmt</b></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-6">
+        <div class="row" formGroupName="mainMenuPermission">
+          <div class="col-sm-12 p-1">
+            <mat-checkbox formControlName="productBookingMgmt" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="digitalBusinessMgmt" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="itServicesBookingMgmt" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+
+            <mat-checkbox formControlName="databaseMgmt" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="marketingMgmt" class="mail-checkbox">
+            </mat-checkbox>
+
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="userMgmt" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <h5>Sub Menu</h5>
+    <div class="row">
+      <div class="col-md-6 col-6">
+        <div class="row">
+          <div class="col-md-12 p-2"><b>Scheduled Model</b></div>
+          <div class="col-md-12 p-2"><b>ProductShoot</b></div>
+          <div class="col-md-12 p-2"> <b>ModelShoot</b></div>
+          <div class="col-md-12 p-2"> <b>Model Mgmt</b></div>
+          <div class="col-md-12 p-2"> <b>Creative Shoot</b></div>
+          <div class="col-md-12 p-2"><b>Image Editing</b></div>
+          <div class="col-md-12 p-2"><b>Creative Shoot</b></div>
+          <div class="col-md-12 p-2"> <b>Registration Setup</b></div>
+          <div class="col-md-12 p-2"> <b>Marketing Services</b></div>
+          <div class="col-md-12 p-2"> <b>Marketing Mgmt</b></div>
+          <div class="col-md-12 p-2"><b>Account Mgmt</b></div>
+          <div class="col-md-12 p-2"><b>Aplus Cataloging</b></div>
+          <div class="col-md-12 p-2"> <b>It Services</b></div>
+          <div class="col-md-12 p-2"> <b>Add Model</b></div>
+          <div class="col-md-12 p-2"> <b>View Model</b></div>
+          <div class="col-md-12 p-2"><b>Customer DB</b></div>
+          <div class="col-md-12 p-2"><b>Marketing DB</b></div>
+          <div class="col-md-12 p-2"> <b>Bulk PushNotification</b></div>
+          <div class="col-md-12 p-2"> <b>Whatsapp</b></div>
+          <div class="col-md-12 p-2"> <b>permission</b></div>
+          <div class="col-md-12 p-2"> <b>Register</b></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-6 ">
+        <div class="row" formGroupName="menuPermission">
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="scheduledModel" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="productShoot" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="modelShoot" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+
+            <mat-checkbox formControlName="creativeShoot" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="imageEditing" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="registrationSetup" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="catalogingListing" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="marketingServices" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="accountMgmt" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="aplusCataloging" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="itServices" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="addModel" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="viewModel" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="customerDB" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="marketingDB" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="bulkPushNotification" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="whatsapp" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="subscribe" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="permission" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+          <div class="col-md-12 p-1">
+            <mat-checkbox formControlName="register" class="mail-checkbox">
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button mat-raised-button color="accent">Submit</button>
+</form>

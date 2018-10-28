@@ -3,8 +3,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import {User} from './user.model';
-import {AccountService} from '../account.service';
-import {mobileNumber} from './validation';
+import { AccountService } from '../account.service';
+import { mobileNumber } from './validation';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',

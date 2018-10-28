@@ -3,49 +3,66 @@ import { WelcomeComponent } from './home/welcome/welcome.component';
 import { SiginComponent } from './account/sigin/sigin.component';
 import { ViewBookingComponent } from './booking-details/view-booking/view-booking.component';
 import { UpdateStatusComponent } from './booking-details/update-status/update-status.component';
-import { RegistrationComponent} from './account/registration/registration.component';
+import { RegistrationComponent } from './account/registration/registration.component';
 import { ApprovalComponent } from './service-provider-management/approval/approval.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { AddModelComponent } from './model-management/add-model/add-model.component';
 import { ViewModelComponent } from './model-management/view-model/view-model.component';
 import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
 import { CustomerDetailsComponent } from './customer-management/customer-details/customer-details.component';
-import {ViewAgencyComponent} from './agency-management/view-agency/view-agency.component';
-import {ImageManagementComponent} from './model-management/image-management/image-management.component';
-import {ViewProfileComponent} from './model-management/view-profile/view-profile.component';
-import {CatalogListingComponent} from './catalog-listing-settings/catalog-listing/catalog-listing.component';
+import { ViewAgencyComponent } from './agency-management/view-agency/view-agency.component';
+import { ImageManagementComponent } from './model-management/image-management/image-management.component';
+import { ViewProfileComponent } from './model-management/view-profile/view-profile.component';
+import { CatalogListingComponent } from './catalog-listing-settings/catalog-listing/catalog-listing.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { UpdateEditingStatusComponent } from './booking-details/update-editing-status/update-editing-status.component';
 import { UpdateCreativeStatusComponent } from './booking-details/update-creative-status/update-creative-status.component';
 import { UpdateCatalogingStatusComponent } from './booking-details/update-cataloging-status/update-cataloging-status.component';
 import { UpdateRegistartionStatusComponent } from './booking-details/update-registartion-status/update-registartion-status.component';
 import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
-import {AuthGuard} from './shared/auth.service';
-import {ProductBookingComponent} from './production-mgmt/product-booking/product-booking.component';
-import {ModelBookingComponent} from './production-mgmt/model-booking/model-booking.component';
-import {ImageEditingBookingComponent} from './production-mgmt/image-editing-booking/image-editing-booking.component';
+import { AuthGuard } from './shared/auth.service';
+import { ProductBookingComponent } from './production-mgmt/product-booking/product-booking.component';
+import { ModelBookingComponent } from './production-mgmt/model-booking/model-booking.component';
+import { ImageEditingBookingComponent } from './production-mgmt/image-editing-booking/image-editing-booking.component';
 import { CreativeBookingComponent } from './production-mgmt/creative-booking/creative-booking.component';
-import {RegistrationBookingViewComponent,
-     RegistrationSetupBookingComponent} from './marketing-management/registration-setup-booking/registration-setup-booking.component';
-import {DigitalMgmtBookingComponent,
-     DigitalMgmtViewComponent} from './marketing-management/digital-mgmt-booking/digital-mgmt-booking.component';
-     import {MonthlyPlanComponent} from './digital-management/monthly-plan/monthly-plan.component';
-     import {AplusCatalogingComponent,
-        AplusBookingViewComponent} from './marketing-management/aplus-cataloging/aplus-cataloging.component';
-        import {CatalogingListingComponent,
-            CatalogingViewComponent} from './marketing-management/cataloging-listing/cataloging-listing.component';
-import { MarketingServicesComponent ,
-    MarketingServicesViewComponent} from './marketing-management/marketing-services/marketing-services.component';
-    import {ItServicesBookingComponent,
-    ITServicesViewComponent} from './it-services-management/it-services-booking/it-services-booking.component';
-import {ScheduledModelBookingComponent,
-    ScheduledBookingViewComponent} from './production-mgmt/scheduled-model-booking/scheduled-model-booking.component';
+import {
+    RegistrationBookingViewComponent,
+    RegistrationSetupBookingComponent
+} from './marketing-management/registration-setup-booking/registration-setup-booking.component';
+import {
+    DigitalMgmtBookingComponent,
+    DigitalMgmtViewComponent
+} from './marketing-management/digital-mgmt-booking/digital-mgmt-booking.component';
+import { MonthlyPlanComponent } from './digital-management/monthly-plan/monthly-plan.component';
+import {
+    AplusCatalogingComponent,
+    AplusBookingViewComponent
+} from './marketing-management/aplus-cataloging/aplus-cataloging.component';
+import {
+    CatalogingListingComponent,
+    CatalogingViewComponent
+} from './marketing-management/cataloging-listing/cataloging-listing.component';
+import {
+    MarketingServicesComponent,
+    MarketingServicesViewComponent
+} from './marketing-management/marketing-services/marketing-services.component';
+import {
+    ItServicesBookingComponent,
+    ITServicesViewComponent
+} from './it-services-management/it-services-booking/it-services-booking.component';
+import {
+    ScheduledModelBookingComponent,
+    ScheduledBookingViewComponent
+} from './production-mgmt/scheduled-model-booking/scheduled-model-booking.component';
 import { MarketingManagementComponent } from './crm/marketing-management/marketing-management/marketing-management.component';
 import { UploadManagementComponent } from './crm/upload-management/upload-management/upload-management.component';
-import { CustomerManagementComponent, CustomerAddComponent,
-    CustomerEditComponent } from './crm/customer-management/customer-management/customer-management.component';
+import {
+    CustomerManagementComponent, CustomerAddComponent,
+    CustomerEditComponent
+} from './crm/customer-management/customer-management/customer-management.component';
 import { WhatsappManagementComponent } from './whatsapp/whatsapp-management/whatsapp-management.component';
-
+import { PermissionComponent } from './user-management/permission/permission/permission.component';
+import { RegisterComponent } from './user-management/register/register.component';
 
 const routes: Routes = [
     {
@@ -90,10 +107,12 @@ const routes: Routes = [
             { path: 'crmcustomer', canActivate: [AuthGuard], component: CustomerManagementComponent },
             { path: 'crmupload', canActivate: [AuthGuard], component: UploadManagementComponent },
             { path: 'whatsapp', canActivate: [AuthGuard], component: WhatsappManagementComponent },
+            { path: 'userpermission', canActivate: [AuthGuard], component: PermissionComponent },
+            { path: 'register', canActivate: [AuthGuard], component: RegisterComponent },
         ]
     },
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
     { path: '**', redirectTo: 'signIn', pathMatch: 'full' },
 ];
 
-export const Routing = RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'});
+export const Routing = RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' });

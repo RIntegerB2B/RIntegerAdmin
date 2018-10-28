@@ -111,7 +111,8 @@ import { UploadManagementComponent,  } from './crm/upload-management/upload-mana
 import { CustomerManagementComponent, CustomerAddComponent,
   CustomerEditComponent } from './crm/customer-management/customer-management/customer-management.component';
 import { WhatsappManagementComponent } from './whatsapp/whatsapp-management/whatsapp-management.component';
-
+import { PermissionComponent } from './user-management/permission/permission/permission.component';
+import { RegisterComponent } from './user-management/register/register.component';
 
 
 @NgModule({
@@ -171,7 +172,9 @@ import { WhatsappManagementComponent } from './whatsapp/whatsapp-management/what
     CustomerManagementComponent,
     CustomerAddComponent,
     CustomerEditComponent,
-    WhatsappManagementComponent
+    WhatsappManagementComponent,
+    PermissionComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Permission } from './../user-management/permission/permission/permission.model';
 @Component({
   selector: 'app-nav-header',
   templateUrl: './nav-header.component.html',
@@ -23,6 +24,7 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit  {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   mobileNo;
+  role: Permission;
   enable: boolean;
   filterValue;
   toggleBar = 'colapseMenuBar';
@@ -45,6 +47,7 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit  {
       this.serviceProvider = false;
       this.admin = true;
     }
+    this.role = this.localStorageService.retrieve('role');
   }
   collapseMenu() {
     this.toggleBar = this.toggleBar === 'colapseMenuBar' ? 'expandMenuBar' : 'colapseMenuBar';

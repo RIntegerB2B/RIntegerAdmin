@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ActivatedRoute } from '@angular/router';
-
 import { PrimeImageData } from './primeImageData.model';
 import { Model } from './model.model';
 import { ModelManagementService } from '../../model-management/model-management.service';
