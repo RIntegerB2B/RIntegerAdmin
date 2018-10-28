@@ -128,6 +128,8 @@ viewMonthlyPlan() {
     this.monthlyPlanModel.bookingOrderId = this.no;
     this.digitalMgmtService.addMonth(this.monthlyPlanModel).subscribe(data => {
       this.saveMonthlyPlan(firstFormGroup);
+      this.monthlyPlanModel = data;
+      console.log(this.monthlyPlanModel);
     }, error => {
       console.log(error);
     });

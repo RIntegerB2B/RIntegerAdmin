@@ -51,6 +51,7 @@ export class SiginComponent implements OnInit {
       } else {
         if (data.role === 'admin') { // admin
           this.localStorageService.store('role', 'admin');
+          this.localStorageService.store('role', data);
           this.router.navigate(['/navheader']);
         } else if (data.role !== 'admin') { // sp
       this.spValidate(name, pwd);
