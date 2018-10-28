@@ -70,6 +70,7 @@ const routes: Routes = [
     },
     { path: 'registration', component: RegistrationComponent },
     { path: 'userpermission', component: PermissionComponent },
+    { path: 'register',  component: RegisterComponent },
     {
         path: 'navheader', canActivate: [AuthGuard], component: NavHeaderComponent,
         children: [
@@ -108,7 +109,6 @@ const routes: Routes = [
             { path: 'crmcustomer', canActivate: [AuthGuard], component: CustomerManagementComponent },
             { path: 'crmupload', canActivate: [AuthGuard], component: UploadManagementComponent },
             { path: 'whatsapp', canActivate: [AuthGuard], component: WhatsappManagementComponent },
-            { path: 'register', canActivate: [AuthGuard], component: RegisterComponent },
         ]
     },
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
