@@ -1,0 +1,92 @@
+<mat-horizontal-stepper #stepper>
+  <mat-step >
+    <div>
+    <ng-template matStepLabel ><button mat-raised-button  (click)="showQuery()">
+        New Request
+      </button></ng-template>
+    <div fxLayout="row">
+      <div fxFlex="40%">
+      </div>
+      <div fxFlex="30%">
+        <mat-form-field>
+          <input matInput placeholder="Search" (keyup)='updateFilter($event)'>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-grid-list [cols]="breakpoint" rowHeight="3:0.5" (window:resize)="onResize($event)">
+       
+      <mat-grid-tile><b>Mobile Number</b></mat-grid-tile>
+      <mat-grid-tile><b>Name</b></mat-grid-tile>
+      <mat-grid-tile><b>Email ID</b></mat-grid-tile>
+      <mat-grid-tile><b>Message</b></mat-grid-tile>
+      <mat-grid-tile>Request Handled</mat-grid-tile>
+    </mat-grid-list>
+    <mat-divider></mat-divider>
+    <mat-grid-list *ngFor="let customer of customerSource; let i = index;" [cols]="breakpoint" rowHeight="3:0.5"
+    (window:resize)="onResize($event)">
+  
+    <mat-grid-tile>{{customer.mobileNumber}}</mat-grid-tile>
+    <mat-grid-tile>{{customer.name}}</mat-grid-tile>
+    <mat-grid-tile>{{customer.emailId}}</mat-grid-tile>
+    <mat-grid-tile>{{customer.message}}</mat-grid-tile>
+    <mat-grid-tile>
+        <button mat-raised-button  color="accent" (click)="requestHandled(customer._id)">
+            handled
+          </button>
+    <!-- <mat-checkbox (change)="getValue(contactForm, $event, customer._id)" class="mail-checkbox">
+      </mat-checkbox> -->
+    </mat-grid-tile>
+  </mat-grid-list>
+    </div>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 20, 30, 40, 50]" [showFirstLastButtons]="true"
+    [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)">
+  </mat-paginator>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="accent" matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step >
+    <ng-template matStepLabel ><button mat-raised-button  (click)="showHandledRequest()">
+        Handled Request
+      </button></ng-template>
+    <div fxLayout="row">
+      <div fxFlex="40%">
+      </div>
+      <div fxFlex="30%">
+        <mat-form-field>
+          <input matInput placeholder="Search" (keyup)='updateFilter($event)'>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-grid-list [cols]="breakpoint" rowHeight="3:0.5" (window:resize)="onResize($event)">
+     
+        <mat-grid-tile><b>Mobile Number</b></mat-grid-tile>
+        <mat-grid-tile><b>Name</b></mat-grid-tile>
+        <mat-grid-tile><b>Email ID</b></mat-grid-tile>
+        <mat-grid-tile><b>Message</b></mat-grid-tile>
+      </mat-grid-list>
+      <mat-divider></mat-divider>
+      <mat-grid-list *ngFor="let customers of customerSource; let i = index;" [cols]="breakpoint" rowHeight="3:0.5"
+      (window:resize)="onResize($event)">
+      <mat-grid-tile>{{customers.mobileNumber}}</mat-grid-tile>
+      <mat-grid-tile>{{customers.name}}</mat-grid-tile>
+      <mat-grid-tile>{{customers.emailId}}</mat-grid-tile>
+      <mat-grid-tile>{{customers.message}}</mat-grid-tile>
+    </mat-grid-list>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 20, 30, 40, 50]" [showFirstLastButtons]="true"
+    [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)">
+  </mat-paginator>
+    <div fxLayout="row">
+        <div fxFlex="50%">
+          <button mat-raised-button color="accent" matStepperPrevious>
+            back
+          </button>
+        </div>
+        <div fxFlex="50%" fxLayoutAlign="end center">
+          <button mat-raised-button color="accent" matStepperNext>
+            next
+          </button>
+        </div>
+      </div>
+  </mat-step>
+</mat-horizontal-stepper>

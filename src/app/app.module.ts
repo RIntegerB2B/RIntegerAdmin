@@ -113,6 +113,7 @@ import { CustomerManagementComponent, CustomerAddComponent,
 import { WhatsappManagementComponent } from './whatsapp/whatsapp-management/whatsapp-management.component';
 import { PermissionComponent } from './user-management/permission/permission/permission.component';
 import { RegisterComponent } from './user-management/register/register.component';
+import {ContactUsComponent} from './contact/contact-us/contact-us.component';
 
 
 @NgModule({
@@ -174,7 +175,8 @@ import { RegisterComponent } from './user-management/register/register.component
     CustomerEditComponent,
     WhatsappManagementComponent,
     PermissionComponent,
-    RegisterComponent
+    RegisterComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,
