@@ -58,6 +58,7 @@ export class PermissionComponent implements OnInit {
         subscribe: new FormControl(false, Validators.required),
         permission: new FormControl(false, Validators.required),
         register: new FormControl(false, Validators.required),
+        contact: new FormControl(false, Validators.required),
       }),
     });
   }

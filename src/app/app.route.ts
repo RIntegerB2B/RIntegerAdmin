@@ -63,6 +63,7 @@ import {
 import { WhatsappManagementComponent } from './whatsapp/whatsapp-management/whatsapp-management.component';
 import { PermissionComponent } from './user-management/permission/permission/permission.component';
 import { RegisterComponent } from './user-management/register/register.component';
+import { ContactUsComponent } from './contact/contact-us/contact-us.component';
 
 const routes: Routes = [
     {
@@ -109,6 +110,7 @@ const routes: Routes = [
             { path: 'whatsapp', canActivate: [AuthGuard], component: WhatsappManagementComponent },
             { path: 'userpermission', canActivate: [AuthGuard], component: PermissionComponent },
             { path: 'register',  canActivate: [AuthGuard], component: RegisterComponent },
+            { path: 'contact',  canActivate: [AuthGuard], component: ContactUsComponent },
         ]
     },
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },

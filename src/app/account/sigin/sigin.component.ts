@@ -10,6 +10,7 @@ import {ModelManagementService} from '../../model-management/model-management.se
 import { Model } from '../../model-management/add-model/model.model';
 import {Users} from './user.model';
 import {NavheaderService} from '../../nav-header/nav-header.service';
+import { UserManagementService } from '../../user-management/user-management.service';
 @Component({
   selector: 'app-sigin',
   templateUrl: './sigin.component.html',
@@ -25,7 +26,8 @@ export class SiginComponent implements OnInit {
   userDetail: Users;
   showPasswordError: boolean;
   constructor(private fb: FormBuilder, private router: Router, private localStorageService: LocalStorageService,
-    private accountService: AccountService, private modelService: ModelManagementService, private navheaderService: NavheaderService ) { }
+    private accountService: AccountService, private modelService: ModelManagementService, private navheaderService: NavheaderService,
+    userManagementService: UserManagementService ) { }
 
   ngOnInit() {
     this.navheaderService.hideMenuTransparent();
@@ -54,7 +56,7 @@ export class SiginComponent implements OnInit {
           this.localStorageService.store('role', data);
           this.router.navigate(['/navheader']);
         } else if (data.role !== 'admin') { // sp
-      this.spValidate(name, pwd);
+       this.spValidate(name, pwd);
         }
       }
     }, error => {
@@ -66,7 +68,7 @@ spValidate(name, pwd) { // check user is approved or not
   this.accountService.validate(this.userModel).subscribe(data => {
     console.log(data);
     if (data === null) {
-this.showError = true;
+  this.showError = true;
     } else  {
       this.showPasswordError = false;
       this.localStorageService.store('isLoggedIn', 'true');
