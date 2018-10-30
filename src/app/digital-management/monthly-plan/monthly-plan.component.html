@@ -2,350 +2,378 @@
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Monthly plan</ng-template>
-
+      <h1>Month-{{selectedMonthName}} Year-{{selectedYearName}}</h1>
       <div class="col-md-12 form-group">
         <div class="row">
           <div class="col-md-3 form-group">
             <div class="row">
-              <div class="col-md-6 form-group">
-                <select #selectmonth (change)="selectMonth(selectmonth.value)" 
-                style="width:150px">
-                  <option disabled>---Select the month ---</option>
-                  <option *ngFor="let data of month" >
-                    {{data}}
-                  </option>
-                </select>
-              </div>
-              <div class="col-md-6 form-group" *ngIf="showYear">
-                <select #selectElem (change)="selectYear(selectElem.value)"
-                 style="width:150px">
-                  <option disabled>---Select the year ---</option>
-                  <option *ngFor="let data of year">
-                    {{data}}
-                  </option>
-                </select>
-              </div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="dp" placeholder="Month and Year" formControlName="newdate">
+                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                <mat-datepicker #dp startView="multi-year" 
+                (yearSelected)="chosenYearHandler($event)"
+                 (monthSelected)="chosenMonthHandler($event, dp)"
+                  panelClass="example-month-picker">
+                </mat-datepicker>
+              </mat-form-field>
             </div>
-
           </div>
           <div class="col-md-3 form-group">
-            <button mat-button matSuffix mat-raised-button color="accent" (click)="showForm()">
-              <mat-icon>add</mat-icon> Add task
+            <button mat-button matSuffix mat-raised-button color="accent" (click)="viewMonthlyPlan()">
+              View
             </button>
-
           </div>
           <div class="col-md-6 form-group" *ngIf="showForms">
             <div class="form-group">
+              <h3>Add Monthly Task</h3>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="title" formControlName="title">
+                <input matInput placeholder="title" formControlName="title" required>
+                <mat-error *ngIf="firstFormGroup.controls['title'].errors?.required">
+                  Title is
+                  <strong>required</strong>
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Description" formControlName="Description">
-              </mat-form-field>
-            </div>
-            <div class="form-group">
-              <button mat-button matSuffix mat-raised-button color="accent" 
-              (click)="save(firstFormGroup)">
-                Save
-              </button>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="col-md-12 form-group">
-        <div class="row">
-          <div class="col-md-6 form-group">
-            <div class="row">
-              <div class="col-md-6 form-group">
-                <b>Title</b>
-              </div>
-              <div class="col-md-6 form-group">
-                <b>Description</b>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="col-md-6 form-group">
-            <div class="row">
-              <div class="col-md-4 form-group">
-
-                <b>Edit</b>
-              </div>
-              <div class="col-md-4 form-group">
-
-                <b>Update Status </b>
-              </div>
-              <div class="col-md-4 form-group">
-
-                <b> Copy to Week</b>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-
-      <div class="container" *ngFor="let data of Status">
-        <div class="row" *ngFor="let val of this.data?.monthlyPlan">
-          <div class="col-md-6 form-group" *ngIf="!showEditing">
-            <div class="row">
-              <div class="col-md-6 form-group">
-                {{val.planTitle}}
-              </div>
-              <div class="col-md-6 form-group">
-                {{val.planDescription}}
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 form-group" *ngIf="showEditing">
-            <div class="row">
-              <div class="col-md-4 form-group">
-                <input class="form-control" hidden type="text"
-                 formControlName="_id" 
-                [value]="data._id" />
-                <input class="form-control" hidden type="text" 
-                formControlName="monthId" 
-                [value]="val._id" />
-                <input class="form-control" type="text" 
-                formControlName="updTitle" [value]="val.planTitle" #updateTitle />
-              </div>
-              <div class="col-md-4 form-group">
-                <input class="form-control" type="text" 
-                formControlName="updDesc" [value]="val.planDescription"
-                  #updateDescription />
-              </div>
-              <div class="col-md-1 form-group">
-                <button mat-button matSuffix (click)="updateMonthlyPlan(data._id, val._id, updateTitle.value ,updateDescription.value)">
-                  <mat-icon>save</mat-icon>
-                </button>
-              </div>
-              <div class="col-md-1 form-group">
-                <button mat-button matSuffix (click)="deleteMonthlyPlan(data._id, val._id)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-              <div class="col-md-1 form-group">
-                <button mat-button matSuffix (click)="cancel()">
-                  <mat-icon>reply</mat-icon>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 form-group">
-            <div class="row">
-              <div class="col-md-4 form-group">
-                <button mat-button matSuffix (click)="editTask()">
-                  <mat-icon>create</mat-icon>
-                </button>
-              </div>
-              <div class="col-md-4 form-group">
-                <select #selectVal (change)="selectStatus(data._id,val._id,selectVal.value)" style="width:150px">
-                  <option *ngFor="let data of status">
-                    {{data}}
-                  </option>
-                </select>
-              </div>
-              <div class="col-md-4 form-group">
-                <select #weekno (change)="selectWeek(data._id,val._id,weekno.value)" style="width:150px">
-                  <option *ngFor="let weekno of week">
-                    {{weekno}}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Weekly Plan</ng-template>
-      <div class="col-md-12 form-group">
-        <div class="row">
-          <div class="col-md-3 form-group">
-            <div class="row">
-              <div class="col-md-6 form-group">
-                <select #selectVal (change)="selectMonth2(selectVal.value)"
-                 style="width:150px">
-                  <option disabled>---Select the month ---</option>
-                  <option *ngFor="let data of month">
-                    {{data}}
-                  </option>
-                </select>
-              </div>
-              <div class="col-md-6 form-group" *ngIf="showYear2">
-                <select #selectElem (change)="selectYear2(selectElem.value)" style="width:150px">
-                  <option disabled>---Select the year ---</option>
-                  <option *ngFor="let data of year">
-                    {{data}}
-                  </option>
-                </select>
-              </div>
-              <div class="col-md-6 form-group" *ngIf="showYear2">
-                <select #selectweek2 (change)="selectWeek2(selectweek2.value)" style="width:150px">
-                  <option disabled>---Select the Week ---</option>
-                  <option *ngFor="let data of week">
-                    {{data}}
-                  </option>
-                </select>
-              </div>
-            </div>
-
-          </div>
-          <div class="col-md-3 form-group" *ngIf="showAdd">
-            <button mat-button matSuffix mat-raised-button color="accent"
-             (click)="showForm2()">
-              <mat-icon>add</mat-icon> Add task
-            </button>
-
-          </div>
-          <div class="col-md-6 form-group" *ngIf="showForms2">
-            <div class="form-group">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="title"
-                 formControlName="title1">
-              </mat-form-field>
-            </div>
-            <div class="form-group">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Description" 
-                formControlName="Description1">
+                <input matInput placeholder="Description" formControlName="Description" required>
+                <mat-error *ngIf="firstFormGroup.controls['Description'].errors?.required">
+                  Description is
+                  <strong>required</strong>
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="form-group">
               <button mat-button matSuffix mat-raised-button color="accent"
-               (click)="saveWeeklyPlan(secondFormGroup)">
+               (click)="firstFormGroup.valid && saveMonthlyPlan(firstFormGroup)">
                 Save
               </button>
             </div>
           </div>
 
-          <div class="col-md-12 form-group">
-            <div class="row">
-              <div class="col-md-4 form-group">
-                <div class="row">
-                  <div class="col-md-6 form-group">
-                    <b>Title</b>
-                  </div>
-                  <div class="col-md-6 form-group">
-                    <b>Description</b>
-                  </div>
+        </div>
+      </div>
+
+      <div class="labelHeader">Task Details</div>
+      <div class="pageBoxLg">
+        <div class="display-none-small">
+          <div class="container-fluid container-fuid-padding-small">
+
+            <!-- show the table -->
+
+            <div class="row gridRowHeader">
+
+              <div class="col-md-2 vcenterHeader">
+                <div class="form-group">
+                  <label>Title</label>
                 </div>
-
               </div>
-
-              <div class="col-md-8 form-group">
-                <div class="row">
-                  <div class="col-md-4 form-group">
-
-                    <b>Edit</b>
-                  </div>
-                  <div class="col-md-4 form-group">
-
-                    <b>Update Status </b>
-                  </div>
-                  <div class="col-md-4 form-group">
-
-                    <b> Copy to Date</b>
-                  </div>
-
+              <div class="col-md-3 vcenterHeader">
+                <div class="form-group">
+                  <label>Description</label>
+                </div>
+              </div>
+              <div class="col-md-3 vcenterHeader">
+                <div>
+                  <label>Action</label>
+                </div>
+              </div>
+              <div class="col-md-2 vcenterHeader">
+                <div>
+                  <label>Update Status</label>
+                </div>
+              </div>
+              <div class="col-md-2 vcenterHeader">
+                <div>
+                  <label>Copy to Week</label>
                 </div>
               </div>
 
             </div>
-          </div>
+            <!--data-->
+            <div *ngIf="noresult">
+              No results found
+            </div>
 
-
-          <div class="container" *ngFor="let data of WeeklyStatus">
-            <div class="row" *ngFor="let val of this.data?.weeklyPlan">
-              <div class="col-md-6 form-group" *ngIf="!showEditing2">
-                <div class="row">
-                  <div class="col-md-6 form-group">
-                    {{val.planTitle}}
+            <div *ngFor="let data of Status">
+              <div *ngFor="let val of this.data?.monthlyPlan">
+                <div class="row gridRow" *ngIf="!val.newShowEdit" >
+                  <div class="col-sm-12 col-md-2 vcenter form-group">
+                    <label class="labelText">{{val.planTitle}}</label>
                   </div>
-                  <div class="col-md-6 form-group">
-                    {{val.planDescription}}
+                  <div class="col-sm-12 col-md-3 vcenter form-group">
+                    <label class="labelText">{{val.planDescription}}</label>
                   </div>
-
-                </div>
-
-              </div>
-              <div class="col-md-6 form-group" *ngIf="showEditing2">
-                <div class="row">
-                  <div class="col-md-4 form-group">
-                    <input class="form-control" hidden type="text" formControlName="_id" [value]="data._id" />
-                    <input class="form-control" hidden type="text" formControlName="weekId" [value]="val._id" />
-                    <input class="form-control" type="text" formControlName="updTitle1" [value]="val.planTitle"
-                      #updateTitle1 />
+                  <div class="col-sm-12 col-md-3 vcenter form-group">
+                    <a (click)="editTask(val)" class="gridEdit">
+                      <p class="textSave">Edit</p>
+                      <mat-icon color="primary">create</mat-icon>
+                    </a>
                   </div>
-                  <div class="col-md-4 form-group">
-                    <input class="form-control" type="text" formControlName="updDesc1" [value]="val.planDescription"
-                      #updateDescription1 />
-                  </div>
-                  <div class="col-md-1 form-group">
-                    <button mat-button matSuffix (click)="updateWeeklyPlan(data._id, val._id, updateTitle1.value ,updateDescription1.value, val.week)">
-                      <mat-icon>save</mat-icon>
-                    </button>
-                  </div>
-                  <div class="col-md-1 form-group">
-                    <button mat-button matSuffix (click)="deleteWeeklyPlan(data._id, val._id)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </div>
-                  <div class="col-md-1 form-group">
-                    <button mat-button matSuffix (click)="cancel2()">
-                      <mat-icon>reply</mat-icon>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-6 form-group">
-                <div class="row">
-                  <div class="col-md-2 form-group">
-                    <button mat-button matSuffix (click)="editTask2()">
-                      <mat-icon>create</mat-icon>
-                    </button>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <select #selectVal (change)="selectStatus2(data._id,val._id,selectVal.value)" style="width:150px">
-                      <option *ngFor="let data of status">
-                        {{data}}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="col-md-4 form-group">
+                  <div class="col-sm-12 col-md-2 vcenter form-group">
                     <mat-form-field>
-                      <input matInput [matDatepicker]="picker1" formControlName="date" placeholder="Choose a date"
-                        #updateDate>
-                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                      <mat-datepicker #picker1></mat-datepicker>
+                      <mat-select #selectstatus [(value)]="val.status" placeholder="Select the status">
+                        <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus(data._id,val._id,selectstatus.value)">
+                          {{statusname}}
+                        </mat-option>
+                      </mat-select>
                     </mat-form-field>
                   </div>
-                  <div class="col-md-2 form-group">
-                    <button mat-button matSuffix mat-raised-button color="accent" (click)="copyToDate(data._id, val._id,updateDate.value)">
-                      copy
-                    </button>
+                  <div class="col-sm-12 col-md-2 vcenter form-group">
+                    <mat-form-field>
+                      <mat-select #weeknoval [(value)]="weekno" placeholder="Select the Week">
+                        <mat-option *ngFor="let weekno of week" [value]="weekno" (click)="selectWeek(data._id,val._id,weeknoval.value)">
+                          {{weekno}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                   </div>
+                </div>
+              <div *ngIf="val.newShowEdit">
+
+                  <!--  <div class="col-sm-12  display-none-large">
+                    <label class="gridLabel">Title:</label>
+                  </div>
+                   -->
+                   <div class="row gridRow">
+                  <div class="col-sm-12 col-md-2 vcenter form-group">
+                    <input class="form-control " hidden type="text" formControlName="_id" [value]="data._id" />
+                    <input class="form-control" hidden type="text" formControlName="monthId" [value]="val._id" />
+                    <input class="form-control labelText" type="text" formControlName="updTitle" [value]="val.planTitle"
+                      #updateTitle />
+                  </div>
+                  <!-- <div class="col-sm-12  display-none-large">
+                    <label class="gridLabel">Description:</label>
+                  </div> -->
+                  <div class="col-sm-12 col-md-3 vcenter form-group">
+                    <input class="form-control labelText" type="text" formControlName="updDesc" [value]="val.planDescription"
+                      #updateDescription />
+                  </div>
+                  <!-- <div class="col-sm-12  display-none-large">
+                    <label class="gridLabel">Edit</label>
+                  </div> -->
+                  <div class="col-sm-12 col-md-1 alignProper vcenter form-group">
+                    <p class="textSave">Save</p>
+                    <mat-icon class="gridEdit" color="primary"
+                     (click)="updateMonthlyPlan(data._id, val._id, updateTitle.value, updateDescription.value)">save</mat-icon>
+                  </div>
+                  <div class="col-sm-12 col-md-1 vcenter alignProper form-group">
+                    <p class="textSave">Delete</p>
+                    <mat-icon class="gridEdit" color="warn" (click)="deleteMonthlyPlan(data._id, val._id, updateTitle.value, updateDescription.value)">delete</mat-icon>
+                  </div>
+                  <div class="col-sm-12 col-md-1 vcenter alignProper form-group">
+                    <p class="textSave">Cancel</p>
+                    <mat-icon class="gridEdit" color="accent" (click)="cancel(val)">cancel</mat-icon>
+                  </div>
+                  <div class="col-sm-12 col-md-2 vcenter form-group">
+                    <mat-form-field>
+                      <mat-select #selectstatus [(value)]="val.status" placeholder="Select the status">
+                        <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus(data._id,val._id,selectstatus.value)">
+                          {{statusname}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-12 col-md-2 vcenter form-group">
+                    <mat-form-field>
+                      <mat-select #weeknoval [(value)]="weekno" placeholder="Select the Week">
+                        <mat-option *ngFor="let weekno of week" [value]="weekno" (click)="selectWeek(data._id,val._id,weeknoval.value)">
+                          {{weekno}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
                 </div>
               </div>
             </div>
+
+            <!--clossing-->
           </div>
         </div>
       </div>
+      <button mat-button matStepperNext>Next</button>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel><button mat-raised-button (click)="viewAllWeeklyPlan()">
+          Weekly Plan
+        </button></ng-template>
+      <h1>Month-{{selectedMonthName}} Year-{{selectedYearName}}</h1>
+        <div class="row">
+         
+          <div class="col-md-6 form-group" *ngIf="showForms2">
+            <h3>Add Weekly Task</h3>
+            <div class="form-group">
+              <mat-select #selectweek2 [(value)]="selweek" placeholder="Select the Week">
+                <mat-option *ngFor="let selweek of week" [value]="selweek">
+                  {{selweek}}
+                </mat-option>
+              </mat-select>
+              <!-- <select #selectweek2  style="width:150px">
+                      <option disabled>---Select the Week ---</option>
+                      <option *ngFor="let data of week">
+                        {{data}}
+                      </option>
+                    </select> -->
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="title" formControlName="title1" required>
+                <mat-error *ngIf="secondFormGroup.controls['title1'].errors?.required">
+                  Title is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Description" formControlName="Description1" required>
+                <mat-error *ngIf="secondFormGroup.controls['Description1'].errors?.required">
+                  Description is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <button mat-button matSuffix mat-raised-button color="accent" (click)="secondFormGroup.valid && saveWeeklyPlan(secondFormGroup, selectweek2.value )">
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+          <div class="pageBoxLg">
+              <div class="display-none-small">
+                <div class="container-fluid container-fuid-padding-small">
+                  <div class="row gridRowHeader">
+          
+                    <div class="col-md-2 vcenterHeader">
+                      <div class="form-group">
+                        <label>Title</label>
+                      </div>
+                    </div>
+                    <div class="col-md-2 vcenterHeader">
+                      <div class="form-group">
+                        <label>Description</label>
+                      </div>
+                    </div>
+                    <div class="col-md-1 vcenterHeader">
+                      <div class="form-group">
+                        <label>Week</label>
+                      </div>
+                    </div>
+                    <div class="col-md-3 vcenterHeader">
+                      <div>
+                        <label>Action</label>
+                      </div>
+                    </div>
+                    <div class="col-md-2 vcenterHeader">
+                      <div>
+                        <label>Update Status</label>
+                      </div>
+                    </div>
+                    <div class="col-md-2 vcenterHeader">
+                      <div>
+                        <label>Copy to Date</label>
+                      </div>
+                    </div>
+          
+                  </div>
+                  <div *ngIf="noresult">
+                    No results found
+                  </div>
+                  <div *ngFor="let data of WeeklyStatus">
+                    <div *ngFor="let val of this.data?.weeklyPlan">
+                      <div class="row gridRow" *ngIf="!val.newShowEditWeek" >
+                        <div class="col-sm-12 col-md-2 vcenter form-group">
+                          <label class="labelText">{{val.planTitle}}</label>
+                        </div>
+                        <div class="col-sm-12 col-md-2 vcenter form-group">
+                          <label class="labelText">{{val.planDescription}}</label>
+                        </div>
+                        <div class="col-sm-12 col-md-1 vcenter form-group">
+                            <label class="labelText">{{val.week}}</label>
+                          </div>
+                        <div class="col-sm-12 col-md-3 vcenter form-group">
+                          <a (click)="editTask2(val)" class="gridEdit">
+                            <p class="textSave">Edit</p>
+                            <mat-icon color="primary">create</mat-icon>
+                          </a>
+                        </div>
+                        <div class="col-sm-12 col-md-2 vcenter form-group">
+                          <mat-form-field>
+                            <mat-select #selectValStatus2 [(value)]="val.status"
+                             placeholder="Select the status">
+                              <mat-option *ngFor="let statusname of status"
+                               [value]="statusname" (click)="selectStatus2(data._id,val._id,selectValStatus2.value)">
+                                {{statusname}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-2 vcenter form-group">
+                          <mat-form-field>
+                            <input matInput [matDatepicker]="picker1" formControlName="date" placeholder="Choose a date"
+                              #updateDate>
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                          </mat-form-field>
+                        <mat-error *ngIf="montherror">
+                            Select the correct month and year
+                          </mat-error>
+                        </div>
+                      </div>
+                    <div *ngIf="val.newShowEditWeek">
+          
+                         <div class="row gridRow">
+                        <div class="col-sm-12 col-md-2 vcenter form-group">
+                         <input class="form-control" hidden type="text" formControlName="_id" [value]="data._id" />
+                          <input class="form-control" hidden type="text" formControlName="weekId" [value]="val._id" />
+                          <input class="form-control labelText" type="text" formControlName="updTitle1" [value]="val.planTitle"
+                            #updateTitle1 />
+                        </div>
+                        <div class="col-sm-12 col-md-3 vcenter form-group">
+                  <input class="form-control labelText" type="text" 
+                  formControlName="updDesc1" [value]="val.planDescription"
+                            #updateDescription1 />                  </div>
+                        <div class="col-sm-12 col-md-1 alignProper vcenter form-group">
+                          <p class="textSave">Save</p>
+                          <mat-icon class="gridEdit" color="primary"
+                           (click)="updateWeeklyPlan(data._id, val._id, updateTitle1.value ,updateDescription1.value, val.week)">save</mat-icon>
+                        </div>
+                        <div class="col-sm-12 col-md-1 vcenter alignProper form-group">
+                          <p class="textSave">Delete</p>
+                          <mat-icon class="gridEdit" color="warn" (click)="deleteWeeklyPlan(data._id, val._id)">delete</mat-icon>
+                        </div>
+                        <div class="col-sm-12 col-md-1 vcenter alignProper form-group">
+                          <p class="textSave">Cancel</p>
+                          <mat-icon class="gridEdit" color="accent" (click)="cancel2(val)">cancel</mat-icon>
+                        </div>
+                        <div class="col-sm-12 col-md-2 vcenter form-group">
+                             <mat-form-field>
+                                <mat-select #weeknoval [(value)]="weekno" placeholder="Select the Week">
+                                  <mat-option *ngFor="let weekno of week" [value]="weekno" (click)="selectWeek(data._id,val._id,weeknoval.value)">
+                                    {{weekno}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-2 vcenter form-group">
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker1" formControlName="date" placeholder="Choose a date"
+                                  #updateDate>
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                             </mat-form-field>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
@@ -354,42 +382,27 @@
   </mat-step>
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup">
-      <ng-template matStepLabel>Daily Plan</ng-template>
-      <div class="col-md-12 form-group">
+      <ng-template matStepLabel><button mat-raised-button (click)="viewDailyPlan()">
+          Daily Plan
+        </button></ng-template>
+      <h1>Month-{{selectedMonthName}} Year-{{selectedYearName}}</h1>
         <div class="row">
-          <div class="col-md-3 form-group">
-            <div class="row">
-              <div class="col-md-6 form-group">
-                <select #selectMonVal (change)="selectMonth3(selectMonVal.value)" style="width:150px">
-                  <option disabled>---Select the month ---</option>
-                  <option *ngFor="let data of month">
-                    {{data}}
-                  </option>
-                </select>
-              </div>
-              <div class="col-md-6 form-group" *ngIf="showYear3">
-                <select #selectElem (change)="selectYear3(selectElem.value)" style="width:150px">
-                  <option disabled>---Select the year ---</option>
-                  <option *ngFor="let data of year">
-                    {{data}}
-                  </option>
-                </select>
-              </div>
-            </div>
-
-          </div>
-          <div class="col-md-3 form-group" *ngIf="showAdd">
-            <button mat-button matSuffix mat-raised-button color="accent" (click)="showForm3()">
-              <mat-icon>add</mat-icon> Add task
-            </button>
-
-          </div>
           <div class="col-md-6 form-group" *ngIf="showForms3">
+            <h3>Add Daily Task</h3>
             <div class="form-group">
-              <input matInput [matDatepicker]="picker2" formControlName="dailydate" placeholder="Choose a date"
-                #updateDate1>
-              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-              <mat-datepicker #picker2></mat-datepicker>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker3" formControlName="dailydate" placeholder="Choose a date"
+                      #updateDate1 required>
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                    <mat-error *ngIf="thirdFormGroup.controls['dailydate'].errors?.required">
+                        Date is
+                        <strong>required</strong>
+                      </mat-error>
+                      <mat-error *ngIf="montherror">
+                        Select the correct month and year
+                      </mat-error>
+                  </mat-form-field>
             </div>
 
             <!--    <mat-form-field>
@@ -399,132 +412,161 @@
                   </mat-form-field> -->
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="title" formControlName="title2">
+                <input matInput placeholder="title" formControlName="title2" required>
+                <mat-error *ngIf="thirdFormGroup.controls['title2'].errors?.required">
+                  Title is
+                  <strong>required</strong>
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="form-group">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Description" formControlName="Description2">
+                <input matInput placeholder="Description" formControlName="Description2" required>
+                <mat-error *ngIf="thirdFormGroup.controls['Description2'].errors?.required">
+                  Description
+                  <strong>required</strong>
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="form-group">
-              <button mat-button matSuffix mat-raised-button color="accent" (click)="saveDailyPlan(thirdFormGroup,updateDate1.value )">
+              <button mat-button matSuffix mat-raised-button color="accent" 
+              (click)="thirdFormGroup.valid && saveDailyPlan(thirdFormGroup, updateDate1.value)">
                 Save
               </button>
             </div>
           </div>
-
-          <div class="col-md-12 form-group">
-            <div class="row">
-              <div class="col-md-4 form-group">
-                <div class="row">
-                  <div class="col-md-4 form-group">
-                    <b>Title</b>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <b>Description</b>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <b>Date</b>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="col-md-8 form-group">
-                <div class="row">
-                  <div class="col-md-4 form-group">
-
-                    <b>Edit</b>
-                  </div>
-                  <div class="col-md-4 form-group">
-
-                    <b>Update Status </b>
-                  </div>
-                  <div class="col-md-4 form-group">
-
-                    <b> Change the Date</b>
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="container" *ngFor="let data of DailyStatus">
-            <div class="row" *ngFor="let val of this.data?.dailyPlan">
-              <div class="col-md-6 form-group" *ngIf="!showEditing3">
-                <div class="row">
-                  <div class="col-md-4 form-group">
-                    {{val.planTitle}}
-                  </div>
-                  <div class="col-md-4 form-group">
-                    {{val.planDescription}}
-                  </div>
-                  <div class="col-md-4 form-group">
-                    {{val.date}}/{{selectedMonth3}}/{{selectedYear3}}
-                  </div>
-                </div>
-
-              </div>
-              <div class="col-md-6 form-group" *ngIf="showEditing3">
-                <div class="row">
-                  <div class="col-md-4 form-group">
-                    <input class="form-control" hidden type="text" formControlName="_id" [value]="data._id" />
-                    <input class="form-control" hidden type="text" formControlName="dateID" [value]="val._id" />
-                    <input class="form-control" type="text" formControlName="updTitle2" [value]="val.planTitle"
-                      #updateTitle2 />
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <input class="form-control" type="text" formControlName="updDesc2" [value]="val.planDescription"
-                      #updateDescription2 />
-                  </div>
-                  <div class="col-md-1 form-group">
-                    <button mat-button matSuffix (click)="updateDailyPlan(data._id, val._id, updateTitle2.value ,updateDescription2.value)">
-                      <mat-icon>save</mat-icon>
-                    </button>
-                  </div>
-                  <div class="col-md-1 form-group">
-                    <button mat-button matSuffix (click)="deleteDailyPlan(data._id, val._id)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </div>
-                  <div class="col-md-1 form-group">
-                    <button mat-button matSuffix (click)="cancel3()">
-                      <mat-icon>reply</mat-icon>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-6 form-group">
-                <div class="row">
-                  <div class="col-md-2 form-group">
-                    <button mat-button matSuffix (click)="editTask3()">
-                      <mat-icon>create</mat-icon>
-                    </button>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <select #selectVal (change)="selectStatus3(data._id,val._id,selectVal.value)" style="width:150px">
-                      <option *ngFor="let data of status">
-                        {{data}}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="col-md-4 form-group">
-                    <mat-form-field>
-                      <input matInput [matDatepicker]="picker3" formControlName="copyToDate" placeholder="Choose a date"
-                        #updateDate2>
-                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                      <mat-datepicker #picker3></mat-datepicker>
-                    </mat-form-field>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
+          <div class="pageBoxLg">
+            <div class="display-none-small">
+              <div class="container-fluid container-fuid-padding-small">
+                <div class="row gridRowHeader">
+                  <div class="col-md-2 vcenterHeader">
+                    <div class="form-group">
+                      <label>Title</label>
+                    </div>
+                  </div>
+                  <div class="col-md-2 vcenterHeader">
+                    <div class="form-group">
+                      <label>Description</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1 vcenterHeader">
+                    <div class="form-group">
+                      <label>Date</label>
+                    </div>
+                  </div>
+                  <div class="col-md-3 vcenterHeader">
+                    <div>
+                      <label>Action</label>
+                    </div>
+                  </div>
+                  <div class="col-md-2 vcenterHeader">
+                    <div>
+                      <label>Update Status</label>
+                    </div>
+                  </div>
+                  <div class="col-md-2 vcenterHeader">
+                    <div>
+                      <label>Copy to Date</label>
+                    </div>
+                  </div>
+        
+                </div>
+                <div *ngIf="noresult">
+                  No results found
+                </div>
+        
+                <div *ngFor="let data of DailyStatus">
+                  <div *ngFor="let val of this.data?.dailyPlan">
+                    <div class="row gridRow" *ngIf="!val.newShowEditDaily" >
+                      <div class="col-sm-12 col-md-2 vcenter form-group">
+                        <label class="labelText">{{val.planTitle}}</label>
+                      </div>
+                      <div class="col-sm-12 col-md-2 vcenter form-group">
+                        <label class="labelText">{{val.planDescription}}</label>
+                      </div>
+                      <div class="col-sm-12 col-md-1 vcenter form-group">
+                          <label class="labelText">{{val.date}}</label>
+                        </div>
+                      <div class="col-sm-12 col-md-3 vcenter form-group">
+                        <a (click)="editTask2(val)" class="gridEdit">
+                          <p class="textSave">Edit</p>
+                          <mat-icon color="primary">create</mat-icon>
+                        </a>
+                      </div>
+                      <div class="col-sm-12 col-md-2 vcenter form-group">
+                        <mat-form-field>
+                          <mat-select #selectValStatus3 [(value)]="val.status" placeholder="Select the status">
+                            <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus3(data._id,val._id,selectValStatus3.value)">
+                              {{statusname}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-12 col-md-2 vcenter form-group">
+                        
+                        <mat-form-field>
+                          <input matInput [matDatepicker]="picker3" formControlName="copyToDate" placeholder="Choose a date"
+                            #updateDate2>
+                          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                          <mat-datepicker #picker3></mat-datepicker>
+                        </mat-form-field>
+                      <mat-error *ngIf="montherror">
+                          Select the correct month and year
+                        </mat-error>
+                      </div>
+                    </div>
+                  <div *ngIf="val.newShowEditDaily">
+        
+                       <div class="row gridRow">
+                      <div class="col-sm-12 col-md-2 vcenter form-group">
+                        <div class="col-md-4 form-group">
+                          <input class="form-control" hidden type="text" formControlName="_id" [value]="data._id" />
+                          <input class="form-control" hidden type="text" formControlName="dateID" [value]="val._id" />
+                          <input class="form-control" type="text" formControlName="updTitle2" [value]="val.planTitle"
+                            #updateTitle2 />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-3 vcenter form-group">
+                        <input class="form-control" type="text" formControlName="updDesc2" [value]="val.planDescription"
+                        #updateDescription2 />
+                                  </div>
+                      <div class="col-sm-12 col-md-1 alignProper vcenter form-group">
+                        <p class="textSave">Save</p>
+                        <mat-icon class="gridEdit" color="primary"
+                        (click)="updateDailyPlan(data._id, val._id, updateTitle2.value ,updateDescription2.value)">save</mat-icon>
+                      </div>
+                      <div class="col-sm-12 col-md-1 vcenter alignProper form-group">
+                        <p class="textSave">Delete</p>
+                        <mat-icon class="gridEdit" color="warn"  (click)="deleteDailyPlan(data._id, val._id)">delete</mat-icon>
+                      </div>
+                      <div class="col-sm-12 col-md-1 vcenter alignProper form-group">
+                        <p class="textSave">Cancel</p>
+                        <mat-icon class="gridEdit" color="accent" (click)="cancel3(val)">cancel</mat-icon>
+                      </div>
+                      <div class="col-sm-12 col-md-2 vcenter form-group">
+                        <mat-form-field>
+                          <mat-select #selectstatus [(value)]="val.status" placeholder="Select the status">
+                            <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus(data._id,val._id,selectstatus.value)">
+                              {{statusname}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-12 col-md-2 vcenter form-group">
+                        <mat-form-field>
+                          <input matInput [matDatepicker]="picker3" formControlName="copyToDate" placeholder="Choose a date"
+                            #updateDate2>
+                          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                          <mat-datepicker #picker3></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
       </div>
       <div>
         <button mat-button matStepperPrevious>Back</button>
@@ -532,4 +574,3 @@
     </form>
   </mat-step>
 </mat-horizontal-stepper>
-<

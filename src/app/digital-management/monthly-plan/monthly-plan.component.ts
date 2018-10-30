@@ -4,7 +4,27 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
+import {MatSnackBar} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
+import * as _moment from 'moment';
+/* import {
+  default as _rollupMoment, Moment } from 'moment';
+ */
+const moment = _moment;
+ export  const MY_FORMATS = {
+  parse: {
+    dateInput: 'MM/YYYY',
+  },
+  display: {
+    dateInput: 'MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+ import {
+   Moment } from 'moment';
 
 import { NavheaderService } from '../../nav-header/nav-header.service';
 import { DigitalManagementService } from '../digital-management.service';
@@ -12,11 +32,15 @@ import { AddMonthlyPlan } from './monthlyplan.model';
 import {DigitalMgmtStatus} from './digital-mgmt.status.model';
 import {WeeklyPlan} from './weeklyplan.model';
 import {DailyPlan} from './dailyplan.model';
+import {NewMonthlyPlan} from './new-month.model';
 
 @Component({
   selector: 'app-monthly-plan',
   templateUrl: './monthly-plan.component.html',
-  styleUrls: ['./monthly-plan.component.css']
+  styleUrls: ['./monthly-plan.component.css'],
+  providers: [
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ]
 })
 export class MonthlyPlanComponent implements OnInit {
   showEditing3: boolean;
@@ -37,9 +61,9 @@ export class MonthlyPlanComponent implements OnInit {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   monthlyPlanModel: AddMonthlyPlan;
-  Status: DigitalMgmtStatus;
-  WeeklyStatus: DigitalMgmtStatus;
-  DailyStatus: DigitalMgmtStatus;
+  Status: DigitalMgmtStatus[];
+  WeeklyStatus: DigitalMgmtStatus [];
+  DailyStatus: DigitalMgmtStatus [];
   WeeklyModel: WeeklyPlan;
   DailyModel: DailyPlan;
   showAdd: boolean;
@@ -52,7 +76,19 @@ export class MonthlyPlanComponent implements OnInit {
   selectedMonth;
   selectedYear;
   selectedWeek;
+  selected = 'All';
   status = ['Planned', 'Started', 'Progress' , 'Completed', 'Pending' , 'Cancel'];
+  message;
+  action;
+  noresult: boolean;
+  selectedMonthName;
+  selectedYearName;
+  monthName;
+  yearValue;
+  date = new FormControl(moment());
+  ctrlValue;
+  newMonthModel: NewMonthlyPlan;
+  montherror: boolean;
 /*   showDays = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
    '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
    , '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
@@ -60,10 +96,12 @@ export class MonthlyPlanComponent implements OnInit {
    '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
    , '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']; */
   constructor(private _formBuilder: FormBuilder, private navheaderService: NavheaderService,
-    private digitalMgmtService: DigitalManagementService, private activatedRoute: ActivatedRoute) {
+    private digitalMgmtService: DigitalManagementService, private activatedRoute: ActivatedRoute ,
+    public snackBar: MatSnackBar) {
     this.no = this.activatedRoute.snapshot.paramMap.get('no');
   }
   ngOnInit() {
+    console.log(window.innerWidth);
     this.navheaderService.makeMenuTransparent();
     this.firstFormGroup = this._formBuilder.group({
       _id: [''],
@@ -71,7 +109,10 @@ export class MonthlyPlanComponent implements OnInit {
       title: [''],
       Description: [''],
       updTitle: [''],
-      updDesc: ['']
+      updDesc: [''],
+      tempmonth: [''],
+      tempyear: [''],
+      newdate: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
       _id: [''],
@@ -92,6 +133,67 @@ export class MonthlyPlanComponent implements OnInit {
       dailydate: [''],
       copyToDate: [''],
     });
+  }
+  chosenYearHandler(normlizedMonth: Moment) {
+    this.yearValue = moment(normlizedMonth).year();
+    console.log(this.yearValue);
+  }
+  chosenMonthHandler(normlizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
+    this.ctrlValue = moment(normlizedMonth).month();
+    console.log(this.ctrlValue);
+    switch (this.ctrlValue ) {
+      case 0: {
+            this.monthName = 'January';
+         break;
+      }
+      case 1: {
+        this.monthName = 'February';
+         break;
+      }
+      case 2: {
+        this.monthName = 'March';
+         break;
+      }
+      case 3: {
+        this.monthName = 'April';
+         break;
+      }
+      case 4: {
+        this.monthName = 'May';
+         break;
+      }
+      case 5: {
+        this.monthName = 'June';
+         break;
+      }
+      case 6: {
+        this.monthName = 'July';
+         break;
+      }
+      case 7: {
+        this.monthName = 'August';
+         break;
+      }
+      case 8: {
+        this.monthName = 'September';
+         break;
+      }
+      case 9: {
+        this.monthName = 'October';
+         break;
+      }
+      case 10: {
+        this.monthName = 'November';
+         break;
+      }
+      case 11: {
+        this.monthName = 'December';
+         break;
+      }
+   }
+   console.log(this.monthName);
+    this.firstFormGroup.controls.newdate.setValue(normlizedMonth);
+    datepicker.close();
   }
   selectMonth(val1) {
     this.selectedMonth = val1;
@@ -115,39 +217,59 @@ export class MonthlyPlanComponent implements OnInit {
     this.showForms = true;
   }
 viewMonthlyPlan() {
-  this.digitalMgmtService.viewMonthlyPlan(this.no, this.selectedMonth, this.selectedYear).subscribe(data => {
+  this.showForms = true;
+  this.selectedMonthName = this.monthName;
+  this.selectedYearName =  this.yearValue;
+  this.save();
+  this.digitalMgmtService.viewMonthlyPlan(this.no, this.monthName,
+    this.yearValue).subscribe(data => {
     this.Status = data;
+    if (data.length === 0) {
+this.noresult = true;
+    } else {
+      this.noresult = false;
+    }
   }, error => {
     console.log(error);
   });
+  this.viewAllWeeklyPlan();
+  this.viewDailyPlan();
 }
-  save(firstFormGroup: FormGroup) {
-    this.monthlyPlanModel = new AddMonthlyPlan();
-    this.monthlyPlanModel.monthName = this.selectedMonth;
-    this.monthlyPlanModel.year = this.selectedYear;
-    this.monthlyPlanModel.bookingOrderId = this.no;
-    this.digitalMgmtService.addMonth(this.monthlyPlanModel).subscribe(data => {
-      this.saveMonthlyPlan(firstFormGroup);
+  save() {
+    this.newMonthModel = new NewMonthlyPlan();
+    this.newMonthModel.monthName = this.monthName;
+    this.newMonthModel.year =  this.yearValue;
+    this.newMonthModel.bookingOrderId = this.no;
+    this.digitalMgmtService.addMonth(this.newMonthModel).subscribe(data => {
+    /*   this.saveMonthlyPlan(firstFormGroup); */
       this.monthlyPlanModel = data;
-      console.log(this.monthlyPlanModel);
     }, error => {
       console.log(error);
     });
   }
   saveMonthlyPlan(firstFormGroup: FormGroup) {
+    this.message = 'Sucessfully added to monthly plan';
+    this.monthlyPlanModel = new AddMonthlyPlan();
     this.monthlyPlanModel.planTitle = this.firstFormGroup.controls.title.value;
     this.monthlyPlanModel.planDescription = this.firstFormGroup.controls.Description.value;
     this.monthlyPlanModel.bookingOrderId = this.no;
-    this.monthlyPlanModel.monthName = this.selectedMonth;
-    this.monthlyPlanModel.year = this.selectedYear;
+    this.monthlyPlanModel.monthName =   this.monthName;
+    this.monthlyPlanModel.year =  this.yearValue;
     this.digitalMgmtService.addMonthlyPlan(this.monthlyPlanModel).subscribe(data => {
       this.Status = data;
+      if (data.length !== 0) {
+        this.noresult = false;
+      }
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+
     }, error => {
       console.log(error);
     });
   }
-  editTask() {
-    this.showEditing = true;
+  editTask(val) {
+    val.newShowEdit = true;
   }
   updateMonthlyPlan( id, monthId, updatedTitle, updatedDescription) {
     this.monthlyPlanModel = new AddMonthlyPlan();
@@ -168,8 +290,8 @@ viewMonthlyPlan() {
       console.log(error);
     });
   }
-  cancel() {
-    this.showEditing = false;
+  cancel(val) {
+    val.newShowEdit = false;
   }
   selectStatus( id1,  monthid2 , val) {
 this.digitalMgmtService.editMonthlyPlanStatus(id1, monthid2, val).subscribe(data => {
@@ -184,42 +306,58 @@ this.digitalMgmtService.editMonthlyPlanStatus(id1, monthid2, val).subscribe(data
   showForm2() {
     this.showForms2 = true;
   }
-  selectMonth2(val1) {
+  /* selectMonth2(val1) {
     this.selectedMonth2 = val1;
     this.showYear2 = true;
   }
   selectYear2(val2) {
     this.selectedYear2 = val2;
-  }
+  }*/
   selectWeek2(val) {
     this.selectedWeek2 = val;
     this.showAdd = true;
-    this.viewWeeklyPlan();
+  /*   this.viewWeeklyPlan(); */
+  }
+  viewAllWeeklyPlan() {
+    this.showForm2();
+    this.digitalMgmtService.viewAllWeeklyPlan(this.no,  this.monthName,
+      this.yearValue).subscribe(data => {
+      this.WeeklyStatus = data;
+    }, error => {
+      console.log(error);
+    });
   }
   viewWeeklyPlan() {
-    this.digitalMgmtService.viewWeeklyPlan(this.no, this.selectedMonth2, this.selectedYear2, this.selectedWeek2).subscribe(data => {
+    this.digitalMgmtService.viewWeeklyPlan(this.no,  this.monthName,
+      this.yearValue,
+       this.selectedWeek2).subscribe(data => {
       this.WeeklyStatus = data;
     }, error => {
       console.log(error);
     });
   }
 
-  saveWeeklyPlan(secondFormGroup ) {
+  saveWeeklyPlan(secondFormGroup , weekvalue) {
+    this.message = 'Sucessfully added to weekly plan';
     this.WeeklyModel = new WeeklyPlan();
     this.WeeklyModel.planTitle = this.secondFormGroup.controls.title1.value;
     this.WeeklyModel.planDescription = this.secondFormGroup.controls.Description1.value;
- this.WeeklyModel.week = this.selectedWeek2;
-    this.digitalMgmtService.addWeeklyPlan(this.no, this.selectedMonth2, this.selectedYear2, this.WeeklyModel).subscribe(data => {
+ this.WeeklyModel.week = weekvalue;
+    this.digitalMgmtService.addWeeklyPlan(this.no, this.monthName, this.yearValue, this.WeeklyModel).subscribe(data => {
       this.WeeklyStatus = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+      this.secondFormGroup.reset();
     }, error => {
       console.log(error);
     });
   }
-  editTask2() {
-    this.showEditing2 = true;
+  editTask2(val) {
+    val.newShowEditWeek = true;
   }
-  cancel2() {
-    this.showEditing2 = false;
+  cancel2(val) {
+    val.newShowEditWeek = false;
   }
   updateWeeklyPlan( id, weekId, updatedTitle, updatedDescription, week) {
     this.WeeklyModel = new WeeklyPlan();
@@ -243,11 +381,15 @@ this.digitalMgmtService.editMonthlyPlanStatus(id1, monthid2, val).subscribe(data
   }
   copyToDate(id, weekId, date) {
     const value = date.split('/');
-    this.digitalMgmtService.copyToDailyPlan(id, weekId, value[1]).subscribe(data => {
-      this.WeeklyStatus = data;
-    }, error => {
-      console.log(error);
-    });
+   console.log(value[0] - 1);
+    console.log(value[2]);
+    const MONTH = value[0] - 1;
+    console.log(MONTH);
+      this.digitalMgmtService.copyToDailyPlan(id, weekId, value[1]).subscribe(data => {
+        this.WeeklyStatus = data;
+      }, error => {
+        console.log(error);
+      });
   }
   selectStatus2( id1,  weekid , val) {
     this.digitalMgmtService.editWeeklyPlanStatus(id1, weekid, val).subscribe(data => {
@@ -275,7 +417,8 @@ this.digitalMgmtService.editMonthlyPlanStatus(id1, monthid2, val).subscribe(data
         this.showAdd = true;
       }
       viewDailyPlan() {
-        this.digitalMgmtService.viewMonthlyPlan(this.no, this.selectedMonth3, this.selectedYear3).subscribe(data => {
+        this.showForm3();
+        this.digitalMgmtService.viewMonthlyPlan(this.no, this.monthName, this.yearValue).subscribe(data => {
           this.DailyStatus = data;
           console.log(data);
         }, error => {
@@ -283,17 +426,23 @@ this.digitalMgmtService.editMonthlyPlanStatus(id1, monthid2, val).subscribe(data
         });
       }
       saveDailyPlan(thirdFormGroup , update) {
+        this.message = 'Sucessfully added to daily plan';
         const DATE = update.split('/');
         this.DailyModel = new DailyPlan();
         this.DailyModel.date = DATE[1];
-        this.DailyModel.planTitle = this.thirdFormGroup.controls.title2.value;
+          this.DailyModel.planTitle = this.thirdFormGroup.controls.title2.value;
         this.DailyModel.planDescription = this.thirdFormGroup.controls.Description2.value;
-        this.digitalMgmtService.addDailyPlan(this.no, this.selectedMonth3, this.selectedYear3, this.DailyModel).subscribe(data => {
+        this.digitalMgmtService.addDailyPlan(this.no, this.monthName, this.yearValue, this.DailyModel).subscribe(data => {
           this.DailyStatus = data;
+          this.snackBar.open(this.message, this.action, {
+            duration: 3000,
+          });
+          this.thirdFormGroup.reset();
         }, error => {
           console.log(error);
         });
-      }
+        }
+
       editTask3() {
         this.showEditing3 = true;
       }

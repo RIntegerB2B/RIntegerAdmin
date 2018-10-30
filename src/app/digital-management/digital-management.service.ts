@@ -9,6 +9,7 @@ import {AddMonthlyPlan} from './monthly-plan/monthlyplan.model';
 import {DigitalMgmtStatus} from './monthly-plan/digital-mgmt.status.model';
 import {WeeklyPlan} from './monthly-plan/weeklyplan.model';
 import { DailyPlan } from './monthly-plan/dailyplan.model';
+import {NewMonthlyPlan} from './monthly-plan/new-month.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -33,10 +34,10 @@ export class DigitalManagementService {
 
   constructor(private http: Http, private httpClient: HttpClient) { }
 
-  addMonth(data: AddMonthlyPlan): Observable<any> {
+  addMonth(data: NewMonthlyPlan): Observable<any> {
     const bookurl = 'addmonth/';
     const url: string = this.serviceUrl + bookurl;
-    return this.httpClient.post<AddMonthlyPlan>(url, data);
+    return this.httpClient.post<NewMonthlyPlan>(url, data);
   }
 
   addMonthlyPlan(data: AddMonthlyPlan): Observable<any> {
@@ -50,7 +51,7 @@ export class DigitalManagementService {
     const yearUrl = '/year/';
     const  planUrl = '/monthlyplan';
     const url: string = this.serviceUrl + addurl + id + monthUrl + month + yearUrl + year + planUrl  ;
-    return this.httpClient.get<DigitalMgmtStatus>(url);
+    return this.httpClient.get<DigitalMgmtStatus[]>(url);
   }
   editMonthlyPlan(id, month, plan: AddMonthlyPlan): Observable<any> {
     const bookingurl = 'id/';
@@ -70,14 +71,14 @@ export class DigitalManagementService {
     const monthUrl = '/month/';
     const statusUrl = '/status/';
     const url: string = this.serviceUrl + addurl + id + monthUrl + month + statusUrl + status  ;
-    return this.httpClient.get<DigitalMgmtStatus>(url);
+    return this.httpClient.get<DigitalMgmtStatus[]>(url);
   }
   copyToWeeklyPlan(id, monthid, weekno) {
     const addurl = 'id/';
     const monthUrl = '/monthid/';
     const weekUrl = '/week/';
     const url: string = this.serviceUrl + addurl + id + monthUrl + monthid + weekUrl + weekno  ;
-    return this.httpClient.get<DigitalMgmtStatus>(url);
+    return this.httpClient.get<DigitalMgmtStatus[]>(url);
   }
 
   // weekly plan
@@ -87,7 +88,16 @@ export class DigitalManagementService {
     const yearUrl = '/year/';
     const  weekUrl = '/week/';
     const url: string = this.serviceUrl + addurl + id + monthUrl + month + yearUrl + year + weekUrl + week ;
-    return this.httpClient.get<DigitalMgmtStatus>(url);
+    return this.httpClient.get<DigitalMgmtStatus[]>(url);
+  }
+
+  viewAllWeeklyPlan(id, month, year) {
+    const addurl = 'bookingid/';
+    const monthUrl = '/month/';
+    const yearUrl = '/year/';
+    const  weekUrl = '/viewweek';
+    const url: string = this.serviceUrl + addurl + id + monthUrl + month + yearUrl + year + weekUrl ;
+    return this.httpClient.get<DigitalMgmtStatus[]>(url);
   }
   addWeeklyPlan(id, month , year,  plan: WeeklyPlan): Observable<any> {
     const bookingurl = 'bookingid/';
@@ -118,21 +128,21 @@ export class DigitalManagementService {
     const monthUrl = '/monthid/';
     const weekUrl = '/week/';
     const url: string = this.serviceUrl + addurl + id + monthUrl + monthid + weekUrl + weekno  ;
-    return this.httpClient.get<DigitalMgmtStatus>(url);
+    return this.httpClient.get<DigitalMgmtStatus[]>(url);
   }
   editWeeklyPlanStatus(id, week, status) {
     const addurl = 'id/';
     const monthUrl = '/week/';
     const statusUrl = '/status/';
     const url: string = this.serviceUrl + addurl + id + monthUrl + week + statusUrl + status  ;
-    return this.httpClient.get<DigitalMgmtStatus>(url);
+    return this.httpClient.get<DigitalMgmtStatus[]>(url);
   }
   copyToDailyPlan(id, weekid, date) {
     const addurl = 'id/';
     const monthUrl = '/weekid/';
     const weekUrl = '/day/';
     const url: string = this.serviceUrl + addurl + id + monthUrl + weekid + weekUrl + date  ;
-    return this.httpClient.get<DigitalMgmtStatus>(url);
+    return this.httpClient.get<DigitalMgmtStatus[]>(url);
   }
 
   // daily plan
@@ -142,7 +152,7 @@ export class DigitalManagementService {
     const yearUrl = '/year/';
     const  weekUrl = '/week/';
     const url: string = this.serviceUrl + addurl + id + monthUrl + month + yearUrl + year + weekUrl  ;
-    return this.httpClient.get<DigitalMgmtStatus>(url);
+    return this.httpClient.get<DigitalMgmtStatus[]>(url);
   }
   addDailyPlan(id, month , year,  plan: DailyPlan): Observable<any> {
     const bookingurl = 'bookingid/';
@@ -173,6 +183,6 @@ editDailyPlanStatus(id, dailyid, status) {
   const monthUrl = '/daily/';
   const statusUrl = '/status/';
   const url: string = this.serviceUrl + addurl + id + monthUrl + dailyid + statusUrl + status  ;
-  return this.httpClient.get<DigitalMgmtStatus>(url);
+  return this.httpClient.get<DigitalMgmtStatus[]>(url);
 }
 }
