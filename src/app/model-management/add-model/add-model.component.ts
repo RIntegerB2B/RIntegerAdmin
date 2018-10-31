@@ -171,7 +171,7 @@ export class AddModelComponent implements OnInit {
       /*  this.userModel.availability = this.modelAvailability; */
       this.spName = this.localStorageService.retrieve('userName');
       this.spCompanyName = this.localStorageService.retrieve('companyName');
-      this.spId = this.localStorageService.retrieve('Id');
+      this.spId = this.localStorageService.retrieve('id');
       this.userModel.serviceProviderId = this.spId;
       this.userModel.serviceProviderCompanyName = this.spCompanyName;
       this.userModel.serviceProviderName = this.spName;

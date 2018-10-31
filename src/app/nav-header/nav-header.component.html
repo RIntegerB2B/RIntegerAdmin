@@ -1,4 +1,4 @@
-<div *ngFor="let data of role">
+<div *ngFor="let data of roles">
   <div *ngFor="let new of data.menuPermission">
     <div *ngFor="let main of data.mainMenuPermission">
       <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
@@ -124,7 +124,7 @@
                                 <a class="pointer" [routerLink]="['model']"> Add Model </a><br>
                               </li>
                               <li class="nav-item" *ngIf="new.viewModel">
-                                <a class="pointer" [routerLink]="['models']"> View Models</a><br>
+                                <a class="pointer" [routerLink]="['models']">View Models</a><br>
                               </li>
                             </ul>
                           </mat-expansion-panel>
@@ -224,3 +224,4 @@
       </div>
     </div>
   </div>
+  

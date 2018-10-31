@@ -24,7 +24,7 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit  {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   mobileNo;
-  role: Permission;
+  roles: Permission;
   enable: boolean;
   filterValue;
   toggleBar = 'colapseMenuBar';
@@ -47,7 +47,7 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit  {
       this.serviceProvider = false;
       this.admin = true;
     }
-    this.role = this.localStorageService.retrieve('role');
+    this.roles = this.localStorageService.retrieve('roles');
   }
   collapseMenu() {
     this.toggleBar = this.toggleBar === 'colapseMenuBar' ? 'expandMenuBar' : 'colapseMenuBar';

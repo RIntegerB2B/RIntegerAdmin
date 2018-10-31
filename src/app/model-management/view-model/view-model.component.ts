@@ -45,13 +45,14 @@ export class ViewModelComponent implements OnInit {
     });
   }
   viewProfile(modelId) {
-    this.spName = this.localStorageService.retrieve('userName');
+    this.spName = this.localStorageService.retrieve('username');
     this.router.navigate(['/navheader/profile', this.spName, 'images', modelId]);
   }
   findModels() {
-    this.spId = this.localStorageService.retrieve('Id');
+    this.spId = this.localStorageService.retrieve('id');
     this.modelService.serviceProviderModels(this.spId).subscribe(data => {
       this.Models = data;
+      console.log(data);
      /*  const arrayLength = data.length - 1;
       for (let i = 0; i <= arrayLength; i++) {
         console.log(data[i].isScheduledBooking);
@@ -74,7 +75,7 @@ export class ViewModelComponent implements OnInit {
     });
   }
   delete(modelId) {
-    this.spName = this.localStorageService.retrieve('userName');
+    this.spName = this.localStorageService.retrieve('username');
     this.modelId = modelId;
     this.modelService.deleteModel(this.modelId, this.spName).subscribe(data => {
       this.Models = data;
@@ -82,7 +83,7 @@ export class ViewModelComponent implements OnInit {
   }
   addScheduled(id) {
     this.message = 'model added to scheduled booking ';
-    this.spId = this.localStorageService.retrieve('Id');
+    this.spId = this.localStorageService.retrieve('id');
    /*  const marketingIndex = this.selectModel.indexOf(id);
     if (isChecked) {
       this.selectModel.push(id);
@@ -97,7 +98,7 @@ export class ViewModelComponent implements OnInit {
     });
   }
   cancelScheduled(id) {
-  this.spId = this.localStorageService.retrieve('Id');
+  this.spId = this.localStorageService.retrieve('id');
       /* const marketingIndex = this.selectModel.indexOf(id);
     if (isChecked) {
       this.unselectedModel.push(id);
@@ -113,7 +114,7 @@ export class ViewModelComponent implements OnInit {
     });
   }
   addToAvailable(id) {
-    this.spId = this.localStorageService.retrieve('Id');
+    this.spId = this.localStorageService.retrieve('id');
         /* const marketingIndex = this.selectModel.indexOf(id);
       if (isChecked) {
         this.unselectedModel.push(id);
@@ -129,7 +130,7 @@ export class ViewModelComponent implements OnInit {
       });
     }
     removeFromAvailable(id) {
-      this.spId = this.localStorageService.retrieve('Id');
+      this.spId = this.localStorageService.retrieve('id');
           /* const marketingIndex = this.selectModel.indexOf(id);
         if (isChecked) {
           this.unselectedModel.push(id);

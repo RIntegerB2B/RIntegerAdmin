@@ -10,7 +10,7 @@ export class User {
     isActive: Boolean;
     userType: string;
     constructor(
-        userName: string,
+    userName: string,
     companyName: string,
     emailId: string,
     mobileNumber: Number,
