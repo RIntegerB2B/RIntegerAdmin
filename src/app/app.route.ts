@@ -7,7 +7,8 @@ import { RegistrationComponent } from './account/registration/registration.compo
 import { ApprovalComponent } from './service-provider-management/approval/approval.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { AddModelComponent } from './model-management/add-model/add-model.component';
-import { ViewModelComponent } from './model-management/view-model/view-model.component';
+import { ViewModelComponent,
+    ScheduledComponent} from './model-management/view-model/view-model.component';
 import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
 import { CustomerDetailsComponent } from './customer-management/customer-details/customer-details.component';
 import { ViewAgencyComponent } from './agency-management/view-agency/view-agency.component';

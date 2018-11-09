@@ -64,9 +64,12 @@
                     <div class="col-md-6 form-group">
                         <img [src]="this.model?.primeImage" style="width: 180px; height: 245px;" />
                       </div>
-                      <div class="col-md-6 form-group">
+                      <div class="col-md-3 form-group">
                         {{model.userName}}
                       </div>
+                      <div class="col-md-3 form-group">
+                          {{scheduledDate}}
+                        </div>
                 </div>
                 
               </div>
@@ -93,13 +96,16 @@
               </div>
               <div class="col-md-5 form-group">
                   <div class="row">
-                  <div class="col-md-6 form-group" *ngIf="!Models[i].isScheduledBooking">
+                  <div class="col-md-6 form-group" *ngIf="!Models[i].isScheduledBooking && Models[i].availability === 'Yes'">
                       <button class="btn btn-success"  (click)="addScheduled(modelId.value)" value="Add Images" type="submit">
                         Add to Scheduled Booking</button>
                     </div>
-                    <div class="col-md-6 form-group" *ngIf="Models[i].isScheduledBooking">
+                    
+                    <div class="col-md-6 form-group" *ngIf="Models[i].isScheduledBooking  && Models[i].availability === 'Yes'">
                       <button class="btn btn-danger"  (click)="cancelScheduled(modelId.value)" value="Add Images" type="submit">
-                        Remove from Scheduled Booking</button>
+                        Remove from Scheduled Booking</button> <br>
+                        <button class="btn btn-success"  style="margin-top: 10px;" (click)="editDate(modelId.value)" value="Add Images" type="submit">
+                            Edit Scheduled Date</button> 
                     </div>
                     <div class="col-md-6 form-group" *ngIf="Models[i].availability !== 'Yes'">
                         <button class="btn btn-success" (click)="addToAvailable(modelId.value)" value="Add Images" type="submit">

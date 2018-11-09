@@ -41,7 +41,7 @@ export class AddModelComponent implements OnInit {
   updatedModel: UpdateModel;
   modelAvailability;
   multipleImages = [];
-
+loadedModelName;
 
   fileToUpload: File = null;
   reader: FileReader = new FileReader();
@@ -72,12 +72,19 @@ export class AddModelComponent implements OnInit {
       shootType: [''],
       modelType: [''],
       modelId: [''],
-      available: ['']
+      available: [''],
       /*   modelAvail: [''] */
-      /*  modelHeight: [''],
-       modelMeasurements: [''],
+      modelHeight: [''],
+      bust: [''],
+      waist: [''],
+      chest: [''],
+      hips: [''],
        shoulder: [''],
-       shoeSize: ['']  */
+       shoeSize: [''],
+       hair: [''],
+       eyes: [''],
+       topsize: [''],
+       bottomsize: ['']
     });
   }
 
@@ -113,6 +120,7 @@ export class AddModelComponent implements OnInit {
       this.loadedModel = data;
       /* console.log(this.loadedModel.primeImage);
       console.log(this.loadedModel); */
+     this.loadedModelName = this.loadedModel.userName;
       this.addModelForm.setValue({
         modelName: this.loadedModel.userName,
         description: this.loadedModel.description,
@@ -124,6 +132,17 @@ export class AddModelComponent implements OnInit {
         modelType: this.loadedModel.modelType,
         modelId: id,
         available: this.loadedModel.availability,
+        modelHeight: this.loadedModel.height,
+        bust: this.loadedModel.bust,
+        waist: this.loadedModel.waist,
+        chest: this.loadedModel.chest,
+        hips: this.loadedModel.hips,
+        shoulder: this.loadedModel.shoulder,
+        shoeSize: this.loadedModel.shoeSize,
+        hair: this.loadedModel.hair,
+        eyes: this.loadedModel.eyes,
+        topsize: this.loadedModel.topsize,
+        bottomsize: this.loadedModel.bottomsize
       });
     }, error => {
       console.log(error);
@@ -166,6 +185,17 @@ export class AddModelComponent implements OnInit {
         addModelForm.controls.whatsapp.value,
         addModelForm.controls.modelType.value,
         addModelForm.controls.shootType.value,
+        addModelForm.controls.modelHeight.value,
+        addModelForm.controls.bust.value,
+        addModelForm.controls.chest.value,
+        addModelForm.controls.waist.value,
+        addModelForm.controls.hips.value,
+        addModelForm.controls.hair.value,
+        addModelForm.controls.eyes.value,
+        addModelForm.controls.shoulder.value,
+        addModelForm.controls.shoeSize.value,
+        addModelForm.controls.topsize.value,
+        addModelForm.controls.bottomsize.value
       );
       // sp details
       /*  this.userModel.availability = this.modelAvailability; */
@@ -197,7 +227,18 @@ export class AddModelComponent implements OnInit {
       fb,
       wapp,
       addModelForm.controls.modelType.value,
-      addModelForm.controls.shootType.value
+      addModelForm.controls.shootType.value,
+      addModelForm.controls.modelHeight.value,
+        addModelForm.controls.bust.value,
+        addModelForm.controls.chest.value,
+        addModelForm.controls.waist.value,
+        addModelForm.controls.hips.value,
+        addModelForm.controls.hair.value,
+        addModelForm.controls.eyes.value,
+        addModelForm.controls.shoulder.value,
+        addModelForm.controls.shoeSize.value,
+        addModelForm.controls.topsize.value,
+        addModelForm.controls.bottomsize.value
     );
     // this.updatedModel.portfolioImageName = this.portFolioImageData.portFolioImage.name;
     this.modelService.updateModel(id, this.updatedModel).subscribe(data => {

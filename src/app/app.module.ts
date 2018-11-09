@@ -28,7 +28,9 @@ import { RegistrationComponent } from './account/registration/registration.compo
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { ApprovalComponent } from './service-provider-management/approval/approval.component';
 import { AddModelComponent } from './model-management/add-model/add-model.component';
-import { ViewModelComponent } from './model-management/view-model/view-model.component';
+import { ViewModelComponent,
+  ScheduledComponent } from './model-management/view-model/view-model.component';
+
 import { ModelManagementService } from './model-management/model-management.service';
 import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
 import { NotificationService } from './notification/notification.service';
@@ -176,7 +178,8 @@ import {ContactUsComponent} from './contact/contact-us/contact-us.component';
     WhatsappManagementComponent,
     PermissionComponent,
     RegisterComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    ScheduledComponent
   ],
   imports: [
     BrowserModule,
@@ -217,7 +220,7 @@ import {ContactUsComponent} from './contact/contact-us/contact-us.component';
     CreativeBookingViewComponent, MarketingEditComponent, MarketingAddComponent, RegistrationBookingViewComponent, ITServicesViewComponent,
     MarketingServicesViewComponent, DigitalMgmtViewComponent, CatalogingViewComponent,
     CustomerAddComponent, CustomerEditComponent,
-    AplusBookingViewComponent, ScheduledBookingViewComponent],
+    AplusBookingViewComponent, ScheduledBookingViewComponent, ScheduledComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

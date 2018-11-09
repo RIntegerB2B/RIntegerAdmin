@@ -12,6 +12,18 @@ export class UpdateModel {
     serviceProviderCompanyName: string;
     modelType: string;
     categoryType: string;
+    height: string;
+    bust: string;
+    chest: string;
+    waist: string;
+    hips: string;
+    hair: string;
+    eyes: string;
+    shoulder: string;
+    shoeSize: string;
+    topsize: string;
+    bottomsize: string;
+    isScheduledBooking: boolean;
     constructor(
         id: string,
         userName: string,
@@ -22,7 +34,18 @@ export class UpdateModel {
         faceBook: string,
         whatsapp: string,
         modelType: string,
-        categoryType: string
+        categoryType: string,
+        height: string,
+        bust: string,
+        chest: string,
+        waist: string,
+        hips: string,
+        hair: string,
+        eyes: string,
+        shoulder: string,
+        shoeSize: string,
+        topsize: string,
+        bottomsize: string
         ) {
       this.userName = userName;
         this.description = description;
@@ -33,6 +56,16 @@ export class UpdateModel {
         this.whatsapp = whatsapp;
         this.modelType = modelType;
         this.categoryType = categoryType;
-
+        this.height = height;
+        this.bust = bust;
+        this.chest = chest;
+        this.waist = waist;
+        this.hips = hips;
+        this.hair = hair;
+        this.eyes = eyes;
+        this.shoulder = shoulder;
+        this.shoeSize = shoeSize;
+        this.topsize = topsize;
+        this.bottomsize = bottomsize;
     }
 }

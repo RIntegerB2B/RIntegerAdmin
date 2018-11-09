@@ -160,6 +160,13 @@ cancelScheduledModel(id, spid): Observable<any> {
   const url: string = this.serviceUrl + addUrl + id + spUrl + spid;
   return this.httpClient.get<Model>(url);
 }
+addScheduledDate(id, spid, date): Observable<any> {
+  const addUrl = 'scheduleddate/';
+  const spUrl = '/serviceproviders/';
+  const dateUrl = '/date/';
+  const url: string = this.serviceUrl + addUrl + id + spUrl + spid + dateUrl + date;
+  return this.httpClient.get<Model>(url);
+}
 addToAvailable(id, spid): Observable<any> {
   const addUrl = 'avaialble/';
   const spUrl = '/serviceproviders/';

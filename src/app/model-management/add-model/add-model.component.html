@@ -5,9 +5,11 @@
         <div class="form-group">
               
            
-        
-          <div class="textContainer"   >
-            <input type="text" placeholder="Model Name" class="form-control required appTextBox" required formControlName="modelName"
+        <div *ngIf="showUpdate">
+          <h4 >Model Name: {{loadedModelName}}</h4>
+        </div>
+          <div class="textContainer" >
+            <input type="text"  placeholder="Model Name" class="form-control required appTextBox" required formControlName="modelName"
               #modelName/>
           </div>
           <div *ngIf="showError" class="alert alert-danger">Please enter Model Name</div>
@@ -28,89 +30,93 @@
               </div>
               <div *ngIf="showModel" class="alert alert-danger">Please select Model Type</div>
           </div>
-          <!-- <div class="form-group">
+
+          <label>Availability </label>
+          <div class="col-sm-12 radio">
+            <label class="pr-2 " *ngFor="let avail of Availability">
+              <input type="radio" formControlName="available" [value]="avail">&nbsp;&nbsp;{{ avail}}
+            </label>
+          </div>
+          <div *ngIf="showAvailability" class="alert alert-danger">Please select the availability</div>
+           <div class="form-group">
           <div class="textContainer">
-            <input type="text" placeholder="Model Height" class="form-control required appTextBox" required formControlName="modelHeight"
+            <input type="text" placeholder="Model Height" class="form-control  appTextBox"  formControlName="modelHeight"
               />
           </div>
-          <div *ngIf="addModelForm.get('modelHeight').errors
-                               && !addModelForm.get('modelHeight').pristine" class="alert alert-danger">
-            <div [hidden]="!addModelForm.get('modelHeight').errors.required">Please enter Model Height</div>
-          </div>
         </div> 
+        <div class="form-group" >
+          <div class="textContainer">
+            <input type="text" placeholder="Bust" class="form-control  appTextBox"  formControlName="bust"/>
+          </div>
+        </div>
+        <div class="form-group" >
+          <div class="textContainer">
+            <input type="text" placeholder="Chest" class="form-control  appTextBox"  formControlName="chest"/>
+          </div>
+        </div>
         <div class="form-group">
-        <div class="textContainer">
-          <input type="text" placeholder="Model Measurements" class="form-control required appTextBox" required formControlName="modelMeasurements"
-            />
+          <div class="textContainer">
+            <input type="text" placeholder="Waist" class="form-control  appTextBox"  formControlName="waist"/>
+          </div>
         </div>
-        <div *ngIf="addModelForm.get('modelMeasurements').errors
-                             && !addModelForm.get('modelMeasurements').pristine" class="alert alert-danger">
-          <div [hidden]="!addModelForm.get('modelMeasurements').errors.required">Please enter Model Measurements</div>
-        </div>
-        </div>
-
         <div class="form-group">
-      <div class="textContainer">
-        <input type="text" placeholder="Shoulder" class="form-control required appTextBox" required formControlName="shoulder"
-          />
-      </div>
-      <div *ngIf="addModelForm.get('shoulder').errors
-                           && !addModelForm.get('shoulder').pristine" class="alert alert-danger">
-        <div [hidden]="!addModelForm.get('shoulder').errors.required">Please enter Shoulder</div>
-      </div>
-      </div> 
+          <div class="textContainer">
+            <input type="text" placeholder="Hips" class="form-control  appTextBox"  formControlName="hips"/>
+          </div>
+        </div>
+      
 
       <div class="form-group">
     <div class="textContainer">
-      <input type="text" placeholder="Shoe Size" class="form-control required appTextBox" required formControlName="shoeSize"
+      <input type="text" placeholder="Shoe Size" class="form-control  appTextBox"  formControlName="shoeSize"
         />
     </div>
-    <div *ngIf="addModelForm.get('shoeSize').errors
-                         && !addModelForm.get('shoeSize').pristine" class="alert alert-danger">
-      <div [hidden]="!addModelForm.get('shoeSize').errors.required">Please enter Shoe Size</div>
     </div>
-    </div> -->
-    <!-- <div class="col md-12">
-        <label class="pr-2 ">Model Availability</label>
-        <div>
-          <input type="radio" value="true"  (click)="avail($event.target.value)" formControlName="modelAvail">Yes
-          <input type="radio" value="false"   (click)="avail($event.target.value)" formControlName="modelAvail" >No
+    <div class="form-group">
+      <div class="textContainer">
+        <input type="text" placeholder="Hair" class="form-control  appTextBox"  formControlName="hair"
+          />
+      </div>
+      </div>
+      <div class="form-group">
+        <div class="textContainer">
+          <input type="text" placeholder="Eyes" class="form-control  appTextBox"  formControlName="eyes"
+            />
         </div>
-      </div> -->
+        </div>
+
+      <div class="form-group">
+        <div class="textContainer">
+          <input type="text" placeholder="Shoulder" class="form-control  appTextBox"  formControlName="shoulder"
+            />
+        </div>
+        </div> 
         <div class="form-group">
           <div class="textContainer">
-            <input type="text" placeholder="Description" class="form-control required appTextBox" required formControlName="description"
-           #modelDesc />
+            <input type="text" placeholder="Top Size" class="form-control  appTextBox"  formControlName="topsize"
+              />
           </div>
-          <div *ngIf="addModelForm.get('description').errors
-                               && !addModelForm.get('description').pristine" class="alert alert-danger">
-            <div [hidden]="!addModelForm.get('description').errors.required">Please enter Description</div>
+          </div>
+          <div class="form-group">
+            <div class="textContainer">
+              <input type="text" placeholder="Bottom Size" class="form-control  appTextBox"  formControlName="bottomsize"
+                />
+            </div>
+            </div>
+  
+   
+
+        <div class="form-group">
+          <div class="textContainer">
+            <input type="text" placeholder="Description" class="form-control  appTextBox"  formControlName="description"
+           #modelDesc />
           </div>
         </div>
 
         
-   <!--      <div class="form-group">
-          <div class="textContainer">
-            <input type="text" placeholder="Availability" class="form-control required appTextBox" required formControlName="availability"
-            #avail/>
-
-          </div>
-          <div>Ex:1,0</div> 
-          
-           <div *ngIf="addModelForm.get('availability').errors
-                                 && !addModelForm.get('availability').pristine" class="alert alert-danger">
-            <div [hidden]="!addModelForm.get('availability').errors.required">Please enter Availability</div>
-          </div> 
-        </div> -->
 
 
-        <label>Availability </label>
-        <div class="col-sm-12 radio">
-          <label class="pr-2 " *ngFor="let avail of Availability">
-            <input type="radio" formControlName="available" [value]="avail">&nbsp;&nbsp;{{ avail}}
-          </label>
-        </div>
-        <div *ngIf="showAvailability" class="alert alert-danger">Please select the availability</div>
+      
     
         <div class="form-group">
           <div class="textContainer">
