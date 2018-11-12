@@ -5,6 +5,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import { MatStepper } from '@angular/material';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 import * as _moment from 'moment';
@@ -33,6 +34,7 @@ import {DigitalMgmtStatus} from './digital-mgmt.status.model';
 import {WeeklyPlan} from './weeklyplan.model';
 import {DailyPlan} from './dailyplan.model';
 import {NewMonthlyPlan} from './new-month.model';
+import {Notification} from '../../shared/notification.model';
 
 @Component({
   selector: 'app-monthly-plan',
@@ -77,7 +79,7 @@ export class MonthlyPlanComponent implements OnInit {
   selectedYear;
   selectedWeek;
   selected = 'All';
-  status = ['Planned', 'Started', 'Progress' , 'Completed', 'Pending' , 'Cancel'];
+  status = ['Planned', 'Started', 'Progress' , 'Pending' , 'Cancel', 'Completed', 'Update'];
   message;
   action;
   noresult: boolean;
@@ -89,6 +91,11 @@ export class MonthlyPlanComponent implements OnInit {
   ctrlValue;
   newMonthModel: NewMonthlyPlan;
   montherror: boolean;
+  titleToSent;
+  title;
+  notificationBody;
+  notificationModel: Notification;
+  mobileNo;
 /*   showDays = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
    '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
    , '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
@@ -99,6 +106,7 @@ export class MonthlyPlanComponent implements OnInit {
     private digitalMgmtService: DigitalManagementService, private activatedRoute: ActivatedRoute ,
     public snackBar: MatSnackBar) {
     this.no = this.activatedRoute.snapshot.paramMap.get('no');
+    this.mobileNo = this.activatedRoute.snapshot.paramMap.get('mobileno');
   }
   ngOnInit() {
     console.log(window.innerWidth);
@@ -121,7 +129,8 @@ export class MonthlyPlanComponent implements OnInit {
       Description1: [''],
       updTitle1: [''],
       updDesc1: [''],
-      date: ['']
+      date: [''],
+      updWeek1: ['']
     });
     this.thirdFormGroup = this._formBuilder.group({
       _id: [''],
@@ -205,10 +214,13 @@ export class MonthlyPlanComponent implements OnInit {
     this.viewMonthlyPlan();
   }
   selectWeek(id1,  monthid2 , val2) {
+    this.message = 'Copied to ' + val2;
     this.selectedWeek = val2;
-    console.log(val2);
     this.digitalMgmtService.copyToWeeklyPlan(id1, monthid2, val2).subscribe(data => {
       this.Status = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
     }, error => {
       console.log(error);
     });
@@ -293,15 +305,27 @@ this.noresult = true;
   cancel(val) {
     val.newShowEdit = false;
   }
-  selectStatus( id1,  monthid2 , val) {
+  selectStatus( id1,  monthid2 , val , title) {
+    this.message = 'Status Updated to - ' + val;
 this.digitalMgmtService.editMonthlyPlanStatus(id1, monthid2, val).subscribe(data => {
-  console.log(data);
   this.Status = data;
+  this.snackBar.open(this.message, this.action, {
+    duration: 3000,
+  });
+  if (val === 'Completed') {
+    this.titleToSent =  'Activity' + ' ' +  title + ' ' +  'completed';
+    this.sendNotification(  this.mobileNo , this.no, this.titleToSent);
+  } else if (val === 'Update' ) {
+    this.titleToSent =  'Activity' + ' ' +  title + ' '  + 'will be updated';
+    this.sendNotification(  this.mobileNo , this.no, this.titleToSent);
+  }
 }, error => {
   console.log(error);
 });
   }
-
+  /* goForward(stepper: MatStepper) {
+    stepper.next();
+  } */
   // weekly plan
   showForm2() {
     this.showForms2 = true;
@@ -380,27 +404,38 @@ this.digitalMgmtService.editMonthlyPlanStatus(id1, monthid2, val).subscribe(data
     });
   }
   copyToDate(id, weekId, date) {
+    this.message = 'Copied to ' + date;
     const value = date.split('/');
    console.log(value[0] - 1);
     console.log(value[2]);
     const MONTH = value[0] - 1;
-    console.log(MONTH);
       this.digitalMgmtService.copyToDailyPlan(id, weekId, value[1]).subscribe(data => {
         this.WeeklyStatus = data;
+        this.snackBar.open(this.message, this.action, {
+          duration: 3000,
+        });
       }, error => {
         console.log(error);
       });
   }
-  selectStatus2( id1,  weekid , val) {
+  selectStatus2( id1,  weekid , val , title) {
+    this.message = 'Status Updated to - ' + val;
     this.digitalMgmtService.editWeeklyPlanStatus(id1, weekid, val).subscribe(data => {
-      console.log(data);
       this.WeeklyStatus = data;
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+      if (val === 'Completed') {
+        this.titleToSent =    title + ' ' +  'completed' ;
+        this.sendNotification(  this.mobileNo , this.no, this.titleToSent);
+      } else if (val === 'Update' ) {
+        this.titleToSent =    title + ' '  + 'will be updated';
+        this.sendNotification(  this.mobileNo , this.no, this.titleToSent);
+      }
     }, error => {
       console.log(error);
     });
       }
-
-      // daily plan
 
       showForm3() {
         this.showForms3 = true;
@@ -443,11 +478,11 @@ this.digitalMgmtService.editMonthlyPlanStatus(id1, monthid2, val).subscribe(data
         });
         }
 
-      editTask3() {
-        this.showEditing3 = true;
+      editTask3(val) {
+        val.newShowEditDaily = true;
       }
-      cancel3() {
-        this.showEditing3 = false;
+      cancel3(val) {
+        val.newShowEditDaily = false;
       }
       updateDailyPlan( id, dateID, updatedTitle, updatedDescription, week) {
         this.DailyModel = new DailyPlan();
@@ -468,12 +503,47 @@ this.digitalMgmtService.editMonthlyPlanStatus(id1, monthid2, val).subscribe(data
           console.log(error);
         });
       }
-      selectStatus3( id1,  dailyId , val) {
+      selectStatus3( id1,  dailyId , val, title) {
+        this.message = 'Status Updated to - ' + val;
         this.digitalMgmtService.editDailyPlanStatus(id1, dailyId, val).subscribe(data => {
-          console.log(data);
           this.DailyStatus = data;
+          this.snackBar.open(this.message, this.action, {
+            duration: 3000,
+          });
+          if (val === 'Completed') {
+            this.titleToSent =    title + ' ' +  'completed' ;
+            this.sendNotification(  this.mobileNo , this.no, this.titleToSent);
+          } else if (val === 'Update' ) {
+            this.titleToSent =    title + ' '  + 'will be updated';
+            this.sendNotification(  this.mobileNo , this.no, this.titleToSent);
+          }
         }, error => {
           console.log(error);
         });
+          }
+          copyToAnotherDate(id, dateId, date) {
+            this.message = 'Copied to ' + date;
+            const value = date.split('/');
+            const MONTH = value[0] - 1;
+              this.digitalMgmtService.copyToDayPlan(id, dateId, value[1]).subscribe(data => {
+                this.DailyStatus = data;
+                this.snackBar.open(this.message, this.action, {
+                  duration: 3000,
+                });
+              }, error => {
+                console.log(error);
+              });
+          }
+
+          sendNotification(mobileNumber, orderId , title) {
+            this.title = title;
+            this.notificationBody = 'Booking Id ' + orderId ;
+            this.notificationModel = new Notification(
+              mobileNumber,
+              this.title,
+            this.notificationBody
+            );
+            this.digitalMgmtService.pushNotification(this.notificationModel).subscribe(data => {
+            });
           }
 }

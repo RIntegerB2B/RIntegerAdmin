@@ -113,7 +113,7 @@
                   <div class="col-sm-12 col-md-2 vcenter form-group">
                     <mat-form-field>
                       <mat-select #selectstatus [(value)]="val.status" placeholder="Select the status">
-                        <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus(data._id,val._id,selectstatus.value)">
+                        <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus(data._id,val._id,selectstatus.value, val.planTitle)">
                           {{statusname}}
                         </mat-option>
                       </mat-select>
@@ -168,7 +168,7 @@
                   <div class="col-sm-12 col-md-2 vcenter form-group">
                     <mat-form-field>
                       <mat-select #selectstatus [(value)]="val.status" placeholder="Select the status">
-                        <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus(data._id,val._id,selectstatus.value)">
+                        <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus(data._id,val._id,selectstatus.value, val.planTitle)">
                           {{statusname}}
                         </mat-option>
                       </mat-select>
@@ -306,7 +306,7 @@
                             <mat-select #selectValStatus2 [(value)]="val.status"
                              placeholder="Select the status">
                               <mat-option *ngFor="let statusname of status"
-                               [value]="statusname" (click)="selectStatus2(data._id,val._id,selectValStatus2.value)">
+                               [value]="statusname" (click)="selectStatus2(data._id,val._id,selectValStatus2.value,val.planTitle)">
                                 {{statusname}}
                               </mat-option>
                             </mat-select>
@@ -315,7 +315,7 @@
                         <div class="col-sm-12 col-md-2 vcenter form-group">
                           <mat-form-field>
                             <input matInput [matDatepicker]="picker1" formControlName="date" placeholder="Choose a date"
-                              #updateDate>
+                              #updateDate (dateChange)="copyToDate(data._id,val._id,updateDate.value)">
                             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                             <mat-datepicker #picker1></mat-datepicker>
                           </mat-form-field>
@@ -333,14 +333,22 @@
                           <input class="form-control labelText" type="text" formControlName="updTitle1" [value]="val.planTitle"
                             #updateTitle1 />
                         </div>
-                        <div class="col-sm-12 col-md-3 vcenter form-group">
+                        <div class="col-sm-12 col-md-2 vcenter form-group">
                   <input class="form-control labelText" type="text" 
                   formControlName="updDesc1" [value]="val.planDescription"
-                            #updateDescription1 />                  </div>
+                            #updateDescription1 />  </div>
+                            <div class="col-sm-12 col-md-1 vcenter  form-group">
+                                <mat-form-field>
+                              <mat-select #updateWeekVal2 [(value)]="val.week" placeholder="Select the Week">
+                                <mat-option *ngFor="let selweek2 of week" [value]="selweek2">
+                                  {{selweek2}}
+                                </mat-option>
+                              </mat-select>   
+                            </mat-form-field>            </div>
                         <div class="col-sm-12 col-md-1 alignProper vcenter form-group">
                           <p class="textSave">Save</p>
                           <mat-icon class="gridEdit" color="primary"
-                           (click)="updateWeeklyPlan(data._id, val._id, updateTitle1.value ,updateDescription1.value, val.week)">save</mat-icon>
+                           (click)="updateWeeklyPlan(data._id, val._id, updateTitle1.value ,updateDescription1.value, updateWeekVal2.value)">save</mat-icon>
                         </div>
                         <div class="col-sm-12 col-md-1 vcenter alignProper form-group">
                           <p class="textSave">Delete</p>
@@ -352,11 +360,13 @@
                         </div>
                         <div class="col-sm-12 col-md-2 vcenter form-group">
                              <mat-form-field>
-                                <mat-select #weeknoval [(value)]="weekno" placeholder="Select the Week">
-                                  <mat-option *ngFor="let weekno of week" [value]="weekno" (click)="selectWeek(data._id,val._id,weeknoval.value)">
-                                    {{weekno}}
-                                  </mat-option>
-                                </mat-select>
+                              <mat-select #selectValStatus2 [(value)]="val.status"
+                              placeholder="Select the status">
+                               <mat-option *ngFor="let statusname of status"
+                                [value]="statusname" (click)="selectStatus2(data._id,val._id,selectValStatus2.value,val.planTitle)">
+                                 {{statusname}}
+                               </mat-option>
+                             </mat-select>
                               </mat-form-field>
                         </div>
                         <div class="col-sm-12 col-md-2 vcenter form-group">
@@ -483,7 +493,7 @@
                           <label class="labelText">{{val.date}}</label>
                         </div>
                       <div class="col-sm-12 col-md-3 vcenter form-group">
-                        <a (click)="editTask2(val)" class="gridEdit">
+                        <a (click)="editTask3(val)" class="gridEdit">
                           <p class="textSave">Edit</p>
                           <mat-icon color="primary">create</mat-icon>
                         </a>
@@ -491,7 +501,7 @@
                       <div class="col-sm-12 col-md-2 vcenter form-group">
                         <mat-form-field>
                           <mat-select #selectValStatus3 [(value)]="val.status" placeholder="Select the status">
-                            <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus3(data._id,val._id,selectValStatus3.value)">
+                            <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus3(data._id,val._id,selectValStatus3.value,val.planTitle)">
                               {{statusname}}
                             </mat-option>
                           </mat-select>
@@ -499,12 +509,12 @@
                       </div>
                       <div class="col-sm-12 col-md-2 vcenter form-group">
                         
-                        <mat-form-field>
-                          <input matInput [matDatepicker]="picker3" formControlName="copyToDate" placeholder="Choose a date"
-                            #updateDate2>
-                          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                          <mat-datepicker #picker3></mat-datepicker>
-                        </mat-form-field>
+                          <mat-form-field>
+                              <input matInput [matDatepicker]="picker4" formControlName="copyToDate" placeholder="Choose a date"
+                                #updateDate4 (dateChange)="copyToAnotherDate(data._id,val._id,updateDate4.value)">
+                              <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                              <mat-datepicker #picker4></mat-datepicker>
+                            </mat-form-field>
                       <mat-error *ngIf="montherror">
                           Select the correct month and year
                         </mat-error>
@@ -514,17 +524,25 @@
         
                        <div class="row gridRow">
                       <div class="col-sm-12 col-md-2 vcenter form-group">
-                        <div class="col-md-4 form-group">
+                        
                           <input class="form-control" hidden type="text" formControlName="_id" [value]="data._id" />
                           <input class="form-control" hidden type="text" formControlName="dateID" [value]="val._id" />
                           <input class="form-control" type="text" formControlName="updTitle2" [value]="val.planTitle"
                             #updateTitle2 />
-                        </div>
                       </div>
-                      <div class="col-sm-12 col-md-3 vcenter form-group">
+                      <div class="col-sm-12 col-md-2 vcenter form-group">
                         <input class="form-control" type="text" formControlName="updDesc2" [value]="val.planDescription"
                         #updateDescription2 />
                                   </div>
+
+                                  <!-- <div class="col-sm-12 col-md-1 vcenter form-group">
+                                  <mat-form-field>
+                                      <input matInput [matDatepicker]="picker5" formControlName="copyToDate" placeholder="Choose a date"
+                                        #updateDate5 >
+                                      <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                                      <mat-datepicker #picker5></mat-datepicker>
+                                    </mat-form-field>
+                                    </div> -->
                       <div class="col-sm-12 col-md-1 alignProper vcenter form-group">
                         <p class="textSave">Save</p>
                         <mat-icon class="gridEdit" color="primary"
@@ -540,20 +558,21 @@
                       </div>
                       <div class="col-sm-12 col-md-2 vcenter form-group">
                         <mat-form-field>
-                          <mat-select #selectstatus [(value)]="val.status" placeholder="Select the status">
-                            <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus(data._id,val._id,selectstatus.value)">
-                              {{statusname}}
-                            </mat-option>
-                          </mat-select>
+                            <mat-select #selectValStatus3 [(value)]="val.status" placeholder="Select the status">
+                                <mat-option *ngFor="let statusname of status" [value]="statusname" (click)="selectStatus3(data._id,val._id,selectValStatus3.value,val.planTitle)">
+                                  {{statusname}}
+                                </mat-option>
+                              </mat-select>
                         </mat-form-field>
                       </div>
                       <div class="col-sm-12 col-md-2 vcenter form-group">
                         <mat-form-field>
-                          <input matInput [matDatepicker]="picker3" formControlName="copyToDate" placeholder="Choose a date"
-                            #updateDate2>
-                          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                          <mat-datepicker #picker3></mat-datepicker>
+                          <input matInput [matDatepicker]="picker4" formControlName="copyToDate" placeholder="Choose a date"
+                            #updateDate4 (dateChange)="copyToAnotherDate(data._id,val._id,updateDate4.value)">
+                          <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                          <mat-datepicker #picker4></mat-datepicker>
                         </mat-form-field>
+
                       </div>
                     </div>
                     </div>

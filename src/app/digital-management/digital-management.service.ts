@@ -10,6 +10,7 @@ import {DigitalMgmtStatus} from './monthly-plan/digital-mgmt.status.model';
 import {WeeklyPlan} from './monthly-plan/weeklyplan.model';
 import { DailyPlan } from './monthly-plan/dailyplan.model';
 import {NewMonthlyPlan} from './monthly-plan/new-month.model';
+import {Notification} from '../shared/notification.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -33,6 +34,12 @@ export class DigitalManagementService {
   }
 
   constructor(private http: Http, private httpClient: HttpClient) { }
+
+  pushNotification(data: Notification) {
+    const notificationUrl = 'pushnotification';
+    const url: string = this.serviceUrl + notificationUrl;
+    return this.http.post(url, data);
+  }
 
   addMonth(data: NewMonthlyPlan): Observable<any> {
     const bookurl = 'addmonth/';
@@ -183,6 +190,14 @@ editDailyPlanStatus(id, dailyid, status) {
   const monthUrl = '/daily/';
   const statusUrl = '/status/';
   const url: string = this.serviceUrl + addurl + id + monthUrl + dailyid + statusUrl + status  ;
+  return this.httpClient.get<DigitalMgmtStatus[]>(url);
+}
+
+copyToDayPlan(id, dateiid, date) {
+  const addurl = 'id/';
+  const monthUrl = '/daily/';
+  const weekUrl = '/copy/';
+  const url: string = this.serviceUrl + addurl + id + monthUrl + dateiid + weekUrl + date  ;
   return this.httpClient.get<DigitalMgmtStatus[]>(url);
 }
 }

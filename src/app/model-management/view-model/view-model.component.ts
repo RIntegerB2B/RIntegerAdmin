@@ -175,7 +175,7 @@ export class ScheduledComponent implements OnInit {
   }
   ngOnInit() {
     this.createViewForm();
-this.scheduledDate = this.localStorageService.retrieve('scheduledDate');
+/* this.scheduledDate = this.localStorageService.retrieve('scheduledDate'); */
  }
   createViewForm() {
     this.scheduledDateForm = this.fb.group({

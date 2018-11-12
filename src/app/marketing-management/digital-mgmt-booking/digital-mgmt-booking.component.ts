@@ -172,8 +172,8 @@ export class DigitalMgmtBookingComponent implements OnInit {
       console.log(error);
     });
   }
-  updateStatus(no) {
-    this.router.navigate(['navheader/monthlyplan', no]);
+  updateStatus(no, mobileno) {
+    this.router.navigate(['navheader/monthlyplan', no, 'num', mobileno ]);
   }
   viewDetails(no) {
     this.marketMgmtService.getDigitalMarketingBookingDetails(no).subscribe(sample => {
