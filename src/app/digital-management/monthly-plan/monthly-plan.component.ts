@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -6,6 +6,8 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { MatStepper } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { PageEvent } from '@angular/material';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 import * as _moment from 'moment';
@@ -46,6 +48,7 @@ import { Notification } from '../../shared/notification.model';
   ]
 })
 export class MonthlyPlanComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   monthToString: any;
   monthToString2: any;
   yearToString: any;
@@ -104,6 +107,11 @@ export class MonthlyPlanComponent implements OnInit {
   mobileNo;
   montherror1: boolean;
   montherror2: boolean;
+  public pageSize = 10;
+  public currentPage = 0;
+  public totalSize = 0;
+  public searchString: string;
+  array: any;
   /*   showDays = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
      '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
      , '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
@@ -239,6 +247,17 @@ export class MonthlyPlanComponent implements OnInit {
   showForm() {
     this.showForms = true;
   }
+  handlePage(e: any) {
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.iterator();
+  }
+  iterator() {
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    const part = this.array.slice(start, end);
+    this.Status = part;
+  }
   viewMonthlyPlan() {
     this.showForms = true;
     this.selectedMonthName = this.monthName;
@@ -267,6 +286,7 @@ export class MonthlyPlanComponent implements OnInit {
     this.digitalMgmtService.addMonth(this.newMonthModel).subscribe(data => {
       /*   this.saveMonthlyPlan(firstFormGroup); */
       this.monthlyPlanModel = data;
+      console.log(this.monthlyPlanModel);
     }, error => {
       console.log(error);
     });
@@ -361,6 +381,7 @@ export class MonthlyPlanComponent implements OnInit {
       this.allowMonth = true;
     } else {
     this.showForm2();
+    this.allowMonth = false;
     this.digitalMgmtService.viewAllWeeklyPlan(this.no, this.monthName,
       this.yearValue).subscribe(data => {
         this.WeeklyStatus = data;
@@ -483,6 +504,7 @@ export class MonthlyPlanComponent implements OnInit {
       this.allowMonth = true;
     } else {
     this.showForm3();
+    this.allowMonth = false;
     this.digitalMgmtService.viewMonthlyPlan(this.no, this.monthName, this.yearValue).subscribe(data => {
       this.DailyStatus = data;
     }, error => {
@@ -532,6 +554,7 @@ export class MonthlyPlanComponent implements OnInit {
       console.log(error);
     });
   }
+ 
   deleteDailyPlan(id, dateId) {
     this.digitalMgmtService.deleteDailyPlan(id, dateId).subscribe(data => {
       this.DailyStatus = data;

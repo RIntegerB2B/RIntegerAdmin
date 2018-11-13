@@ -52,7 +52,7 @@ export class DigitalManagementService {
     const url: string = this.serviceUrl + bookurl;
     return this.httpClient.post<DigitalMgmtStatus>(url, data);
   }
-  viewMonthlyPlan(id, month, year) {
+  viewMonthlyPlan(id, month, year): Observable<any> {
     const addurl = 'bookingid/';
     const monthUrl = '/month/';
     const yearUrl = '/year/';

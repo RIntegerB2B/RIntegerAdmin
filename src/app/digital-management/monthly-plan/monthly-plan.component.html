@@ -28,13 +28,15 @@
             </mat-error>
           </mat-form-field>
           <div class="d-md-none d-sm-none">
-            <button mat-button matSuffix mat-raised-button color="accent" (click)="viewMonthlyPlan()">
+            <button mat-button matSuffix mat-raised-button color="accent"
+             (click)="viewMonthlyPlan()">
               View
             </button>
           </div>
         </div>
         <div class="col-md-2 display-none-small form-group">
-          <button mat-button matSuffix mat-raised-button color="accent" (click)="viewMonthlyPlan()">
+          <button mat-button matSuffix mat-raised-button color="accent" 
+          (click)="viewMonthlyPlan()">
             View
           </button>
         </div>
@@ -180,6 +182,12 @@
             </div>
           </div>
         </div>
+        <!-- <mat-paginator #paginator [pageSize]="pageSize" 
+        [pageSizeOptions]="[10, 20, 30, 40, 50]"
+          [showFirstLastButtons]="true" 
+          [length]="totalSize" 
+          [pageIndex]="currentPage" (page)="handlePage($event)">
+        </mat-paginator> -->
       </div>
       <div class="display-none-small">
         <div class="labelHeader">Task Details</div>
@@ -313,8 +321,13 @@
                 </div>
               </div>
             </div>
-
-            <!--clossing-->
+        <!--     <mat-paginator #paginator [pageSize]="pageSize" 
+        [pageSizeOptions]="[10, 20, 30, 40, 50]"
+          [showFirstLastButtons]="true" 
+          [length]="totalSize" 
+          [pageIndex]="currentPage" (page)="handlePage($event)">
+        </mat-paginator> -->
+            <!--clossing -->
           </div>
         </div>
       </div>
@@ -376,7 +389,7 @@
       </div>
       <!-- mobile View -->
       <div class="d-lg-none d-md-none" *ngFor="let data of WeeklyStatus">
-        <div *ngFor="let val of this.data?.weeklyPlan">
+        <div *ngFor="let val of this.data?.weeklyPlan; let i = index;">
           <div class="row gridRow" *ngIf="!val.newShowEditWeek">
             <div class="col-12  vcenter form-group">
               <button mat-icon-button class="float-right" [matMenuTriggerFor]="menu">
@@ -547,7 +560,7 @@
               No results found
             </div>
             <div *ngFor="let data of WeeklyStatus">
-              <div *ngFor="let val of this.data?.weeklyPlan">
+              <div *ngFor="let val of this.data?.weeklyPlan; let i = index">
                 <div class="row gridRow" *ngIf="!val.newShowEditWeek">
                   <div class="col-sm-12 col-md-2 vcenter form-group">
                     <label class="labelText">{{val.planTitle}}</label>
@@ -710,7 +723,7 @@
 
       <!-- mobile View -->
       <div class="d-lg-none d-md-none" *ngFor="let data of DailyStatus">
-        <div *ngFor="let val of this.data?.dailyPlan">
+        <div *ngFor="let val of this.data?.dailyPlan; let i = index">
           <div class="row gridRow" 
 *ngIf="!val.newShowEditDaily">
             <div class="col-12  vcenter form-group">
@@ -882,7 +895,7 @@
             </div>
 
             <div *ngFor="let data of DailyStatus">
-              <div *ngFor="let val of this.data?.dailyPlan">
+              <div *ngFor="let val of this.data?.dailyPlan; let i = index">
                 <div class="row gridRow" *ngIf="!val.newShowEditDaily">
                   <div class="col-sm-12 col-md-2 vcenter form-group">
                     <label class="labelText">{{val.planTitle}}</label>
