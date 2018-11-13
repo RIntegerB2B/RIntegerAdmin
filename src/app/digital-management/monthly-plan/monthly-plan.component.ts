@@ -60,7 +60,7 @@ export class MonthlyPlanComponent implements OnInit {
   showYear2: boolean;
   showForms2: boolean;
   no;
-  isLinear = false;
+  isLinear = true;
   showForms: boolean;
   showYear: boolean;
   firstFormGroup: FormGroup;
@@ -86,7 +86,7 @@ export class MonthlyPlanComponent implements OnInit {
   status = ['Planned', 'Started', 'Progress', 'Pending', 'Cancel', 'Completed', 'Update'];
   message;
   action;
-  noresult: boolean;
+  noresult = false;
   selectedMonthName;
   selectedYearName;
   monthName;
@@ -97,7 +97,9 @@ export class MonthlyPlanComponent implements OnInit {
   montherror: boolean;
   titleToSent;
   title;
+  allowMonth = false;
   notificationBody;
+  hideData: number;
   notificationModel: Notification;
   mobileNo;
   montherror1: boolean;
@@ -126,7 +128,8 @@ export class MonthlyPlanComponent implements OnInit {
       updDesc: [''],
       tempmonth: [''],
       tempyear: [''],
-      newdate: ['']
+      newdate: ['', Validators.required],
+      monthName: ['',  Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       _id: [''],
@@ -260,6 +263,7 @@ export class MonthlyPlanComponent implements OnInit {
     this.newMonthModel.monthName = this.monthName;
     this.newMonthModel.year = this.yearValue;
     this.newMonthModel.bookingOrderId = this.no;
+    this.firstFormGroup.controls.monthName.setValue(this.monthName);
     this.digitalMgmtService.addMonth(this.newMonthModel).subscribe(data => {
       /*   this.saveMonthlyPlan(firstFormGroup); */
       this.monthlyPlanModel = data;
@@ -351,6 +355,11 @@ export class MonthlyPlanComponent implements OnInit {
     /*   this.viewWeeklyPlan(); */
   }
   viewAllWeeklyPlan() {
+    if (
+      this.firstFormGroup.controls.monthName.value === ''
+    )      {
+      this.allowMonth = true;
+    } else {
     this.showForm2();
     this.digitalMgmtService.viewAllWeeklyPlan(this.no, this.monthName,
       this.yearValue).subscribe(data => {
@@ -358,6 +367,7 @@ export class MonthlyPlanComponent implements OnInit {
       }, error => {
         console.log(error);
       });
+  }
   }
   viewWeeklyPlan() {
     this.digitalMgmtService.viewWeeklyPlan(this.no, this.monthName,
@@ -467,6 +477,11 @@ export class MonthlyPlanComponent implements OnInit {
     this.showAdd = true;
   }
   viewDailyPlan() {
+    if (
+      this.firstFormGroup.controls.monthName.value === ''
+    )      {
+      this.allowMonth = true;
+    } else {
     this.showForm3();
     this.digitalMgmtService.viewMonthlyPlan(this.no, this.monthName, this.yearValue).subscribe(data => {
       this.DailyStatus = data;
@@ -474,6 +489,7 @@ export class MonthlyPlanComponent implements OnInit {
       console.log(error);
     });
   }
+}
   saveDailyPlan(thirdFormGroup, update) {
     this.message = 'Sucessfully added to daily plan';
     const DATE = update.split('/');
@@ -504,10 +520,11 @@ export class MonthlyPlanComponent implements OnInit {
   cancel3(val) {
     val.newShowEditDaily = false;
   }
-  updateDailyPlan(id, dateID, updatedTitle, updatedDescription, week) {
+  updateDailyPlan(id, dateID, updatedTitle, updatedDescription, daily) {
     this.DailyModel = new DailyPlan();
     this.DailyModel.planTitle = updatedTitle;
     this.DailyModel.planDescription = updatedDescription;
+    this.DailyModel.date = daily;
     this.digitalMgmtService.editDailyPlan(id, dateID, this.DailyModel).subscribe(data => {
       this.DailyStatus = data;
       this.showEditing3 = false;

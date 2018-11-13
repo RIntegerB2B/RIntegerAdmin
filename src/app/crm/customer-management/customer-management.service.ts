@@ -37,6 +37,11 @@ export class CustomerManagementService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Customer[]>(url);
   }
+  getAllSubscribeCustomer(): Observable<any> {
+    const addUrl = 'subscribecustomers';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Customer[]>(url);
+  }
   editCustomer(edit): Observable<any> {
     const addUrl = 'customers/';
     const url: string = this.serviceUrl + addUrl + edit._id;

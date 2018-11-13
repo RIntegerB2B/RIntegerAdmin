@@ -85,6 +85,20 @@ export class PushNotificationComponent implements OnInit {
         console.log(error);
       });
   }
+  getAllSubscribe() {
+    this.customerService.getAllSubscribeCustomer()
+      .subscribe((response) => {
+        this.customerSource = new MatTableDataSource<Element>(response);
+        this.customerSource.paginator = this.paginator;
+        this.array = response;
+        this.customerMarket = response;
+        this.totalSize = this.array.length;
+        this.temp = response;
+        this.iterator();
+      }, error => {
+        console.log(error);
+      });
+  }
   getAllMarketCustomers()     {
     this.marketingManagementService.allMarketCustomer()
     .subscribe((response) => {

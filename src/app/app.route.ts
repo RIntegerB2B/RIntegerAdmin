@@ -65,7 +65,7 @@ import { WhatsappManagementComponent } from './whatsapp/whatsapp-management/what
 import { PermissionComponent } from './user-management/permission/permission/permission.component';
 import { RegisterComponent } from './user-management/register/register.component';
 import { ContactUsComponent } from './contact/contact-us/contact-us.component';
-
+import { SubscribeCustomerComponent } from './crm/customer-management/subscribe-customer/subscribe-customer.component';
 const routes: Routes = [
     {
         path: 'signIn', component: SiginComponent
@@ -112,6 +112,7 @@ const routes: Routes = [
             { path: 'userpermission', canActivate: [AuthGuard], component: PermissionComponent },
             { path: 'register',  canActivate: [AuthGuard], component: RegisterComponent },
             { path: 'contact',  canActivate: [AuthGuard], component: ContactUsComponent },
+            { path: 'crmsubscribe',  canActivate: [AuthGuard], component: SubscribeCustomerComponent }
         ]
     },
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
