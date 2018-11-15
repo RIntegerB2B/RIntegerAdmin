@@ -203,7 +203,6 @@ export class PushNotificationComponent implements OnInit {
       pushNotificationForm.controls.linkUrl.value
     );
     this.notificationService.pushNotification(this.pushNotificationModel).subscribe(data => {
-      console.log(data);
     }, error => {
       console.log(error);
     });

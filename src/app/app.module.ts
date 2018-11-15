@@ -117,6 +117,7 @@ import { PermissionComponent } from './user-management/permission/permission/per
 import { RegisterComponent } from './user-management/register/register.component';
 import {ContactUsComponent} from './contact/contact-us/contact-us.component';
 import {SubscribeCustomerComponent} from './crm/customer-management/subscribe-customer/subscribe-customer.component';
+import { AnalysisComponent } from './crm/data-analysis/analysis/analysis.component';
 
 @NgModule({
   declarations: [
@@ -180,7 +181,8 @@ import {SubscribeCustomerComponent} from './crm/customer-management/subscribe-cu
     RegisterComponent,
     ContactUsComponent,
     ScheduledComponent,
-    SubscribeCustomerComponent
+    SubscribeCustomerComponent,
+    AnalysisComponent,
   ],
   imports: [
     BrowserModule,

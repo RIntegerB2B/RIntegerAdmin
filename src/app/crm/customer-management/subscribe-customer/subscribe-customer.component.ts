@@ -107,7 +107,7 @@ export class SubscribeCustomerComponent implements OnInit {
   deleteSubscribe(subscribeDetailsForm: FormGroup, row) {
     row.editing = false;
     subscribeDetailsForm.reset();
-    this.customerService.deleteCustomer(row).subscribe(data => {
+    this.customerService.deleteSubscribedCustomer(row).subscribe(data => {
       this.newSubscribe = data;
     }, error => {
       console.log(error);

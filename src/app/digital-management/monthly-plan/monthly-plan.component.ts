@@ -554,7 +554,6 @@ export class MonthlyPlanComponent implements OnInit {
       console.log(error);
     });
   }
- 
   deleteDailyPlan(id, dateId) {
     this.digitalMgmtService.deleteDailyPlan(id, dateId).subscribe(data => {
       this.DailyStatus = data;

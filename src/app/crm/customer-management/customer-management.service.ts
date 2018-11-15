@@ -59,4 +59,10 @@ export class CustomerManagementService {
     const url: string = this.serviceUrl + addUrl + edit._id;
     return this.httpClient.delete<Customer[]>(url);
   }
+
+  deleteSubscribedCustomer(edit): Observable<any> {
+    const addUrl = 'subscribedcustomers/';
+    const url: string = this.serviceUrl + addUrl + edit.mobileNumber;
+    return this.httpClient.delete<Customer[]>(url);
+  }
 }
