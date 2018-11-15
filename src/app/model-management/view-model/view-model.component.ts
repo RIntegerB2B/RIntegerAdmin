@@ -79,10 +79,10 @@ export class ViewModelComponent implements OnInit , DoCheck {
       } */
     });
   }
-  delete(modelId) {
+  delete(modelId, modelname) {
     this.spName = this.localStorageService.retrieve('username');
     this.modelId = modelId;
-    this.modelService.deleteModel(this.modelId, this.spName).subscribe(data => {
+    this.modelService.deleteModel(this.modelId, this.spName, modelname).subscribe(data => {
       this.Models = data;
     });
   }

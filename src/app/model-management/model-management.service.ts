@@ -49,6 +49,16 @@ this.newSp.next(data);
     const url: string = this.serviceUrl + addUrl + modelName + addUrl1 + spName;
     return this.httpClient.put<boolean>(url, formData);
   }
+
+  editprimeImage(primeImageData: PrimeImageData , modelname , spName): Observable<any> {
+    const formData: FormData = new FormData();
+    const modelName = modelname;
+    formData.append('file', primeImageData.primeImage, primeImageData.primeImage.name);
+    const addUrl = 'editprimeimage/';
+    const addUrl1 = '/sp/';
+    const url: string = this.serviceUrl + addUrl + modelName + addUrl1 + spName;
+    return this.httpClient.put<boolean>(url, formData);
+  }
   // /ecommerceImage/:id/name/:modelName
   uploadecommerceImage( spName, id, modelName , data ): Observable<any> {
    /*  const formData: FormData = new FormData();
@@ -99,10 +109,11 @@ this.newSp.next(data);
     const url: string = this.serviceUrl + addUrl + id + modelUrl;
     return this.httpClient.get<Model>(url);
   }
-  deleteModel(id , spName): Observable<any> {
+  deleteModel(id , spName, modelname): Observable<any> {
     const addUrl = 'model/';
     const addUrl1 = '/sp/';
-    const url: string = this.serviceUrl + addUrl + id + addUrl1 + spName;
+    const modelUrl1 = '/model/';
+    const url: string = this.serviceUrl + addUrl + id + addUrl1 + spName + modelUrl1 + modelname;
     return this.httpClient.delete<Model>(url);
   }
   updateModel(id, data: UpdateModel): Observable<any> {
@@ -116,15 +127,16 @@ this.newSp.next(data);
     return this.httpClient.get<Model>(url);
   }
   // sp deletec ecom
-  deleteEcomImg(name , id, image): Observable<any> {
+  deleteEcomImg(name , id, image , modelname): Observable<any> {
     const addUrl = 'serviceprovider/';
     const addUrl1 = '/model/';
     const addUrl2 = '/ecomm/';
-    const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image ;
+    const addUrl3 = '/modelname/';
+    const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image + addUrl3 + modelname ;
     return this.httpClient.delete<Model>(url);
   }
   // sp delete portrait
-  deletePortImg(name , id, image): Observable<any> {
+  deletePortImg(name , id, image ): Observable<any> {
     const addUrl = 'serviceprovider/';
     const addUrl1 = '/model/';
     const addUrl2 = '/portrait/';
@@ -132,19 +144,21 @@ this.newSp.next(data);
     return this.httpClient.delete<Model>(url);
   }
   // sp delete product
-  deleteProdImg(name , id, image): Observable<any> {
+  deleteProdImg(name , id, image, modelname): Observable<any> {
     const addUrl = 'serviceprovider/';
     const addUrl1 = '/model/';
     const addUrl2 = '/product/';
-    const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image ;
+    const addUrl3 = '/modelname/';
+    const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image + addUrl3 + modelname ;
     return this.httpClient.delete<Model>(url);
   }
 // sp delete portFolio
-deletePortFolioImg(name , id, image): Observable<any> {
+deletePortFolioImg(name , id, image, modelname): Observable<any> {
   const addUrl = 'serviceprovider/';
   const addUrl1 = '/model/';
   const addUrl2 = '/portFolio/';
-  const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image ;
+  const addUrl3 = '/modelname/';
+  const url: string = this.serviceUrl + addUrl + name + addUrl1 + id + addUrl2 + image + addUrl3 + modelname;
   return this.httpClient.delete<Model>(url);
 }
 

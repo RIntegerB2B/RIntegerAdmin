@@ -1,0 +1,37 @@
+export class EditModel {
+    userName: string;
+    description: string;
+    availability: string;
+    mobileNumber: Number;
+    emailId: string;
+    faceBook: string;
+    whatsapp: string;
+    primeImage: string;
+    ecommerceImages: [string];
+    productImages: [string];
+    portFolioImages: [string];
+    ecommerceImageName: [string];
+    productImageName: [string];
+    portraitImageName: [string];
+    porFolioImageName: [string];
+    catalogImageName: string;
+    serviceProviderId: string;
+    serviceProviderName: string;
+    serviceProviderCompanyName: string;
+    modelType: string;
+    categoryType: string;
+    height: string;
+    bust: string;
+    chest: string;
+    waist: string;
+    hips: string;
+    hair: string;
+    eyes: string;
+    shoulder: string;
+    shoeSize: string;
+    topsize: string;
+    bottomsize: string;
+    isScheduledBooking: boolean;
+    scheduledDate: string;
+    modelId: string;
+}

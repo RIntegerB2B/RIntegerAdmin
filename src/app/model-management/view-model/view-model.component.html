@@ -87,7 +87,7 @@
                       Images<mat-icon>add_a_photo</mat-icon></button>
                   </div>
                   <div class="col-md-4 form-group">
-                    <button mat-raised-button color="accent" (click)="delete(modelId.value)" value="Delete" type="submit">
+                    <button mat-raised-button color="accent" (click)="delete(modelId.value, model.userName)" value="Delete" type="submit">
                       Delete <mat-icon> delete sweep icon</mat-icon></button>
                     <input type="textbox" hidden [value]="Models[i].isScheduledBooking" formControlName="isScheduled">
                     <!-- <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" /> -->

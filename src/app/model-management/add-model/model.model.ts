@@ -7,6 +7,9 @@ export class Model {
     faceBook: string;
     whatsapp: string;
     primeImage: string;
+    ecommerceImages: [string];
+    productImages: [string];
+    portFolioImages: [string];
     ecommerceImageName: [string];
     productImageName: [string];
     portraitImageName: [string];

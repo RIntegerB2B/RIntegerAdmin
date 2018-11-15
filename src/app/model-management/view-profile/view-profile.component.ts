@@ -3,10 +3,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { ActivatedRoute } from '@angular/router';
+import { PrimeImageData } from '../add-model/primeImageData.model';
 
 import { ModelManagementService } from '../model-management.service';
 import { Model } from '../add-model/model.model';
 import { NavheaderService } from '../../nav-header/nav-header.service';
+import {EditModel} from './edit-profile.model';
 
 
 @Component({
@@ -25,6 +27,21 @@ export class ViewProfileComponent implements OnInit {
   showProfile: boolean;
   showAll: boolean;
   showPortFolio: boolean;
+  changePrime: boolean;
+  ecommerceImageNames = [];
+  name;
+  loadedModelName;
+  spName;
+  spCompanyName;
+  spId;
+  editModel: EditModel;
+
+  fileToUpload: File = null;
+  reader: FileReader = new FileReader();
+  portFolioImageBlob: Blob;
+  portFolioImageBytes: Uint8Array;
+  primeImageData: PrimeImageData = new PrimeImageData();
+  modelName;
 
   constructor(private fb: FormBuilder, private router: Router, private localStorageService: LocalStorageService,
     private navheaderService: NavheaderService,
@@ -50,10 +67,28 @@ export class ViewProfileComponent implements OnInit {
       portFolioID: ['']
     });
   }
+  handleFileInput(files: FileList, loadedImage) {
+    this.fileToUpload = files.item(0);
+    this.primeImageData.primeImage = this.fileToUpload = files[0];
+    this.reader.readAsArrayBuffer(this.fileToUpload);
+    this.reader.onload = () => {
+      const fileResult = this.reader.result;
+      this.portFolioImageBytes = new Uint8Array(fileResult);
+      this.portFolioImageBlob = new Blob([this.portFolioImageBytes.buffer]);
+      const reader1 = new FileReader();
+      reader1.readAsDataURL(this.portFolioImageBlob);
+      reader1.onload = (e: Event & { target: { result: string } }) => {
+        loadedImage.src = reader1.result;
+      };
+    };
+    console.log(this.primeImageData);
+  }
   findImages() {
     this.modelService.findImages(this.serviceProviderName, this.modelId).subscribe(data => {
       this.Model = data;
-      console.log(data);
+     this.modelName = this.Model[0].userName;
+      console.log(this.Model);
+
     }, error => {
       console.log(error);
     });
@@ -65,6 +100,7 @@ export class ViewProfileComponent implements OnInit {
     this.showPortrait = false;
     this.showProduct = false;
     this.showPortFolio = false;
+    this.changePrime = false;
   }
   productImage() {
     this.showEcommerce = false;
@@ -72,6 +108,7 @@ export class ViewProfileComponent implements OnInit {
     this.showPortrait = false;
     this.showProduct = true;
     this.showAll = false;
+    this.changePrime = false;
     this.showPortFolio = false;
   }
   ecommerceImage() {
@@ -80,6 +117,7 @@ export class ViewProfileComponent implements OnInit {
     this.showPortrait = false;
     this.showProduct = false;
     this.showAll = false;
+    this.changePrime = false;
     this.showPortFolio = false;
   }
   portraitImage() {
@@ -89,6 +127,7 @@ export class ViewProfileComponent implements OnInit {
     this.showProduct = false;
     this.showAll = false;
     this.showPortFolio = false;
+    this.changePrime = false;
   }
   profileImage() {
     this.showEcommerce = false;
@@ -97,6 +136,7 @@ export class ViewProfileComponent implements OnInit {
     this.showProduct = false;
     this.showAll = false;
     this.showPortFolio = false;
+    this.changePrime = false;
   }
   portFolioImage() {
     this.showEcommerce = false;
@@ -105,23 +145,24 @@ export class ViewProfileComponent implements OnInit {
     this.showProduct = false;
     this.showAll = false;
     this.showPortFolio = true;
+    this.changePrime = false;
   }
-  deleteEcomImage(images) {
+  deleteEcomImage(images, modelname) {
     const str = images;
     const strlen = str.length;
     const imageName = str.substring(str.lastIndexOf('/') + 1);
     console.log(imageName);
-    this.modelService.deleteEcomImg(this.serviceProviderName, this.modelId, imageName).subscribe(data => {
+    this.modelService.deleteEcomImg(this.serviceProviderName, this.modelId, imageName, modelname).subscribe(data => {
       this.Model = data;
     }, error => {
       console.log(error);
     });
   }
-  deleteProdImage(images) {
+  deleteProdImage(images, modelname) {
     const str = images;
     const strlen = str.length;
     const imageName = str.substring(str.lastIndexOf('/') + 1);
-    this.modelService.deleteProdImg(this.serviceProviderName, this.modelId, imageName).subscribe(data => {
+    this.modelService.deleteProdImg(this.serviceProviderName, this.modelId, imageName, modelname).subscribe(data => {
       this.Model = data;
       console.log(data);
     }, error => {
@@ -138,18 +179,43 @@ export class ViewProfileComponent implements OnInit {
       console.log(error);
     });
   }
-  deletePortFolioImage(images) {
+  deletePortFolioImage(images, modelname) {
     const str = images;
     const strlen = str.length;
     const imageName = str.substring(str.lastIndexOf('/') + 1);
-    this.modelService.deletePortFolioImg(this.serviceProviderName, this.modelId, imageName).subscribe(data => {
+    this.modelService.deletePortFolioImg(this.serviceProviderName, this.modelId, imageName, modelname).subscribe(data => {
       this.Model = data;
     }, error => {
       console.log(error);
     });
   }
+  changePrimeImage() {
+    this.showEcommerce = false;
+    this.showProfile = false;
+    this.showPortrait = false;
+    this.showProduct = false;
+    this.showAll = false;
+    this.showPortFolio = false;
+    this.changePrime = true;
+  }
 
+  changePrimeImages() {
 
+    this.spName = this.localStorageService.retrieve('userName');
+    this.spCompanyName = this.localStorageService.retrieve('companyName');
+    this.spId = this.localStorageService.retrieve('id');
+    this.editModel = new EditModel();
+    this.editModel.serviceProviderId = this.spId;
+    this.editModel.serviceProviderCompanyName = this.spCompanyName;
+    this.editModel.serviceProviderName = this.spName;
+    this.editModel.userName = this.modelName;
+    this.editModel.primeImage = this.primeImageData.primeImage.name;
+    this.editModel.modelId = this.modelId;
+    this.modelService.editprimeImage(this.primeImageData, this.modelName, this.spName).subscribe(data => {
+    }, error => {
+      console.log(error);
+    });
+  }
   // update profile details
   update(id) {
     this.modelId = id;

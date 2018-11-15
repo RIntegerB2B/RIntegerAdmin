@@ -109,7 +109,6 @@ loadedModelName;
   }
 
   avail(modelAva) {
-    console.log(modelAva);
     this.modelAvailability = modelAva;
   }
   getModel(id) {
