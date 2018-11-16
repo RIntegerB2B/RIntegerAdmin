@@ -9,6 +9,7 @@ import { ModelManagementService } from '../model-management.service';
 import { Model } from '../add-model/model.model';
 import { NavheaderService } from '../../nav-header/nav-header.service';
 import {EditModel} from './edit-profile.model';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -19,7 +20,7 @@ import {EditModel} from './edit-profile.model';
 export class ViewProfileComponent implements OnInit {
   serviceProviderName;
   modelId;
-  Model: Model[] = [];
+  Model: Model;
   viewProfileForm: FormGroup;
   showEcommerce: boolean;
   showPortrait: boolean;
@@ -42,9 +43,18 @@ export class ViewProfileComponent implements OnInit {
   portFolioImageBytes: Uint8Array;
   primeImageData: PrimeImageData = new PrimeImageData();
   modelName;
+  message;
+  action;
+  modelecomLength;
+  modelproductLength;
+  modelportfolioLength;
+  portfolioImgName;
+productImgName;
+  ecommImgName;
 
   constructor(private fb: FormBuilder, private router: Router, private localStorageService: LocalStorageService,
     private navheaderService: NavheaderService,
+    public snackBar: MatSnackBar,
     private activatedRoute: ActivatedRoute, private modelService: ModelManagementService) {
     this.serviceProviderName = this.activatedRoute.snapshot.paramMap.get('name');
     this.modelId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -81,14 +91,30 @@ export class ViewProfileComponent implements OnInit {
         loadedImage.src = reader1.result;
       };
     };
-    console.log(this.primeImageData);
   }
   findImages() {
     this.modelService.findImages(this.serviceProviderName, this.modelId).subscribe(data => {
       this.Model = data;
-     this.modelName = this.Model[0].userName;
-      console.log(this.Model);
-
+     this.modelecomLength = this.Model[0].ecommerceImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelecomLength ; i++ ) {
+        const ecomLength = this.Model[0].ecommerceImageName[i].lastIndexOf('/') + 1;
+        this.ecommImgName = this.Model[0].ecommerceImageName[i].substr(ecomLength);
+this.Model[0].ecommerceImages.push(this.ecommImgName);
+      }
+      // prod
+      this.modelproductLength = this.Model[0].productImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelproductLength ; i++ ) {
+        const prodLength = this.Model[0].productImageName[i].lastIndexOf('/') + 1;
+        this.productImgName = this.Model[0].productImageName[i].substr(prodLength);
+this.Model[0].productImages.push(this.productImgName);
+      }
+      // portfolio
+      this.modelportfolioLength = this.Model[0].portFolioImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelportfolioLength ; i++ ) {
+        const portfolioLength = this.Model[0].portFolioImageName[i].lastIndexOf('/') + 1;
+        this.portfolioImgName = this.Model[0].portFolioImageName[i].substr(portfolioLength);
+this.Model[0].portFolioImages.push(this.portfolioImgName);
+      }
     }, error => {
       console.log(error);
     });
@@ -151,9 +177,28 @@ export class ViewProfileComponent implements OnInit {
     const str = images;
     const strlen = str.length;
     const imageName = str.substring(str.lastIndexOf('/') + 1);
-    console.log(imageName);
     this.modelService.deleteEcomImg(this.serviceProviderName, this.modelId, imageName, modelname).subscribe(data => {
       this.Model = data;
+      this.modelecomLength = this.Model[0].ecommerceImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelecomLength ; i++ ) {
+        const ecomLength = this.Model[0].ecommerceImageName[i].lastIndexOf('/') + 1;
+        this.ecommImgName = this.Model[0].ecommerceImageName[i].substr(ecomLength);
+this.Model[0].ecommerceImages.push(this.ecommImgName);
+      }
+      // prod
+      this.modelproductLength = this.Model[0].productImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelproductLength ; i++ ) {
+        const prodLength = this.Model[0].productImageName[i].lastIndexOf('/') + 1;
+        this.productImgName = this.Model[0].productImageName[i].substr(prodLength);
+this.Model[0].productImages.push(this.productImgName);
+      }
+      // portfolio
+      this.modelportfolioLength = this.Model[0].portFolioImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelportfolioLength ; i++ ) {
+        const portfolioLength = this.Model[0].portFolioImageName[i].lastIndexOf('/') + 1;
+        this.portfolioImgName = this.Model[0].portFolioImageName[i].substr(portfolioLength);
+this.Model[0].portFolioImages.push(this.portfolioImgName);
+      }
     }, error => {
       console.log(error);
     });
@@ -164,7 +209,26 @@ export class ViewProfileComponent implements OnInit {
     const imageName = str.substring(str.lastIndexOf('/') + 1);
     this.modelService.deleteProdImg(this.serviceProviderName, this.modelId, imageName, modelname).subscribe(data => {
       this.Model = data;
-      console.log(data);
+      this.modelecomLength = this.Model[0].ecommerceImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelecomLength ; i++ ) {
+        const ecomLength = this.Model[0].ecommerceImageName[i].lastIndexOf('/') + 1;
+        this.ecommImgName = this.Model[0].ecommerceImageName[i].substr(ecomLength);
+this.Model[0].ecommerceImages.push(this.ecommImgName);
+      }
+      // prod
+      this.modelproductLength = this.Model[0].productImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelproductLength ; i++ ) {
+        const prodLength = this.Model[0].productImageName[i].lastIndexOf('/') + 1;
+        this.productImgName = this.Model[0].productImageName[i].substr(prodLength);
+this.Model[0].productImages.push(this.productImgName);
+      }
+      // portfolio
+      this.modelportfolioLength = this.Model[0].portFolioImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelportfolioLength ; i++ ) {
+        const portfolioLength = this.Model[0].portFolioImageName[i].lastIndexOf('/') + 1;
+        this.portfolioImgName = this.Model[0].portFolioImageName[i].substr(portfolioLength);
+this.Model[0].portFolioImages.push(this.portfolioImgName);
+      }
     }, error => {
       console.log(error);
     });
@@ -185,6 +249,26 @@ export class ViewProfileComponent implements OnInit {
     const imageName = str.substring(str.lastIndexOf('/') + 1);
     this.modelService.deletePortFolioImg(this.serviceProviderName, this.modelId, imageName, modelname).subscribe(data => {
       this.Model = data;
+      this.modelecomLength = this.Model[0].ecommerceImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelecomLength ; i++ ) {
+        const ecomLength = this.Model[0].ecommerceImageName[i].lastIndexOf('/') + 1;
+        this.ecommImgName = this.Model[0].ecommerceImageName[i].substr(ecomLength);
+this.Model[0].ecommerceImages.push(this.ecommImgName);
+      }
+      // prod
+      this.modelproductLength = this.Model[0].productImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelproductLength ; i++ ) {
+        const prodLength = this.Model[0].productImageName[i].lastIndexOf('/') + 1;
+        this.productImgName = this.Model[0].productImageName[i].substr(prodLength);
+this.Model[0].productImages.push(this.productImgName);
+      }
+      // portfolio
+      this.modelportfolioLength = this.Model[0].portFolioImageName.length - 1;
+      for  (let i = 0 ; i <= this.modelportfolioLength ; i++ ) {
+        const portfolioLength = this.Model[0].portFolioImageName[i].lastIndexOf('/') + 1;
+        this.portfolioImgName = this.Model[0].portFolioImageName[i].substr(portfolioLength);
+this.Model[0].portFolioImages.push(this.portfolioImgName);
+      }
     }, error => {
       console.log(error);
     });
@@ -200,7 +284,7 @@ export class ViewProfileComponent implements OnInit {
   }
 
   changePrimeImages() {
-
+this.message = 'Prime Image changed';
     this.spName = this.localStorageService.retrieve('userName');
     this.spCompanyName = this.localStorageService.retrieve('companyName');
     this.spId = this.localStorageService.retrieve('id');
@@ -212,9 +296,17 @@ export class ViewProfileComponent implements OnInit {
     this.editModel.primeImage = this.primeImageData.primeImage.name;
     this.editModel.modelId = this.modelId;
     this.modelService.editprimeImage(this.primeImageData, this.modelName, this.spName).subscribe(data => {
+       this.showProfile = true;
     }, error => {
       console.log(error);
     });
+    this.snackBar.open(this.message, this.action, {
+      duration: 3000,
+    });
+   /*  this.router.navigate(['/navheader/models']); */
+   /*  this.findImages(); */
+    this.showProfile = true;
+    this.changePrime = false;
   }
   // update profile details
   update(id) {

@@ -10,6 +10,7 @@ import { ServiceProviderDetail } from './service-provider-detail.model';
 import { UpdateModel } from '../add-model/update.model';
 import { NavheaderService } from '../../nav-header/nav-header.service';
 import { mobileNumber } from './mobile-validation';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -42,13 +43,15 @@ export class AddModelComponent implements OnInit {
   modelAvailability;
   multipleImages = [];
 loadedModelName;
+message;
+  action;
 
   fileToUpload: File = null;
   reader: FileReader = new FileReader();
   portFolioImageBlob: Blob;
   portFolioImageBytes: Uint8Array;
   constructor(private fb: FormBuilder, private router: Router,
-    private modelService: ModelManagementService, private localStorageService: LocalStorageService,
+    private modelService: ModelManagementService, private localStorageService: LocalStorageService, public snackBar: MatSnackBar,
     private navheaderService: NavheaderService,
     private activatedRoute: ActivatedRoute) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -148,6 +151,7 @@ loadedModelName;
     });
   }
   save(addModelForm: FormGroup, modelName: any) {
+    this.message = 'Model added successfully';
     if (modelName === '') {
       this.showError = true;
       this.showError2 = false;
@@ -206,6 +210,9 @@ loadedModelName;
       this.userModel.serviceProviderName = this.spName;
       this.userModel.primeImage = this.primeImageData.primeImage.name;
       this.modelService.createModel(this.userModel).subscribe(data => {
+        this.snackBar.open(this.message, this.action, {
+          duration: 3000,
+        });
         console.log(data);
       });
       this.uploadImage(modelName, this.spName);
@@ -241,7 +248,6 @@ loadedModelName;
     );
     // this.updatedModel.portfolioImageName = this.portFolioImageData.portFolioImage.name;
     this.modelService.updateModel(id, this.updatedModel).subscribe(data => {
-      console.log(data);
       //  this.uploadImage(modelName , this.spName);
       this.router.navigate(['/navheader/models']);
     }, error => {

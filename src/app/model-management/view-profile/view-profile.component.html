@@ -24,7 +24,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link">
-              <button mat-button (click)="changePrimeImage()">Change Prime Image</button></a>
+              <button mat-button (click)="changePrimeImage()">Change Profile Image</button></a>
           </li>
         </ul>
       </div>
@@ -62,15 +62,22 @@
       </div>
     </div>
     <div class="row" *ngIf="showEcommerce">
+        
       <div class="col-md-8 mx-auto">
 
         <div class="container">
+            <h4 >
+                Ecommerce Images
+             </h4> 
           <div class="row" *ngFor="let model of Model">
 
-            <!--  <p *ngFor="let names of this.model?.ecommerceImages">
-                  {{ecommerceImages}}
-              </p>   -->
-            <div class="col-md-3 form-group" *ngFor="let images of this.model?.ecommerceImageName">
+         
+            <div class="col-md-3 form-group" *ngFor="let images of this.model?.ecommerceImageName; let i = index;">
+<!--  {{model.ecommerceImages}} -->
+
+<h6 >
+    Image Name:   {{model.ecommerceImages[i]}}
+</h6> 
 
               <input type="textbox" hidden [value]="this.images" formControlName="ecomImgId" #ecomID>
               <button matTooltip="Do you want to delete" (click)="deleteEcomImage(ecomID.value, model.userName)"
@@ -90,7 +97,7 @@
                 <input type="file"  name="file" class="btn btnPink btn-block" id="file" multiple (change)="handleFileInput($event.target.files, loadedImage)">
                 <button  (click)="changePrimeImages()"
                 mat-button color="primary" >
-              Change Prime Image
+              Change Profile Image
               </button>
               </div>
 
@@ -99,11 +106,17 @@
       <div class="col-md-8 mx-auto">
 
         <div class="container">
+            <h4 >
+                Product Images
+             </h4> 
           <div class="row" *ngFor="let model of Model">
-
-            <div class="col-md-3 form-group" *ngFor="let images of this.model?.productImageName">
+              
+            <div class="col-md-3 form-group" *ngFor="let images of this.model?.productImageName; let i = index;">
               <input type="textbox" hidden [value]="this.images" formControlName="prodImgId" #proID>
-             <!--  {{this.images | slice:-15}} -->
+             
+              <h6 >
+                  Image Name:  {{model.productImages[i]}}
+              </h6> 
               <button matTooltip="Do you want to delete" (click)="deleteProdImage(proID.value, model.userName)"
                 mat-button matSuffix mat-icon-button>
                 <mat-icon>clear</mat-icon>
@@ -136,11 +149,17 @@
       <div class="col-md-8 mx-auto">
 
         <div class="container">
+            <h4 >
+                Portfolio Images
+             </h4> 
           <div class="row" *ngFor="let model of Model">
-
-            <div class="col-md-3 form-group" *ngFor="let images of this.model?.portFolioImageName">
+         
+            <div class="col-md-3 form-group" *ngFor="let images of this.model?.portFolioImageName; let i = index;">
               <input type="textbox" hidden [value]="this.images" formControlName="porImgId" #portFolioID>
-            <!--   {{this.images | slice:-15}} -->
+             
+              <h6 >
+               Image Name:   {{model.portFolioImages[i]}}
+              </h6> 
               <button (click)="deletePortFolioImage(portFolioID.value, model.userName)" mat-button matSuffix
                 mat-icon-button>
                 <mat-icon>clear</mat-icon>
@@ -157,9 +176,9 @@
           <div class="row" *ngFor="let model of Model">
             <div class="col-md-3 form-group">
               <img [src]="this.model?.primeImage" style="width: 180px; height: 245px;" />
-              <button (click)="update(modelId.value)" matTooltip="Do you change the image" mat-stroked-button matSuffix>
+             <!--  <button (click)="update(modelId.value)" matTooltip="Do you change the image" mat-stroked-button matSuffix>
                 <mat-icon>camera_alt</mat-icon>
-              </button>
+              </button> -->
             </div>
             <div class="col-md-9 form-group">
               <div class="col-md-12 form-group">

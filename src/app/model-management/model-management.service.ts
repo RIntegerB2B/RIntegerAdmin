@@ -60,6 +60,16 @@ this.newSp.next(data);
     return this.httpClient.put<boolean>(url, formData);
   }
   // /ecommerceImage/:id/name/:modelName
+
+  checkEcommerceImage(data , modelID , spName): Observable<any> {
+  /*   const formData: FormData = new FormData();
+    formData.append('file', primeImageData.primeImage, primeImageData.primeImage.name); */
+    const modelId = modelID;
+    const addUrl = 'checkecommerceImage/';
+    const addUrl1 = '/id/';
+    const url: string = this.serviceUrl + addUrl + spName + addUrl1 +   modelId;
+    return this.httpClient.put<boolean>(url, data);
+  }
   uploadecommerceImage( spName, id, modelName , data ): Observable<any> {
    /*  const formData: FormData = new FormData();
     formData.append('file', imageData.ecommerceImage, imageData.ecommerceImage.name); */
@@ -100,7 +110,7 @@ this.newSp.next(data);
     const addUrl = 'serviceprovider/';
     const addUrl1 = '/modelimages/';
     const url: string = this.serviceUrl + addUrl + name  + addUrl1 + id;
-    return this.httpClient.get<Model>(url);
+    return this.httpClient.get<Model[]>(url);
   }
 
     serviceProviderModels(id): Observable<any> {

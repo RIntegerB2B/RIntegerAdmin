@@ -51,15 +51,25 @@ export class ImageManagementComponent implements OnInit {
 
   handleEcommerceInput(images: any, loadedImage) {
     this.fileToUpload = images;
-    console.log(this.fileToUpload);
+    /* this.checkEcomm(); */
   }
-
+checkEcomm() {
+  const formData: any = new FormData();
+    this.fileLength = this.fileToUpload.length;
+    for (let i = 0; i <= this.fileLength; i++) {
+      formData.append('uploads[]', this.fileToUpload[i]);
+    }
+   this.spName = this.localStorageService.retrieve('userName');
+   this.modelService.checkEcommerceImage( formData, this.id, this.spName).subscribe(data => {
+  }, error => {
+    console.log(error);
+  });
+}
 
   uploadEcommerce() {
     this.spName = this.localStorageService.retrieve('userName');
     const formData: any = new FormData();
     this.fileLength = this.fileToUpload.length;
-    console.log(this.fileLength);
     for (let i = 0; i <= this.fileLength; i++) {
       formData.append('uploads[]', this.fileToUpload[i]);
     }
