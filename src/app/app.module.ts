@@ -118,6 +118,7 @@ import { RegisterComponent } from './user-management/register/register.component
 import {ContactUsComponent} from './contact/contact-us/contact-us.component';
 import {SubscribeCustomerComponent} from './crm/customer-management/subscribe-customer/subscribe-customer.component';
 import { AnalysisComponent } from './crm/data-analysis/analysis/analysis.component';
+import { NotSubscribedComponent } from './crm/data-analysis/not-subscribed/not-subscribed.component';
 
 @NgModule({
   declarations: [
@@ -183,6 +184,7 @@ import { AnalysisComponent } from './crm/data-analysis/analysis/analysis.compone
     ScheduledComponent,
     SubscribeCustomerComponent,
     AnalysisComponent,
+    NotSubscribedComponent,
   ],
   imports: [
     BrowserModule,

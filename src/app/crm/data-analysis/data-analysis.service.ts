@@ -31,4 +31,10 @@ export class DataAnalysisService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Notification[]>(url);
   }
+
+  notSubscribed(): Observable<any> {
+    const addUrl = 'notsubscribedcustomers';
+    const url: string = this.serviceUrl + addUrl;
+    return this.httpClient.get<Notification[]>(url);
+  }
 }

@@ -2,16 +2,15 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
-import {Notification} from './subscribed.model';
+import {Notification} from '../../../shared/notification.model';
 import {DataAnalysisService} from '../data-analysis.service';
 
 @Component({
-  selector: 'app-analysis',
-  templateUrl: './analysis.component.html',
-  styleUrls: ['./analysis.component.css']
+  selector: 'app-not-subscribed',
+  templateUrl: './not-subscribed.component.html',
+  styleUrls: ['./not-subscribed.component.css']
 })
-export class AnalysisComponent implements OnInit {
-
+export class NotSubscribedComponent implements OnInit {
   arrayBuffer: any;
   file: File;
   subscribedDetailsForm: FormGroup;
@@ -21,7 +20,6 @@ export class AnalysisComponent implements OnInit {
   selectedMobileNumbers = [];
   temp = [];
   currentPageLimit = 0;
-  uniqueNames = [];
   pageLimitOptions = [
     {value: 10},
     {value: 25},
@@ -32,27 +30,9 @@ export class AnalysisComponent implements OnInit {
     private http: HttpClient) { }
   ngOnInit() {
     this.createForm();
-    this.getOnlySubscribed();
+    this.getNotSubscribed();
   }
-  getOnlySubscribed() {
-    this.analysisService.onlySubscribed().subscribe(data => {
-      this.subscribed = data;
-for (let i = 0; i < this.subscribed.length; i++) {
-    if (this.uniqueNames.indexOf(this.subscribed[i].mobileNumber) === -1) {
-        this.uniqueNames.push(this.subscribed[i].mobileNumber);
-    }
-}
-console.log(this.uniqueNames);
-for ( let i = 0; i < this.uniqueNames.length; i++) {
-    console.log(this.uniqueNames[i]);
-}
-     /*  console.log(data); */
-            /* this.temp = [...data]; */
-      this.temp = data;
-    }, error => {
-      console.log(error);
-    });
-  }
+
   updateFilter(event) {
     // this.showData = true;
     const val = event.target.value.toLowerCase();
@@ -74,7 +54,7 @@ for ( let i = 0; i < this.uniqueNames.length; i++) {
         }
       }
     });
-    this.uniqueNames = rows;
+    this.subscribed = rows;
     this.table.offset = 0;
   }
   changePageLimit(limit: any) {
@@ -96,4 +76,15 @@ for ( let i = 0; i < this.uniqueNames.length; i++) {
     this.subscribedDetailsForm = this.fb.group({
     });
   }
+  getNotSubscribed() {
+    this.analysisService.notSubscribed().subscribe(data => {
+      this.subscribed = data;
+      console.log(data);
+            /* this.temp = [...data]; */
+      this.temp = data;
+    }, error => {
+      console.log(error);
+    });
+  }
 }
+

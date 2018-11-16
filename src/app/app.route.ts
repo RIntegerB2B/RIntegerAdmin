@@ -67,6 +67,8 @@ import { RegisterComponent } from './user-management/register/register.component
 import { ContactUsComponent } from './contact/contact-us/contact-us.component';
 import { SubscribeCustomerComponent } from './crm/customer-management/subscribe-customer/subscribe-customer.component';
 import {AnalysisComponent} from './crm/data-analysis/analysis/analysis.component';
+import {NotSubscribedComponent} from './crm/data-analysis/not-subscribed/not-subscribed.component';
+
 const routes: Routes = [
     {
         path: 'signIn', component: SiginComponent
@@ -114,7 +116,8 @@ const routes: Routes = [
             { path: 'register',  canActivate: [AuthGuard], component: RegisterComponent },
             { path: 'contact',  canActivate: [AuthGuard], component: ContactUsComponent },
             { path: 'crmsubscribe',  canActivate: [AuthGuard], component: SubscribeCustomerComponent },
-            { path: 'analysis',  canActivate: [AuthGuard], component: AnalysisComponent }
+            { path: 'analysis',  canActivate: [AuthGuard], component: AnalysisComponent },
+            { path: 'notsubscribed',  canActivate: [AuthGuard], component: NotSubscribedComponent }
         ]
     },
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
