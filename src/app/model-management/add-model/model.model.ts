@@ -13,7 +13,7 @@ export class Model {
     ecommerceImageName: [string];
     productImageName: [string];
     portraitImageName: [string];
-    porFolioImageName: [string];
+    portFolioImageName: [string];
     catalogImageName: string;
     serviceProviderId: string;
     serviceProviderName: string;
