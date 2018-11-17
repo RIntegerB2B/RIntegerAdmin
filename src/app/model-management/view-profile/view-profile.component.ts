@@ -95,6 +95,7 @@ productImgName;
   findImages() {
     this.modelService.findImages(this.serviceProviderName, this.modelId).subscribe(data => {
       this.Model = data;
+    this.modelName =  this.Model[0].userName;
      this.modelecomLength = this.Model[0].ecommerceImageName.length - 1;
       for  (let i = 0 ; i <= this.modelecomLength ; i++ ) {
         const ecomLength = this.Model[0].ecommerceImageName[i].lastIndexOf('/') + 1;
