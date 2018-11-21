@@ -91,7 +91,27 @@ export class ViewModelComponent implements OnInit , DoCheck {
     const part = this.array.slice(start, end);
     this.dataSource = part;
   }
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    const filterCustomer = Object.keys(this.temp[0]);
+    filterCustomer.splice(filterCustomer.length - 1);
 
+    console.log(filterCustomer);
+    if (!filterCustomer.length) {
+      return;
+    }
+    const rows = this.temp.filter(function (d) {
+      for (let i = 0; i <= filterCustomer.length; i++) {
+        const column = filterCustomer[i];
+        console.log(d[column]);
+        if (d[column] && d[column].toString().toLowerCase().indexOf(val) > -1) {
+          return true;
+        }
+      }
+    });
+    this.dataSource = rows;
+    /* this.table.offset = 0; */
+  }
   delete(modelId, modelname) {
     this.spName = this.localStorageService.retrieve('username');
     this.modelId = modelId;

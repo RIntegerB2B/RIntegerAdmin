@@ -10,7 +10,12 @@
 </div>
 
 <form [formGroup]="viewModelForm" novalidate style="padding-top:60px">
-  <div class="container-fluid">
+  <div class="container-fluid"> 
+    <div class="row">
+        <mat-form-field>
+            <input matInput placeholder="Search" (keyup)='updateFilter($event)'>
+          </mat-form-field>
+    </div>
       <mat-paginator #paginator [pageSize]="pageSize" 
         [pageSizeOptions]="[5, 10, 20, 30, 40, 50]"
           [showFirstLastButtons]="true" 
