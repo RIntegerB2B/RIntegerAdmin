@@ -68,7 +68,7 @@ import {
   MatStepperModule,
   MatPaginatorModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
 } from '@angular/material';
 import { ProductBookingComponent, ProductBookingViewComponent } from './production-mgmt/product-booking/product-booking.component';
 import { ModelBookingComponent, ModelBookingViewComponent } from './production-mgmt/model-booking/model-booking.component';

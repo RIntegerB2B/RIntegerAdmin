@@ -11,54 +11,39 @@
 
 <form [formGroup]="viewModelForm" novalidate style="padding-top:60px">
   <div class="container-fluid">
+      <mat-paginator #paginator [pageSize]="pageSize" 
+        [pageSizeOptions]="[5, 10, 20, 30, 40, 50]"
+          [showFirstLastButtons]="true" 
+          [length]="totalSize" 
+          [pageIndex]="currentPage" (page)="handlePage($event)">
+        </mat-paginator>
     <div class="row">
+      
+  
       <div class="col-md-12 mx-auto">
-     <!--    <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="col-md-6">
-                <div class="row">
-                    <div class="form-group">
-                        <label>Catalog</label>
-                      </div>
-                </div>
-               
-              </div>
-              <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Model Name</label>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-              
-            </div>
-            <div class="col-md-4">
-              
-              </div>
-             <div class="col-md-2">
-              <div class="form-group">
-                <label>Mobile Number</label>
-              </div>
-            </div>
-
-            <div class="col-md-2 ">
-              <div class="form-group">
-                <label>WhatsApp No</label>
-              </div>
-            </div>
-
-            <div class="col-md-2 ">
-              <div class="form-group">
-                <label>Facebook Id</label>
-              </div>
-            </div> 
-
-
-          </div>
-        </div> -->
         <div class="container">
-          <div class="row" *ngFor="let model of Models ; let i = index">
+          <div class="row">
+            
+            <div class="col-md-4 form-group">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                     <b>Prime Image</b> 
+                      </div>
+                      <div class="col-md-3 form-group">
+                         <b>Name</b> 
+                        </div>
+                        <div class="col-md-3 form-group">
+                      
+                            <b>Position</b>
+                          </div>
+                      </div>
+              </div>
+           
+            
+          </div>
+        </div>
+        <div class="container">
+          <div class="row" *ngFor="let model of dataSource ; let i = index">
               <div class="col-md-4 form-group">
                 <div class="row">
                     <div class="col-md-6 form-group">
@@ -67,9 +52,9 @@
                       <div class="col-md-3 form-group">
                         {{model.userName}}
                       </div>
-                      <!-- <div class="col-md-3 form-group">
-                          {{scheduledDate}}
-                        </div> -->
+                      <div class="col-md-3 form-group">
+                          {{model.position}}
+                        </div>
                 </div>
                 
               </div>
@@ -89,29 +74,29 @@
                   <div class="col-md-4 form-group">
                     <button mat-raised-button color="accent" (click)="delete(modelId.value, model.userName)" value="Delete" type="submit">
                       Delete <mat-icon> delete sweep icon</mat-icon></button>
-                    <input type="textbox" hidden [value]="Models[i].isScheduledBooking" formControlName="isScheduled">
+                    <input type="textbox" hidden [value]="dataSource[i].isScheduledBooking" formControlName="isScheduled">
                     <!-- <input type="button" class="btn btn-danger" value="Delete" (click)="delete(modelId.value)" /> -->
                   </div>
                   </div>
               </div>
               <div class="col-md-5 form-group">
                   <div class="row">
-                  <div class="col-md-6 form-group" *ngIf="!Models[i].isScheduledBooking && Models[i].availability === 'Yes'">
+                  <div class="col-md-6 form-group" *ngIf="!dataSource[i].isScheduledBooking && dataSource[i].availability === 'Yes'">
                       <button class="btn btn-success"  (click)="addScheduled(modelId.value)" value="Add Images" type="submit">
                         Add to Scheduled Booking</button>
                     </div>
                     
-                    <div class="col-md-6 form-group" *ngIf="Models[i].isScheduledBooking  && Models[i].availability === 'Yes'">
+                    <div class="col-md-6 form-group" *ngIf="dataSource[i].isScheduledBooking  && dataSource[i].availability === 'Yes'">
                       <button class="btn btn-danger"  (click)="cancelScheduled(modelId.value)" value="Add Images" type="submit">
                         Remove from Scheduled Booking</button> <br>
                         <button class="btn btn-success"  style="margin-top: 10px;" (click)="editDate(modelId.value)" value="Add Images" type="submit">
                             Edit Scheduled Date</button> 
                     </div>
-                    <div class="col-md-6 form-group" *ngIf="Models[i].availability !== 'Yes'">
+                    <div class="col-md-6 form-group" *ngIf="dataSource[i].availability !== 'Yes'">
                         <button class="btn btn-success" (click)="addToAvailable(modelId.value)" value="Add Images" type="submit">
                             Add to  Available</button>
                       </div>
-                      <div class="col-md-6 form-group" *ngIf="Models[i].availability === 'Yes'">
+                      <div class="col-md-6 form-group" *ngIf="dataSource[i].availability === 'Yes'">
                           <button class="btn btn-danger"  (click)="removeFromAvailable(modelId.value)" value="Add Images" type="submit">
                            Remove from Available</button>
                         </div>

@@ -87,7 +87,8 @@ message;
        hair: [''],
        eyes: [''],
        topsize: [''],
-       bottomsize: ['']
+       bottomsize: [''],
+       position: ['']
     });
   }
 
@@ -144,7 +145,8 @@ message;
         hair: this.loadedModel.hair,
         eyes: this.loadedModel.eyes,
         topsize: this.loadedModel.topsize,
-        bottomsize: this.loadedModel.bottomsize
+        bottomsize: this.loadedModel.bottomsize,
+        position: this.loadedModel.position
       });
     }, error => {
       console.log(error);
@@ -179,6 +181,7 @@ message;
       this.showAvailability = false;
       this.showModel = false;
       this.userModel = new Model(
+        addModelForm.controls.position.value,
         addModelForm.controls.modelName.value,
         addModelForm.controls.description.value,
         addModelForm.controls.available.value,
@@ -221,10 +224,10 @@ message;
     }
 
   }
-  edit(addModelForm: FormGroup, modelName: any, modelDesc: any, id: any,
+  edit(addModelForm: FormGroup, modelposition: any, modelName: any, modelDesc: any, id: any,
     mob: any, email: any, fb: any, wapp: any) {
     this.updatedModel = new UpdateModel(
-      id,
+      modelposition,
       modelName,
       modelDesc,
       addModelForm.controls.available.value,

@@ -1,8 +1,10 @@
-import { Component, OnInit, Inject, DoCheck } from '@angular/core';
+import { Component, OnInit, Inject, DoCheck, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+
 
 import { ModelManagementService } from '../../model-management/model-management.service';
 import { NavheaderService } from '../../nav-header/nav-header.service';
@@ -16,6 +18,7 @@ import { copyStyles } from '@angular/animations/browser/src/util';
   styleUrls: ['./view-model.component.css']
 })
 export class ViewModelComponent implements OnInit , DoCheck {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   selectModel = [];
   spId;
   viewModelForm: FormGroup;
@@ -28,6 +31,14 @@ export class ViewModelComponent implements OnInit , DoCheck {
   message;
   action;
   scheduledDate;
+
+  public pageSize = 5;
+  public currentPage = 0;
+  public totalSize = 0;
+  dataSource: any = [];
+  array: any;
+  temp: any = [];
+
   constructor(private fb: FormBuilder, private router: Router, private navheaderService: NavheaderService,
     private modelService: ModelManagementService, private localStorageService: LocalStorageService, private dialog: MatDialog,
     private snackBar: MatSnackBar) { }
@@ -55,35 +66,46 @@ export class ViewModelComponent implements OnInit , DoCheck {
   findModels() {
     this.spId = this.localStorageService.retrieve('id');
     this.scheduledDate = this.localStorageService.retrieve('scheduledDate');
-    this.modelService.serviceProviderModels(this.spId).subscribe(data => {
-      this.Models = data;
-      console.log(data);
-     /*  const arrayLength = data.length - 1;
-      for (let i = 0; i <= arrayLength; i++) {
-        console.log(data[i].isScheduledBooking);
-        switch (data[i].isScheduledBooking) {
-          case true:
-            {
-              this.showScheduled = false;
-              this.removeScheduled = true;
-              break;
-            }
-          case false:
-            {
-              this.showScheduled = true;
-              this.removeScheduled = false;
-              break;
-            }
+    this.modelService.serviceProviderModels(this.spId)
+      .subscribe((response) => {
+        this.dataSource = new MatTableDataSource<Element>(response);
+        this.dataSource.paginator = this.paginator;
+        this.array = response;
+        this.Models = response;
+        this.totalSize = this.array.length;
+        this.temp = response;
+        this.iterator();
+      }, error => {
+        console.log(error);
+      });
 
-        }
-      } */
-    });
   }
+  handlePage(e: any) {
+    this.currentPage = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.iterator();
+  }
+  iterator() {
+    const end = (this.currentPage + 1) * this.pageSize;
+    const start = this.currentPage * this.pageSize;
+    const part = this.array.slice(start, end);
+    this.dataSource = part;
+  }
+
   delete(modelId, modelname) {
     this.spName = this.localStorageService.retrieve('username');
     this.modelId = modelId;
-    this.modelService.deleteModel(this.modelId, this.spName, modelname).subscribe(data => {
-      this.Models = data;
+    this.modelService.deleteModel(this.modelId, this.spName, modelname)
+    .subscribe((response) => {
+      this.dataSource = new MatTableDataSource<Element>(response);
+      this.dataSource.paginator = this.paginator;
+      this.array = response;
+      this.Models = response;
+      this.totalSize = this.array.length;
+      this.temp = response;
+      this.iterator();
+    }, error => {
+      console.log(error);
     });
   }
   addScheduled(id) {
@@ -95,8 +117,17 @@ export class ViewModelComponent implements OnInit , DoCheck {
       data: id
     });
     dialogRef.afterClosed();
-    this.modelService.allowScheduledModel(id, this.spId).subscribe(data => {
-      this.Models = data;
+    this.modelService.allowScheduledModel(id, this.spId)
+    .subscribe((response) => {
+      this.dataSource = new MatTableDataSource<Element>(response);
+      this.dataSource.paginator = this.paginator;
+      this.array = response;
+      this.Models = response;
+      this.totalSize = this.array.length;
+      this.temp = response;
+      this.iterator();
+    }, error => {
+      console.log(error);
     });
     this.snackBar.open(this.message, this.action, {
       duration: 3000,
@@ -115,8 +146,17 @@ export class ViewModelComponent implements OnInit , DoCheck {
     this.localStorageService.clear('scheduledDate');
   this.spId = this.localStorageService.retrieve('id');
     this.message = 'model removed from scheduled booking ';
-    this.modelService.cancelScheduledModel(id, this.spId).subscribe(data => {
-      this.Models = data;
+    this.modelService.cancelScheduledModel(id, this.spId)
+    .subscribe((response) => {
+      this.dataSource = new MatTableDataSource<Element>(response);
+      this.dataSource.paginator = this.paginator;
+      this.array = response;
+      this.Models = response;
+      this.totalSize = this.array.length;
+      this.temp = response;
+      this.iterator();
+    }, error => {
+      console.log(error);
     });
     this.snackBar.open(this.message, this.action, {
       duration: 3000,
@@ -125,8 +165,17 @@ export class ViewModelComponent implements OnInit , DoCheck {
   addToAvailable(id) {
     this.spId = this.localStorageService.retrieve('id');
       this.message = 'added to available model';
-      this.modelService.addToAvailable(id, this.spId).subscribe(data => {
-        this.Models = data;
+      this.modelService.addToAvailable(id, this.spId)
+      .subscribe((response) => {
+        this.dataSource = new MatTableDataSource<Element>(response);
+        this.dataSource.paginator = this.paginator;
+        this.array = response;
+        this.Models = response;
+        this.totalSize = this.array.length;
+        this.temp = response;
+        this.iterator();
+      }, error => {
+        console.log(error);
       });
       this.snackBar.open(this.message, this.action, {
         duration: 3000,
@@ -136,8 +185,17 @@ export class ViewModelComponent implements OnInit , DoCheck {
       this.localStorageService.clear('scheduledDate');
       this.spId = this.localStorageService.retrieve('id');
         this.message = 'removed from available model';
-        this.modelService.removeFromAvailable(id, this.spId).subscribe(data => {
-          this.Models = data;
+        this.modelService.removeFromAvailable(id, this.spId)
+        .subscribe((response) => {
+          this.dataSource = new MatTableDataSource<Element>(response);
+          this.dataSource.paginator = this.paginator;
+          this.array = response;
+          this.Models = response;
+          this.totalSize = this.array.length;
+          this.temp = response;
+          this.iterator();
+        }, error => {
+          console.log(error);
         });
         this.snackBar.open(this.message, this.action, {
           duration: 3000,

@@ -37,7 +37,7 @@ export class AnalysisComponent implements OnInit {
   getOnlySubscribed() {
     this.analysisService.onlySubscribed().subscribe(data => {
       this.subscribed = data;
-for (let i = 0; i < this.subscribed.length; i++) {
+/* for (let i = 0; i < this.subscribed.length; i++) {
     if (this.uniqueNames.indexOf(this.subscribed[i].mobileNumber) === -1) {
         this.uniqueNames.push(this.subscribed[i].mobileNumber);
     }
@@ -45,7 +45,7 @@ for (let i = 0; i < this.subscribed.length; i++) {
 console.log(this.uniqueNames);
 for ( let i = 0; i < this.uniqueNames.length; i++) {
     console.log(this.uniqueNames[i]);
-}
+} */
      /*  console.log(data); */
             /* this.temp = [...data]; */
       this.temp = data;

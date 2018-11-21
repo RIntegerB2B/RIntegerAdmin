@@ -1,5 +1,6 @@
 export class UpdateModel {
     id: string;
+    position: string;
     userName: string;
     description: string;
     availability: boolean;
@@ -25,7 +26,7 @@ export class UpdateModel {
     bottomsize: string;
     isScheduledBooking: boolean;
     constructor(
-        id: string,
+        position: string,
         userName: string,
         description: string,
         availability: boolean,
@@ -47,6 +48,7 @@ export class UpdateModel {
         topsize: string,
         bottomsize: string
         ) {
+            this.position = position;
       this.userName = userName;
         this.description = description;
         this.availability = availability;

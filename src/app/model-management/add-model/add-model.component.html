@@ -3,7 +3,12 @@
     <div class="row">
       <div class="col-md-6  mx-auto">
         <div class="form-group">
-              
+            <div *ngIf="showUpdate">
+                <h2 class="text-center">Edit Model Details</h2>
+              </div>  
+              <div *ngIf="!showUpdate">
+                  <h2 class="text-center">Add Model Details</h2>
+                </div> 
            
         <div *ngIf="showUpdate">
           <h4 >Model Name: {{loadedModelName}}</h4>
@@ -13,7 +18,10 @@
               #modelName/>
           </div>
           <div *ngIf="showError" class="alert alert-danger">Please enter Model Name</div>
-         
+          <div class="textContainer" >
+            <input type="text"  placeholder="Model Position" class="form-control required appTextBox"  formControlName="position"
+              #modelposition/>
+          </div>
         </div>
         <div class="col-md-12">
           <label>Type of Category</label>
@@ -174,7 +182,7 @@
         <input type="text"  placeholder="Catalog Id" hidden class="form-control required appTextBox"  formControlName="modelId"
           #id/>
         <div *ngIf="showUpdate">
-          <input type="submit" class="btn btnPink btn-block" value="Update" (click)="edit(addModelForm,modelName.value,modelDesc.value,id.value,
+          <input type="submit" class="btn btnPink btn-block" value="Update" (click)="edit(addModelForm,modelposition.value,modelName.value,modelDesc.value,id.value,
           mob.value,email.value,fb.value,wapp.value)" />
         </div>
       </div>
