@@ -1,5 +1,5 @@
 export class Model {
-    position: string;
+    position: Number;
     userName: string;
     description: string;
     availability: string;
@@ -35,7 +35,7 @@ export class Model {
     isScheduledBooking: boolean;
     scheduledDate: string;
     constructor(
-        position: string,
+        position: Number,
         userName: string,
         description: string,
         availability: string,
