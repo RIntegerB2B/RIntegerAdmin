@@ -37,4 +37,9 @@ export class DataAnalysisService {
     const url: string = this.serviceUrl + addUrl;
     return this.httpClient.get<Notification[]>(url);
   }
+  deleteSubscribedCustomer(edit): Observable<any> {
+    const addUrl = 'subscribednumber/';
+    const url: string = this.serviceUrl + addUrl + edit._id;
+    return this.httpClient.delete<Notification[]>(url);
+  }
 }

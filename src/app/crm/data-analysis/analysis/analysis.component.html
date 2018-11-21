@@ -71,17 +71,17 @@
           {{row?.mobileNumber}}
         </ng-template>
       </ngx-datatable-column>
-    <!--   <ngx-datatable-column  [sortable]="false" [draggable]="false" name="MOBILE NUMBER" [flexGrow]="1">
+      <ngx-datatable-column  [sortable]="false" [draggable]="false" name="SUBSCRIBED DATE" [flexGrow]="1">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row?.userSubscriptions.endpoint}}
+            {{row?.date}}
           </ng-template>
-        </ngx-datatable-column> -->
+        </ngx-datatable-column>
       <ngx-datatable-column [sortable]="false" [draggable]="false" name="EDIT" [flexGrow]="1">
           <ng-template let-row="row" ngx-datatable-cell-template>
   
           
             <button mat-icon-button mat-sm-button color="accent" (click)="deleteSubscribe(subscribedDetailsForm, row)">
-             <!--  <mat-icon>delete</mat-icon> -->
+              <mat-icon>delete</mat-icon>
             </button>
           </ng-template>
         </ngx-datatable-column>

@@ -34,20 +34,13 @@ export class AnalysisComponent implements OnInit {
     this.createForm();
     this.getOnlySubscribed();
   }
+  createForm() {
+    this.subscribedDetailsForm = this.fb.group({
+    });
+  }
   getOnlySubscribed() {
     this.analysisService.onlySubscribed().subscribe(data => {
       this.subscribed = data;
-/* for (let i = 0; i < this.subscribed.length; i++) {
-    if (this.uniqueNames.indexOf(this.subscribed[i].mobileNumber) === -1) {
-        this.uniqueNames.push(this.subscribed[i].mobileNumber);
-    }
-}
-console.log(this.uniqueNames);
-for ( let i = 0; i < this.uniqueNames.length; i++) {
-    console.log(this.uniqueNames[i]);
-} */
-     /*  console.log(data); */
-            /* this.temp = [...data]; */
       this.temp = data;
     }, error => {
       console.log(error);
@@ -92,8 +85,12 @@ for ( let i = 0; i < this.uniqueNames.length; i++) {
     });
   }
 
-  createForm() {
-    this.subscribedDetailsForm = this.fb.group({
+  deleteSubscribe(subscribedDetailsForm: FormGroup, row) {
+    this.analysisService.deleteSubscribedCustomer(row).subscribe(data => {
+      this.subscribed = data;
+      this.temp = data;
+    }, error => {
+      console.log(error);
     });
-  }
+ }
 }
