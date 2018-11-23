@@ -29,7 +29,7 @@ import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { ApprovalComponent } from './service-provider-management/approval/approval.component';
 import { AddModelComponent } from './model-management/add-model/add-model.component';
 import { ViewModelComponent,
-  ScheduledComponent } from './model-management/view-model/view-model.component';
+  ScheduledComponent, ScheduledLocationComponent } from './model-management/view-model/view-model.component';
 
 import { ModelManagementService } from './model-management/model-management.service';
 import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
@@ -105,7 +105,7 @@ import {
 } from './it-services-management/it-services-booking/it-services-booking.component';
 import {
   ScheduledModelBookingComponent,
-  ScheduledBookingViewComponent
+  ScheduledBookingViewComponent,
 } from './production-mgmt/scheduled-model-booking/scheduled-model-booking.component';
 import { MarketingManagementComponent, MarketingAddComponent,
    MarketingEditComponent } from './crm/marketing-management/marketing-management/marketing-management.component';
@@ -185,6 +185,7 @@ import { NotSubscribedComponent } from './crm/data-analysis/not-subscribed/not-s
     SubscribeCustomerComponent,
     AnalysisComponent,
     NotSubscribedComponent,
+    ScheduledLocationComponent
   ],
   imports: [
     BrowserModule,
@@ -225,7 +226,7 @@ import { NotSubscribedComponent } from './crm/data-analysis/not-subscribed/not-s
     CreativeBookingViewComponent, MarketingEditComponent, MarketingAddComponent, RegistrationBookingViewComponent, ITServicesViewComponent,
     MarketingServicesViewComponent, DigitalMgmtViewComponent, CatalogingViewComponent,
     CustomerAddComponent, CustomerEditComponent,
-    AplusBookingViewComponent, ScheduledBookingViewComponent, ScheduledComponent],
+    AplusBookingViewComponent, ScheduledBookingViewComponent, ScheduledComponent,  ScheduledLocationComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

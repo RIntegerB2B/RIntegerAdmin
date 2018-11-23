@@ -153,6 +153,16 @@ export class ViewModelComponent implements OnInit , DoCheck {
       duration: 3000,
     });
   }
+  addLocation(id) {
+    this.message = 'added scheduled location ';
+    this.spId = this.localStorageService.retrieve('id');
+    const dialogRef = this.dialog.open(ScheduledLocationComponent, {
+      width: '520px',
+      disableClose: true,
+      data: id
+    });
+    dialogRef.afterClosed();
+  }
   editDate(id) {
     this.spId = this.localStorageService.retrieve('id');
     const dialogRef = this.dialog.open(ScheduledComponent, {
@@ -305,6 +315,50 @@ export class ScheduledComponent implements OnInit {
     this.modelService.addScheduledDate(this.ID, this.spId, this.scheduled).subscribe(data => {
       this.Models = data;
       this.localStorageService.store('scheduledDate', data[0].scheduledDate);
+    });
+    this.dialogRef.close();
+   /*  this.modelService.serviceProviderModels(this.spId).subscribe(data => {
+      this.Models = data;
+      console.log(data);
+    }); */
+  }
+}
+
+@Component({
+  templateUrl: './scheduled-location.component.html'
+})
+export class ScheduledLocationComponent implements OnInit {
+  scheduledLocationForm: FormGroup;
+  message;
+  action;
+  Models: Model[] = [];
+  spId;
+  scheduled;
+  scheduledDate;
+  constructor(private fb: FormBuilder,  private router: Router,  public snackBar: MatSnackBar,
+     private localStorageService: LocalStorageService, private modelService: ModelManagementService,
+     public dialogRef: MatDialogRef<ScheduledComponent>,
+     @Inject(MAT_DIALOG_DATA) public ID) {
+       console.log(ID);
+  }
+  cancel(): void {
+    this.dialogRef.close();
+  }
+  ngOnInit() {
+    this.createViewForm();
+/* this.scheduledDate = this.localStorageService.retrieve('scheduledDate'); */
+ }
+  createViewForm() {
+    this.scheduledLocationForm = this.fb.group({
+      location: ['']
+    });
+  }
+  save() {
+   this.scheduled = this.scheduledLocationForm.controls.location.value;
+    this.spId = this.localStorageService.retrieve('id');
+    this.modelService.addScheduledLocation(this.ID, this.spId, this.scheduled).subscribe(data => {
+      this.Models = data;
+      /* this.localStorageService.store('scheduledDate', data[0].scheduledDate); */
     });
     this.dialogRef.close();
    /*  this.modelService.serviceProviderModels(this.spId).subscribe(data => {
