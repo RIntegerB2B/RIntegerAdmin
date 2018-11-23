@@ -203,4 +203,17 @@ removeFromAvailable(id, spid): Observable<any> {
   const url: string = this.serviceUrl + addUrl + id + spUrl + spid;
   return this.httpClient.get<Model>(url);
 }
+
+allowProjectionModel(id, spid): Observable<any> {
+  const addUrl = 'projectionmodel/';
+  const spUrl = '/serviceproviders/';
+  const url: string = this.serviceUrl + addUrl + id + spUrl + spid;
+  return this.httpClient.get<Model>(url);
+}
+cancelProjectionModel(id, spid): Observable<any> {
+  const addUrl = 'removeprojectionmodel/';
+  const spUrl = '/serviceproviders/';
+  const url: string = this.serviceUrl + addUrl + id + spUrl + spid;
+  return this.httpClient.get<Model>(url);
+}
 }

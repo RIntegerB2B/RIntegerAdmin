@@ -38,11 +38,8 @@ export class CustomerManagementComponent implements OnInit {
   }
 
   updateFilter(event) {
-    // this.showData = true;
     const val = event.target.value.toLowerCase();
-    /* if (this.dataSource.length !== 0) { */
     const filterCustomer = Object.keys(this.temp[0]);
-    // Removes last "$$index" from "column"
     filterCustomer.splice(filterCustomer.length - 1);
 
     console.log(filterCustomer);

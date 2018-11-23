@@ -86,22 +86,30 @@
               </div>
               <div class="col-md-5 form-group">
                   <div class="row">
-                  <div class="col-md-6 form-group" *ngIf="!dataSource[i].isScheduledBooking && dataSource[i].availability === 'Yes'">
+                  <div class="col-md-3 form-group" *ngIf="!dataSource[i].isScheduledBooking && dataSource[i].availability === 'Yes'">
                       <button class="btn btn-success"  (click)="addScheduled(modelId.value)" value="Add Images" type="submit">
-                        Add to Scheduled Booking</button>
+                        Add to Schedule</button>
                     </div>
-                    
-                    <div class="col-md-6 form-group" *ngIf="dataSource[i].isScheduledBooking  && dataSource[i].availability === 'Yes'">
+                   
+                    <div class="col-md-3 form-group" *ngIf="dataSource[i].isScheduledBooking  && dataSource[i].availability === 'Yes'">
                       <button class="btn btn-danger"  (click)="cancelScheduled(modelId.value)" value="Add Images" type="submit">
-                        Remove from Scheduled Booking</button> <br>
+                        Remove from Schedule</button> <br>
                         <button class="btn btn-success"  style="margin-top: 10px;" (click)="editDate(modelId.value)" value="Add Images" type="submit">
                             Edit Scheduled Date</button> 
                     </div>
-                    <div class="col-md-6 form-group" *ngIf="dataSource[i].availability !== 'Yes'">
+                    <div class="col-md-3 form-group" *ngIf="dataSource[i].availability !== 'Yes'">
                         <button class="btn btn-success" (click)="addToAvailable(modelId.value)" value="Add Images" type="submit">
                             Add to  Available</button>
                       </div>
-                      <div class="col-md-6 form-group" *ngIf="dataSource[i].availability === 'Yes'">
+                      <div class="col-md-3 form-group" *ngIf="!dataSource[i].isProjectionModel && dataSource[i].availability === 'Yes'">
+                        <button class="btn btn-success"  (click)="addProjection(modelId.value)" value="Add Images" type="submit">
+                          Add to Projection </button>
+                      </div>
+                      <div class="col-md-3 form-group" *ngIf="dataSource[i].isProjectionModel  && dataSource[i].availability === 'Yes'">
+                        <button class="btn btn-danger"  (click)="cancelProjection(modelId.value)" value="Add Images" type="submit">
+                          Remove from Projection</button> 
+                      </div>
+                      <div class="col-md-3 form-group" *ngIf="dataSource[i].availability === 'Yes'">
                           <button class="btn btn-danger"  (click)="removeFromAvailable(modelId.value)" value="Add Images" type="submit">
                            Remove from Available</button>
                         </div>

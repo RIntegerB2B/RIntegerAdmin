@@ -34,6 +34,7 @@ export class Model {
     bottomsize: string;
     isScheduledBooking: boolean;
     scheduledDate: string;
+    isProjectionModel: boolean;
     constructor(
         position: Number,
         userName: string,

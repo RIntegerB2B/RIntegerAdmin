@@ -32,7 +32,7 @@ export class ViewModelComponent implements OnInit , DoCheck {
   action;
   scheduledDate;
 
-  public pageSize = 5;
+  public pageSize = 10;
   public currentPage = 0;
   public totalSize = 0;
   dataSource: any = [];
@@ -206,6 +206,45 @@ export class ViewModelComponent implements OnInit , DoCheck {
       this.spId = this.localStorageService.retrieve('id');
         this.message = 'removed from available model';
         this.modelService.removeFromAvailable(id, this.spId)
+        .subscribe((response) => {
+          this.dataSource = new MatTableDataSource<Element>(response);
+          this.dataSource.paginator = this.paginator;
+          this.array = response;
+          this.Models = response;
+          this.totalSize = this.array.length;
+          this.temp = response;
+          this.iterator();
+        }, error => {
+          console.log(error);
+        });
+        this.snackBar.open(this.message, this.action, {
+          duration: 3000,
+        });
+      }
+      addProjection(id) {
+        this.message = 'added to projection model ';
+        this.spId = this.localStorageService.retrieve('id');
+        this.modelService.allowProjectionModel(id, this.spId)
+        .subscribe((response) => {
+          this.dataSource = new MatTableDataSource<Element>(response);
+          this.dataSource.paginator = this.paginator;
+          this.array = response;
+          this.Models = response;
+          this.totalSize = this.array.length;
+          this.temp = response;
+          this.iterator();
+        }, error => {
+          console.log(error);
+        });
+        this.snackBar.open(this.message, this.action, {
+          duration: 3000,
+        });
+      }
+
+      cancelProjection(id) {
+        this.message = 'removed from projection model ';
+        this.spId = this.localStorageService.retrieve('id');
+        this.modelService.cancelProjectionModel(id, this.spId)
         .subscribe((response) => {
           this.dataSource = new MatTableDataSource<Element>(response);
           this.dataSource.paginator = this.paginator;
