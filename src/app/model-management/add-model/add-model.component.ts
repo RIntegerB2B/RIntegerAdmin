@@ -32,7 +32,7 @@ export class AddModelComponent implements OnInit {
   spId: string;
   spCompanyName: string;
   modelTypes = ['National', 'InterNational'];
-  shootTypes = ['Men', 'Women'];
+  shootTypes = ['Men', 'Women', 'Kids'];
   id;
   Availability = ['Yes', 'No'];
   modelAvailable = ['Yes', 'No'];

@@ -221,4 +221,12 @@ cancelProjectionModel(id, spid): Observable<any> {
   const url: string = this.serviceUrl + addUrl + id + spUrl + spid;
   return this.httpClient.get<Model>(url);
 }
+
+addScheduledLocation(id, spid, location): Observable<any> {
+  const addUrl = 'scheduled/';
+  const spUrl = '/serviceproviders/';
+  const dateUrl = '/location/';
+  const url: string = this.serviceUrl + addUrl + id + spUrl + spid + dateUrl + location;
+  return this.httpClient.get<Model>(url);
+}
 }

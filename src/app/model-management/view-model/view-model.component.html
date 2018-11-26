@@ -96,6 +96,8 @@
                         Remove from Schedule</button> <br>
                         <button class="btn btn-success"  style="margin-top: 10px;" (click)="editDate(modelId.value)" value="Add Images" type="submit">
                             Edit Scheduled Date</button> 
+                            <button class="btn btn-success"  style="margin-top: 10px;" (click)="addLocation(modelId.value)" value="Add Location" type="submit">
+                             Add Location</button> 
                     </div>
                     <div class="col-md-3 form-group" *ngIf="dataSource[i].availability !== 'Yes'">
                         <button class="btn btn-success" (click)="addToAvailable(modelId.value)" value="Add Images" type="submit">
