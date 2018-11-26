@@ -119,6 +119,7 @@ import {ContactUsComponent} from './contact/contact-us/contact-us.component';
 import {SubscribeCustomerComponent} from './crm/customer-management/subscribe-customer/subscribe-customer.component';
 import { AnalysisComponent } from './crm/data-analysis/analysis/analysis.component';
 import { NotSubscribedComponent } from './crm/data-analysis/not-subscribed/not-subscribed.component';
+import { BannerComponent } from './settings/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -185,6 +186,7 @@ import { NotSubscribedComponent } from './crm/data-analysis/not-subscribed/not-s
     SubscribeCustomerComponent,
     AnalysisComponent,
     NotSubscribedComponent,
+    BannerComponent,
   ],
   imports: [
     BrowserModule,

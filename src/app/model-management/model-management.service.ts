@@ -10,6 +10,7 @@ import {PrimeImageData} from './add-model/primeImageData.model';
 import {User} from '../account/registration/user.model';
 import {UpdateModel} from './add-model/update.model';
 import {ImageData} from './image-management/imageData.model';
+import { Banner } from '../shared/bannerModel.model';
 
 @Injectable({
   providedIn: 'root'
@@ -71,13 +72,17 @@ this.newSp.next(data);
     return this.httpClient.put<boolean>(url, data);
   }
   uploadecommerceImage( spName, id, modelName , data ): Observable<any> {
-   /*  const formData: FormData = new FormData();
-    formData.append('file', imageData.ecommerceImage, imageData.ecommerceImage.name); */
     const addUrl = 'ecommerceImage/';
     const addUrl1 = '/id/';
     const addUrl2 = '/name/';
     const url: string = this.serviceUrl + addUrl + spName +  addUrl1 + id + addUrl2 + modelName ;
     return this.httpClient.put<boolean>(url, data);
+  }
+  uploadeBannerImage(bannerName , data ): Observable<any> {
+     const addUrl = 'bannerImage/';
+     /* const addUrl2 = '/name/'; */
+     const url: string = this.serviceUrl + addUrl;
+     return this.httpClient.put<boolean>(url, data);
   }
   uploadeportraitImage(spName, id, modelName , data ): Observable<any> {
     /* const formData: FormData = new FormData();

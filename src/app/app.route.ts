@@ -68,6 +68,7 @@ import { ContactUsComponent } from './contact/contact-us/contact-us.component';
 import { SubscribeCustomerComponent } from './crm/customer-management/subscribe-customer/subscribe-customer.component';
 import {AnalysisComponent} from './crm/data-analysis/analysis/analysis.component';
 import {NotSubscribedComponent} from './crm/data-analysis/not-subscribed/not-subscribed.component';
+import { BannerComponent } from './settings/banner/banner.component';
 
 const routes: Routes = [
     {
@@ -117,7 +118,8 @@ const routes: Routes = [
             { path: 'contact',  canActivate: [AuthGuard], component: ContactUsComponent },
             { path: 'crmsubscribe',  canActivate: [AuthGuard], component: SubscribeCustomerComponent },
             { path: 'analysis',  canActivate: [AuthGuard], component: AnalysisComponent },
-            { path: 'notsubscribed',  canActivate: [AuthGuard], component: NotSubscribedComponent }
+            { path: 'notsubscribed',  canActivate: [AuthGuard], component: NotSubscribedComponent },
+            { path: 'banner', component: BannerComponent },
         ]
     },
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
