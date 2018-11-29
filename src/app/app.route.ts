@@ -68,7 +68,12 @@ import { ContactUsComponent } from './contact/contact-us/contact-us.component';
 import { SubscribeCustomerComponent } from './crm/customer-management/subscribe-customer/subscribe-customer.component';
 import {AnalysisComponent} from './crm/data-analysis/analysis/analysis.component';
 import {NotSubscribedComponent} from './crm/data-analysis/not-subscribed/not-subscribed.component';
-import { BannerComponent } from './settings/banner/banner.component';
+import {SuperCategoryComponent} from './our-work/super-category/super-category.component';
+import {MainCategoryComponent} from './our-work/main-category/main-category.component';
+import {AddImagesComponent} from './our-work/add-images/add-images.component';
+import {ViewImagesComponent} from './our-work/view-images/view-images.component';
+import {MultipleImagesComponent} from './our-work/multiple-images/multiple-images.component';
+import {ViewMultipleImagesComponent} from './our-work/view-multiple-images/view-multiple-images.component';
 
 const routes: Routes = [
     {
@@ -119,7 +124,14 @@ const routes: Routes = [
             { path: 'crmsubscribe',  canActivate: [AuthGuard], component: SubscribeCustomerComponent },
             { path: 'analysis',  canActivate: [AuthGuard], component: AnalysisComponent },
             { path: 'notsubscribed',  canActivate: [AuthGuard], component: NotSubscribedComponent },
-            { path: 'banner', component: BannerComponent },
+            { path: 'supercategory',  canActivate: [AuthGuard], component: SuperCategoryComponent },
+            { path: 'maincategory',  canActivate: [AuthGuard], component: MainCategoryComponent },
+            { path: 'addportfolio',  canActivate: [AuthGuard], component: AddImagesComponent },
+            { path: 'viewportfolio',  canActivate: [AuthGuard], component: ViewImagesComponent },
+            { path: 'addmultiple/:mainid/maincategory/:subcatid/category/:catid',
+            canActivate: [AuthGuard], component: MultipleImagesComponent },
+            { path: 'view/:mainid/main/:subcatid/cat/:catid/name/:name/subname/:sub',
+            canActivate: [AuthGuard], component: ViewMultipleImagesComponent },
         ]
     },
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },

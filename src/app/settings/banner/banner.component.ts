@@ -41,7 +41,6 @@ export class BannerComponent implements OnInit {
       this.showImage = this.check;
     };
     this.banner = this.banner;
-    
   }
   convertDataURIToBinary(dataURI) {
     const base64Index = dataURI.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
