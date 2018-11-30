@@ -199,7 +199,8 @@ import {BannerComponent} from './settings/banner/banner.component';
     ViewImagesComponent,
     MultipleImagesComponent,
     ViewMultipleImagesComponent,
-    BannerComponent
+    BannerComponent,
+    ScheduledLocationComponent
   ],
   imports: [
     BrowserModule,

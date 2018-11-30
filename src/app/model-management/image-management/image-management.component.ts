@@ -8,6 +8,7 @@ import { ModelManagementService } from '../model-management.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavheaderService } from '../../nav-header/nav-header.service';
 
+
 @Component({
   selector: 'app-image-management',
   templateUrl: './image-management.component.html',
@@ -74,6 +75,28 @@ checkEcomm() {
       formData.append('uploads[]', this.fileToUpload[i]);
     }
     this.modelService.uploadecommerceImage(this.spName, this.id, this.name, formData).subscribe(data => {
+    }, error => {
+      console.log(error);
+    });
+  }
+  handleBannerInput(images: any, loadedImage) {
+    this.fileToUpload = images;
+  }
+  uploadBanner() {
+   /*  this.name = 'banner';
+    this.banner = new Banner(
+      bannerName,
+      bannerImage
+    ); */
+    const formData: any = new FormData();
+    this.fileLength = this.fileToUpload.length;
+    for (let i = 0; i <= this.fileLength; i++) {
+      formData.append('uploads[]', this.fileToUpload[i]);
+    }
+   /*  this.modelService.createBanner(this.banner).subscribe(data => {
+      console.log(data);
+    }); */
+    this.modelService.uploadeBannerImage(this.name, formData).subscribe(data => {
     }, error => {
       console.log(error);
     });

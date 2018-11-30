@@ -74,6 +74,7 @@ import {AddImagesComponent} from './our-work/add-images/add-images.component';
 import {ViewImagesComponent} from './our-work/view-images/view-images.component';
 import {MultipleImagesComponent} from './our-work/multiple-images/multiple-images.component';
 import {ViewMultipleImagesComponent} from './our-work/view-multiple-images/view-multiple-images.component';
+import { BannerComponent } from './settings/banner/banner.component';
 
 const routes: Routes = [
     {
@@ -132,6 +133,7 @@ const routes: Routes = [
             canActivate: [AuthGuard], component: MultipleImagesComponent },
             { path: 'view/:mainid/main/:subcatid/cat/:catid/name/:name/subname/:sub',
             canActivate: [AuthGuard], component: ViewMultipleImagesComponent },
+            { path: 'banner', component: BannerComponent },
         ]
     },
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },
