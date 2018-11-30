@@ -119,6 +119,13 @@ import {ContactUsComponent} from './contact/contact-us/contact-us.component';
 import {SubscribeCustomerComponent} from './crm/customer-management/subscribe-customer/subscribe-customer.component';
 import { AnalysisComponent } from './crm/data-analysis/analysis/analysis.component';
 import { NotSubscribedComponent } from './crm/data-analysis/not-subscribed/not-subscribed.component';
+import { SuperCategoryComponent } from './our-work/super-category/super-category.component';
+import { MainCategoryComponent } from './our-work/main-category/main-category.component';
+import { AddImagesComponent } from './our-work/add-images/add-images.component';
+import { ViewImagesComponent } from './our-work/view-images/view-images.component';
+import { MultipleImagesComponent } from './our-work/multiple-images/multiple-images.component';
+import { ViewMultipleImagesComponent } from './our-work/view-multiple-images/view-multiple-images.component';
+import {BannerComponent} from './settings/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -185,7 +192,14 @@ import { NotSubscribedComponent } from './crm/data-analysis/not-subscribed/not-s
     SubscribeCustomerComponent,
     AnalysisComponent,
     NotSubscribedComponent,
-    ScheduledLocationComponent
+    ScheduledLocationComponent,
+    SuperCategoryComponent,
+    MainCategoryComponent,
+    AddImagesComponent,
+    ViewImagesComponent,
+    MultipleImagesComponent,
+    ViewMultipleImagesComponent,
+    BannerComponent
   ],
   imports: [
     BrowserModule,

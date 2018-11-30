@@ -304,3 +304,9 @@ label {
   position: relative;
   text-align: left;
 }
+.displayNone {
+  display: none;
+}
+.displayBlock {
+  display: block;
+}
