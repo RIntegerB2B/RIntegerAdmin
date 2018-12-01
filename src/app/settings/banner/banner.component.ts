@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from './../settings.service';
 import { Banner } from '../../shared/bannerModel.model';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-banner',
@@ -18,8 +19,10 @@ export class BannerComponent implements OnInit {
   banner: Banner;
   bannerAll: Banner;
   BASE64_MARKER: any = ';base64,';
+  message;
+  action;
   constructor(
-    private settingsService: SettingsService
+    private settingsService: SettingsService, private snackBar: MatSnackBar
   ) { }
   ngOnInit() {
     this.banner = new Banner(
@@ -54,7 +57,12 @@ export class BannerComponent implements OnInit {
     return array;
   }
   uploadBanner() {
+    this.message = 'Banner image saved';
     this.settingsService.uploadBannerImage(this.banner).subscribe(data => {
+      this.snackBar.open(this.message, this.action, {
+        duration: 3000,
+      });
+      this.getAllBanner();
     }, error => {
       console.log(error);
     });
