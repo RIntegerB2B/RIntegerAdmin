@@ -1,6 +1,7 @@
 export class Notification {
     mobileNumber: Number;
     title: String;
+    name: String;
     notificationBody: String;
     date: String;
     constructor(

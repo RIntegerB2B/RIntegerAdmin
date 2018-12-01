@@ -71,6 +71,11 @@
           {{row?.mobileNumber}}
         </ng-template>
       </ngx-datatable-column>
+      <ngx-datatable-column  [sortable]="false" [draggable]="false" name="NAME" [flexGrow]="1">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row?.name}}
+          </ng-template>
+        </ngx-datatable-column>
       <ngx-datatable-column  [sortable]="false" [draggable]="false" name="SUBSCRIBED DATE" [flexGrow]="1">
           <ng-template let-row="row" ngx-datatable-cell-template>
             {{row?.date}}
