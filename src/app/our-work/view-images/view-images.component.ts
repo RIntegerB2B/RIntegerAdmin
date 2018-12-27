@@ -10,6 +10,7 @@ import {MainCatOnSub} from '../add-images/main-category.model';
 import {ImageDetails} from './image-detail.model';
 
 
+
 @Component({
   selector: 'app-view-images',
   templateUrl: './view-images.component.html',
@@ -38,9 +39,6 @@ export class ViewImagesComponent implements OnInit {
   createForm() {
     this.viewPortfolioForm = this.fb.group({
       ID: [''],
-    /*   Scheduled: [''],
-      isScheduled: [''],
-      RemoveScheduled: [''] */
     });
   }
   superCategory() {
@@ -56,8 +54,6 @@ export class ViewImagesComponent implements OnInit {
     this.headerCatSelectedData = id;
     this.workservice.showMainCategoryOnSub(id).subscribe(data => {
       this.mainCat = data[0].mainCategory;
-    /*   console.log('test', data[0].mainCategory); */
-    /*   console.log('test', this.mainCat[0].mainCategory); */
     }, error => {
       console.log(error);
     });

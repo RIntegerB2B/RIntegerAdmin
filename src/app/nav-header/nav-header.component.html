@@ -274,6 +274,35 @@
                     </div>
                     <div class="menu">
                       <a matRipple class="nav-item-sep">
+                        <mat-accordion *ngIf="main.userMgmt">
+                          <mat-expansion-panel class="expansion">
+                            <mat-expansion-panel-header>
+                              <mat-panel-description>
+                             Video - Portfolio
+                              </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <ul class="navbar-nav">
+                              <li class="nav-item" *ngIf="new.permission">
+                                <a class="pointer" [routerLink]="['videosupercategory']"> Video Main category</a><br>
+                              </li>
+                              <li class="nav-item" *ngIf="new.permission">
+                                <a class="pointer" [routerLink]="['videomaincategory']"> Video Sub category</a><br>
+                              </li>
+                              <li class="nav-item" *ngIf="new.register">  
+                                <a class="pointer" [routerLink]="['addvideo']">Add Video </a><br>
+                              </li>
+                              <li class="nav-item" *ngIf="new.contact">
+                                <a class="pointer" [routerLink]="['viewvideo']">View Video</a><br>
+                              </li>
+                            </ul>
+                          </mat-expansion-panel>
+                          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                          </mat-expansion-panel>
+                        </mat-accordion>
+                      </a>
+                    </div>
+                    <div class="menu">
+                      <a matRipple class="nav-item-sep">
                         <mat-accordion>
                           <mat-expansion-panel class="expansion">
                             <mat-expansion-panel-header>

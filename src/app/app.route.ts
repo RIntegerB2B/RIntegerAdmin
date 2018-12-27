@@ -75,6 +75,10 @@ import {ViewImagesComponent} from './our-work/view-images/view-images.component'
 import {MultipleImagesComponent} from './our-work/multiple-images/multiple-images.component';
 import {ViewMultipleImagesComponent} from './our-work/view-multiple-images/view-multiple-images.component';
 import { BannerComponent } from './settings/banner/banner.component';
+import {AddVideosComponent} from './video-portfolio/add-videos/add-videos.component';
+import {MainCategoryVideoComponent} from './video-portfolio/main-category-video/main-category-video.component';
+import {SuperCategoryVideoComponent} from './video-portfolio/super-category-video/super-category-video.component';
+import {ViewVideosComponent} from './video-portfolio/view-videos/view-videos.component';
 
 const routes: Routes = [
     {
@@ -134,6 +138,10 @@ const routes: Routes = [
             { path: 'view/:mainid/main/:subcatid/cat/:catid/name/:name/subname/:sub',
             canActivate: [AuthGuard], component: ViewMultipleImagesComponent },
             { path: 'banner', component: BannerComponent },
+            { path: 'videosupercategory', component: SuperCategoryVideoComponent },
+            { path: 'videomaincategory', component: MainCategoryVideoComponent },
+            { path: 'addvideo', component: AddVideosComponent },
+            { path: 'viewvideo', component: ViewVideosComponent },
         ]
     },
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },

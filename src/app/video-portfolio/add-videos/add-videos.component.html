@@ -1,0 +1,60 @@
+<form [formGroup]="addModelForm" style="padding-top:60px" novalidate>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6  mx-auto">
+        <div class="form-group">
+            
+           
+        <div >
+        </div>
+        <div class="form-group col-sm-12 col-md-12">
+          <div class="textContainer">
+            <select  #selectElem (change)="setNewUser(selectElem.value)" class="hideLabel form-control">
+              <option>Select Main Category</option>
+              <option *ngFor="let name  of superCategoryDetail" [value]="name._id">
+                {{name.categoryName}}
+              </option>
+            </select>
+
+          </div>
+          <input class="form-control" hidden type="text" formControlName="ID" [value]="this.headerCatSelectedData" #superCat />
+        </div>
+
+        <div class="form-group col-sm-12 col-md-12">
+          <div class="textContainer">
+            <select  #selectItem1 (change)="getCategory(selectItem1.value)" class="hideLabel form-control">
+              <option>Select sub category</option>
+              <option *ngFor="let category of mainCat" [value]="category._id">
+                {{category.mainCategoryName}}
+              </option>
+            </select>
+
+          </div>
+
+        </div>
+          <div class="textContainer" >
+            <input type="text"  placeholder="Video Name" class="form-control required appTextBox" required formControlName="modelName"
+              #modelName/>
+          </div>
+          <div class="textContainer" >
+            <input type="text"  placeholder="Video Url" class="form-control required appTextBox" required formControlName="videosUrl"
+             />
+          </div>
+          <!-- <div *ngIf="showError" class="alert alert-danger">Category Name</div> -->
+         <!--  <div class="textContainer" >
+            <input type="text"  placeholder="Category Position" class="form-control required appTextBox"  formControlName="position"
+              #modelposition/>
+          </div> -->
+        </div>
+        <div >
+          <input type="submit" class="btn btnPink btn-block" value="Save" (click)="save(addModelForm,selectElem.value,selectItem1.value,modelName.value)" />
+        </div>
+        
+        <input type="text"  placeholder="Catalog Id" hidden class="form-control required appTextBox"  formControlName="modelId"
+          #id/>
+      
+      </div>
+     
+    </div>
+  </div>
+</form>

@@ -126,6 +126,11 @@ import { ViewImagesComponent } from './our-work/view-images/view-images.componen
 import { MultipleImagesComponent } from './our-work/multiple-images/multiple-images.component';
 import { ViewMultipleImagesComponent } from './our-work/view-multiple-images/view-multiple-images.component';
 import {BannerComponent} from './settings/banner/banner.component';
+import { SuperCategoryVideoComponent } from './video-portfolio/super-category-video/super-category-video.component';
+import { MainCategoryVideoComponent } from './video-portfolio/main-category-video/main-category-video.component';
+import { AddVideosComponent } from './video-portfolio/add-videos/add-videos.component';
+import { ViewVideosComponent } from './video-portfolio/view-videos/view-videos.component';
+import {SafePipe} from './shared/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -200,7 +205,12 @@ import {BannerComponent} from './settings/banner/banner.component';
     MultipleImagesComponent,
     ViewMultipleImagesComponent,
     BannerComponent,
-    ScheduledLocationComponent
+    ScheduledLocationComponent,
+    SuperCategoryVideoComponent,
+    MainCategoryVideoComponent,
+    AddVideosComponent,
+    ViewVideosComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,

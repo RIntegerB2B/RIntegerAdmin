@@ -1,0 +1,115 @@
+<form [formGroup]="viewPortfolioForm" style="padding-top:60px" novalidate>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4  mx-auto">
+        <div class="form-group">
+          <div>
+
+            <h2 class="text-center">Show Portfolio Videos</h2>
+          </div>
+
+          <div class="form-group col-sm-12 col-md-6">
+            <div class="textContainer">
+              <select #selectElem (change)="setNewUser(selectElem.value)" class="hideLabel form-control">
+                <option>Select Main Category</option>
+                <option *ngFor="let name  of superCategoryDetail" [value]="name._id">
+                  {{name.categoryName}}
+                </option>
+              </select>
+
+            </div>
+            <input class="form-control" hidden type="text" formControlName="ID" [value]="this.headerCatSelectedData" #superCat />
+          </div>
+
+          <div class="form-group col-sm-12 col-md-6">
+            <div class="textContainer">
+              <select #selectItem1 (change)="getCategory(selectItem1.value)" class="hideLabel form-control">
+                <option>Select sub category</option>
+                <option *ngFor="let cat of mainCat" [value]="cat._id">
+                  {{cat.mainCategoryName}}
+                </option>
+              </select>
+
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+
+
+
+      </div>
+
+
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+    </div>
+
+    <div class="row">
+
+
+      <div class="col-md-12 mx-auto">
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-6 form-group">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <b>Prime Image</b>
+                </div>
+                <div class="col-md-3 form-group">
+                  <b>Name</b>
+                </div>
+                <div class="col-md-3 form-group">
+
+                  <b>Position</b>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="container">
+          <div class="row" *ngFor="let data of mainCategoryData">
+            <div class="col-md-6 form-group">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <iframe class="resp-iframe"
+                  [src]=" data.videosUrl | safe">
+                  </iframe>
+                </div>
+                <div class="col-md-3 form-group">
+                  {{data.videoName}}
+                </div>
+               <!--  <div class="col-md-3 form-group">
+                  {{data.videosUrl}}
+                </div> -->
+              </div>
+
+            </div>
+            <div class="col-md-6 form-group">
+              <div class="row">
+
+
+                <div class="col-md-3 form-group">
+                  <button mat-raised-button color="accent" (click)="deleteCategory(data._id)" value="view Images" type="submit">
+                    Delete
+                    <mat-icon> delete sweep icon</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
