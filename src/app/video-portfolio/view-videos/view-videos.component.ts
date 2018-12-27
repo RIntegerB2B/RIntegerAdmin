@@ -59,7 +59,7 @@ export class ViewVideosComponent implements OnInit {
     this.headCatSelected = id;
     this.videoPortfolioService.showMainCategory(this.headerCatSelectedData, id).subscribe(data => {
       this.mainCategoryData = data.category;
-      this.categoryId =  data.category[0]._id;
+    /*   this.categoryId =  data.category[0]._id; */
       console.log('video data', data.category);
     }, error => {
       console.log(error);
