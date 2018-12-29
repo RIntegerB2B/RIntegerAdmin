@@ -5,6 +5,9 @@ import { Observable, of , Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { AppSetting } from '../config/appSetting';
 import { Banner } from '../shared/bannerModel.model';
+
+import {AdImageData} from './ads/adImageData.model';
+import {AdsModel} from './ads/ads.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -39,5 +42,26 @@ deleteBanner(deleteData): Observable<any> {
   const addUrl = 'bannerDelete/';
   const url: string = this.serviceUrl + addUrl + deleteData._id;
   return this.httpClient.delete<Banner[]>(url);
+}
+
+uploadAdImage(adImageData: AdImageData , position ): Observable<any> {
+  const formData: FormData = new FormData();
+  formData.append('file', adImageData.adImage, adImageData.adImage.name);
+  const addUrl = 'ads/';
+  /* const addUrl1 = '/position/'; */
+  const url: string = this.serviceUrl + addUrl  ;
+  return this.httpClient.put<boolean>(url, formData);
+}
+
+findAdsImage(): Observable<any> {
+  const addUrl = 'alladsimage';
+  const url: string = this.serviceUrl + addUrl;
+  return this.httpClient.get<AdsModel>(url);
+}
+
+deleteAds(deleteData): Observable<any> {
+  const addUrl = 'adsDelete/';
+  const url: string = this.serviceUrl + addUrl + deleteData._id;
+  return this.httpClient.delete<AdsModel>(url);
 }
 }

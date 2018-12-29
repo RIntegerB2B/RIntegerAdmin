@@ -79,6 +79,7 @@ import {AddVideosComponent} from './video-portfolio/add-videos/add-videos.compon
 import {MainCategoryVideoComponent} from './video-portfolio/main-category-video/main-category-video.component';
 import {SuperCategoryVideoComponent} from './video-portfolio/super-category-video/super-category-video.component';
 import {ViewVideosComponent} from './video-portfolio/view-videos/view-videos.component';
+import {AdsComponent} from './settings/ads/ads.component';
 
 const routes: Routes = [
     {
@@ -142,6 +143,8 @@ const routes: Routes = [
             { path: 'videomaincategory', component: MainCategoryVideoComponent },
             { path: 'addvideo', component: AddVideosComponent },
             { path: 'viewvideo', component: ViewVideosComponent },
+            { path: 'viewvideo', component: ViewVideosComponent },
+            { path: 'adImages', component: AdsComponent}
         ]
     },
     { path: '', redirectTo: 'signIn', pathMatch: 'full' },

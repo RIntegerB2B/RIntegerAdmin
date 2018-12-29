@@ -1,0 +1,43 @@
+<form [formGroup]="addModelForm" style="padding-top:60px" novalidate>
+  <div class="container-fluid">
+    <div class="row">
+       
+
+        <div class="col-md-4 form-group">
+          <div>
+            <img [src]="this.adsModel?.adImageName" #loadedImage style="width: 180px; height: 245px;" />
+          </div>
+          <div>
+            <input type="file" name="file" class="btn btnPink " id="file" multiple (change)="handleFileInput($event.target.files, loadedImage)">
+          </div>
+
+          <div class="form-group">
+
+            <div class="textContainer">
+              <input type="text" placeholder="Model Position" class="form-control required appTextBox" formControlName="position"
+                #modelposition />
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btn btnPink btn-block" value="Save" (click)="uploadImage()" />
+          </div>
+        </div>
+      <div  class="col-md-6 form-group">
+        <div class="row">
+            <div class="col-md-4 form-group" *ngFor="let data of adsModel">
+                <button matTooltip="Do you want to delete" (click)="deleteAdImage(data)"
+                mat-button matSuffix mat-icon-button>
+                <mat-icon>clear</mat-icon>
+              </button> 
+                <img [src]="data.adImageName" style="width: 180px; height: 245px;">
+                        </div>
+        </div>
+        
+      </div>
+       
+
+        
+
+    </div>
+    </div>
+</form>

@@ -131,6 +131,7 @@ import { MainCategoryVideoComponent } from './video-portfolio/main-category-vide
 import { AddVideosComponent } from './video-portfolio/add-videos/add-videos.component';
 import { ViewVideosComponent } from './video-portfolio/view-videos/view-videos.component';
 import {SafePipe} from './shared/safe.pipe';
+import { AdsComponent } from './settings/ads/ads.component';
 
 @NgModule({
   declarations: [
@@ -210,7 +211,8 @@ import {SafePipe} from './shared/safe.pipe';
     MainCategoryVideoComponent,
     AddVideosComponent,
     ViewVideosComponent,
-    SafePipe
+    SafePipe,
+    AdsComponent
   ],
   imports: [
     BrowserModule,
