@@ -37,7 +37,7 @@ export class AdsComponent implements OnInit {
   }
   createForm() {
     this.addModelForm = this.fb.group({
-      position: [''],
+      position: ['', Validators],
     });
   }
 
