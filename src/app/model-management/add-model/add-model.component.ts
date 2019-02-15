@@ -93,8 +93,6 @@ message;
   }
 
 
-
-
   handleFileInput(files: FileList, loadedImage) {
     this.fileToUpload = files.item(0);
     this.primeImageData.primeImage = this.fileToUpload = files[0];

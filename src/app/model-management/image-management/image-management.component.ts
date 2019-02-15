@@ -31,6 +31,7 @@ export class ImageManagementComponent implements OnInit {
   id;
   name;
   spName;
+  ecomImagesPreview = [];
 
   constructor(private fb: FormBuilder, private router: Router, private localStorageService: LocalStorageService,
     private navheaderService: NavheaderService,
@@ -50,9 +51,22 @@ export class ImageManagementComponent implements OnInit {
     });
   }
 
-  handleEcommerceInput(images: any, loadedImage) {
+  handleEcommerceInput(images: any) {
     this.fileToUpload = images;
-    /* this.checkEcomm(); */
+    /* const ecomFiles = images;
+    if (ecomFiles) {
+      for (const files of ecomFiles) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.ecomImagesPreview.push(e.target.result);
+        };
+        reader.readAsDataURL(files);
+      }
+    } */
+  }
+  test(value) {
+    const fileResultData = value.result;
+    console.log('test data', this.imageData);
   }
 checkEcomm() {
   const formData: any = new FormData();

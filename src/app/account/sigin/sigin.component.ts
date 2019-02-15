@@ -47,7 +47,6 @@ export class SiginComponent implements OnInit {
     );
 
     this.accountService.signIn(this.userModel).subscribe(data => {
-      console.log(data);
       if (data === null) {
         this.showPasswordError = true;
       } else {
