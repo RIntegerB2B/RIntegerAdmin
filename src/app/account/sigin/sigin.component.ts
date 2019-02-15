@@ -76,6 +76,7 @@ spValidate(name, pwd) { // check user is approved or not
       this.localStorageService.store('userName', data[0].userName);
       this.localStorageService.store('id', data[0].Id);
       this.localStorageService.store('roles', data);
+      sessionStorage.setItem('tokenKey', data[0].tokenKey);
       this.status = false;
 this.router.navigate(['/navheader/productbooking']);
     }
