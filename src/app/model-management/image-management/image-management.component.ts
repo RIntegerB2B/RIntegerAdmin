@@ -51,7 +51,7 @@ export class ImageManagementComponent implements OnInit {
     });
   }
 
-  handleEcommerceInput(images: any) {
+  handleEcommerceInput(images: any, loadedImage) {
     this.fileToUpload = images;
     /* const ecomFiles = images;
     if (ecomFiles) {
