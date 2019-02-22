@@ -12,7 +12,7 @@ import { Permission } from './../user-management/permission/permission/permissio
   templateUrl: './nav-header.component.html',
   styleUrls: ['./nav-header.component.css']
 })
-export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit  {
+export class NavHeaderComponent implements OnInit, OnDestroy  {
   navID;
   admin: boolean;
   serviceProvider: boolean;
@@ -54,14 +54,8 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
   logout() {
     this.localStorageService.clear('isLoggedIn');
-    this.router.navigate(['/signIn']);
-  }
-  ngAfterViewInit() {
-    // setTimeout(() => {
-    //   this.sidebarPS = new PerfectScrollbar('#sidebar-top-scroll-area', {
-    //     suppressScrollX: true
-    //   })
-    // })
+    this.router.navigate(['/signin']);
+     sessionStorage.removeItem('tokenKey');
   }
   ngOnDestroy(): void {
     // if(this.sidebarPS) {

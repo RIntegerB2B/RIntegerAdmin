@@ -45,8 +45,9 @@ export class SiginComponent implements OnInit {
       onAdminForm.controls.userName.value,
       onAdminForm.controls.password.value,
     );
-
-    this.accountService.signIn(this.userModel).subscribe(data => {
+    this.spValidate(name, pwd);
+  }
+   /*  this.accountService.signIn(this.userModel).subscribe(data => {
       if (data === null) {
         this.showPasswordError = true;
       } else {
@@ -61,7 +62,8 @@ export class SiginComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-  }
+  } */
+
 spValidate(name, pwd) { // check user is approved or not
   this.userModel = new SignIn(name, pwd);
   this.accountService.validate(this.userModel).subscribe(data => {
@@ -77,7 +79,7 @@ spValidate(name, pwd) { // check user is approved or not
       this.localStorageService.store('roles', data);
       sessionStorage.setItem('tokenKey', data[0].tokenKey);
       this.status = false;
-this.router.navigate(['/navheader/productbooking']);
+      this.router.navigate(['/navheader/productbooking']);
     }
   }, error => {
     console.log(error);

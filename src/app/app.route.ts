@@ -21,7 +21,7 @@ import { UpdateCreativeStatusComponent } from './booking-details/update-creative
 import { UpdateCatalogingStatusComponent } from './booking-details/update-cataloging-status/update-cataloging-status.component';
 import { UpdateRegistartionStatusComponent } from './booking-details/update-registartion-status/update-registartion-status.component';
 import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
-import { AuthGuard } from './shared/auth.service';
+import { AuthGuard } from './shared/auth-guard-service/auth.service';
 import { ProductBookingComponent } from './production-mgmt/product-booking/product-booking.component';
 import { ModelBookingComponent } from './production-mgmt/model-booking/model-booking.component';
 import { ImageEditingBookingComponent } from './production-mgmt/image-editing-booking/image-editing-booking.component';
@@ -83,7 +83,7 @@ import {AdsComponent} from './settings/ads/ads.component';
 
 const routes: Routes = [
     {
-        path: 'signIn', component: SiginComponent
+        path: 'signin', component: SiginComponent
     },
     { path: 'registration', component: RegistrationComponent },
     {
@@ -147,8 +147,8 @@ const routes: Routes = [
             { path: 'adImages', component: AdsComponent}
         ]
     },
-    { path: '', redirectTo: 'signIn', pathMatch: 'full' },
-    { path: '**', redirectTo: 'signIn', pathMatch: 'full' },
+    { path: '', redirectTo: 'signin', pathMatch: 'full' },
+    { path: '**', redirectTo: 'signin', pathMatch: 'full' },
 ];
 
 export const Routing = RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' });
