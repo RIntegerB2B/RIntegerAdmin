@@ -9,11 +9,12 @@ export class BookingDetail {
     bookingOrderId: string;
     bookingStatus: number;
     bookingType: string;
-    constructor(
+    bookingDate: Date;
+    /* constructor(
         name: string,
         mobileNumber: number ,
         productDescription: string,
-        quantityDescription: string,
+        quantityDescription: string, 
         shootType: string,
         modelType: string
 ) {
@@ -24,5 +25,5 @@ export class BookingDetail {
         this.shootType = shootType;
         this.modelType = modelType;
 
-    }
+    } */
 }

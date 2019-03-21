@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { Routing } from './app.route';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -21,7 +21,7 @@ import { WelcomeComponent } from './home/welcome/welcome.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule,
-  MatInputModule, MatSelectModule
+  MatInputModule, MatSelectModule, MatTableModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegistrationComponent } from './account/registration/registration.component';
@@ -50,10 +50,13 @@ import { UpdateRegistartionStatusComponent } from './booking-details/update-regi
 import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
 import { AuthGuard } from './shared/auth.service';
 import { NavheaderService } from './nav-header/nav-header.service';
+import {AllBookingService } from './AllBooking/all-booking/all-booking.service';
+import {ApprovedbookingService} from './AllBooking/approvedbooking/approvedbooking.service';
+import {CancelledbookingService} from './AllBooking/cancelled-boooking/cancelledbooking.service';
 import {
   MatSidenavModule,
   MatListModule,
-  MatTooltipModule,
+  MatTooltipModule,  
   MatOptionModule,
   MatMenuModule,
   MatSnackBarModule,
@@ -132,6 +135,19 @@ import { AddVideosComponent } from './video-portfolio/add-videos/add-videos.comp
 import { ViewVideosComponent } from './video-portfolio/view-videos/view-videos.component';
 import {SafePipe} from './shared/safe.pipe';
 import { AdsComponent } from './settings/ads/ads.component';
+import { ViewPanelComponent } from './view-panel/view-panel.component';
+import {ViewPanelService} from './view-panel/view-panel.service';
+import { AllBookingComponent } from './AllBooking/all-booking/all-booking.component';
+import { ApprovedbookingComponent } from './AllBooking/approvedbooking/approvedbooking.component';
+import { CancelledBoookingComponent } from './AllBooking/cancelled-boooking/cancelled-boooking.component';
+import { from } from 'rxjs';
+import { SearchPipe } from './view-panel/search.pipe';
+import { NewPanelComponent } from './view-panel/new-panel/new-panel.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -212,17 +228,25 @@ import { AdsComponent } from './settings/ads/ads.component';
     AddVideosComponent,
     ViewVideosComponent,
     SafePipe,
-    AdsComponent
+    AdsComponent,
+    ViewPanelComponent,
+    AllBookingComponent,
+    ApprovedbookingComponent,
+    CancelledBoookingComponent,
+    SearchPipe,
+    NewPanelComponent
+    
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     Routing,
     RouterModule,
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
     RouterModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,MatTableModule,
     FlexLayoutModule,
     MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule,
     MatSidenavModule,
@@ -244,16 +268,19 @@ import { AdsComponent } from './settings/ads/ads.component';
     NgxDatatableModule,
     MatBadgeModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+    MatNativeDateModule,NgxPaginationModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AccountService, BookingDetailsService, NavheaderService,
-    ModelManagementService, LocalStorageService, NotificationService, AuthGuard],
+  providers: [AccountService, BookingDetailsService, NavheaderService,ViewPanelService,
+    ModelManagementService, LocalStorageService, NotificationService, AuthGuard,
+    ApprovedbookingService,AllBookingService,CancelledbookingService],
   entryComponents: [ProductBookingViewComponent, ModelBookingViewComponent, EditingBookingViewComponent,
     CreativeBookingViewComponent, MarketingEditComponent, MarketingAddComponent, RegistrationBookingViewComponent, ITServicesViewComponent,
     MarketingServicesViewComponent, DigitalMgmtViewComponent, CatalogingViewComponent,
     CustomerAddComponent, CustomerEditComponent,
-    AplusBookingViewComponent, ScheduledBookingViewComponent, ScheduledComponent,  ScheduledLocationComponent],
+    AplusBookingViewComponent, ScheduledBookingViewComponent, ScheduledComponent,  
+    ScheduledLocationComponent
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

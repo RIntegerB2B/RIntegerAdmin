@@ -5,7 +5,8 @@
           <div class="col-md-6 text-center mx-auto" *ngIf="!registered">
             <h6 class="text-center text-dark">REGISTRATION</h6>
               <div class="form-group" >
-                  <select  (change)="getType($event.target.value)" formControlName="userType" class="form-control" required>
+                  <select  (change)="getType($event.target.value)" formControlName="userType"
+                   class="form-control" required>
                       <option  >Please Select User Type</option>    
                           <option *ngFor="let userType of userTypes">
                               {{userType}}
@@ -41,7 +42,8 @@
            </div>
            <div class="form-group">
             <mat-form-field class="example-full-width">
-             <input matInput placeholder="Mobile Number" formControlName="mobileNumber" maxlength="10" required>
+             <input matInput placeholder="Mobile Number" formControlName="mobileNumber"
+              maxlength="10" required>
              <button mat-button  matSuffix mat-icon-button aria-label="Mobile Number">
                  <mat-icon>phone</mat-icon>
                </button>
@@ -111,7 +113,8 @@
         </div>
         <div class="registered" *ngIf= "registered">
           <h3> You have registered successfully  </h3> 
-          <button  mat-raised-button color="accent" [routerLink]="['/signIn']" ><strong>LOGIN</strong></button>
+          <button  mat-raised-button color="accent" [routerLink]="['/signIn']" >
+            <strong>LOGIN</strong></button>
           
         </div>
       </div>

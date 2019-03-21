@@ -80,12 +80,20 @@ import {MainCategoryVideoComponent} from './video-portfolio/main-category-video/
 import {SuperCategoryVideoComponent} from './video-portfolio/super-category-video/super-category-video.component';
 import {ViewVideosComponent} from './video-portfolio/view-videos/view-videos.component';
 import {AdsComponent} from './settings/ads/ads.component';
+import { ViewPanelComponent } from './view-panel/view-panel.component';
+import {AllBookingComponent} from './AllBooking/all-booking/all-booking.component';
+import {ApprovedbookingComponent} from './AllBooking/approvedbooking/approvedbooking.component';
+import {CancelledBoookingComponent} from './AllBooking/cancelled-boooking/cancelled-boooking.component';
+import { NewPanelComponent } from './view-panel/new-panel/new-panel.component';
 
 const routes: Routes = [
     {
         path: 'signIn', component: SiginComponent
     },
+    { path: 'userpermission',  component: PermissionComponent },
     { path: 'registration', component: RegistrationComponent },
+    
+   
     {
         path: 'navheader', canActivate: [AuthGuard], component: NavHeaderComponent,
         children: [
@@ -124,7 +132,17 @@ const routes: Routes = [
             { path: 'crmcustomer', canActivate: [AuthGuard], component: CustomerManagementComponent },
             { path: 'crmupload', canActivate: [AuthGuard], component: UploadManagementComponent },
             { path: 'whatsapp', canActivate: [AuthGuard], component: WhatsappManagementComponent },
-            { path: 'userpermission', canActivate: [AuthGuard], component: PermissionComponent },
+            
+            { path:'newpanel',component:NewPanelComponent,
+            children: [ {path:'viewpanel' ,component: ViewPanelComponent}, 
+            { path:'allbooking' , component: AllBookingComponent},
+            { path:'approved' , component: ApprovedbookingComponent},
+            { path:'cancelled' , component: CancelledBoookingComponent}]
+        },    
+            
+          
+
+
             { path: 'register',  canActivate: [AuthGuard], component: RegisterComponent },
             { path: 'contact',  canActivate: [AuthGuard], component: ContactUsComponent },
             { path: 'crmsubscribe',  canActivate: [AuthGuard], component: SubscribeCustomerComponent },
