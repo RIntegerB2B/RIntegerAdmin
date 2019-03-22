@@ -35,17 +35,16 @@ displayedColumns:string[]=['bookingDate','name','mobileNumber','bookingType','bo
     })
   }
  
-  onApproved(book,bookingType,bookfields){
+  onApproved(book, bookingType, bookfields){
     this.BookingApproved = true;
     this.bookeddetails = new BookingDetail();
     this.bookeddetails.bookingType = bookingType;
-    this.vps.getUpdateBookingapprove(book, this.bookeddetails).subscribe(data =>{
+    this.vps.getUpdateBookingapprove(book, this.bookeddetails).subscribe(data => {
       this.bookeddetails = data;
-      console.log(this.bookeddetails);
       this.onLead(bookfields);
-        })
+        });
   }
-onLead(bookfields){
+onLead(bookfields) {
   this.leaddetails = new leadModel();
   this.leaddetails.name = bookfields.name ;
   this.leaddetails.mobileNumber = bookfields.mobileNumber ;

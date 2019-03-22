@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Routing } from './app.route';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -28,8 +28,10 @@ import { RegistrationComponent } from './account/registration/registration.compo
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { ApprovalComponent } from './service-provider-management/approval/approval.component';
 import { AddModelComponent } from './model-management/add-model/add-model.component';
-import { ViewModelComponent,
-  ScheduledComponent, ScheduledLocationComponent } from './model-management/view-model/view-model.component';
+import {
+  ViewModelComponent,
+  ScheduledComponent, ScheduledLocationComponent
+} from './model-management/view-model/view-model.component';
 
 import { ModelManagementService } from './model-management/model-management.service';
 import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
@@ -50,13 +52,13 @@ import { UpdateRegistartionStatusComponent } from './booking-details/update-regi
 import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
 import { AuthGuard } from './shared/auth-guard-service/auth.service';
 import { NavheaderService } from './nav-header/nav-header.service';
-import {AllBookingService } from './AllBooking/all-booking/all-booking.service';
-import {ApprovedbookingService} from './AllBooking/approvedbooking/approvedbooking.service';
-import {CancelledbookingService} from './AllBooking/cancelled-boooking/cancelledbooking.service';
+import { AllBookingService } from './AllBooking/all-booking/all-booking.service';
+import { ApprovedbookingService } from './AllBooking/approvedbooking/approvedbooking.service';
+import { CancelledbookingService } from './AllBooking/cancelled-boooking/cancelledbooking.service';
 import {
   MatSidenavModule,
   MatListModule,
-  MatTooltipModule,  
+  MatTooltipModule,
   MatOptionModule,
   MatMenuModule,
   MatSnackBarModule,
@@ -110,16 +112,20 @@ import {
   ScheduledModelBookingComponent,
   ScheduledBookingViewComponent,
 } from './production-mgmt/scheduled-model-booking/scheduled-model-booking.component';
-import { MarketingManagementComponent, MarketingAddComponent,
-   MarketingEditComponent } from './crm/marketing-management/marketing-management/marketing-management.component';
-import { UploadManagementComponent,  } from './crm/upload-management/upload-management/upload-management.component';
-import { CustomerManagementComponent, CustomerAddComponent,
-  CustomerEditComponent } from './crm/customer-management/customer-management/customer-management.component';
+import {
+  MarketingManagementComponent, MarketingAddComponent,
+  MarketingEditComponent
+} from './crm/marketing-management/marketing-management/marketing-management.component';
+import { UploadManagementComponent, } from './crm/upload-management/upload-management/upload-management.component';
+import {
+  CustomerManagementComponent, CustomerAddComponent,
+  CustomerEditComponent
+} from './crm/customer-management/customer-management/customer-management.component';
 import { WhatsappManagementComponent } from './whatsapp/whatsapp-management/whatsapp-management.component';
 import { PermissionComponent } from './user-management/permission/permission/permission.component';
 import { RegisterComponent } from './user-management/register/register.component';
-import {ContactUsComponent} from './contact/contact-us/contact-us.component';
-import {SubscribeCustomerComponent} from './crm/customer-management/subscribe-customer/subscribe-customer.component';
+import { ContactUsComponent } from './contact/contact-us/contact-us.component';
+import { SubscribeCustomerComponent } from './crm/customer-management/subscribe-customer/subscribe-customer.component';
 import { AnalysisComponent } from './crm/data-analysis/analysis/analysis.component';
 import { NotSubscribedComponent } from './crm/data-analysis/not-subscribed/not-subscribed.component';
 import { SuperCategoryComponent } from './our-work/super-category/super-category.component';
@@ -128,25 +134,22 @@ import { AddImagesComponent } from './our-work/add-images/add-images.component';
 import { ViewImagesComponent } from './our-work/view-images/view-images.component';
 import { MultipleImagesComponent } from './our-work/multiple-images/multiple-images.component';
 import { ViewMultipleImagesComponent } from './our-work/view-multiple-images/view-multiple-images.component';
-import {BannerComponent} from './settings/banner/banner.component';
+import { BannerComponent } from './settings/banner/banner.component';
 import { SuperCategoryVideoComponent } from './video-portfolio/super-category-video/super-category-video.component';
 import { MainCategoryVideoComponent } from './video-portfolio/main-category-video/main-category-video.component';
 import { AddVideosComponent } from './video-portfolio/add-videos/add-videos.component';
 import { ViewVideosComponent } from './video-portfolio/view-videos/view-videos.component';
-import {SafePipe} from './shared/safe.pipe';
+import { SafePipe } from './shared/safe.pipe';
 import { AdsComponent } from './settings/ads/ads.component';
 import { ViewPanelComponent } from './view-panel/view-panel.component';
-import {ViewPanelService} from './view-panel/view-panel.service';
+import { ViewPanelService } from './view-panel/view-panel.service';
 import { AllBookingComponent } from './AllBooking/all-booking/all-booking.component';
 import { ApprovedbookingComponent } from './AllBooking/approvedbooking/approvedbooking.component';
 import { CancelledBoookingComponent } from './AllBooking/cancelled-boooking/cancelled-boooking.component';
 import { from } from 'rxjs';
 import { SearchPipe } from './view-panel/search.pipe';
 import { NewPanelComponent } from './view-panel/new-panel/new-panel.component';
-import {NgxPaginationModule} from 'ngx-pagination';
-
-
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './shared/helpers/error.interceptor';
 
@@ -237,7 +240,7 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     CancelledBoookingComponent,
     SearchPipe,
     NewPanelComponent
-    
+
   ],
   imports: [
     BrowserModule,
@@ -248,7 +251,7 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     HttpModule,
     HttpClientModule,
     RouterModule,
-    BrowserAnimationsModule,MatTableModule,
+    BrowserAnimationsModule, MatTableModule,
     FlexLayoutModule,
     MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule,
     MatSidenavModule,
@@ -270,12 +273,12 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     NgxDatatableModule,
     MatBadgeModule,
     MatDatepickerModule,
-    MatNativeDateModule,NgxPaginationModule,
+    MatNativeDateModule, NgxPaginationModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [AccountService, BookingDetailsService, NavheaderService,ViewPanelService,
+  providers: [AccountService, BookingDetailsService, NavheaderService, ViewPanelService,
     ModelManagementService, LocalStorageService, NotificationService, AuthGuard,
-    ApprovedbookingService,AllBookingService,CancelledbookingService, 
+    ApprovedbookingService, AllBookingService, CancelledbookingService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   entryComponents: [ProductBookingViewComponent, ModelBookingViewComponent,
@@ -285,9 +288,9 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     RegistrationBookingViewComponent, ITServicesViewComponent,
     MarketingServicesViewComponent, DigitalMgmtViewComponent, CatalogingViewComponent,
     CustomerAddComponent, CustomerEditComponent,
-    AplusBookingViewComponent, ScheduledBookingViewComponent, ScheduledComponent,  
+    AplusBookingViewComponent, ScheduledBookingViewComponent, ScheduledComponent,
     ScheduledLocationComponent
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

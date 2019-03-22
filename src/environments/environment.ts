@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   serviceUrl: 'http://localhost:3012/',
-  imageUrl: 'https://rinteger.com/assets/images/logohomepage.jpg'
+  imageUrl: 'https://rinteger.com/assets/images/logohomepage.jpg',
+  serviceOperation: 'http://localhost:3041/'
 };
 
 /*
