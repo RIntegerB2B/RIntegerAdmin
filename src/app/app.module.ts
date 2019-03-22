@@ -6,7 +6,7 @@ import { Routing } from './app.route';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { Ng2Webstorage, LocalStorageService } from 'ngx-webstorage';
@@ -48,7 +48,7 @@ import { UpdateCreativeStatusComponent } from './booking-details/update-creative
 import { UpdateCatalogingStatusComponent } from './booking-details/update-cataloging-status/update-cataloging-status.component';
 import { UpdateRegistartionStatusComponent } from './booking-details/update-registartion-status/update-registartion-status.component';
 import { UpdateAplusStatusComponent } from './booking-details/update-aplus-status/update-aplus-status.component';
-import { AuthGuard } from './shared/auth.service';
+import { AuthGuard } from './shared/auth-guard-service/auth.service';
 import { NavheaderService } from './nav-header/nav-header.service';
 import {AllBookingService } from './AllBooking/all-booking/all-booking.service';
 import {ApprovedbookingService} from './AllBooking/approvedbooking/approvedbooking.service';
@@ -147,6 +147,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
+import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
+import { ErrorInterceptor } from './shared/helpers/error.interceptor';
 
 
 @NgModule({
@@ -273,9 +275,14 @@ import {NgxPaginationModule} from 'ngx-pagination';
   ],
   providers: [AccountService, BookingDetailsService, NavheaderService,ViewPanelService,
     ModelManagementService, LocalStorageService, NotificationService, AuthGuard,
-    ApprovedbookingService,AllBookingService,CancelledbookingService],
-  entryComponents: [ProductBookingViewComponent, ModelBookingViewComponent, EditingBookingViewComponent,
-    CreativeBookingViewComponent, MarketingEditComponent, MarketingAddComponent, RegistrationBookingViewComponent, ITServicesViewComponent,
+    ApprovedbookingService,AllBookingService,CancelledbookingService, 
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
+  entryComponents: [ProductBookingViewComponent, ModelBookingViewComponent,
+    EditingBookingViewComponent,
+    CreativeBookingViewComponent,
+    MarketingEditComponent, MarketingAddComponent,
+    RegistrationBookingViewComponent, ITServicesViewComponent,
     MarketingServicesViewComponent, DigitalMgmtViewComponent, CatalogingViewComponent,
     CustomerAddComponent, CustomerEditComponent,
     AplusBookingViewComponent, ScheduledBookingViewComponent, ScheduledComponent,  

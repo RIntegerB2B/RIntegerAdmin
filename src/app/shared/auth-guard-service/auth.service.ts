@@ -6,9 +6,9 @@ import { LocalStorageService } from 'ngx-webstorage';
 export class AuthGuard implements CanActivate {
 
 
-    constructor(private router: Router, private localStorageService: LocalStorageService) {}
+    constructor(private router: Router) {}
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    /* canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         const url: string = state.url;
         return this.verifyLogin(url);
     }
@@ -28,5 +28,15 @@ export class AuthGuard implements CanActivate {
           status = false;
         }
         return status;
+    } */
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        if (sessionStorage.getItem('tokenKey')) {
+            // logged in so return true
+            return true;
+        }
+        // not logged in so redirect to login page with the return url
+        this.router.navigate(['signin'],
+         { queryParams: { returnUrl: state.url }});
+        return false;
     }
 }
