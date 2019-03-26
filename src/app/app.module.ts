@@ -149,7 +149,6 @@ import { CancelledBoookingComponent } from './AllBooking/cancelled-boooking/canc
 import { from } from 'rxjs';
 import { SearchPipe } from './view-panel/search.pipe';
 import { NewPanelComponent } from './view-panel/new-panel/new-panel.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './shared/helpers/error.interceptor';
 
@@ -273,7 +272,7 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     NgxDatatableModule,
     MatBadgeModule,
     MatDatepickerModule,
-    MatNativeDateModule, NgxPaginationModule,
+    MatNativeDateModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AccountService, BookingDetailsService, NavheaderService, ViewPanelService,

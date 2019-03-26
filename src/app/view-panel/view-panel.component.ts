@@ -35,13 +35,15 @@ displayedColumns:string[]=['bookingDate','name','mobileNumber','bookingType','bo
     })
   }
  
-  onApproved(book, bookingType, bookfields){
+  onApproved(book, bookingType, bookfields) {
     this.BookingApproved = true;
     this.bookeddetails = new BookingDetail();
     this.bookeddetails.bookingType = bookingType;
     this.vps.getUpdateBookingapprove(book, this.bookeddetails).subscribe(data => {
       this.bookeddetails = data;
       this.onLead(bookfields);
+        }, error => {
+          console.log(error);
         });
   }
 onLead(bookfields) {
@@ -49,20 +51,22 @@ onLead(bookfields) {
   this.leaddetails.name = bookfields.name ;
   this.leaddetails.mobileNumber = bookfields.mobileNumber ;
   this.leaddetails.bookingDate = bookfields.bookingDate ;
-  this.vps.getapprovedtolead(this.leaddetails).subscribe(data =>{
+  this.vps.getapprovedtolead(this.leaddetails).subscribe(data => {
     this.leaddetails = data;
-    console.log(this.leaddetails);
-})
+}, error => {
+  console.log(error);
+});
 }
 
-  onCancelled(book,bookingType){
+  onCancelled(book, bookingType) {
     this.BookingCancelled = true;
     this.bookeddetails = new BookingDetail();
     this.bookeddetails.bookingType = bookingType;
     this.vps.getUpdateBookingcancel(book, this.bookeddetails).subscribe(data =>{
       this.bookeddetails = data;
-      console.log(this.bookeddetails);
-    })
+    }, error =>   {
+      console.log(error);
+  });
   }
 
 }

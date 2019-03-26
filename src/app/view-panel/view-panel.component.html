@@ -22,7 +22,8 @@
     <div class="col-md-2"> {{book.bookingOrderId}}</div>
 
 
-    <div class="col-md-2">    <button class="btn btn-primary" (click)="onApproved(book.bookingOrderId,
+    <div class="col-md-2">    <button class="btn btn-primary" 
+      (click)="onApproved(book.bookingOrderId,
       book.bookingType, book)" 
       type="submit">Approve</button></div>
   <div class="col-md-2"> <button class="btn btn-secondary" (click)="onCancelled(book.bookingOrderId,

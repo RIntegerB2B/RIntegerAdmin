@@ -9,17 +9,15 @@ import {BookingDetail} from './../../booking-details/view-booking/booking-detail
   providedIn: 'root'
 })
 export class ApprovedbookingService {
-  holder:AllBooking;
-  serviceUrl:string =AppSetting.serviceUrl;
-  constructor(private http:HttpClient) { }
+  holder: AllBooking;
+  serviceUrl: string = AppSetting.serviceUrl;
+  constructor(private http: HttpClient) { }
 
-  
-getApprovedBooking() :Observable<AllBooking[]> {
+getApprovedBooking(): Observable<AllBooking[]> {
 const addurl = 'allApproved';
 const url = this.serviceUrl + addurl;
 
   return this.http.get<AllBooking[]>(url);
-   
 }
 
 getUpdateBookingcancel(book, bookingType: AllBooking): Observable<AllBooking> {
@@ -30,4 +28,3 @@ return this.http.put<AllBooking>(url, bookingType);
 }
 
 }
-    

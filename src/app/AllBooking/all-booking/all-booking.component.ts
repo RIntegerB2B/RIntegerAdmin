@@ -12,12 +12,12 @@ import {MatTableDataSource} from '@angular/material';
 })
 export class AllBookingComponent implements OnInit {
   allbooking ;
-  p: number = 1;
+  p = 1;
  /*  dataSource: AllBooking; */
-  displayedColumns:string[]=['bookingDate','name','mobileNumber','bookingType','bookingOrderId',
-  'bookingStatus']; 
+  displayedColumns: string[] = ['bookingDate', 'name', 'mobileNumber', 'bookingType','bookingOrderId',
+  'bookingStatus'];
 
-  constructor(private abs:AllBookingService ) { }
+  constructor(private abs: AllBookingService ) { }
 
   ngOnInit() {
     this.getAllBooking();
@@ -25,12 +25,11 @@ export class AllBookingComponent implements OnInit {
 
   getAllBooking() {
     this.abs.getAllBooking().subscribe(book => {
-      this.allbooking = new MatTableDataSource<AllBooking>(book); 
+      this.allbooking = new MatTableDataSource<AllBooking>(book);
       this.allbooking = book;
-    
-      console.log(this.allbooking);
-      
-     })
+     }, error => {
+       console.log(error);
+     });
   }
 
 

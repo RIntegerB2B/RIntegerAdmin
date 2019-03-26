@@ -7,8 +7,10 @@ import { RegistrationComponent } from './account/registration/registration.compo
 import { ApprovalComponent } from './service-provider-management/approval/approval.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
 import { AddModelComponent } from './model-management/add-model/add-model.component';
-import { ViewModelComponent,
-    ScheduledComponent} from './model-management/view-model/view-model.component';
+import {
+    ViewModelComponent,
+    ScheduledComponent
+} from './model-management/view-model/view-model.component';
 import { PushNotificationComponent } from './notification/push-notification/push-notification.component';
 import { CustomerDetailsComponent } from './customer-management/customer-details/customer-details.component';
 import { ViewAgencyComponent } from './agency-management/view-agency/view-agency.component';
@@ -66,34 +68,34 @@ import { PermissionComponent } from './user-management/permission/permission/per
 import { RegisterComponent } from './user-management/register/register.component';
 import { ContactUsComponent } from './contact/contact-us/contact-us.component';
 import { SubscribeCustomerComponent } from './crm/customer-management/subscribe-customer/subscribe-customer.component';
-import {AnalysisComponent} from './crm/data-analysis/analysis/analysis.component';
-import {NotSubscribedComponent} from './crm/data-analysis/not-subscribed/not-subscribed.component';
-import {SuperCategoryComponent} from './our-work/super-category/super-category.component';
-import {MainCategoryComponent} from './our-work/main-category/main-category.component';
-import {AddImagesComponent} from './our-work/add-images/add-images.component';
-import {ViewImagesComponent} from './our-work/view-images/view-images.component';
-import {MultipleImagesComponent} from './our-work/multiple-images/multiple-images.component';
-import {ViewMultipleImagesComponent} from './our-work/view-multiple-images/view-multiple-images.component';
+import { AnalysisComponent } from './crm/data-analysis/analysis/analysis.component';
+import { NotSubscribedComponent } from './crm/data-analysis/not-subscribed/not-subscribed.component';
+import { SuperCategoryComponent } from './our-work/super-category/super-category.component';
+import { MainCategoryComponent } from './our-work/main-category/main-category.component';
+import { AddImagesComponent } from './our-work/add-images/add-images.component';
+import { ViewImagesComponent } from './our-work/view-images/view-images.component';
+import { MultipleImagesComponent } from './our-work/multiple-images/multiple-images.component';
+import { ViewMultipleImagesComponent } from './our-work/view-multiple-images/view-multiple-images.component';
 import { BannerComponent } from './settings/banner/banner.component';
-import {AddVideosComponent} from './video-portfolio/add-videos/add-videos.component';
-import {MainCategoryVideoComponent} from './video-portfolio/main-category-video/main-category-video.component';
-import {SuperCategoryVideoComponent} from './video-portfolio/super-category-video/super-category-video.component';
-import {ViewVideosComponent} from './video-portfolio/view-videos/view-videos.component';
-import {AdsComponent} from './settings/ads/ads.component';
+import { AddVideosComponent } from './video-portfolio/add-videos/add-videos.component';
+import { MainCategoryVideoComponent } from './video-portfolio/main-category-video/main-category-video.component';
+import { SuperCategoryVideoComponent } from './video-portfolio/super-category-video/super-category-video.component';
+import { ViewVideosComponent } from './video-portfolio/view-videos/view-videos.component';
+import { AdsComponent } from './settings/ads/ads.component';
 import { ViewPanelComponent } from './view-panel/view-panel.component';
-import {AllBookingComponent} from './AllBooking/all-booking/all-booking.component';
-import {ApprovedbookingComponent} from './AllBooking/approvedbooking/approvedbooking.component';
-import {CancelledBoookingComponent} from './AllBooking/cancelled-boooking/cancelled-boooking.component';
+import { AllBookingComponent } from './AllBooking/all-booking/all-booking.component';
+import { ApprovedbookingComponent } from './AllBooking/approvedbooking/approvedbooking.component';
+import { CancelledBoookingComponent } from './AllBooking/cancelled-boooking/cancelled-boooking.component';
 import { NewPanelComponent } from './view-panel/new-panel/new-panel.component';
 
 const routes: Routes = [
     {
         path: 'signin', component: SiginComponent
     },
-    { path: 'userpermission',  component: PermissionComponent },
+    { path: 'userpermission', component: PermissionComponent },
     { path: 'registration', component: RegistrationComponent },
-    
-   
+
+
     {
         path: 'navheader', canActivate: [AuthGuard], component: NavHeaderComponent,
         children: [
@@ -132,37 +134,42 @@ const routes: Routes = [
             { path: 'crmcustomer', canActivate: [AuthGuard], component: CustomerManagementComponent },
             { path: 'crmupload', canActivate: [AuthGuard], component: UploadManagementComponent },
             { path: 'whatsapp', canActivate: [AuthGuard], component: WhatsappManagementComponent },
-            
-            { path:'newpanel',component:NewPanelComponent,
-            children: [ {path:'viewpanel' ,component: ViewPanelComponent}, 
-            { path:'allbooking' , component: AllBookingComponent},
-            { path:'approved' , component: ApprovedbookingComponent},
-            { path:'cancelled' , component: CancelledBoookingComponent}]
-        },    
-            
-          
+
+            {
+                path: 'newpanel', component: NewPanelComponent,
+                children: [{ path: 'viewpanel', component: ViewPanelComponent },
+                { path: 'allbooking', component: AllBookingComponent },
+                { path: 'approved', component: ApprovedbookingComponent },
+                { path: 'cancelled', component: CancelledBoookingComponent }]
+            },
 
 
-            { path: 'register',  canActivate: [AuthGuard], component: RegisterComponent },
-            { path: 'contact',  canActivate: [AuthGuard], component: ContactUsComponent },
-            { path: 'crmsubscribe',  canActivate: [AuthGuard], component: SubscribeCustomerComponent },
-            { path: 'analysis',  canActivate: [AuthGuard], component: AnalysisComponent },
-            { path: 'notsubscribed',  canActivate: [AuthGuard], component: NotSubscribedComponent },
-            { path: 'supercategory',  canActivate: [AuthGuard], component: SuperCategoryComponent },
-            { path: 'maincategory',  canActivate: [AuthGuard], component: MainCategoryComponent },
-            { path: 'addportfolio',  canActivate: [AuthGuard], component: AddImagesComponent },
-            { path: 'viewportfolio',  canActivate: [AuthGuard], component: ViewImagesComponent },
-            { path: 'addmultiple/:mainid/maincategory/:subcatid/category/:catid',
-            canActivate: [AuthGuard], component: MultipleImagesComponent },
-            { path: 'view/:mainid/main/:subcatid/cat/:catid/name/:name/subname/:sub',
-            canActivate: [AuthGuard], component: ViewMultipleImagesComponent },
+
+
+            { path: 'register', canActivate: [AuthGuard], component: RegisterComponent },
+            { path: 'contact', canActivate: [AuthGuard], component: ContactUsComponent },
+            { path: 'crmsubscribe', canActivate: [AuthGuard], component: SubscribeCustomerComponent },
+            { path: 'analysis', canActivate: [AuthGuard], component: AnalysisComponent },
+            { path: 'notsubscribed', canActivate: [AuthGuard], component: NotSubscribedComponent },
+            { path: 'supercategory', canActivate: [AuthGuard], component: SuperCategoryComponent },
+            { path: 'maincategory', canActivate: [AuthGuard], component: MainCategoryComponent },
+            { path: 'addportfolio', canActivate: [AuthGuard], component: AddImagesComponent },
+            { path: 'viewportfolio', canActivate: [AuthGuard], component: ViewImagesComponent },
+            {
+                path: 'addmultiple/:mainid/maincategory/:subcatid/category/:catid',
+                canActivate: [AuthGuard], component: MultipleImagesComponent
+            },
+            {
+                path: 'view/:mainid/main/:subcatid/cat/:catid/name/:name/subname/:sub',
+                canActivate: [AuthGuard], component: ViewMultipleImagesComponent
+            },
             { path: 'banner', component: BannerComponent },
             { path: 'videosupercategory', component: SuperCategoryVideoComponent },
             { path: 'videomaincategory', component: MainCategoryVideoComponent },
             { path: 'addvideo', component: AddVideosComponent },
             { path: 'viewvideo', component: ViewVideosComponent },
             { path: 'viewvideo', component: ViewVideosComponent },
-            { path: 'adImages', component: AdsComponent}
+            { path: 'adImages', component: AdsComponent }
         ]
     },
     { path: '', redirectTo: 'signin', pathMatch: 'full' },
