@@ -5,7 +5,7 @@ export const AppSetting: AppSettingType = {
     /* serviceUrl: 'http://localhost:3012/', */
     /* serviceOperation: 'http://localhost:3041/', */
     serviceUrl: environment.serviceUrl,
-    serviceOperation: environment.serviceOperation,
+    serviceUrlOperation: environment.serviceUrlOperation,
     imageUrl: environment.imageUrl
 };
 

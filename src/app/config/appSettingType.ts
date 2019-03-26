@@ -3,5 +3,5 @@ interface AppSettingType {
     local3010BuyerServiceUrl: string;
     serviceUrl: string;
     imageUrl: string;
-    serviceOperation: string;
+    serviceUrlOperation: string;
    }
