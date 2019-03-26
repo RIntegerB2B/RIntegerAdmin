@@ -51,6 +51,7 @@ export class NavHeaderComponent implements OnInit, OnDestroy  {
   }
   collapseMenu() {
     this.toggleBar = this.toggleBar === 'colapseMenuBar' ? 'expandMenuBar' : 'colapseMenuBar';
+    console.log(this.toggleBar);
   }
   logout() {
     this.localStorageService.clear('isLoggedIn');
