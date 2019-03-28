@@ -87,12 +87,14 @@ import { AllBookingComponent } from './AllBooking/all-booking/all-booking.compon
 import { ApprovedbookingComponent } from './AllBooking/approvedbooking/approvedbooking.component';
 import { CancelledBoookingComponent } from './AllBooking/cancelled-boooking/cancelled-boooking.component';
 import { NewPanelComponent } from './view-panel/new-panel/new-panel.component';
+import { BookdetailstestComponent } from './bookdetailstest/bookdetailstest.component';
 
 const routes: Routes = [
     {
         path: 'signin', component: SiginComponent
     },
     { path: 'userpermission', component: PermissionComponent },
+    { path: 'test', component: BookdetailstestComponent },
     { path: 'registration', component: RegistrationComponent },
 
 

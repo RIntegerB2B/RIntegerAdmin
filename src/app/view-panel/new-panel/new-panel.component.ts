@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup,FormControl,FormArray,FormBuilder} from '@angular/forms';
+import {FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
 
 
 @Component({
@@ -9,10 +9,10 @@ import {FormGroup,FormControl,FormArray,FormBuilder} from '@angular/forms';
 })
 export class NewPanelComponent implements OnInit {
   search = 'y';
-  searchform:FormGroup;
-  constructor( private fb:FormBuilder) {
+  searchform: FormGroup;
+  constructor( private fb: FormBuilder) {
     this.searchform = this.fb.group({
-      search:[]
+      search: []
     });
    }
 

@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { from, Observable } from 'rxjs';
 import { BookingDetail } from './../booking-details/view-booking/booking-detail.model';
 import { AppSetting } from './../config/appSetting';
-import { leadModel } from './new-panel/lead.model';
+import { LeadModel } from './new-panel/lead.model';
 @Injectable({
   providedIn: 'root'
 })
 export class ViewPanelService {
   holder;
-  lead: leadModel;
+  lead: LeadModel;
   serviceUrl: string = AppSetting.serviceUrl;
   serviceUrlOperation: string = AppSetting.serviceUrlOperation;
   constructor(private http: HttpClient) { }
@@ -25,10 +25,10 @@ export class ViewPanelService {
     const url: string = this.serviceUrl + addurl;
     return this.http.put<BookingDetail>(url, bookingType);
   }
-  getapprovedtolead(leaddetails): Observable<leadModel> {
-    const addurl = 'addlead/';
+  getapprovedtolead(leaddetails): Observable<LeadModel> {
+    const addurl = 'addlead';
     const url: string = this.serviceUrlOperation + addurl;
-    return this.http.post<leadModel>(url, leaddetails);
+    return this.http.post<LeadModel>(url, leaddetails);
   }
 
 

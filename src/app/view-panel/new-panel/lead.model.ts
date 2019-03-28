@@ -1,5 +1,6 @@
-export class leadModel{
-    name:string;
+export class LeadModel {
+    name: string;
     mobileNumber: number;
-    bookingDate:Date;
+    bookingDate: Date;
+    emailId: string;
 }

@@ -151,6 +151,7 @@ import { SearchPipe } from './view-panel/search.pipe';
 import { NewPanelComponent } from './view-panel/new-panel/new-panel.component';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 import { ErrorInterceptor } from './shared/helpers/error.interceptor';
+import { BookdetailstestComponent } from './bookdetailstest/bookdetailstest.component';
 
 
 @NgModule({
@@ -238,7 +239,8 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     ApprovedbookingComponent,
     CancelledBoookingComponent,
     SearchPipe,
-    NewPanelComponent
+    NewPanelComponent,
+    BookdetailstestComponent
 
   ],
   imports: [
